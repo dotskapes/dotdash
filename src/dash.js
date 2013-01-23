@@ -20,7 +20,7 @@ function Dashboard (selector) {
             'top': $ (selector).position ().top,
             'width': panel_width,
             'height': full_height,
-            'background-color': 'red'
+            'background-color': 'black'
         });
 
         right.css ({
@@ -29,19 +29,29 @@ function Dashboard (selector) {
             'top': $ (selector).position ().top,
             'width': panel_width,
             'height': full_height,
-            'background-color': 'blue'
+            'background-color': 'black'
         });
     };
     set_panels ();
+    
+    // Add the panels to the document
+    $ (selector).append (left).append (right);
 
+    // Temp: Add the map view pane to the left panel
+    var map_panel = new MapPanel ();
+    //left.append (map_panel.html ());
+    map_panel.create (left);
+    map_panel.resize (left);
 
     // If the window is resized, we may want to resize the dashboard
     $ (window).resize (function () {
         set_panels ();
+        map_panel.resize (left);
     });
-    
-    // Add the panels to the document
-    $ (selector).append (left).append (right);
+
+    var data = new DataAPI ('temp/2011.json', function () {
+        map_panel.change (data);
+    });
 };
 
 var dash = {
