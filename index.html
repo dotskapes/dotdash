@@ -3,13 +3,17 @@
   <head>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/wigglemaps/wigglemaps.min.js"></script>
+    <script type="text/javascript" src="lib/d3/d3.min.js"></script>
     <script type="text/javascript" src="src/data.js"></script>
     <script type="text/javascript" src="src/dash.js"></script>
     <script type="text/javascript" src="src/map_panel.js"></script>
+    <script type="text/javascript" src="src/time_panel.js"></script>
+    <script type="text/javascript" src="src/mds_panel.js"></script>
     <title>Spatial-Temporal Dashboard</title>
   </head>
   <script type="text/javascript">
     dash.ready (function () {
+        // Set the size of the div containing the dashboard
         var set_width = function () {
             $ ('#dashboard').css ({
                 'width': $ (window).width (),
@@ -17,6 +21,7 @@
             });
         };
         set_width ();
+        // Resize the dashboard when the window size changes
         $ (window).resize (function () {
             set_width ();
         });

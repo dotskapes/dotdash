@@ -4,20 +4,22 @@ function MapPanel () {
     var layer;
     
     this.create = function (parent) {
+        var $parent = $ (parent);
         container = $ ('<div></div>').css ({
-            'width': parent.width (),
-            'height': parent.height ()
+            'width': $parent.width (),
+            'height': $parent.height ()
         }).attr ('id', 'wigglemap');
 
-        parent.append (container);
+        $parent.append (container);
         
         map = new wiggle.Map ('#wigglemap');
     };
 
     this.resize = function (parent) {
+        var $parent = $ (parent);
         container.css ({
-            'width': parent.width (),
-            'height': parent.height ()
+            'width': $parent.width (),
+            'height': $parent.height ()
         });
         map.resize ();
     };

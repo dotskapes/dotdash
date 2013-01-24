@@ -1,10 +1,20 @@
 function DataAPI (src, callback) {
     var data = null;
+    var order = null;
     $.ajax ({
         url: src,
         dataType: 'json',
         success: function (response) {
+            // Set the data
             data = response;
+
+            // Find an ordering, if possible
+            order = [];
+            for (var key in data.features[0].properties) {
+                if (!isNaN (Number (data.features[0].properties[key])))
+                    order.push (key);
+            }
+            order.sort ();
             callback ();
         }
     });
@@ -21,5 +31,9 @@ function DataAPI (src, callback) {
 
     this.data = function () {
         return data;
+    };
+
+    this.order = function () {
+        return order;
     };
 };
