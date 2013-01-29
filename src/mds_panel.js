@@ -3,6 +3,10 @@ function MDSPanel () {
     var back_group, data_group;
 
     var xmap, ymap;
+
+    this.name = 'MDS';
+
+    this.created = false;
     
     this.create = function (parent) {
         var $parent = $ (parent);
@@ -23,7 +27,7 @@ function MDSPanel () {
             .attr ('width', 1)
             .attr ('height', 1)
             .style ('fill', '#ff0000');
-
+        this.created = true;
     };
     
     this.resize = function (parent) {

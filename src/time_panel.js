@@ -3,7 +3,18 @@ function TimePanel () {
     var back_group, data_group;
 
     var xmap, ymap;
+
+    this.name = 'Time Series';
+    this.created = false;
     
+    // parent_sel is jquery parent/container selector to append to
+    this.show = function(parent_sel) {
+        svg.style('display','block');
+        // get jquery elementy from d3 element & append
+        $(parent_sel).append($(svg.node()));
+    };
+
+    // parent is a string css selector (not a jquery element)
     this.create = function (parent) {
         var $parent = $ (parent);
         svg = d3.select (parent).append ('svg').attr ({
@@ -23,7 +34,8 @@ function TimePanel () {
             .attr ('width', 1)
             .attr ('height', 1)
             .style ('fill', '#0000ff');
-
+        
+        this.created = true;
     };
     
     this.resize = function (parent) {
