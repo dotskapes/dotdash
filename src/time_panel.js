@@ -95,7 +95,6 @@ function merge_range (r1, r2) {
 function get_range (layer, tol) {
     var range = null;
     $.each (layer.properties (true), function (i, field) {
-        console.log (field);
         var new_range = layer.features ().range (field);
         range = merge_range (range, new_range);
     });

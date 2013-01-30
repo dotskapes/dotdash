@@ -15,6 +15,7 @@ function MapPanel () {
         $parent.append (container);
         
         map = new wiggle.Map ('#wigglemap');
+
         this.created = true;
     };
 
@@ -42,5 +43,13 @@ function MapPanel () {
         map.vcenter (layer.bounds.centroid ());
         map.extents (layer.bounds.width ());
         map.append (layer);
+
+	//var current = null;
+        map.select (function (box) {
+	    //if (current)
+	    //	current.style ('fill', null);
+	    current = layer.search (box);
+	    //current.style ('fill', wiggle.util.icolor (204, 85, 0, 255));
+        });
     };
 };
