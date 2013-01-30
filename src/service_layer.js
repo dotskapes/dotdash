@@ -33,8 +33,10 @@ function ServiceLayer (src, callback) {
                     order.push (key);
             }
             order.sort ();*/
-
             layer = wiggle.io.GeoJSON (data);
+            layer
+                .style ('stroke', wiggle.util.fcolor (.3, .3, .3, 1.0))
+                .style ('stroke-opacity', .75);
             callback (layer);
         }
     });
@@ -44,6 +46,9 @@ function ServiceLayer (src, callback) {
     };
 
     this.update = function () {
+        for (var i = 0; i < settings['ramp'].length; i ++) {
+            layer.features ().quantile (settings['step'], i + 1, settings['ramp'].length).style ('fill', settings['ramp'][i]);
+        }
         /*layer.features ().select (settings['query']).each (function (i, f) {
             var val 
         });*/

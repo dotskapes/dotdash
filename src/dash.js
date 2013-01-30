@@ -174,6 +174,7 @@ function Dashboard (selector) {
 
     // Start the service layer
     var service_layer = new ServiceLayer ('temp/2011.json', function (layer) {
+        service_layer.update ();
         map_panel.change (layer);
         time_panel.change (layer);
     });

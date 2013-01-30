@@ -39,6 +39,8 @@ function MapPanel () {
         if (layer)
             map.remove (layer);
         layer = data;
+        map.vcenter (layer.bounds.centroid ());
+        map.extents (layer.bounds.width ());
         map.append (layer);
     };
 };
