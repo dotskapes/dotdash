@@ -77,25 +77,18 @@ function Dashboard (selector) {
     }
 
     var stringToPanel = {};
+    var controller = new Controller();
     // dash javascript panel object
     var addPanel = function(panel) {
         // add to selection
         $(".view-select").append(optionTemp(panel.name));
         stringToPanel[panel.name] = panel;
+        controller.addView(panel);
     }
 
-    var map_panel = new MapPanel();
-    addPanel(map_panel);
-    //map_panel.resize (left);
-
-    // Temp: Add the time panel to the right
-    var time_panel = new TimePanel ();
-    addPanel(time_panel);
-    //time_panel.resize (right);
-
-    // Dummy MDS panel
-    var mds_panel = new MDSPanel ();
-    addPanel(mds_panel);
+    // panels aka views
+    var panels = [new MapPanel(), new TimePanel(), new MDSPanel()];
+    $.each(panels,function(i,pan) { addPanel(pan); } );
 
     // select is jquery element, container_sel is jquery selector for parent
     var selectListener = function(select,containerSel) {
@@ -160,24 +153,24 @@ function Dashboard (selector) {
     selectListener($('.left-select'),'#left-view');
     selectListener($('.right-select'),'#right-view');
 
-    // initialize with map on left (& time series on right)
-    $('.left-select').val(map_panel.name).change();
-    // left map select will cause right time series due to bumpOther
+    // initialize with 1st panel on left (& 2nd on right)
+    $('.left-select').val(panels[0].name).change();
+    // left panel select will cause right to bump to 2nd
 
 
     // If the window is resized, we may want to resize the dashboard
     $ (window).resize (function () {
         set_panels ();
-        map_panel.resize ('#left');
-        time_panel.resize ('#right');
+        panels[leftIndex].resize('#left');
+        panels[rightIndex].resize('#right');
     });
 
-    // Start the service layer
-    var service_layer = new ServiceLayer ('temp/2011.json', function (layer) {
-        service_layer.update ();
-        map_panel.change (layer);
-        time_panel.change (layer);
-    });
+    var newData = function(data) {
+        service_layer.update();
+        controller.newData(data);
+    }
+    // Start the service layer, callback sends data to controller
+    var service_layer = new ServiceLayer('temp/2011.json',newData);
 };
 
 var dash = {
