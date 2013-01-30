@@ -34,7 +34,6 @@ function Dashboard (selector) {
             'top': $ (selector).position ().top,
             'width': panel_width,
             'height': full_height,
-            'background-color': 'black'
         });
         leftView.css ({
             'position': 'absolute',
@@ -42,7 +41,6 @@ function Dashboard (selector) {
             'top': $ (selector).position ().top + selectHeight,
             'width': panel_width,
             'height': full_height,
-            'background-color': 'black'
         });
 
         right.css ({
@@ -51,7 +49,6 @@ function Dashboard (selector) {
             'top': $ (selector).position ().top,
             'width': panel_width,
             'height': full_height,
-            'background-color': 'black'
         });
     };
 
