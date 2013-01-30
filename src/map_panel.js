@@ -2,6 +2,8 @@ function MapPanel () {
     var container;
     var map;
     var layer;
+
+    this.created = false;
     
     this.create = function (parent) {
         var $parent = $ (parent);
@@ -13,6 +15,15 @@ function MapPanel () {
         $parent.append (container);
         
         map = new wiggle.Map ('#wigglemap');
+        this.created = true;
+    };
+
+    this.name = "Map";
+
+    // parent_sel is jquery parent/container selector to append to
+    this.show = function(parent_sel) {
+        container.css('display','block');
+        $(parent_sel).append(container);
     };
 
     this.resize = function (parent) {
@@ -27,11 +38,7 @@ function MapPanel () {
     this.change = function (data) {
         if (layer)
             map.remove (layer);
-        //layer = wiggle.io.GeoJSON (data.data ());
-        var layer = new wiggle.layer.PolygonLayer ();
-        data.each (function (i, feature) {
-            layer.append (feature);
-        });
+        layer = data;
         map.append (layer);
     };
 };

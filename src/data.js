@@ -17,65 +17,8 @@ function DataAPI (src, callback) {
             order.sort ();*/
 
             // Temporary formatting!
-            var elem = [];
-            var num_points = 0;
-            var num_polys = 0;
-            for (var i = 0; i < data.features.length; i ++) {
-	        var feature = data.features[i];
-	        if (feature.type == 'Feature') {
-	            if (feature.geometry.type == 'Point') {
-		        num_points ++;
-		        elem.push ({
-		            geom: [feature.geometry.coordinates],
-		            attr: feature.properties
-		        });
-	            }
-	            if (feature.geometry.type == 'MultiPoint') {
-		        num_points += feature.geometry.cooordinates.length;
-		        elem.push ({
-		            geom: feature.geometry.coordinates,
-		            attr: feature.properties
-		        });
-	            }
-	            if (feature.geometry.type == 'Polygon') {
-		        var poly = feature.geometry.coordinates;
-		        var oriented = [];
-		        for (var k = 0; k <= poly.length - 1; k ++) {
-		            var o_ring = [];
-		            for (var j = poly[k].length - 1; j >= 0; j --) {
-			        o_ring.push (poly[k][j]);
-		            }
-		            oriented.push (o_ring);
-		        }
-		        num_polys ++;
-		        elem.push ({
-		            geom: [oriented],
-		            attr: feature.properties
-		        });
-	            }
-	            if (feature.geometry.type == 'MultiPolygon') {
-		        var rings = [];
-		        $.each (feature.geometry.coordinates, function (i, poly) {
-		            var oriented = [];
-		            for (var k = 0; k <= poly.length - 1; k ++) {
-			        var o_ring = [];
-			        for (var j = poly[k].length - 1; j >= 0; j --) {
-			            o_ring.push (poly[k][j]);
-			        }
-			        oriented.push (o_ring);
-		            }
-		            rings.push (oriented);
-		        });
-		        num_polys ++;
-		        elem.push ({
-		            geom: rings,
-		            attr: feature.properties
-		        });
-	            }
-                }
-            }
-            var selector = new LayerSelector (elem);
-            callback (selector);
+            var layer = wiggle.io.GeoJSON (data);
+            callback (layer);
             }
     });
 
