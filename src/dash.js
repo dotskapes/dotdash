@@ -97,7 +97,6 @@ function Dashboard (selector) {
     var mds_panel = new MDSPanel ();
     addPanel(mds_panel);
 
-
     // select is jquery element, container_sel is jquery selector for parent
     var selectListener = function(select,containerSel) {
         select.change(function() {
@@ -173,10 +172,10 @@ function Dashboard (selector) {
         time_panel.resize ('#right');
     });
 
-    // Start the data API
-    var data = new DataAPI ('temp/2011.json', function (features) {
-        map_panel.change (features);
-        time_panel.change (features);
+    // Start the service layer
+    var service_layer = new ServiceLayer ('temp/2011.json', function (layer) {
+        map_panel.change (layer);
+        time_panel.change (layer);
     });
 };
 
