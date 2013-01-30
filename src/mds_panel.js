@@ -36,6 +36,7 @@ function MDSPanel () {
 
     this.change = function (data) {
         xmap = d3.scale.linear ().domain ([0, data.order ().length], [0, 1]);
+        //data_group.selectAll ('path').data (data.data ())
         console.log (data.order ());
     };
 };

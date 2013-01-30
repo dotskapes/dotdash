@@ -59,9 +59,9 @@ function Dashboard (selector) {
     });
 
     // Start the data API
-    var data = new DataAPI ('temp/2011.json', function () {
-        map_panel.change (data);
-        time_panel.change (data);
+    var data = new DataAPI ('temp/2011.json', function (features) {
+        map_panel.change (features);
+        time_panel.change (features);
     });
 };
 

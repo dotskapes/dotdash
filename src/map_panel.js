@@ -27,7 +27,11 @@ function MapPanel () {
     this.change = function (data) {
         if (layer)
             map.remove (layer);
-        layer = wiggle.io.GeoJSON (data.data ());
+        //layer = wiggle.io.GeoJSON (data.data ());
+        var layer = new wiggle.layer.PolygonLayer ();
+        data.each (function (i, feature) {
+            layer.append (feature);
+        });
         map.append (layer);
     };
 };

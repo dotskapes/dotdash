@@ -35,7 +35,8 @@ function TimePanel () {
     };
 
     this.change = function (data) {
-        xmap = d3.scale.linear ().domain ([0, data.order ().length], [0, 1]);
-        console.log (data.order ());
+        data_group.selectAll ('path')
+        //xmap = d3.scale.linear ().domain ([0, data.order ().length], [0, 1]);
+        //console.log (data.order ());
     };
 };
