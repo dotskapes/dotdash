@@ -54,7 +54,8 @@ function Dashboard (selector, baseUrl) {
     };
 
     // Add the panels to the document
-    $ (selector).append (left).append (right);
+    var views = $ ('<div></div>').addClass ('panels').append (left).append (right);
+    $ (selector).append (views);
 
     var templateLoader = $.ajax({
         url: baseUrl + 'src/templates/select-template.hb'
