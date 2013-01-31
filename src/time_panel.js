@@ -1,6 +1,6 @@
 function TimePanel () {
     var svg;
-    var back_group, data_group;
+    var h_group, v_group, data_group;
 
     var xmap, ymap;
 
@@ -32,15 +32,16 @@ function TimePanel () {
 
         xmap = d3.scale.linear ().domain ([0, 1]).range ([0, WIDTH]);
 
-        back_group = svg.append ('g');
-        data_group = svg.append ('g');
-
-        var matte = back_group.append ('rect')
+        var matte = svg.append ('rect')
             .attr ('x', 0)
             .attr ('y', 0)
-            .attr ('width', 1)
-            .attr ('height', 1)
+            .attr ('width', WIDTH)
+            .attr ('height', HEIGHT)
             .style ('fill', '#ffffff');
+
+        h_group = svg.append ('g');
+        v_group = svg.append ('g');
+        data_group = svg.append ('g');
         
         this.created = true;
     };
@@ -53,27 +54,83 @@ function TimePanel () {
         });        
     };
 
+    var h_lines = [];
+    var v_lines = [];
+    var properties = [];
+    var prop_map = {};
+    var layer = null;
+
     var draw_horizontal_lines = function () {
-        
-    };
-
-    this.change = function (layer) {
-        var range = get_range (layer, .05);
-        var lines = [];
-        var current_line = 1000 * Math.floor (range.min / 1000);
-        while (current_line <= range.max) {
-            lines.push (current_line);
-            current_line += 1000;
-        }
-
-        ymap = d3.scale.linear ().domain ([range.min, range.max]).range ([HEIGHT, 0]);
-
-        back_group.selectAll ('line').data (lines).enter ().append ('line')
+        h_group.selectAll ('line').data (h_lines).enter ().append ('line')
             .attr ('x1', 0)
             .attr ('x2', WIDTH)
             .attr ('y1', ymap)
             .attr ('y2', ymap)
-            .attr ('stroke', '#cccccc');
+            .attr ('stroke', '#cccccc');        
+    };
+
+    var draw_vertical_lines = function () {
+        var map_line = function (line) {
+            return time_map (prop_map[line]);
+        };
+        v_group.selectAll ('line').data (v_lines).enter ().append ('line')
+            .attr ('x1', map_line)
+            .attr ('x2', map_line)
+            .attr ('y1', 0)
+            .attr ('y2', HEIGHT)
+            .attr ('stroke', '#cccccc')
+            .attr ('class', function (d) { return prop_map[d]})
+            .on ('mouseover', function (d) {
+                //console.log (d);
+            });
+    };
+
+    var draw_time_series = function () {
+        var get_series = function (d) {
+            var points = [];
+            $.each (properties, function (i, prop) {
+                points.push (time_map (i) + ' ' + ymap (d.attr (prop)));
+            });
+            return points;
+        };
+
+        var get_path = function (d) {
+            var points = get_series (d);
+            return 'M ' + points.join ('L');
+        };
+
+        data_group.selectAll ('path').data (layer.features ().items ()).enter ().append ('path')
+            .attr ('d', get_path)
+            .style ('fill', 'none')
+            .style ('stroke', function (d) { return d.style ('fill').rgb () })
+            .style ('stroke-width', 1.5);
+    };
+
+
+    this.change = function (data) {
+        layer = data;
+
+        properties = layer.properties (true);
+        properties.sort ();
+
+        var range = get_range (layer, .05);
+        var current_line = 1000 * Math.floor (range.min / 1000);
+        while (current_line <= range.max) {
+            h_lines.push (current_line);
+            current_line += 1000;
+        }
+
+        ymap = d3.scale.linear ().domain ([range.min, range.max]).range ([HEIGHT, 0]);
+        time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, WIDTH]);
+
+        $.each (properties, function (i, prop) {
+            v_lines.push (prop);
+            prop_map[prop] = i;
+        });
+        
+        draw_horizontal_lines ();
+        draw_vertical_lines ();
+        draw_time_series ();
         
         //data_group.selectAll ('path')
         //xmap = d3.scale.linear ().domain ([0, data.order ().length], [0, 1]);
