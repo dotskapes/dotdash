@@ -1,4 +1,4 @@
-function Dashboard (selector) {
+function Dashboard (selector, baseUrl) {
     // Static set of views for now
     var views = ['map', 'time', 'mds', 'table'];
 
@@ -57,7 +57,7 @@ function Dashboard (selector) {
     $ (selector).append (left).append (right);
 
     var templateLoader = $.ajax({
-        url: 'src/templates/select-template.hb'
+        url: baseUrl + 'src/templates/select-template.hb'
     });
 
     templateLoader.fail(function (data) {console.log(data);});
@@ -174,7 +174,7 @@ function Dashboard (selector) {
             controller.newData(data);
         }
         // Start the service layer, callback sends data to controller
-        var service_layer = new ServiceLayer('temp/2011.json',newData);
+        var service_layer = new ServiceLayer(baseUrl + 'temp/2011.json',newData);
     });
 };
 
@@ -182,9 +182,10 @@ var dash = {
     ready: function (func) {
         $ (document).ready (func);
     },
-    create: function (selector) {
-        if (!selector)
-            selector = 'body';
-        return new Dashboard (selector);
+    create: function (selector, baseUrl) {
+        selector = selector || 'body';
+        baseUrl = baseUrl || '';
+        
+        return new Dashboard (selector, baseUrl);
     }
 };
