@@ -36,7 +36,8 @@ function ServiceLayer (src, callback) {
             layer = wiggle.io.GeoJSON (data);
             layer
                 .style ('stroke', wiggle.util.fcolor (.3, .3, .3, 1.0))
-                .style ('stroke-opacity', .75);
+                .style ('stroke-opacity', .75)
+                .style ('fill-opacity', .8);
             callback (layer);
         }
     });
