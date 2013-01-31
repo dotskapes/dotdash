@@ -5,19 +5,30 @@ function FilterView () {
         var filters = [
             { name: 'step',
               title: 'Time Step',
-              values: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+              options: [{ value: 'jan' }, 
+                        { value: 'feb' }, 
+                        { value: 'mar' }, 
+                        { value: 'apr' }, 
+                        { value: 'may' }, 
+                        { value: 'jun' }, 
+                        { value: 'jul' }, 
+                        { value: 'aug' }, 
+                        { value: 'sep' }, 
+                        { value: 'oct' }, 
+                        { value: 'nov' }, 
+                        { value: 'dec' }]
             },
             { name: 'ramp',
               title: 'Color Ramp',
-              values: [0, 1, 2, 3, 4]
+              options: [{value: 0}, {value: 1}, {value: 2}, {value: 3}, {value: 4}]
             },
             { name: 'dist',
               title: 'Color Distribution',
-              values: [0, 1]
+              options: [{value: 0}, {value: 1}]
             },
             { name: 'range',
               title: 'Color Scale',
-              values: [0, 1]
+              options: [{value: 0}, {value: 1}]
             }
         ];
 

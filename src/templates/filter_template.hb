@@ -2,7 +2,12 @@
     <h2>Filter</h2>
     {{#each filters}}
         <div class="filter">
-            {{this.title}}
+            <div>{{title}}</div>
+            {{#each options}}
+                <label>
+                    <input type="radio" name="{{../name}}" value="{{value}}" />{{value}}
+                </label>
+            {{/each}}
         </div>
     {{/each}}
 </div>
