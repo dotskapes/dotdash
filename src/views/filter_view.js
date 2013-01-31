@@ -24,11 +24,15 @@ function FilterView () {
             },
             { name: 'dist',
               title: 'Color Distribution',
-              options: [{value: 0}, {value: 1}]
+              options: [{value: 'Quantile'}, {value: 'Uniform'}]
             },
             { name: 'range',
               title: 'Color Scale',
-              options: [{value: 0}, {value: 1}]
+              options: [{value: 'Local'}, {value: 'Global'}]
+            },
+            { name: 'agg',
+              title: 'Aggregate',
+              options: [{value: 'Mean'}, {value: 'Max'}, {value: 'Min'}]
             }
         ];
 
