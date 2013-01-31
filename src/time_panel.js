@@ -6,6 +6,8 @@ function TimePanel () {
 
     var WIDTH, HEIGHT;
 
+    var popup = null;
+
     this.name = 'Time Series';
     this.created = false;
     
@@ -30,14 +32,21 @@ function TimePanel () {
         WIDTH = $parent.width ();
         HEIGHT = $parent.height ();
 
+        popup = new Popup ();
+
         xmap = d3.scale.linear ().domain ([0, 1]).range ([0, WIDTH]);
 
         var matte = svg.append ('rect')
-            .attr ('x', 0)
-            .attr ('y', 0)
-            .attr ('width', WIDTH)
-            .attr ('height', HEIGHT)
-            .style ('fill', '#ffffff');
+            .attr ({
+                'x': 0,
+                'y': 0,
+                'width': WIDTH,
+                'height': HEIGHT
+            }).style ({
+                'fill': '#ffffff',
+                'stroke': '#cccccc',
+                'stroke-width': 1.0
+            });
 
         h_group = svg.append ('g');
         v_group = svg.append ('g');
@@ -82,6 +91,9 @@ function TimePanel () {
             .attr ('class', function (d) { return prop_map[d]})
             .on ('mouseover', function (d) {
                 //console.log (d);
+                popup.show (d, d3.event);
+            }).on ('mouseout', function (d) {
+                popup.hide ();
             });
     };
 
@@ -111,17 +123,19 @@ function TimePanel () {
         layer = data;
 
         properties = layer.properties (true);
-        properties.sort ();
+        properties.sort (dateCompare);
 
         var range = get_range (layer, .05);
-        var current_line = 1000 * Math.floor (range.min / 1000);
+        /*var current_line = 1000 * Math.floor (range.min / 1000);
         while (current_line <= range.max) {
             h_lines.push (current_line);
             current_line += 1000;
-        }
+        }*/
 
-        ymap = d3.scale.linear ().domain ([range.min, range.max]).range ([HEIGHT, 0]);
+        ymap = d3.scale.linear ().domain ([0, range.max]).range ([HEIGHT, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, WIDTH]);
+
+        h_lines = ymap.ticks (10);
 
         $.each (properties, function (i, prop) {
             v_lines.push (prop);
@@ -159,4 +173,37 @@ function get_range (layer, tol) {
         min: range.min - (range.max - range.min) * tol,
         max: range.max + (range.max - range.min) * tol,
     };
+};
+
+function parseUSDate (date) {
+    var matches = date.match (/(\d+)\/(\d+)\/(\d+)/);
+    return {
+        month: parseInt (matches[1]),
+        day: parseInt (matches[2]),
+        year: parseInt (matches[3])
+    };
+};
+
+function dateCompare (a, b) {
+    var choose_smaller = function (x, y) {
+        if (x < y)
+            return -1;
+        else if (y < x)
+            return 1;
+        else
+            return 0;
+    };
+    a = parseUSDate (a);
+    b = parseUSDate (b);
+    if (a.year != b.year) {
+        return choose_smaller (a.year, b.year);
+    }
+    else if (a.month != b.month) {
+        return choose_smaller (a.month, b.month);
+    }
+    else if (a.day != b.day) {
+        return choose_smaller (a.day, b.day);
+    }
+    else
+        return 0;
 };
