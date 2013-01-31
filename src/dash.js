@@ -5,7 +5,7 @@ function Dashboard (selector) {
     // Static set of filters for now
     var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
 
-    var selectHeight = 20;
+    var selectHeight = 25;
 
     var initialized = false;
 
@@ -36,11 +36,8 @@ function Dashboard (selector) {
             'height': full_height,
         });
         leftView.css ({
-            'position': 'absolute',
-            'left': $ (selector).position ().left,
-            'top': $ (selector).position ().top + selectHeight,
-            'width': panel_width,
-            'height': full_height,
+            'width': '100%',
+            'height': full_height - selectHeight
         });
 
         right.css ({
@@ -48,7 +45,11 @@ function Dashboard (selector) {
             'left': $ (selector).position ().left + panel_width,
             'top': $ (selector).position ().top,
             'width': panel_width,
-            'height': full_height,
+        });
+
+        rightView.css ({
+            'width': '100%',
+            'height': full_height - selectHeight
         });
     };
 
