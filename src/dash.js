@@ -175,6 +175,12 @@ function Dashboard (selector, baseUrl) {
         }
         // Start the service layer, callback sends data to controller
         var service_layer = new ServiceLayer(baseUrl + 'temp/2011.json',newData);
+
+        // Start the filter view
+        var filterView = new FilterView();
+        filterView.render().done(function (html) {
+            $(selector).append(html);
+        });
     });
 };
 
