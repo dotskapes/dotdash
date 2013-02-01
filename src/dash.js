@@ -180,6 +180,10 @@ function Dashboard (selector, baseUrl) {
         var filterView = new FilterView();
         filterView.render().done(function (html) {
             $(selector).append(html);
+            filterView.onChange(function (name, value) {
+                // controller should do something with this
+                console.log(name + ' changed to ' + value); 
+            });
         });
     });
 };

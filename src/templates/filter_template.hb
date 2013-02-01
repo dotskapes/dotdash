@@ -5,7 +5,7 @@
             <div>{{title}}</div>
             {{#each options}}
                 <label>
-                    <input type="radio" name="{{../name}}" value="{{@index}}" {{#unless @index}}checked{{/unless}} />{{value}}
+                    <input class="filter-button" type="radio" name="{{../name}}" value="{{@index}}" {{#unless @index}}checked{{/unless}} />{{label}}
                 </label>
             {{/each}}
         </div>
