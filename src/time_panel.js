@@ -1,3 +1,4 @@
+"use strict";
 function TimePanel () {
     var svg;
     var h_group, v_group, data_group;
@@ -13,6 +14,7 @@ function TimePanel () {
     this.created = false;
 
     var selection = null;
+    var time_map;
     
     // parent_sel is jquery parent/container selector to append to
     this.show = function(parent_sel) {
@@ -23,7 +25,6 @@ function TimePanel () {
 
      // parent is a string css selector (not a jquery element)
      this.create = function (parent) {
-         ServiceLayer.addDataListener(that);
          var $parent = $ (parent);
          svg = d3.select (parent).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
@@ -56,6 +57,7 @@ function TimePanel () {
          v_group = svg.append ('g');
          data_group = svg.append ('g');
 
+         wireUp();
          this.created = true;
      };
 
@@ -132,6 +134,11 @@ function TimePanel () {
     };
 
 
+    var wireUp = function() {
+        ServiceLayer.addDataListener(that);
+        selectionManager.addView(that);
+    }
+
     this.newData = function (data) {
         layer = data;
 
@@ -166,8 +173,25 @@ function TimePanel () {
         //xmap = d3.scale.linear ().domain ([0, data.order ().length], [0, 1]);
         //console.log (data.order ());
     };
+
+    // Selection methods/interface - called by SelectionManager
+    // stubs - todo - implements once webgl issue is worked out
+    this.deselect = function(selectionLayer) {
+        selectionLayer.each (function (i, f) {
+            // deleselect feature...
+        });;
+    }
+
+    this.select = function(selectionLayer) {
+        selectionLayer.each (function (i, f) {
+            // select....
+        });
+    }
+
+
 };
 
+// eventually move to a util file
 function merge_range (r1, r2) {
     if (!r1)
         return r2;
