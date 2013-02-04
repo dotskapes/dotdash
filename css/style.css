@@ -2,4 +2,27 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-};
+    height: 100%;
+    overflow: hidden;
+}
+
+.view {
+    width: 50%;
+    height: 100%;
+    float: left;
+    display: none;
+}
+
+.right-panel {
+    float: right;
+}
+
+#left, #right {
+    width: 50%;
+    float: left;
+}
+
+#options {
+    float: right;
+    width: 200px;
+}

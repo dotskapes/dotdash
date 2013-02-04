@@ -1,28 +1,25 @@
-function MDSPanel () {
+function MDSPanel (parent) {
     var svg;
     var back_group, data_group;
 
     var xmap, ymap;
 
+    this.parent = parent;
     this.name = 'MDS';
 
     this.created = false;
 
-    // parent_sel is jquery parent/container selector to append to
-    this.show = function(parent_sel) {
+    this.show = function() {
         svg.style('display','block');
         // get jquery elementy from d3 element & append
-        $(parent_sel).append($(svg.node()));
+        this.parent.show();
     };
     
-    this.create = function (parent) {
-        var $parent = $ (parent);
-        svg = d3.select (parent).append ('svg').attr ({
+    this.create = function () {
+
+        svg = d3.select (this.parent[0]).append ('svg').attr ({
             'viewBox': '0 0 1 1',
             'preserveAspectRatio': 'none'
-        }).style ({
-            'width': $parent.width (),
-            'height': $parent.height (),
         });
 
         back_group = svg.append ('g');
@@ -34,15 +31,12 @@ function MDSPanel () {
             .attr ('width', 1)
             .attr ('height', 1)
             .style ('fill', '#ff0000');
+        this.parent.append($(svg.node()));
+        this.parent.show();
         this.created = true;
     };
     
-    this.resize = function (parent) {
-        var $parent = $ (parent);
-        svg.style ({
-            'width': $parent.width (),
-            'height': $parent.height (),
-        });        
+    this.resize = function () {
     };
 
     this.change = function (data) {
