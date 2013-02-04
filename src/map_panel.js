@@ -1,9 +1,13 @@
 function MapPanel () {
     var container;
+    // wiggle.Map object
     var map;
     var layer;
+    var that = this;
 
     this.created = false;
+
+    this.getMap = function() { return map; }
     
     this.create = function (parent) {
         var $parent = $ (parent);
@@ -15,7 +19,7 @@ function MapPanel () {
         $parent.append (container);
         
         map = new wiggle.Map ('#wigglemap');
-
+        wireupMap();
         this.created = true;
     };
 
@@ -36,7 +40,7 @@ function MapPanel () {
         map.resize ();
     };
 
-    this.change = function (data) {
+    this.newData = function (data) {
         if (layer)
             map.remove (layer);
         layer = data;
@@ -44,12 +48,29 @@ function MapPanel () {
         map.extents (layer.bounds.width ());
         map.append (layer);
 
-	//var current = null;
-        map.select (function (box) {
-	    //if (current)
-	    //	current.style ('fill', null);
-	    current = layer.search (box);
-	    //current.style ('fill', wiggle.util.icolor (204, 85, 0, 255));
+    };
+
+    var wireupMap = function() {
+        // listen to service layer for new data
+        ServiceLayer.addDataListener(that);
+
+        // listen for select/deselect
+        selectionManager.addView(that);
+
+        // listen for map select and send selection to selectionManager
+        map.select(function  (box) {
+	    selectionLayer = layer.search (box);
+            selectionManager.select(selectionLayer);
         });
     };
+
+    // Selection methods/interface - called by SelectionManager
+    this.deselect = function(selectionLayer) {
+        selectionLayer.style('fill',null);
+    }
+
+    this.select = function(selectionLayer) {
+        selectionLayer.style('fill', wiggle.util.icolor (204, 85, 0, 255));
+    }
+
 };

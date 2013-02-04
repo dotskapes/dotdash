@@ -7,6 +7,7 @@ function TimePanel () {
     var WIDTH, HEIGHT;
 
     var popup = null;
+    var that = this;
 
     this.name = 'Time Series';
     this.created = false;
@@ -22,6 +23,7 @@ function TimePanel () {
 
      // parent is a string css selector (not a jquery element)
      this.create = function (parent) {
+         ServiceLayer.addDataListener(that);
          var $parent = $ (parent);
          svg = d3.select (parent).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
@@ -130,7 +132,7 @@ function TimePanel () {
     };
 
 
-    this.change = function (data) {
+    this.newData = function (data) {
         layer = data;
 
         properties = layer.properties (true);

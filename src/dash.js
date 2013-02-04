@@ -1,6 +1,6 @@
 function Dashboard (selector, baseUrl) {
     // Static set of views for now
-    var views = ['map', 'time', 'mds', 'table'];
+    //var views = ['map', 'time', 'mds', 'table'];
 
     // Static set of filters for now
     var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
@@ -57,6 +57,7 @@ function Dashboard (selector, baseUrl) {
     var views = $ ('<div></div>').addClass ('panels').append (left).append (right);
     $ (selector).append (views);
 
+    // should we just do handlebars stuff synchronously?
     var templateLoader = $.ajax({
         url: baseUrl + 'src/templates/select-template.hb'
     });
@@ -64,6 +65,8 @@ function Dashboard (selector, baseUrl) {
     templateLoader.fail(function (data) {console.log(data);});
 
     templateLoader.done(function (template) {
+
+        // maybe move this to a separate dash-select.js file ?
         // handlebars for left right select dropdowns
         var selTemp = Handlebars.compile(template);
         var leftCtxt = {selClass:"left-select"};
@@ -82,6 +85,7 @@ function Dashboard (selector, baseUrl) {
         }
 
         var stringToPanel = {};
+
         var controller = new Controller();
         // dash javascript panel object
         var addPanel = function(panel) {
@@ -90,10 +94,14 @@ function Dashboard (selector, baseUrl) {
             stringToPanel[panel.name] = panel;
             controller.addView(panel);
         }
-        
-        // panels aka views
+
+        // should there be a list of strings that somehow get mapped to panels?
         var panels = [new MapPanel(), new TimePanel(), new MDSPanel()];
+        // hmmm - controller centric way of doing things - havent written this off yet
+        //var controllers = [new MapController(), new TimeController(), new MDSController()];
+        var view = function(i) { return controllers[i].view; }
         $.each(panels,function(i,pan) { addPanel(pan); } );
+        //$.each(controllers,function(i,c) { addController(c); } );
         
         // select is jquery element, container_sel is jquery selector for parent
         var selectListener = function(select,containerSel) {
@@ -102,12 +110,16 @@ function Dashboard (selector, baseUrl) {
                 // change this to hide() fn on panels object superclass
                 container.children().css('display','none');
                 var panelName = selectedText(select);
+                showPanel(panelName,containerSel);
+                bumpOtherDropdownIfSame(select);
+            });
+        }
+
+        var showPanel= function(panelName,containerSel) {
                 var panel = stringToPanel[panelName];
                 if (!panel) throw "Error: Panel "+panelName+" not found";
                 if (!panel.created) panel.create(containerSel);
                 else panel.show(containerSel);
-                bumpOtherDropdownIfSame(select)
-            });
         }
 
         // get currently selected option's text in select jquery element
@@ -170,12 +182,9 @@ function Dashboard (selector, baseUrl) {
             panels[rightIndex].resize('#right');
         });
 
-        var newData = function(data) {
-            service_layer.update();
-            controller.newData(data);
-        }
-        // Start the service layer, callback sends data to controller
-        var service_layer = new ServiceLayer(baseUrl + 'temp/2011.json',newData);
+        var url = function(path) { return baseUrl + path; }
+
+        ServiceLayer.loadUrl(url('temp/2011.json'));
 
         // Start the filter view
         var filterView = new FilterView();
