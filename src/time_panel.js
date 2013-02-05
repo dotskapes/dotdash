@@ -101,27 +101,43 @@ function TimePanel (parent) {
             });
     };
 
+    var feature_lookup = {};
     var draw_time_series = function () {
         var get_series = function (d) {
             var points = [];
+            var last_valid = false;
             $.each (properties, function (i, prop) {
-                points.push (time_map (i) + ' ' + ymap (d.attr (prop)));
+                var val = d.attr (prop);
+                if (isNaN (val)) {
+                    last_valid = false;
+                }
+                else {
+                    if (last_valid)
+                        points.push ('L');
+                    else
+                        points.push ('M');
+
+                    last_valid = true;
+                    points.push (time_map (i) + ' ' + ymap (val));
+                }
             });
             return points;
         };
 
         var get_path = function (d) {
             var points = get_series (d);
-            return 'M ' + points.join ('L');
+            return points.join (' ');
         };
 
         data_group.selectAll ('path').data (layer.features ().items ()).enter ().append ('path')
             .attr ('d', get_path)
             .style ('fill', 'none')
             .style ('stroke', function (d) { return d.style ('fill').rgb () })
-            .style ('stroke-width', 1.5);
+            .style ('stroke-width', 1.5)
+            .each (function (d) {
+                feature_lookup[d.id] = this;
+            });
     };
-
 
     var wireUp = function() {
         ServiceLayer.addDataListener(that);
@@ -132,7 +148,7 @@ function TimePanel (parent) {
         layer = data;
 
         properties = layer.properties (true);
-        properties.sort (dateCompare);
+        properties.sort ();
 
         var range = get_range (layer, .05);
         /*var current_line = 1000 * Math.floor (range.min / 1000);
@@ -170,13 +186,13 @@ function TimePanel (parent) {
     // stubs - todo - implements once webgl issue is worked out
     this.deselect = function(selectionLayer) {
         selectionLayer.each (function (i, f) {
-            // deleselect feature...
+            d3.select (feature_lookup[f.id]).style ('stroke', 'blue');
         });;
     }
 
     this.select = function(selectionLayer) {
         selectionLayer.each (function (i, f) {
-            // select....
+            d3.select (feature_lookup[f.id]).style ('stroke', 'rgb(241,246,112)');
         });
     }
 

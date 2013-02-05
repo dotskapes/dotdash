@@ -147,7 +147,7 @@ function Dashboard (selector, baseUrl) {
 
         var url = function(path) { return baseUrl + path; }
 
-        ServiceLayer.loadUrl(url('temp/2011.json'));
+        ServiceLayer.loadUrl(url('temp/flu_country.json'));
 
         // Start the filter view
         var filterView = new FilterView();
