@@ -5,7 +5,6 @@ function MapPanel (parent) {
     var layer;
     var that = this;
 
-    this.parent = parent;
     this.created = false;
 
     this.getMap = function() { return map; }
@@ -13,8 +12,8 @@ function MapPanel (parent) {
     this.create = function () {
         container = $ ('<div></div>').attr ('id', 'wigglemap');
 
-        this.parent.append (container);
-        this.parent.show();
+        parent.append (container);
+        parent.show();
 
         map = new wiggle.Map ('#wigglemap');
         wireupMap();
@@ -25,7 +24,11 @@ function MapPanel (parent) {
 
     this.show = function() {
         container.css('display','block');
-        this.parent.show();
+        parent.show();
+    };
+
+    this.addClass = function (cssClass) {
+        parent.addClass(cssClass);
     };
 
     this.resize = function () {

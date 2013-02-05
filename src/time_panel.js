@@ -8,7 +8,6 @@ function TimePanel (parent) {
     var popup = null;
     var that = this;
 
-    this.parent = parent;
     this.name = 'Time Series';
     this.created = false;
 
@@ -18,17 +17,17 @@ function TimePanel (parent) {
     this.show = function() {
         svg.style('display','block');
         // get jquery elementy from d3 element & append
-        this.parent.show();
+        parent.show();
     };
 
-     this.create = function (parent) {
-         svg = d3.select (this.parent[0]).append ('svg').attr ({
+     this.create = function () {
+         svg = d3.select (parent[0]).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
              //'preserveAspectRatio': 'none'
          });
 
-         var width = this.parent.width();
-         var height = this.parent.height();
+         var width = parent.width();
+         var height = parent.height();
 
          popup = new Popup ();
 
@@ -51,11 +50,15 @@ function TimePanel (parent) {
          data_group = svg.append ('g');
 
          wireUp();
-         this.parent.show();
+         parent.show();
          this.created = true;
      };
 
-     this.resize = function (parent) {
+     this.addClass = function (cssClass) {
+         parent.addClass(cssClass);
+     };
+
+     this.resize = function () {
      };
 
      var h_lines = [];
@@ -157,8 +160,8 @@ function TimePanel (parent) {
             current_line += 1000;
         }*/
 
-        var width = this.parent.width();
-        var height = this.parent.height();
+        var width = parent.width();
+        var height = parent.height();
 
         ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);

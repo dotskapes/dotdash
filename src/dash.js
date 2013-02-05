@@ -90,8 +90,8 @@ function Dashboard (selector, baseUrl) {
                     else panel.show();
                 });
                 $('.view').removeClass('left-panel').removeClass('right-panel');
-                leftPanel.parent.addClass('left-panel');
-                rightPanel.parent.addClass('right-panel');
+                leftPanel.addClass('left-panel');
+                rightPanel.addClass('right-panel');
         }
 
         // get currently selected option's text in select jquery element
