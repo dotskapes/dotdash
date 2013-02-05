@@ -116,15 +116,28 @@ function TimePanel () {
     var draw_time_series = function () {
         var get_series = function (d) {
             var points = [];
+            var last_valid = false;
             $.each (properties, function (i, prop) {
-                points.push (time_map (i) + ' ' + ymap (d.attr (prop)));
+                var val = d.attr (prop);
+                if (isNaN (val)) {
+                    last_valid = false;
+                }
+                else {
+                    if (last_valid)
+                        points.push ('L');
+                    else
+                        points.push ('M');
+
+                    last_valid = true;
+                    points.push (time_map (i) + ' ' + ymap (val));
+                }
             });
             return points;
         };
 
         var get_path = function (d) {
             var points = get_series (d);
-            return 'M ' + points.join ('L');
+            return points.join (' ');
         };
 
         data_group.selectAll ('path').data (layer.features ().items ()).enter ().append ('path')
@@ -146,7 +159,7 @@ function TimePanel () {
         layer = data;
 
         properties = layer.properties (true);
-        properties.sort (dateCompare);
+        properties.sort ();
 
         var range = get_range (layer, .05);
         /*var current_line = 1000 * Math.floor (range.min / 1000);
