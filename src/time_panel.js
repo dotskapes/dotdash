@@ -112,6 +112,7 @@ function TimePanel () {
             });
     };
 
+    var feature_lookup = {};
     var draw_time_series = function () {
         var get_series = function (d) {
             var points = [];
@@ -130,9 +131,11 @@ function TimePanel () {
             .attr ('d', get_path)
             .style ('fill', 'none')
             .style ('stroke', function (d) { return d.style ('fill').rgb () })
-            .style ('stroke-width', 1.5);
+            .style ('stroke-width', 1.5)
+            .each (function (d) {
+                feature_lookup[d.id] = this;
+            });
     };
-
 
     var wireUp = function() {
         ServiceLayer.addDataListener(that);
@@ -178,13 +181,13 @@ function TimePanel () {
     // stubs - todo - implements once webgl issue is worked out
     this.deselect = function(selectionLayer) {
         selectionLayer.each (function (i, f) {
-            // deleselect feature...
+            d3.select (feature_lookup[f.id]).style ('stroke', 'blue');
         });;
     }
 
     this.select = function(selectionLayer) {
         selectionLayer.each (function (i, f) {
-            // select....
+            d3.select (feature_lookup[f.id]).style ('stroke', 'rgb(241,246,112)');
         });
     }
 
