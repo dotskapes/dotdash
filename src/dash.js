@@ -138,14 +138,6 @@ function Dashboard (selector, baseUrl) {
             return select.attr('class').indexOf('left') !== -1;
         }
         
-        // add selection listeners to left right select dropdowns
-        selectListener($('.left-select'));
-        selectListener($('.right-select'));
-        
-        // initialize with 1st panel on left (& 2nd on right)
-        $('.left-select').val(panels[0].name).change();
-        // left panel select will cause right to bump to 2nd
-        
 
         // If the window is resized, we may want to resize the dashboard
         $ (window).resize (function () {
@@ -165,6 +157,14 @@ function Dashboard (selector, baseUrl) {
                 // controller should do something with this
                 console.log(name + ' changed to ' + value); 
             });
+
+            // add selection listeners to left right select dropdowns
+            selectListener($('.left-select'));
+            selectListener($('.right-select'));
+
+            // initialize with 1st panel on left (& 2nd on right)
+            $('.left-select').val(panels[0].name).change();
+            // left panel select will cause right to bump to 2nd
         });
     });
 };
