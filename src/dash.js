@@ -1,3 +1,4 @@
+// refactor - break out dropdown & such
 function Dashboard (selector, baseUrl) {
     // Static set of views for now
     var views = ['map', 'time', 'mds', 'table'];
