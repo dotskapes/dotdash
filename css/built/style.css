@@ -1,0 +1,33 @@
+html, body, #dashboard {
+  height: 100%; }
+
+.panels {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  height: 100%;
+  overflow: hidden;
+  position: relative; }
+  .panels .view {
+    position: absolute;
+    top: 22px;
+    bottom: 0;
+    width: 50%;
+    float: left;
+    display: none; }
+    .panels .view.left-panel {
+      left: 0; }
+    .panels .view.right-panel {
+      right: 0; }
+
+#left, #right {
+  height: 22px;
+  width: 50%;
+  float: left; }
+
+#options {
+  float: right;
+  width: 200px; }
+
+#wigglemap {
+  height: 100%; }
