@@ -1,0 +1,51 @@
+@mixin vendor_prefix ($key, $value) {
+    -moz-#{$key}: $value;
+    -webkit-#{$key}: $value;
+    #{$key}: $value;
+}
+
+html, body, #dashboard {
+    height: 100%;
+}
+
+$dropdownHeight: 22px;
+$panelWidth: 50%;
+
+.panels {
+    @include vendor_prefix(user-select, none);
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    
+    .view {
+        position: absolute;
+        top: $dropdownHeight;
+        bottom: 0;
+        width: $panelWidth;
+        float: left;
+        display: none;
+
+        &.left-panel {
+            left: 0;
+        }
+
+        &.right-panel {
+            right: 0;
+        }
+    }
+}
+
+#left, #right {
+    height: $dropdownHeight;
+    width: $panelWidth;
+    float: left;
+}
+
+#options {
+    float: right;
+    width: 200px;
+}
+
+#wigglemap {
+    height: 100%;
+}
