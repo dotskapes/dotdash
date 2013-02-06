@@ -63,6 +63,7 @@ function TimePanel (element) {
 
      var h_lines = [];
      var v_lines = [];
+     // properties is the sorted list of keys(dates) for time series data in feature
      var properties = [];
      var prop_map = {};
      var layer = null;
@@ -147,11 +148,11 @@ function TimePanel (element) {
         selectionManager.addView(that);
     }
 
+
     this.newData = function (data) {
         layer = data;
 
-        properties = layer.properties (true);
-        properties.sort ();
+        properties = ServiceLayer.getSortedDateProperties(layer);
 
         var range = get_range (layer, .05);
         /*var current_line = 1000 * Math.floor (range.min / 1000);
