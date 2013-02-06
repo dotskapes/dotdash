@@ -4,6 +4,7 @@ function MapPanel (element) {
     var map;
     var layer;
     var that = this;
+    var colorMap = function() { return ServiceLayer.colorMap; }
 
     this.created = false;
 
@@ -42,7 +43,8 @@ function MapPanel (element) {
         map.vcenter (layer.bounds.centroid ());
         map.extents (layer.bounds.width ());
         map.append (layer);
-
+        // initial (unselected) coloring
+        this.deselect(layer);
     };
 
     var wireupMap = function() {
@@ -61,11 +63,20 @@ function MapPanel (element) {
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function(selectionLayer) {
-        selectionLayer.style('fill',null);
+        //selectionLayer.style('fill',null);
+        var allFeats = ServiceLayer.currentData.features();
+        // this should then further select on what is unfiltered out
+        // but we are not yet filtering...
+        // var unfiltered = filterQueries.get(allFeats);
+        var colorMapFn = function(feature) {
+            return colorMap().colorForFeat(feature);
+        };
+        allFeats.style('fill', colorMapFn);
     }
 
     this.select = function(selectionLayer) {
-        selectionLayer.style('fill', wiggle.util.icolor (204, 85, 0, 255));
+        selectionLayer.style('fill', ColorMap.HIGHLIGHT);
     }
+
 
 };
