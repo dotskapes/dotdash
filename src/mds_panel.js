@@ -1,4 +1,4 @@
-function MDSPanel (parent) {
+function MDSPanel (element) {
     var svg;
     var back_group, data_group;
 
@@ -11,12 +11,12 @@ function MDSPanel (parent) {
     this.show = function() {
         svg.style('display','block');
         // get jquery elementy from d3 element & append
-        parent.show();
+        element.show();
     };
     
     this.create = function () {
 
-        svg = d3.select (parent[0]).append ('svg').attr ({
+        svg = d3.select (element[0]).append ('svg').attr ({
             'viewBox': '0 0 1 1',
             'preserveAspectRatio': 'none'
         });
@@ -30,13 +30,13 @@ function MDSPanel (parent) {
             .attr ('width', 1)
             .attr ('height', 1)
             .style ('fill', '#ff0000');
-        parent.append($(svg.node()));
-        parent.show();
+        element.append($(svg.node()));
+        element.show();
         this.created = true;
     };
 
     this.addClass = function (cssClass) {
-        parent.addClass(cssClass);
+        element.addClass(cssClass);
     };
     
     this.resize = function () {

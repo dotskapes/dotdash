@@ -1,5 +1,5 @@
 "use strict";
-function TimePanel (parent) {
+function TimePanel (element) {
     var svg;
     var h_group, v_group, data_group;
 
@@ -17,17 +17,17 @@ function TimePanel (parent) {
     this.show = function() {
         svg.style('display','block');
         // get jquery elementy from d3 element & append
-        parent.show();
+        element.show();
     };
 
      this.create = function () {
-         svg = d3.select (parent[0]).append ('svg').attr ({
+         svg = d3.select (element[0]).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
              //'preserveAspectRatio': 'none'
          });
 
-         var width = parent.width();
-         var height = parent.height();
+         var width = element.width();
+         var height = element.height();
 
          popup = new Popup ();
 
@@ -50,12 +50,12 @@ function TimePanel (parent) {
          data_group = svg.append ('g');
 
          wireUp();
-         parent.show();
+         element.show();
          this.created = true;
      };
 
      this.addClass = function (cssClass) {
-         parent.addClass(cssClass);
+         element.addClass(cssClass);
      };
 
      this.resize = function () {
@@ -160,8 +160,8 @@ function TimePanel (parent) {
             current_line += 1000;
         }*/
 
-        var width = parent.width();
-        var height = parent.height();
+        var width = element.width();
+        var height = element.height();
 
         ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);
