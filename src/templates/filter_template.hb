@@ -1,4 +1,4 @@
-<div id="options" style="float:right; width: 200px;">
+<div id="options">
     <h2>Filter</h2>
     {{#each filters}}
         <div class="filter">

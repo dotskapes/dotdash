@@ -1,6 +1,6 @@
 function Dashboard (selector, baseUrl) {
     // Static set of views for now
-    //var views = ['map', 'time', 'mds', 'table'];
+    var views = ['map', 'time', 'mds', 'table'];
 
     // Static set of filters for now
     var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
@@ -18,44 +18,16 @@ function Dashboard (selector, baseUrl) {
     // Format the two panels
     var left = $ ('<div>').attr ('id', 'left');
     var right = $ ('<div>').attr ('id', 'right');
-    // container for view panels
-    var leftView = $('<div>').attr('id','left-view').addClass('view');
-    var rightView = $('<div>').attr('id','right-view').addClass('view');
 
-    // Set the CSS for the panels, call everytime the window resizes
-    var set_panels = function () {
-        var full_width = $ (selector).width ();
-        var full_height = $ (selector).height ();
-        var filter_width = 200;
-        var panel_width = (full_width - filter_width) / 2;
-        left.css ({
-            'position': 'absolute',
-            'left': $ (selector).position ().left,
-            'top': $ (selector).position ().top,
-            'width': panel_width,
-            'height': full_height,
-        });
-        leftView.css ({
-            'width': '100%',
-            'height': full_height - selectHeight
-        });
-
-        right.css ({
-            'position': 'absolute',
-            'left': $ (selector).position ().left + panel_width,
-            'top': $ (selector).position ().top,
-            'width': panel_width,
-        });
-
-        rightView.css ({
-            'width': '100%',
-            'height': full_height - selectHeight
-        });
-    };
 
     // Add the panels to the document
-    var views = $ ('<div></div>').addClass ('panels').append (left).append (right);
-    $ (selector).append (views);
+    var panels = $ ('<div></div>').addClass ('panels').append (left).append (right);
+    $ (selector).append (panels);
+
+    $.each(views, function (i, view) {
+        var panel = $('<div>').attr('id', view).addClass('view');
+        panels.append(panel);
+    });
 
     // should we just do handlebars stuff synchronously?
     var templateLoader = $.ajax({
@@ -74,11 +46,6 @@ function Dashboard (selector, baseUrl) {
         left.append(leftSel);
         right.append(selTemp({selClass:"right-select"}));
 
-        left.append(leftView);
-        right.append(rightView);
-        
-        set_panels ();
-
         // do this with handlebars?
         var optionTemp = function(name) {
             return "<option>"+name+"</option>";
@@ -96,7 +63,7 @@ function Dashboard (selector, baseUrl) {
         }
 
         // should there be a list of strings that somehow get mapped to panels?
-        var panels = [new MapPanel(), new TimePanel(), new MDSPanel()];
+        var panels = [new MapPanel($('#map')), new TimePanel($('#time')), new MDSPanel($('#mds'))];
         // hmmm - controller centric way of doing things - havent written this off yet
         //var controllers = [new MapController(), new TimeController(), new MDSController()];
         var view = function(i) { return controllers[i].view; }
@@ -104,22 +71,27 @@ function Dashboard (selector, baseUrl) {
         //$.each(controllers,function(i,c) { addController(c); } );
         
         // select is jquery element, container_sel is jquery selector for parent
-        var selectListener = function(select,containerSel) {
+        var selectListener = function(select) {
             select.change(function() {
-                container = $(containerSel);
-                // change this to hide() fn on panels object superclass
-                container.children().css('display','none');
-                var panelName = selectedText(select);
-                showPanel(panelName,containerSel);
+                $('.view').hide();
+                var leftPanelName = selectedText($('.left-select'));
+                var rightPanelName = selectedText($('.right-select'));
+                showPanels(leftPanelName,rightPanelName);
                 bumpOtherDropdownIfSame(select);
             });
         }
 
-        var showPanel= function(panelName,containerSel) {
-                var panel = stringToPanel[panelName];
-                if (!panel) throw "Error: Panel "+panelName+" not found";
-                if (!panel.created) panel.create(containerSel);
-                else panel.show(containerSel);
+        var showPanels = function(leftPanelName, rightPanelName) {
+                var leftPanel = stringToPanel[leftPanelName];
+                var rightPanel = stringToPanel[rightPanelName];
+                $.each([leftPanel, rightPanel], function (i, panel) {
+                    if (!panel) throw "Error: Panel "+panelName+" not found";
+                    if (!panel.created) panel.create();
+                    else panel.show();
+                });
+                $('.view').removeClass('left-panel').removeClass('right-panel');
+                leftPanel.addClass('left-panel');
+                rightPanel.addClass('right-panel');
         }
 
         // get currently selected option's text in select jquery element
@@ -166,20 +138,11 @@ function Dashboard (selector, baseUrl) {
             return select.attr('class').indexOf('left') !== -1;
         }
         
-        // add selection listeners to left right select dropdowns
-        selectListener($('.left-select'),'#left-view');
-        selectListener($('.right-select'),'#right-view');
-        
-        // initialize with 1st panel on left (& 2nd on right)
-        $('.left-select').val(panels[0].name).change();
-        // left panel select will cause right to bump to 2nd
-        
 
         // If the window is resized, we may want to resize the dashboard
         $ (window).resize (function () {
-            set_panels ();
-            panels[leftIndex].resize('#left');
-            panels[rightIndex].resize('#right');
+            panels[leftIndex].resize();
+            panels[rightIndex].resize();
         });
 
         var url = function(path) { return baseUrl + path; }
@@ -189,11 +152,19 @@ function Dashboard (selector, baseUrl) {
         // Start the filter view
         var filterView = new FilterView();
         filterView.render().done(function (html) {
-            $(selector).append(html);
+            $(selector).prepend(html);
             filterView.onChange(function (name, value) {
                 // controller should do something with this
                 console.log(name + ' changed to ' + value); 
             });
+
+            // add selection listeners to left right select dropdowns
+            selectListener($('.left-select'));
+            selectListener($('.right-select'));
+
+            // initialize with 1st panel on left (& 2nd on right)
+            $('.left-select').val(panels[0].name).change();
+            // left panel select will cause right to bump to 2nd
         });
     });
 };
