@@ -1,11 +1,9 @@
 "use strict";
-function TimePanel () {
+function TimePanel (element) {
     var svg;
     var h_group, v_group, data_group;
 
     var xmap, ymap;
-
-    var WIDTH, HEIGHT;
 
     var popup = null;
     var that = this;
@@ -16,37 +14,31 @@ function TimePanel () {
     var selection = null;
     var time_map;
     
-    // parent_sel is jquery parent/container selector to append to
-    this.show = function(parent_sel) {
+    this.show = function() {
         svg.style('display','block');
         // get jquery elementy from d3 element & append
-        $(parent_sel).append($(svg.node()));
+        element.show();
     };
 
-     // parent is a string css selector (not a jquery element)
-     this.create = function (parent) {
-         var $parent = $ (parent);
-         svg = d3.select (parent).append ('svg').attr ({
+     this.create = function () {
+         svg = d3.select (element[0]).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
              //'preserveAspectRatio': 'none'
-         }).style ({
-             'width': $parent.width (),
-             'height': $parent.height (),
          });
 
-         WIDTH = $parent.width ();
-         HEIGHT = $parent.height ();
+         var width = element.width();
+         var height = element.height();
 
          popup = new Popup ();
 
-         xmap = d3.scale.linear ().domain ([0, 1]).range ([0, WIDTH]);
+         xmap = d3.scale.linear ().domain ([0, 1]).range ([0, width]);
 
          var matte = svg.append ('rect')
              .attr ({
                  'x': 0,
                  'y': 0,
-                 'width': WIDTH,
-                 'height': HEIGHT
+                 'width': width,
+                 'height': height
              }).style ({
                  'fill': '#ffffff',
                  'stroke': '#cccccc',
@@ -58,15 +50,15 @@ function TimePanel () {
          data_group = svg.append ('g');
 
          wireUp();
+         element.show();
          this.created = true;
      };
 
-     this.resize = function (parent) {
-         var $parent = $ (parent);
-         svg.style ({
-             'width': $parent.width (),
-             'height': $parent.height (),
-         });        
+     this.addClass = function (cssClass) {
+         element.addClass(cssClass);
+     };
+
+     this.resize = function () {
      };
 
      var h_lines = [];
@@ -75,16 +67,16 @@ function TimePanel () {
      var prop_map = {};
      var layer = null;
 
-     var draw_horizontal_lines = function () {
+     var draw_horizontal_lines = function (width) {
          h_group.selectAll ('line').data (h_lines).enter ().append ('line')
              .attr ('x1', 0)
-             .attr ('x2', WIDTH)
+             .attr ('x2', width)
              .attr ('y1', ymap)
              .attr ('y2', ymap)
              .attr ('stroke', '#cccccc');        
      };
 
-     var draw_vertical_lines = function () {
+     var draw_vertical_lines = function (height) {
          var map_line = function (line) {
              return time_map (prop_map[line]);
          };
@@ -92,7 +84,7 @@ function TimePanel () {
              .attr ('x1', map_line)
              .attr ('x2', map_line)
              .attr ('y1', 0)
-             .attr ('y2', HEIGHT)
+             .attr ('y2', height)
              .attr ('stroke', '#cccccc')
              .attr ('class', function (d) { return prop_map[d]})
              .on ('mouseover', function (d) {
@@ -168,8 +160,11 @@ function TimePanel () {
             current_line += 1000;
         }*/
 
-        ymap = d3.scale.linear ().domain ([0, range.max]).range ([HEIGHT, 0]);
-        time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, WIDTH]);
+        var width = element.width();
+        var height = element.height();
+
+        ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
+        time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);
 
         h_lines = ymap.ticks (10);
 
@@ -178,8 +173,8 @@ function TimePanel () {
             prop_map[prop] = i;
         });
         
-        draw_horizontal_lines ();
-        draw_vertical_lines ();
+        draw_horizontal_lines (width);
+        draw_vertical_lines (height);
         draw_time_series ();
 
         selection = new SVGSelection (svg);
