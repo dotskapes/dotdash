@@ -150,6 +150,14 @@ function Dashboard (selector, baseUrl) {
 
         ServiceLayer.loadUrl(url('temp/flu_country.json'));
 
+        // add selection listeners to left right select dropdowns
+        selectListener($('.left-select'));
+        selectListener($('.right-select'));
+
+        // initialize with 1st panel on left (& 2nd on right)
+        // left panel select will cause right to bump to 2nd
+        $('.left-select').val(panels[0].name).change();
+
         // Start the filter view
         var filterView = new FilterView(baseUrl);
         filterView.render().done(function (html) {
@@ -158,14 +166,6 @@ function Dashboard (selector, baseUrl) {
                 // controller should do something with this
                 console.log(name + ' changed to ' + value); 
             });
-
-            // add selection listeners to left right select dropdowns
-            selectListener($('.left-select'));
-            selectListener($('.right-select'));
-
-            // initialize with 1st panel on left (& 2nd on right)
-            $('.left-select').val(panels[0].name).change();
-            // left panel select will cause right to bump to 2nd
         });
     });
 };
