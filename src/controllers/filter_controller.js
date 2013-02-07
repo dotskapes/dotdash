@@ -1,11 +1,11 @@
 'use strict';
-var FilterController = function(parent) {
+var FilterController = function(parent,baseUrl) {
 
     var filterView;
     var colorRampController = new ColorRampController();
 
     var init = function(parent) {
-        filterView = new FilterView();
+        filterView = new FilterView(baseUrl);
         // ajax handlebars
         filterView.render().done(function (html) {
             parent.prepend(html);

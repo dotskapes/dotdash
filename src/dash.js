@@ -1,3 +1,4 @@
+'use strict';
 // refactor - break out dropdown & such
 function Dashboard (selector, baseUrl) {
     // Static set of views for now
@@ -21,13 +22,13 @@ function Dashboard (selector, baseUrl) {
     var right = $ ('<div>').attr ('id', 'right');
 
 
-    // Add the panels to the document
-    var panels = $ ('<div></div>').addClass ('panels').append (left).append (right);
-    $ (selector).append (panels);
+    // Add the panel div/containers to the document
+    var panel_container = $('<div></div>').addClass ('panels').append (left).append (right);
+    $ (selector).append (panel_container);
 
     $.each(views, function (i, view) {
-        var panel = $('<div>').attr('id', view).addClass('view');
-        panels.append(panel);
+        var panel_div = $('<div>').attr('id', view).addClass('view');
+        panel_container.append(panel_div);
     });
 
     // should we just do handlebars stuff synchronously?
@@ -156,15 +157,8 @@ function Dashboard (selector, baseUrl) {
         // left panel select will cause right to bump to 2nd
         $('.left-select').val(panels[0].name).change();
 
-        // Start the filter view
-        var filterView = new FilterView(baseUrl);
-        filterView.render().done(function (html) {
-            $(selector).prepend(html);
-            filterView.onChange(function (name, value) {
-                // controller should do something with this
-                console.log(name + ' changed to ' + value); 
-            });
-        });
+        // Start the filter controller/view
+        new FilterController($(selector),baseUrl);
     });
 };
 
