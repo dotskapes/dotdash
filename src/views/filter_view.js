@@ -1,4 +1,4 @@
-function FilterView () {
+function FilterView (baseUrl) {
 
     this.render = function () {
         // hard-coded filters for now
@@ -39,7 +39,7 @@ function FilterView () {
         var viewRenderer = $.Deferred();
 
         var templateLoader = $.ajax({
-            url: 'src/templates/filter_template.hb'
+            url: baseUrl + 'src/templates/filter_template.hb'
         });
 
         templateLoader.done(function (template) {
