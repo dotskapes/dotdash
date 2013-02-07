@@ -151,7 +151,7 @@ function Dashboard (selector, baseUrl) {
         ServiceLayer.loadUrl(url('temp/flu_country.json'));
 
         // Start the filter view
-        var filterView = new FilterView();
+        var filterView = new FilterView(baseUrl);
         filterView.render().done(function (html) {
             $(selector).prepend(html);
             filterView.onChange(function (name, value) {
