@@ -5,7 +5,11 @@
             <div>{{title}}</div>
             {{#each options}}
                 <label>
-                    <input class="filter-button" type="radio" name="{{../name}}" value="{{@index}}" {{#unless @index}}checked{{/unless}} />{{label}}
+                  <!-- div class="{{../name}}+</div> put in a div for controller
+                       to fill in??? in place of input? -->
+                  <input class="filter-button {{../name}}" type="radio"
+                         name="{{../name}}" value="{{@index}}"
+                         {{#unless @index}}checked{{/unless}} />{{label}}
                 </label>
             {{/each}}
         </div>
