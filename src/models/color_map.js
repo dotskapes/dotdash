@@ -24,10 +24,12 @@ function ColorMap(data) {
     var global_vals = [];
     $.each (dateProps, function (i, dateProp) {
         var vals = [];
-        $.each (data.features, function (j, feature) {
-            vals.push (feature.properties[dateProp]);
-            global_vals.push (feature.properties[dateProp]);
-        });
+        if (data.features.length) { // prevent error when ember is loaded
+            $.each (data.features, function (j, feature) {
+                vals.push (feature.properties[dateProp]);
+                global_vals.push (feature.properties[dateProp]);
+            });
+        }
         set_range (vals, currentDateProp);
     });
     set_range (global_vals, 'global');
