@@ -156,7 +156,7 @@ function ColorMap(data) {
         return ranges[dateProp];
     }
 
-    this.color = function (index) {
+    this.setColorRamp = function (index) {
         if (index == 0)
             colors = grey_blue;
         else if (index == 1)
