@@ -54,13 +54,11 @@ function Dashboard (selector, baseUrl) {
 
         var stringToPanel = {};
 
-        var controller = new Controller();
         // dash javascript panel object
         var addPanel = function(panel) {
             // add to selection
             $(".view-select").append(optionTemp(panel.name));
             stringToPanel[panel.name] = panel;
-            controller.addView(panel);
         }
 
         // should there be a list of strings that somehow get mapped to panels?
