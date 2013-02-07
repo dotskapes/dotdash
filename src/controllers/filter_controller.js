@@ -14,11 +14,10 @@ var FilterController = function(parent) {
     }
 
     var initControllers = function() {
+        // take this out and just have events go direct to controller?
         filterView.onChange(function (name, value) {
             // controller should do something with this
             console.log(name + ' changed to ' + value);
-            //if (name === 'ramp')
-              //  colorRampController.newRamp(value);
         });
         new ColorRampController();
     }
