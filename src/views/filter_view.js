@@ -18,7 +18,7 @@ function FilterView (baseUrl) {
                         { label: 'nov' }, 
                         { label: 'dec' }]
             },
-            { name: 'ramp',
+            { name: ColorRampController.CSS_CLASS,
               title: 'Color Ramp',
               options: [{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
             },
