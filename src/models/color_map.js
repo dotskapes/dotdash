@@ -10,6 +10,8 @@ function ColorMap(data) {
 
     var currentDateProp = dateProps[0];
 
+    // figure out uniform distribution (for uniform filter)
+    // sets min & max range, can be used by each time step or global
     var set_range = function (vals, currentDateProp) {
         vals.sort (function (a, b) {
             return a - b;
@@ -21,17 +23,19 @@ function ColorMap(data) {
         };
     };
 
+    // figure global color scale, that is scale according to all features,
+    // not just self(local)
     var global_vals = [];
     $.each (dateProps, function (i, dateProp) {
         var vals = [];
-        if (data.features.length) { // prevent error when ember is loaded
-            $.each (data.features, function (j, feature) {
-                vals.push (feature.properties[dateProp]);
-                global_vals.push (feature.properties[dateProp]);
-            });
-        }
+        data.features().each(function (j, feature) {
+            vals.push (feature.properties[dateProp]);
+            global_vals.push (feature.properties[dateProp]);
+        });
+        // set min & max range for timestep/dateProp
         set_range (vals, currentDateProp);
     });
+    // get global min & max under property "global"
     set_range (global_vals, 'global');
 
     var quantiles = {
