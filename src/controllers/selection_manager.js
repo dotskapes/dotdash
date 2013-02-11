@@ -7,7 +7,7 @@ var selectionManager = new SelectionManager();
 function SelectionManager() {
     
     var views = [];
-    // this is a wigglemaps layer object that selects for wigglemap features
+    // this is a wigglemaps layer selector that selects for wigglemap features
     var currentSelectionLayer;
 
     this.addView = function(view) { views.push(view); }

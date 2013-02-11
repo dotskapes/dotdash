@@ -45,4 +45,6 @@ function MDSPanel (element) {
     this.change = function (data) {
 
     };
+
+    this.draw = function() {} // ??
 };
