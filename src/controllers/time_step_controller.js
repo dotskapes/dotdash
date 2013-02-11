@@ -1,6 +1,6 @@
 function TimeStepController (baseUrl) {
 
-    var view = new TimeStepView(baseUrl);
+    var view = new TimeStepFilterView(baseUrl);
 
     var init = function () {
 
