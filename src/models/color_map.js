@@ -1,12 +1,12 @@
 'use strict';
 var NUM_COLORS = 6;
 
-function ColorMap(data) {
+function ColorMap(dataLayer) {
     var ranges = {};
 
     // a list of properties of feature that correspond to timestamped data.
     // and sorted by dates - though thats not relevant for color map
-    var dateProps = ServiceLayer.getSortedDateProperties(data);
+    var dateProps = ServiceLayer.getSortedDateProperties(dataLayer);
 
     var currentDateProp = dateProps[0];
 
@@ -26,11 +26,11 @@ function ColorMap(data) {
     // figure global color scale, that is scale according to all features,
     // not just self(local)
     var global_vals = [];
-    $.each (dateProps, function (i, dateProp) {
+    $.each(dateProps, function (i, dateProp) {
         var vals = [];
-        data.features().each(function (j, feature) {
-            vals.push (feature.properties[dateProp]);
-            global_vals.push (feature.properties[dateProp]);
+        dataLayer.features().each(function (j, feature) {
+            vals.push (feature.attr(dateProp));
+            global_vals.push (feature.attr(dateProp));
         });
         // set min & max range for timestep/dateProp
         set_range (vals, currentDateProp);
