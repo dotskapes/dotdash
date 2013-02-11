@@ -1,4 +1,4 @@
-function TimeStepView (baseUrl) {
+function TimeStepFilterView (baseUrl) {
 
     this.update = function (timeSteps) {
         $('#step-filter').empty();
