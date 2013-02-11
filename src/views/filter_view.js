@@ -3,20 +3,9 @@ function FilterView (baseUrl) {
     this.render = function () {
         // hard-coded filters for now
         var filters = [
-            { name: 'step',
+            { name: TimeStepController.NAME,
               title: 'Time Step',
-              options: [{ label: 'jan' }, 
-                        { label: 'feb' }, 
-                        { label: 'mar' }, 
-                        { label: 'apr' }, 
-                        { label: 'may' }, 
-                        { label: 'jun' }, 
-                        { label: 'jul' }, 
-                        { label: 'aug' }, 
-                        { label: 'sep' }, 
-                        { label: 'oct' }, 
-                        { label: 'nov' }, 
-                        { label: 'dec' }]
+              options: []
             },
             { name: ColorRampController.CSS_CLASS,
               title: 'Color Ramp',
