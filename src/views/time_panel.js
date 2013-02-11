@@ -200,6 +200,10 @@ function TimePanel (element) {
         });
     }
 
+    this.draw = function() {
+        // ???
+    }
+
 
 };
 
