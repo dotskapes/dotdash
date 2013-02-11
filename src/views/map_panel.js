@@ -78,5 +78,16 @@ function MapPanel (element) {
         selectionLayer.style('fill', ColorMap.HIGHLIGHT);
     }
 
+    // draw map - without highlight/selection
+    this.draw = function() {
+        var allFeats = ServiceLayer.currentData.features();
+        // this should then further select on what is unfiltered out
+        // but we are not yet filtering...
+        // var unfiltered = filterQueries.get(allFeats);
+        var colorMapFn = function(feature) {
+            return colorMap().colorForFeat(feature);
+        };
+        allFeats.style('fill', colorMapFn);
+    }
 
 };
