@@ -8,6 +8,30 @@ html, body, #dashboard {
     height: 100%;
 }
 
+.collapse-toggler {
+    .collapse-arrow {
+        display: inline-block;
+    }
+
+    .expand-arrow {
+        display: none;
+    }
+
+    &.collapsed {
+        .collapse-arrow {
+            display: none;
+        }
+    
+        .expand-arrow {
+            display: inline-block;
+        }
+    }
+}
+
+.collapsible {
+    display: none;
+}
+
 $dropdownHeight: 22px;
 $panelWidth: 50%;
 

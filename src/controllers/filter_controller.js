@@ -9,6 +9,12 @@ var FilterController = function(parent,baseUrl) {
         // ajax handlebars
         filterView.render().done(function (html) {
             parent.prepend(html);
+            $('.collapse-toggler').click(function (event) {
+                var content = $(event.currentTarget).siblings('.collapsible')
+                content.slideToggle();
+                $(event.currentTarget).toggleClass('collapsed');
+                event.stopPropagation();
+            });
             initControllers();
         });
     }
@@ -20,6 +26,7 @@ var FilterController = function(parent,baseUrl) {
             console.log(name + ' changed to ' + value);
         });
         new ColorRampController();
+        new TimeStepController(baseUrl);
     }
   
     init(parent);

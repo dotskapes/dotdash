@@ -11,11 +11,10 @@ function Dashboard (parentSelector, baseUrl) {
 
     var url = function(path) { return baseUrl + path; }
 
-    ServiceLayer.loadUrl(url('temp/flu_country.json'));
-
     // Start the filter controller/view
     new FilterController($(parentSelector),baseUrl);
 
+    ServiceLayer.loadUrl(url('temp/flu_country.json'));
 };
 
 // called by index.html to start up dash
