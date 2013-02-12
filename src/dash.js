@@ -24,7 +24,7 @@ function Dashboard (parentSelector, baseUrl) {
 };
 
 // called by index.html to start up dash
-var dash = {
+window.dash = {
     ready: function (func) {
         $ (document).ready (func);
     },
