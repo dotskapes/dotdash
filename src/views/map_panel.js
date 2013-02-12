@@ -1,4 +1,11 @@
-function MapPanel () {
+goog.provide('MapPanel');
+
+goog.require('ColorMap');
+goog.require('ServiceLayer');
+goog.require('selectionManager');
+goog.require('Panel');
+
+var MapPanel = function () {
 
     // this basically makes Panel the superclass of MapPanel
     Panel.call(this,'Map','map');
