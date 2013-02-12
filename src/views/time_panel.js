@@ -1,7 +1,7 @@
 function TimePanel () {
 
-    // this basically makes Panel the superclass of GraphPanel
-    Panel.call(this);
+    // Panel superclass of TimePanel
+    Panel.call(this,'Time Series','time');
 
     // wiggle.Graph object
     var graph;
@@ -35,6 +35,7 @@ function TimePanel () {
         var properties = layer.numeric ();
         properties.sort ();
         layer.attr ('order', properties);
+
 
         graph = new wiggle.TimeSeries ('#timeseries', {
             // hard coding / 10 to make it look nice for now

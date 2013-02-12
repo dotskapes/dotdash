@@ -1,7 +1,9 @@
-function Panel() {
+function Panel(name,label) {
     this.created = false;
-    this.name = 'Name Me';
-    this.label = 'label_me';
+    // for display
+    this.name = name;
+    // for internal/class
+    this.label = label;
     this.parentElement;
     this.container;
 

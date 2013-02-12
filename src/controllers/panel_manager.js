@@ -34,7 +34,9 @@ var PanelManager = new function() {
         panels = [new MapPanel(),new TimePanel(),new MDSPanel()];
         $.each(panels,function(i,pan) {
             nameToPanel[pan.name] = pan;
-            ServiceLayer.addDataListener(pan);
+            ServiceLayer.addDataCallback(function (data) {
+                return pan.newData (data);
+            });
             selectionManager.addView(pan);
         } );
     }
