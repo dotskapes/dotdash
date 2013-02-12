@@ -1,3 +1,11 @@
+goog.provide('TimePanel');
+
+goog.require('ServiceLayer');
+goog.require('Panel');
+goog.require('Popup');
+goog.require('SVGSelection');
+
+"use strict";
 function TimePanel () {
 
     // Panel superclass of TimePanel

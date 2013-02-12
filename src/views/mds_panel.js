@@ -1,3 +1,7 @@
+goog.provide('MDSPanel');
+
+goog.require('Panel');
+
 'use strict';
 function MDSPanel () {
 

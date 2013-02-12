@@ -1,3 +1,9 @@
+goog.provide('dash');
+
+goog.require('ServiceLayer');
+goog.require('FilterController');
+goog.require('PanelManager');
+
 'use strict';
 // refactor - break out dropdown & such
 function Dashboard (parentSelector, baseUrl) {

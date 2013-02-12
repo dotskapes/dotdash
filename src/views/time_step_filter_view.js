@@ -1,3 +1,5 @@
+goog.provide('TimeStepFilterView');
+
 function TimeStepFilterView (baseUrl) {
 
     this.update = function (timeSteps) {

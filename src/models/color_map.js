@@ -1,3 +1,5 @@
+goog.provide('ColorMap');
+
 'use strict';
 var NUM_COLORS = 6;
 

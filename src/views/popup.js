@@ -1,3 +1,5 @@
+goog.provide('Popup');
+
 function $div () {
     return $ ('<div></div>');
 };

@@ -1,3 +1,9 @@
+goog.provide('MapPanel');
+
+goog.require('ColorMap');
+goog.require('ServiceLayer');
+goog.require('Panel');
+
 function MapPanel () {
 
     // this basically makes Panel the superclass of MapPanel

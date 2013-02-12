@@ -1,3 +1,5 @@
+goog.provide('SelectionManager');
+
 "use strict";
 // non enforced poor mans singleton - scandal?
 // actually we may eventually have more than 1 selection manager if loading up

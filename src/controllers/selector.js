@@ -1,3 +1,5 @@
+goog.provide('SVGSelection');
+
 function SVGSelection (svg) {
     var start = new vect (0, 0);
     var end = new vect (0, 0);
