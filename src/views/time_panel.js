@@ -21,13 +21,18 @@ function TimePanel () {
     var selection = null;
     var time_map;
     
-    this.show = function() {
-        svg.style('display','block');
-        // get jquery elementy from d3 parentElement & append
-        this.show();
-    };
+    // this is jquery shenanigans for definning ones own show as well as calling
+    // superclass show
+    this.show = (function (parentShow) {
+        return function () {
+            svg.style('display','block');
+            // get jquery elementy from d3 parentElement & append
+            // .call(that) ensures panel this is that
+            parentShow.call(that);
+        };
+    }) (this.show); // superclass Panel.show
 
-     this.create = function () {
+    this.create = function () {
          svg = d3.select (this.parentElement[0]).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
              //'preserveAspectRatio': 'none'
