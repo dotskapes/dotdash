@@ -2,7 +2,7 @@
 // javascripts funny Singleton pattern
 var PanelManager = new function() {
 
-    var nameToPanel = {};
+    var labelToPanel = {};
     // for now hardwired
     var panels;
 
@@ -33,6 +33,7 @@ var PanelManager = new function() {
     var initPanels = function() {
         panels = [new MapPanel(),new TimePanel(),new MDSPanel()];
         $.each(panels,function(i,pan) {
+            labelToPanel[pan.label] = pan;
             nameToPanel[pan.name] = pan;
             ServiceLayer.addDataCallback(function (data) {
                 return pan.newData (data);
@@ -52,34 +53,45 @@ var PanelManager = new function() {
     }
 
     var selectionDropdown = function() {
-        // should we just do handlebars stuff synchronously?
-        var templateLoader = $.ajax({
-            url: baseUrl + 'src/templates/select-template.hb',
-            async: false // this has to lad before we can do anything
-        });
-
-        templateLoader.fail(function (data) {console.log(data);});
-
-        templateLoader.done(function (template) {
-            // handlebars for left right select dropdowns
-            var selTemp = Handlebars.compile(template);
-            var leftCtxt = {selClass:"left-select"};
-            var leftSel = selTemp(leftCtxt);
-            left.append(leftSel);
-            right.append(selTemp({selClass:"right-select"}));
-        });
+        var selTemp = loadTemplate('select-template.hb');
+        var leftCtxt = {selClass:"left-select"};
+        var leftSel = selTemp(leftCtxt);
+        left.append(leftSel);
+        right.append(selTemp({selClass:"right-select"}));
         addPanelNamesToSelect();
     }
 
     var addPanelNamesToSelect = function() {
         $.each(panels,function(i,pan) {
-            $('.view-select').append(optionTemp(pan.name));
+            $('.view-select').append(optionTemp(pan.label,pan.name));
         });
     }
 
-    // do this with handlebars? yes
-    var optionTemp = function(name) {
-        return "<option>"+name+"</option>";
+    var optionTemp = function(label,name) {
+        return optionTemplate()({label: label,name: name});
+    }
+
+    var cachedOptionTemplate;
+    var optionTemplate = function() {
+        if (!cachedOptionTemplate)
+            cachedOptionTemplate = loadTemplate('select-option-template.hb');
+        return cachedOptionTemplate;
+    }
+
+    // this should be a util function
+    var loadTemplate = function(templateFile) {
+        var compiledTemplate;
+        var templateLoader = $.ajax({
+            url: baseUrl + 'src/templates/' + templateFile,
+            async: false
+        });
+
+        templateLoader.fail(function(data) {consolse.log(data);});
+
+        templateLoader.done(function(template) {
+            compiledTemplate = Handlebars.compile(template);
+        });
+        return compiledTemplate;
     }
 
 
@@ -99,18 +111,18 @@ var PanelManager = new function() {
     var selectListener = function(select) {
         select.change(function() {
             $('.view').hide();
-            var leftPanelName = selectedText($('.left-select'));
-            var rightPanelName = selectedText($('.right-select'));
+            var leftPanelName = selectedValue($('.left-select'));
+            var rightPanelName = selectedValue($('.right-select'));
             showPanels(leftPanelName,rightPanelName);
             bumpOtherDropdownIfSame(select);
         });
     }
 
-    var showPanels = function(leftPanelName, rightPanelName) {
-        if (!leftPanelName) throw "cant show panels: Left panel name undefined";
-        if (!rightPanelName) throw "Right panel name undefined";
-        var leftPanel = nameToPanel[leftPanelName];
-        var rightPanel = nameToPanel[rightPanelName];
+    var showPanels = function(leftPanelLabel, rightPanelLabel) {
+        if (!leftPanelLabel) throw "cant show panels: Left panel name undefined";
+        if (!rightPanelLabel) throw "Right panel name undefined";
+        var leftPanel = labelToPanel[leftPanelLabel];
+        var rightPanel = labelToPanel[rightPanelLabel];
         $.each([leftPanel, rightPanel], function (i, panel) {
             if (!panel) throw "Error: Panel "+leftPanelName+" "+rightPanelName+" not found";
             if (!panel.created) panel.create();
@@ -122,8 +134,8 @@ var PanelManager = new function() {
     }
 
     // get currently selected option's text in select jquery element
-    var selectedText = function(select) {
-        return selectedOption(select).text();
+    var selectedValue = function(select) {
+        return selectedOption(select).val();
     }
 
     var selectedIndex = function(select) {
@@ -153,8 +165,8 @@ var PanelManager = new function() {
         var newIndex = selectedIndex(select) + 1 % selectSize();
         isLeftSelect(other) ? leftIndex = newIndex : rightIndex = newIndex;
         selectedOption(other).removeAttr('selected');
-        var newText = other.children().eq(newIndex).text();
-        other.val(newText).change();
+        var newValue = other.children().eq(newIndex).val();
+        other.val(newValue).change();
     }
     
     var getOtherSelect = function(select) {
