@@ -28,13 +28,12 @@ var PanelManager = new function() {
         showFirstTwoPanels();
     }
 
-    // init panels list and nameToPanel hash
+    // init panels list and labelToPanel hash
     // for now hardwires the panels, eventually get dynamically
     var initPanels = function() {
         panels = [new MapPanel(),new TimePanel(),new MDSPanel()];
         $.each(panels,function(i,pan) {
             labelToPanel[pan.label] = pan;
-            nameToPanel[pan.name] = pan;
             ServiceLayer.addDataCallback(function (data) {
                 return pan.newData (data);
             });
