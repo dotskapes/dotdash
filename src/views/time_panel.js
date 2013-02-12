@@ -143,7 +143,7 @@ function TimePanel () {
         data_group.selectAll ('path').data (layer.features ().items ()).enter ().append ('path')
             .attr ('d', get_path)
             .style ('fill', 'none')
-            .style ('stroke', function (d) { return d.style ('fill').rgb () })
+            //.style ('stroke', function (d) { return d.style ('fill').rgb () })
             .style ('stroke-width', 1.5)
             .each (function (d) {
                 feature_lookup[d.id] = this;

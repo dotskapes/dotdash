@@ -43,6 +43,8 @@ function MapPanel () {
     };
 
     var wireupMap = function() {
+        // enable selection in map
+        //map.enableSelect();
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
 	    selectionLayer = layer.search (box);
@@ -58,7 +60,8 @@ function MapPanel () {
         var colorMapFn = function(feature) {
             return colorMap().colorForFeat(feature);
         };
-        this.allFeatures().style('fill', colorMapFn);
+        //this.allFeatures().style('fill', colorMapFn);
+        selectionLayer.style('fill',colorMapFn);
     }
 
     this.select = function(selectionLayer) {
