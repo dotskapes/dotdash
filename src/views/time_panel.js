@@ -1,5 +1,9 @@
 "use strict";
-function TimePanel (element) {
+function TimePanel () {
+
+    // Panel superclass of TimePanel
+    Panel.call(this);
+
     var svg;
     var h_group, v_group, data_group;
 
@@ -8,7 +12,10 @@ function TimePanel (element) {
     var popup = null;
     var that = this;
 
+    // display
     this.name = 'Time Series';
+    // internal/class
+    this.label = 'time';
     this.created = false;
 
     var selection = null;
@@ -16,18 +23,18 @@ function TimePanel (element) {
     
     this.show = function() {
         svg.style('display','block');
-        // get jquery elementy from d3 element & append
-        element.show();
+        // get jquery elementy from d3 parentElement & append
+        this.show();
     };
 
      this.create = function () {
-         svg = d3.select (element[0]).append ('svg').attr ({
+         svg = d3.select (this.parentElement[0]).append ('svg').attr ({
              //'viewBox': '0 0 1 1',
              //'preserveAspectRatio': 'none'
          });
 
-         var width = element.width();
-         var height = element.height();
+         var width = this.width();
+         var height = this.height();
 
          popup = new Popup ();
 
@@ -49,13 +56,8 @@ function TimePanel (element) {
          v_group = svg.append ('g');
          data_group = svg.append ('g');
 
-         wireUp();
-         element.show();
+         this.show();
          this.created = true;
-     };
-
-     this.addClass = function (cssClass) {
-         element.addClass(cssClass);
      };
 
      this.resize = function () {
@@ -143,12 +145,6 @@ function TimePanel (element) {
             });
     };
 
-    var wireUp = function() {
-        ServiceLayer.addDataListener(that);
-        selectionManager.addView(that);
-    }
-
-
     this.newData = function (data) {
         layer = data;
 
@@ -161,8 +157,8 @@ function TimePanel (element) {
             current_line += 1000;
         }*/
 
-        var width = element.width();
-        var height = element.height();
+        var width = this.width();
+        var height = this.height();
 
         ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);
