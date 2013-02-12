@@ -4,7 +4,7 @@ function $div () {
     return $ ('<div></div>');
 };
 
-function Popup () {
+var Popup = function () {
     var container = $div ().css ({
         position: 'absolute',
         'display': 'none'

@@ -4,7 +4,7 @@ goog.require('ColorMap');
 goog.require('ServiceLayer');
 goog.require('Panel');
 
-function MapPanel () {
+var MapPanel = function () {
 
     // this basically makes Panel the superclass of MapPanel
     Panel.call(this,'Map','map');

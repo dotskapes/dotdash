@@ -6,7 +6,7 @@ goog.require('Popup');
 goog.require('SVGSelection');
 
 "use strict";
-function TimePanel () {
+var TimePanel = function () {
 
     // Panel superclass of TimePanel
     Panel.call(this,'Time Series','time');

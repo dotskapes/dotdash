@@ -3,7 +3,7 @@ goog.provide('FilterView');
 goog.require('ColorRampController');
 goog.require('TimeStepController');
 
-function FilterView (baseUrl) {
+var FilterView = function (baseUrl) {
 
     this.render = function () {
         // hard-coded filters for now

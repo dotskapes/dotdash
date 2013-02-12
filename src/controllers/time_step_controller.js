@@ -4,7 +4,7 @@ goog.require('ServiceLayer');
 goog.require('PanelManager');
 goog.require('TimeStepFilterView');
 
-function TimeStepController (baseUrl) {
+var TimeStepController = function (baseUrl) {
 
     var view = new TimeStepFilterView(baseUrl);
 

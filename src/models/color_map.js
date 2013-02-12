@@ -3,7 +3,7 @@ goog.provide('ColorMap');
 'use strict';
 var NUM_COLORS = 6;
 
-function ColorMap(dataLayer) {
+var ColorMap = function (dataLayer) {
     var ranges = {};
 
     // a list of properties of feature that correspond to timestamped data.

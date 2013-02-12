@@ -1,6 +1,6 @@
 goog.provide('TimeStepFilterView');
 
-function TimeStepFilterView (baseUrl) {
+var TimeStepFilterView = function(baseUrl) {
 
     this.update = function (timeSteps) {
         $('#step-filter').empty();

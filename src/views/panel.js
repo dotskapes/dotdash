@@ -2,7 +2,7 @@ goog.provide('Panel');
 
 goog.require('ServiceLayer');
 
-function Panel(name,label) {
+var Panel = function (name,label) {
     this.created = false;
     // for display
     this.name = name;
