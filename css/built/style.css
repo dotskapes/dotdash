@@ -41,5 +41,5 @@ html, body, #dashboard {
   float: right;
   width: 200px; }
 
-#wigglemap {
+#wigglemap, #timeseries {
   height: 100%; }

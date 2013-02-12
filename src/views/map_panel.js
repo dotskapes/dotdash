@@ -7,7 +7,6 @@ function MapPanel () {
     var map;
     var layer;
     var that = this;
-    var colorMap = function() { return ServiceLayer.colorMap; }
 
     this.getMap = function() { return map; }
     
@@ -35,11 +34,17 @@ function MapPanel () {
         if (layer)
             map.remove (layer);
         layer = data;
-        map.vcenter (layer.bounds.centroid ());
+
+        layer.features ()
+            .style (map, 'stroke', ColorMap.WHITE)
+            .style (map, 'fill-opacity', .9);
+
+        map.center (layer.bounds.centroid ());
         map.extents (layer.bounds.width ());
         map.append (layer);
         // initial (unselected) coloring
         this.deselect(layer);
+        this.draw ();
     };
 
     var wireupMap = function() {
@@ -47,7 +52,7 @@ function MapPanel () {
         //map.enableSelect();
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
-	    selectionLayer = layer.search (box);
+	    selectionLayer = map.search (layer, box);
             that.fireSelect(selectionLayer);
         });
     };
@@ -57,27 +62,23 @@ function MapPanel () {
         // this should then further select on what is unfiltered out
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
-        var colorMapFn = function(feature) {
-            return colorMap().colorForFeat(feature);
-        };
-        //this.allFeatures().style('fill', colorMapFn);
-        selectionLayer.style('fill',colorMapFn);
+        selectionLayer.style(map, 'fill', function (f) {
+            return ServiceLayer.colorMap.colorForFeat (f);
+        });
     }
 
     this.select = function(selectionLayer) {
-        selectionLayer.style('fill', ColorMap.HIGHLIGHT);
+        selectionLayer.style(map, 'fill', ColorMap.HIGHLIGHT);
     }
 
     // draw map - without highlight/selection
     this.draw = function() {
-        var allFeats = ServiceLayer.currentData.features();
         // this should then further select on what is unfiltered out
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
-        var colorMapFn = function(feature) {
-            return colorMap().colorForFeat(feature);
-        };
-        allFeats.style('fill', colorMapFn);
+        layer.features ().style(map, 'fill', function (f) {
+            return ServiceLayer.colorMap.colorForFeat (f);
+        });
     }
 
 };

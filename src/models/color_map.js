@@ -184,9 +184,11 @@ function ColorMap(dataLayer) {
 };
 
 // if there is a hole in the data rather than barfing use grey
-ColorMap.NO_DATA =  wiggle.util.icolor(70,70,70,255);
+ColorMap.NO_DATA =  wiggle.util.icolor(75,75,75,255);
 
 // constant for highlight color - color needs to be immutable!
 ColorMap.HIGHLIGHT = wiggle.util.icolor (241, 246, 112, 255);
 
 ColorMap.AGGREGATE = wiggle.util.icolor (230, 97, 1, 255);
+
+ColorMap.WHITE = wiggle.util.icolor (255, 255, 255, 255);
