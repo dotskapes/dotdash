@@ -2,8 +2,9 @@
 // javascripts funny Singleton pattern
 var PanelManager = new function() {
 
-    var panels = [];
     var nameToPanel = {};
+    // for now hardwired
+    var panels;
 
     var selectHeight = 25;
 
@@ -18,21 +19,32 @@ var PanelManager = new function() {
     var right = $ ('<div>').attr ('id', 'right');
     var baseUrl;
 
-    this.init = function(views,parentSelector,url) {
+    this.init = function(parentSelector,url) {
         baseUrl = url;
-        setupDivs(views,parentSelector);
-        selectionDropdown();
         initPanels();
+        setupDivs(parentSelector);
+        selectionDropdown();
         initSelectListeners();
         showFirstTwoPanels();
     }
 
-    var setupDivs = function(views,parentSelector) {
+    // init panels list and nameToPanel hash
+    // for now hardwires the panels, eventually get dynamically
+    var initPanels = function() {
+        panels = [new MapPanel(),new TimePanel(),new MDSPanel()];
+        $.each(panels,function(i,pan) {
+            nameToPanel[pan.name] = pan;
+            ServiceLayer.addDataListener(pan);
+            selectionManager.addView(pan);
+        } );
+    }
+
+    var setupDivs = function(parentSelector) {
         // Add the panel div/containers to the document
         var panel_container = $('<div>').addClass('panels').append(left).append(right);
         $(parentSelector).append(panel_container);
-        $.each(views, function (i, view) {
-            var panel_div = $('<div>').attr('id', view).addClass('view');
+        $.each(panels, function(i,panel) {
+            var panel_div = panel.makeParentElement();
             panel_container.append(panel_div);
         });
     }
@@ -54,19 +66,13 @@ var PanelManager = new function() {
             left.append(leftSel);
             right.append(selTemp({selClass:"right-select"}));
         });
+        addPanelNamesToSelect();
     }
 
-    var initPanels = function() {
-        // should there be a list of strings that somehow get mapped to panels?
-        // yes!
-        var panels = [new MapPanel($('#map')), new TimePanel($('#time')), new MDSPanel($('#mds'))];
-        $.each(panels,function(i,pan) { addPanel(pan); } );
-    }
-
-    var addPanel = function(panel) {
-        panels.push(panel);
-        nameToPanel[panel.name] = panel;
-        $('.view-select').append(optionTemp(panel.name));
+    var addPanelNamesToSelect = function() {
+        $.each(panels,function(i,pan) {
+            $('.view-select').append(optionTemp(pan.name));
+        });
     }
 
     // do this with handlebars? yes
