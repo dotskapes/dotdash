@@ -1,4 +1,9 @@
+'use strict';
 function MDSPanel (element) {
+
+    // TimePanel subclass of Panel
+    Panel.call(this);
+
     var svg;
     var back_group, data_group;
 
@@ -47,4 +52,11 @@ function MDSPanel (element) {
     };
 
     this.draw = function() {} // ??
+
+    this.newData = function(data) {
+        // display new data
+    }
+    this.select = function() {}
+    this.deselect = function() {}
+
 };
