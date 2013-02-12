@@ -1,7 +1,7 @@
 function MapPanel () {
 
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this);
+    Panel.call(this,'Map','map');
 
     // wiggle.Map object
     var map;
@@ -22,11 +22,6 @@ function MapPanel () {
         this.created = true;
     };
 
-    // for display
-    this.name = 'Map';
-    // for internal use - classname...
-    this.label = 'map';
-
     this.resize = function () {
         map.resize ();
     };
@@ -39,7 +34,7 @@ function MapPanel () {
         map.extents (layer.bounds.width ());
         map.append (layer);
         // initial (unselected) coloring
-        this.deselect(layer);
+        that.deselect(layer);
     };
 
     var wireupMap = function() {
@@ -47,7 +42,7 @@ function MapPanel () {
         //map.enableSelect();
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
-	    selectionLayer = layer.search (box);
+            selectionLayer = layer.search (box);
             that.fireSelect(selectionLayer);
         });
     };
