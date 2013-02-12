@@ -162,8 +162,8 @@ function TimePanel () {
             current_line += 1000;
         }*/
 
-        var width = this.width();
-        var height = this.height();
+        var width = that.width();
+        var height = that.height();
 
         ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);

@@ -29,17 +29,17 @@ var ServiceLayer = (function () {
 
     var layer = null;
 
-    var dataListeners = [];
+    var dataCallbacks = [];
 
 
     var fireNewData = function(dataLayer) {
-        $.each(dataListeners,function(i,dl) { dl.newData(dataLayer); });
+        $.each(dataCallbacks,function(i,cb) { cb(dataLayer); });
     };
 
     // Singleton public methods/properties
     return {
 
-        addDataListener: function(dl) { dataListeners.push(dl); },
+        addDataCallback: function(cb) { dataCallbacks.push(cb); },
 
         loadUrl: function(url) {
             var that = this;

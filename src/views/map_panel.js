@@ -39,7 +39,7 @@ function MapPanel () {
         map.extents (layer.bounds.width ());
         map.append (layer);
         // initial (unselected) coloring
-        this.deselect(layer);
+        that.deselect(layer);
     };
 
     var wireupMap = function() {
@@ -47,7 +47,7 @@ function MapPanel () {
         //map.enableSelect();
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
-	    selectionLayer = layer.search (box);
+            selectionLayer = layer.search (box);
             that.fireSelect(selectionLayer);
         });
     };
