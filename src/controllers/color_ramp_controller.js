@@ -12,12 +12,9 @@ function ColorRampController() {
     }
 
     var newRamp = function(value) {
-        console.log('color ramp controller got val '+value);
         colorMap().setColorRamp(value);
-        // redraw panels with new colors
-        //panelManager.draw(); // does selection too?
-        // reselecting will actually cause everything to redraw
-        selectionManager.reselect();
+        // redraw panels with new colors & redraws selection
+        PanelManager.draw();
     }
 
     init();
