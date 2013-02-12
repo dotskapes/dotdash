@@ -162,17 +162,10 @@ function ColorMap(dataLayer) {
         return ranges[dateProp];
     }
 
+    var colorRamps = [white_red,grey_blue,red_blue,white_green,brown_green];
+
     this.setColorRamp = function (index) {
-        if (index == 0)
-            colors = white_red;
-        else if (index == 1)
-            colors = grey_blue;
-        else if (index == 2)
-            colors = red_blue;
-        else if (index == 3)
-            colors = white_green;
-        else if (index == 4)
-            colors = brown_green;
+        colors = colorRamps[index];
     }
 
     this.dist = function (index) {
