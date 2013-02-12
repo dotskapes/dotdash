@@ -1,4 +1,4 @@
-goog.provide('SelectionManager');
+goog.provide('selectionManager');
 
 "use strict";
 // non enforced poor mans singleton - scandal?

@@ -1,6 +1,7 @@
 goog.provide('TimePanel');
 
 goog.require('ServiceLayer');
+goog.require('selectionManager');
 goog.require('Panel');
 goog.require('Popup');
 goog.require('SVGSelection');

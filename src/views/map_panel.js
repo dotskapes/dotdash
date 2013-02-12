@@ -2,6 +2,7 @@ goog.provide('MapPanel');
 
 goog.require('ColorMap');
 goog.require('ServiceLayer');
+goog.require('selectionManager');
 goog.require('Panel');
 
 var MapPanel = function () {
