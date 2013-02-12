@@ -87,7 +87,7 @@ var ServiceLayer = (function () {
             // this gets the properties of the feature that have numerical values
             // this assumes that ONLY date props are numerical - this is not true for
             // all datasets
-            var sortedDateProps = layer.properties(true);
+            var sortedDateProps = layer.numeric ();
             // this assumes the dates are lexically sortable, euro dates NOT USA
             sortedDateProps.sort();
             return sortedDateProps;
