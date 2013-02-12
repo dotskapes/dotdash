@@ -1,7 +1,7 @@
 function MapPanel () {
 
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this);
+    Panel.call(this,'Map','map');
 
     // wiggle.Map object
     var map;
@@ -21,11 +21,6 @@ function MapPanel () {
         wireupMap();
         this.created = true;
     };
-
-    // for display
-    this.name = 'Map';
-    // for internal use - classname...
-    this.label = 'map';
 
     this.resize = function () {
         map.resize ();

@@ -2,16 +2,12 @@
 function MDSPanel () {
 
     // TimePanel subclass of Panel
-    Panel.call(this);
+    Panel.call(this,'MDS','mds');
 
     var svg;
     var back_group, data_group;
 
     var xmap, ymap;
-
-    this.name = 'MDS';
-
-    this.created = false;
 
     this.show = function() {
         svg.style('display','block');

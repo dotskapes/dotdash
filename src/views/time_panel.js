@@ -2,7 +2,7 @@
 function TimePanel () {
 
     // Panel superclass of TimePanel
-    Panel.call(this);
+    Panel.call(this,'Time Series','time');
 
     var svg;
     var h_group, v_group, data_group;
@@ -11,12 +11,6 @@ function TimePanel () {
 
     var popup = null;
     var that = this;
-
-    // display
-    this.name = 'Time Series';
-    // internal/class
-    this.label = 'time';
-    this.created = false;
 
     var selection = null;
     var time_map;
