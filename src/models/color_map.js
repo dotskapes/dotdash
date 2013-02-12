@@ -124,7 +124,8 @@ function ColorMap(dataLayer) {
         wiggle.util.icolor(0, 109, 44, 255),
     ];
 
-    var colors = grey_blue;
+    // 1st initial color - which should be same as index 0 for color ramp - refactor
+    var colors = white_red;
     var dist = 0;
     var range = 0;
 
@@ -162,9 +163,9 @@ function ColorMap(dataLayer) {
 
     this.setColorRamp = function (index) {
         if (index == 0)
-            colors = grey_blue;
-        else if (index == 1)
             colors = white_red;
+        else if (index == 1)
+            colors = grey_blue;
         else if (index == 2)
             colors = red_blue;
         else if (index == 3)

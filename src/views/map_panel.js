@@ -1,36 +1,31 @@
-function MapPanel (element) {
-    var container;
+function MapPanel () {
+
+    // this basically makes Panel the superclass of MapPanel
+    Panel.call(this);
+
     // wiggle.Map object
     var map;
     var layer;
     var that = this;
     var colorMap = function() { return ServiceLayer.colorMap; }
 
-    this.created = false;
-
     this.getMap = function() { return map; }
     
     this.create = function () {
-        container = $ ('<div></div>').attr ('id', 'wigglemap');
+        this.container = $ ('<div>').attr ('id', 'wigglemap');
 
-        element.append (container);
-        element.show();
+        this.parentElement.append(this.container);
+        this.show();
 
         map = new wiggle.Map ('#wigglemap');
         wireupMap();
         this.created = true;
     };
 
-    this.name = "Map";
-
-    this.show = function() {
-        container.css('display','block');
-        element.show();
-    };
-
-    this.addClass = function (cssClass) {
-        element.addClass(cssClass);
-    };
+    // for display
+    this.name = 'Map';
+    // for internal use - classname...
+    this.label = 'map';
 
     this.resize = function () {
         map.resize ();
@@ -48,30 +43,25 @@ function MapPanel (element) {
     };
 
     var wireupMap = function() {
-        // listen to service layer for new data
-        ServiceLayer.addDataListener(that);
-
-        // listen for select/deselect
-        selectionManager.addView(that);
-
+        // enable selection in map
+        //map.enableSelect();
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
 	    selectionLayer = layer.search (box);
-            selectionManager.select(selectionLayer);
+            that.fireSelect(selectionLayer);
         });
     };
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function(selectionLayer) {
-        //selectionLayer.style('fill',null);
-        var allFeats = ServiceLayer.currentData.features();
         // this should then further select on what is unfiltered out
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         var colorMapFn = function(feature) {
             return colorMap().colorForFeat(feature);
         };
-        allFeats.style('fill', colorMapFn);
+        //this.allFeatures().style('fill', colorMapFn);
+        selectionLayer.style('fill',colorMapFn);
     }
 
     this.select = function(selectionLayer) {

@@ -1,4 +1,9 @@
-function MDSPanel (element) {
+'use strict';
+function MDSPanel () {
+
+    // TimePanel subclass of Panel
+    Panel.call(this);
+
     var svg;
     var back_group, data_group;
 
@@ -10,13 +15,13 @@ function MDSPanel (element) {
 
     this.show = function() {
         svg.style('display','block');
-        // get jquery elementy from d3 element & append
-        element.show();
+        // get jquery elementy from d3 this.parentElement & append
+        this.parentElement.show();
     };
     
     this.create = function () {
 
-        svg = d3.select (element[0]).append ('svg').attr ({
+        svg = d3.select (this.parentElement[0]).append ('svg').attr ({
             'viewBox': '0 0 1 1',
             'preserveAspectRatio': 'none'
         });
@@ -30,15 +35,11 @@ function MDSPanel (element) {
             .attr ('width', 1)
             .attr ('height', 1)
             .style ('fill', '#ff0000');
-        element.append($(svg.node()));
-        element.show();
+        this.parentElement.append($(svg.node()));
+        this.show();
         this.created = true;
     };
 
-    this.addClass = function (cssClass) {
-        element.addClass(cssClass);
-    };
-    
     this.resize = function () {
     };
 
@@ -47,4 +48,11 @@ function MDSPanel (element) {
     };
 
     this.draw = function() {} // ??
+
+    this.newData = function(data) {
+        // display new data
+    }
+    this.select = function() {}
+    this.deselect = function() {}
+
 };
