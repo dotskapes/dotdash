@@ -1,4 +1,9 @@
-function Panel(name,label) {
+goog.provide('Panel');
+
+goog.require('ServiceLayer');
+goog.require('selectionManager');
+
+var Panel = function (name,label) {
     this.created = false;
     // for display
     this.name = name;

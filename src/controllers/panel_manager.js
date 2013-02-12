@@ -1,3 +1,10 @@
+goog.provide('PanelManager');
+
+goog.require('selectionManager');
+goog.require('MapPanel');
+goog.require('TimePanel');
+goog.require('MDSPanel');
+
 'use strict';
 // javascripts funny Singleton pattern
 var PanelManager = new function() {

@@ -1,3 +1,5 @@
+goog.provide('ServiceLayer');
+
 // SingletonPattern being used for ServiceLayer
 //var Singleton = (function () {
 //    var c, d, e;

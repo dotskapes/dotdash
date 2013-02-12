@@ -1,4 +1,9 @@
-function FilterView (baseUrl) {
+goog.provide('FilterView');
+
+goog.require('ColorRampController');
+goog.require('TimeStepController');
+
+var FilterView = function (baseUrl) {
 
     this.render = function () {
         // hard-coded filters for now

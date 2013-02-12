@@ -1,3 +1,9 @@
+goog.provide('FilterController');
+
+goog.require('ColorRampController');
+goog.require('TimeStepController');
+goog.require('FilterView');
+
 'use strict';
 var FilterController = function(parent,baseUrl) {
 

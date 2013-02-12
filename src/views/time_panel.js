@@ -1,4 +1,13 @@
-function TimePanel () {
+goog.provide('TimePanel');
+
+goog.require('ServiceLayer');
+goog.require('selectionManager');
+goog.require('Panel');
+goog.require('Popup');
+goog.require('SVGSelection');
+
+"use strict";
+var TimePanel = function () {
 
     // Panel superclass of TimePanel
     Panel.call(this,'Time Series','time');
