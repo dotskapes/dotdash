@@ -7,7 +7,7 @@ function $div () {
 function Popup () {
     var container = $div ().css ({
         position: 'absolute',
-        'display': 'none',
+        'display': 'none'
     }).addClass ('popup');
 
     $ ('body').append (container);
