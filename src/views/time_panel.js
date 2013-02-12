@@ -2,7 +2,7 @@
 function TimePanel () {
 
     // Panel superclass of TimePanel
-    Panel.call(this);
+    Panel.call(this,'Time Series','time');
 
     var svg;
     var h_group, v_group, data_group;
@@ -11,12 +11,6 @@ function TimePanel () {
 
     var popup = null;
     var that = this;
-
-    // display
-    this.name = 'Time Series';
-    // internal/class
-    this.label = 'time';
-    this.created = false;
 
     var selection = null;
     var time_map;
@@ -162,8 +156,8 @@ function TimePanel () {
             current_line += 1000;
         }*/
 
-        var width = this.width();
-        var height = this.height();
+        var width = that.width();
+        var height = that.height();
 
         ymap = d3.scale.linear ().domain ([0, range.max]).range ([height, 0]);
         time_map = d3.scale.linear ().domain ([0, properties.length - 1]).range ([0, width]);

@@ -14,12 +14,12 @@ function TimeStepController (baseUrl) {
         };
 
 
-        ServiceLayer.addDataListener({
-            newData : function (layer) {
+        ServiceLayer.addDataCallback(
+            function (layer) {
                 var promise = view.update(layer.properties().sort());
                 promise.done(addEventListener);
             }
-        });
+        );
     };
 
     init();
