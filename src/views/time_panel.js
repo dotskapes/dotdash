@@ -27,11 +27,6 @@ var TimePanel = function () {
         this.created = true;
     };
 
-    // for display
-    this.name = 'Time Series';
-    // for internal use - classname...
-    this.label = 'time';
-
     this.resize = function () {
         graph.resize ();
     };
