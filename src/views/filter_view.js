@@ -33,7 +33,8 @@ var FilterView = function (baseUrl) {
         var viewRenderer = $.Deferred();
 
         var templateLoader = $.ajax({
-            url: baseUrl + 'src/templates/filter_template.hb'
+            url: baseUrl + 'src/templates/filter_template.hb',
+            async: false
         });
 
         templateLoader.done(function (template) {
