@@ -26,16 +26,16 @@ var Panel = function (name, label, configOptions) {
         this.parentElement = $('<div>').attr('id', this.label).addClass('view');
         var buttons = $('<div>').addClass('buttons');
         if (configOptions) {
-            $.each(configOptions, function (label, option) {
+            $.each(configOptions, $.proxy(function (label, option) {
                 var button = $('<div>')
-                    .attr('id', label+'-button')
+                    .attr('id', this.label+'-'+label+'-button')
                     .addClass('button')
                     .html(option.name);
                 if (option.enabled) {
                     button.addClass('enabled');
                 }
                 buttons.append(button);
-            });
+            }, this));
         }
         this.parentElement.append(buttons);
         return this.parentElement;

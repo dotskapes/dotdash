@@ -62,7 +62,7 @@ var MapPanel = function () {
             that.fireSelect(selectionLayer);
         });
 
-        $('#selection-button').click(function (event) {
+        $('#map-selection-button').click(function (event) {
             $(event.target).toggleClass('enabled');
             if ($(event.target).hasClass('enabled')) {
                 map.enableSelect();
