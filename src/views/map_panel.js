@@ -7,8 +7,11 @@ goog.require('Panel');
 
 var MapPanel = function () {
 
+    var configOptions = {selection: {name: 'Selection',
+                                     enabled: false}};
+
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this,'Map','map');
+    Panel.call(this,'Map','map', configOptions);
 
     // wiggle.Map object
     var map;
@@ -50,11 +53,22 @@ var MapPanel = function () {
 
     var wireupMap = function() {
         // enable selection in map
-        map.enableSelect();
+        if (configOptions.selection.enabled) {
+            map.enableSelect();
+        }
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
 	    selectionLayer = map.search (layer, box);
             that.fireSelect(selectionLayer);
+        });
+
+        $('#selection-button').click(function (event) {
+            $(event.target).toggleClass('enabled');
+            if ($(event.target).hasClass('enabled')) {
+                map.enableSelect();
+            } else {
+                map.disableSelect();
+            }
         });
     };
 

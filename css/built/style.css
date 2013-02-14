@@ -31,6 +31,25 @@ html, body, #dashboard {
       left: 0; }
     .panels .view.right-panel {
       right: 0; }
+    .panels .view .buttons {
+      position: absolute;
+      top: 0px;
+      right: 0px; }
+    .panels .view .button {
+      background-color: white;
+      padding: 5px;
+      margin: 3px;
+      cursor: pointer;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      -moz-box-shadow: inset 0px 0px 1px 1px #aaaaaa;
+      -webkit-box-shadow: inset 0px 0px 1px 1px #aaaaaa;
+      box-shadow: inset 0px 0px 1px 1px #aaaaaa; }
+      .panels .view .button:hover {
+        background-color: #dddddd; }
+      .panels .view .button.enabled, .panels .view .button:active {
+        background-color: #aaaaaa; }
 
 #left, #right {
   height: 22px;

@@ -3,7 +3,7 @@ goog.provide('Panel');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 
-var Panel = function (name,label) {
+var Panel = function (name, label, configOptions) {
     this.created = false;
     // for display
     this.name = name;
@@ -22,7 +22,22 @@ var Panel = function (name,label) {
     };
 
     this.makeParentElement = function() {
+        // this should be moved to a template
         this.parentElement = $('<div>').attr('id', this.label).addClass('view');
+        var buttons = $('<div>').addClass('buttons');
+        if (configOptions) {
+            $.each(configOptions, function (label, option) {
+                var button = $('<div>')
+                    .attr('id', label+'-button')
+                    .addClass('button')
+                    .html(option.name);
+                if (option.enabled) {
+                    button.addClass('enabled');
+                }
+                buttons.append(button);
+            });
+        }
+        this.parentElement.append(buttons);
         return this.parentElement;
     };
 
