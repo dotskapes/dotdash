@@ -16,3 +16,9 @@ In wigglemaps, run npm link
 In dash, run npm link wigglemaps
 
 npm update to update
+
+
+
+sass:
+gem install sass
+sass --watch css/style.scss:css/built/style.css
