@@ -4,6 +4,10 @@
     #{$key}: $value;
 }
 
+@mixin rounded_corners ($radius) {
+    @include vendor_prefix(border-radius, $radius);
+} 
+
 html, body, #dashboard {
     height: 100%;
 }
@@ -55,6 +59,29 @@ $panelWidth: 50%;
 
         &.right-panel {
             right: 0;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 0px;
+            right: 0px;   
+        }
+
+        .button {
+            background-color: white;
+            padding: 5px;
+            margin: 3px;
+            cursor: pointer;
+            @include rounded_corners(5px);
+            @include vendor_prefix(box-shadow, inset 0px 0px 1px 1px #aaaaaa);
+
+            &:hover {
+                background-color: #dddddd;
+            }
+
+            &.enabled, &:active {
+                background-color: #aaaaaa;
+            }
         }
     }
 }

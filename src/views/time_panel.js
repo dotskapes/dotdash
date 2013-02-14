@@ -9,8 +9,11 @@ goog.require('SVGSelection');
 "use strict";
 var TimePanel = function () {
 
+    var configOptions = {selection: {name: 'Selection',
+                                     enabled: false}};
+
     // Panel superclass of TimePanel
-    Panel.call(this,'Time Series','time');
+    Panel.call(this,'Time Series','time', configOptions);
 
     // wiggle.Graph object
     var graph;
@@ -23,14 +26,8 @@ var TimePanel = function () {
         this.parentElement.append(this.container);
         this.show();
 
-        wireupGraph();
         this.created = true;
     };
-
-    // for display
-    this.name = 'Time Series';
-    // for internal use - classname...
-    this.label = 'time';
 
     this.resize = function () {
         graph.resize ();
@@ -54,6 +51,7 @@ var TimePanel = function () {
         });
 
         graph.append (layer);
+        wireupGraph();
 
         // initial (unselected) coloring
         this.deselect(layer);
@@ -62,12 +60,23 @@ var TimePanel = function () {
 
     var wireupGraph = function() {
         // enable selection in graph
-        //graph.enableSelect();
+        if (configOptions.selection.enabled) {
+            graph.enableSelect();
+        }
         // listen for graph select and send selection to selectionManager
-        //graph.select(function  (box) {
-	    //selectionLayer = graph.search (layer, box);
-            //that.fireSelect(selectionLayer);
-        //});
+        graph.select(function  (box) {
+	    selectionLayer = graph.search (layer, box);
+            that.fireSelect(selectionLayer);
+        });
+
+        $('#time-selection-button').click(function (event) {
+            $(event.target).toggleClass('enabled');
+            if ($(event.target).hasClass('enabled')) {
+                graph.enableSelect();
+            } else {
+                graph.disableSelect();
+            }
+        });
     };
 
     // Selection methods/interface - called by SelectionManager
