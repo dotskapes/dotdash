@@ -10,5 +10,9 @@
     "handlebars": "1.0.8",
     "d3": "3.0.5",
     "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev"
+  },
+  "devDependencies": {
+    "grunt": "~0.3",
+    "grunt-handlebars-js": "~0.1.2"
   }
 }
