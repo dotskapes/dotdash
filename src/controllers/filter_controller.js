@@ -12,17 +12,16 @@ var FilterController = function(parent,baseUrl) {
 
     var init = function(parent) {
         filterView = new FilterView(baseUrl);
-        // ajax handlebars
-        filterView.render().done(function (html) {
-            parent.prepend(html);
-            $('.collapse-toggler').click(function (event) {
-                var content = $(event.currentTarget).siblings('.collapsible')
-                content.slideToggle();
-                $(event.currentTarget).toggleClass('collapsed');
-                event.stopPropagation();
-            });
-            initControllers();
+        // handlebars
+        var html = filterView.render();
+        parent.prepend(html);
+        $('.collapse-toggler').click(function (event) {
+            var content = $(event.currentTarget).siblings('.collapsible')
+            content.slideToggle();
+            $(event.currentTarget).toggleClass('collapsed');
+            event.stopPropagation();
         });
+        initControllers();
     }
 
     var initControllers = function() {
