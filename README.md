@@ -1,3 +1,7 @@
+see wiki:
+https://github.com/dotskapes/dash/wiki/Dash
+
+
 Dash is short for dashboard.
 This shows several visuals for geographic data: wiggle map, time series, MDS & a table.
 
@@ -12,11 +16,6 @@ To use npm, you'll need to install node (http://nodejs.org/). On a mac you'll al
 Once npm is installed, run npm install in dash to download the dependencies.
 
 To use a local version of wigglemaps:
-In wigglemaps, run npm link
-In dash, run npm link wigglemaps
-
-npm update to update
-
 
 
 sass:
