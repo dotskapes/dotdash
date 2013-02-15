@@ -12,20 +12,9 @@ var TimeStepFilterView = function(baseUrl) {
     }; 
 
     this.render = function (labels) {
-        var renderer = $.Deferred();
-        
-        var templateLoader = $.ajax({
-            url: baseUrl + 'src/templates/radio_button_template.hb'
-        });
-
-        templateLoader.done(function (template) {
-            var compiled = Handlebars.compile(template);
-            var html = compiled({options: labels, name: 'step'});
-            $('#step-filter').html(html);
-            renderer.resolve();
-        });
-
-        return renderer.promise();
+        var template = Handlebars.templates['radio_button_template'];
+        var html = template({options: labels, name: 'step'});
+        $('#step-filter').html(html);
     };
 
 };
