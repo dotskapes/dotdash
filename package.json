@@ -1,9 +1,9 @@
 {
-  "name": "dash",
+  "name": "dotdash",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dotskapes/dash.git"
+    "url": "git://github.com/dotskapes/dotdash.git"
   },
   "dependencies": {
     "jquery": ">=1.8.3",
