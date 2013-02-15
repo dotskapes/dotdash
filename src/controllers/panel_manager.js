@@ -59,7 +59,7 @@ var PanelManager = new function() {
     }
 
     var selectionDropdown = function() {
-        var selTemp = loadTemplate('select-template.hb');
+        var selTemp = Handlebars.templates['select-template'];
         var leftCtxt = {selClass:"left-select"};
         var leftSel = selTemp(leftCtxt);
         left.append(leftSel);
@@ -74,32 +74,9 @@ var PanelManager = new function() {
     }
 
     var optionTemp = function(label,name) {
-        return optionTemplate()({label: label,name: name});
+        var tmp = Handlebars.templates['select-option-template'];
+        return tmp({label: label,name: name});
     }
-
-    var cachedOptionTemplate;
-    var optionTemplate = function() {
-        if (!cachedOptionTemplate)
-            cachedOptionTemplate = loadTemplate('select-option-template.hb');
-        return cachedOptionTemplate;
-    }
-
-    // this should be a util function
-    var loadTemplate = function(templateFile) {
-        var compiledTemplate;
-        var templateLoader = $.ajax({
-            url: baseUrl + 'src/templates/' + templateFile,
-            async: false
-        });
-
-        templateLoader.fail(function(data) {consolse.log(data);});
-
-        templateLoader.done(function(template) {
-            compiledTemplate = Handlebars.compile(template);
-        });
-        return compiledTemplate;
-    }
-
 
     this.draw = function() {
         // this should probably only draw the panels currently showing

@@ -5,22 +5,17 @@ goog.require('FilterController');
 goog.require('PanelManager');
 
 'use strict';
-// refactor - break out dropdown & such
 function Dashboard (parentSelector, baseUrl) {
-    // Static set of views for now - todo: read from config file
-    //var views = ['map', 'time', 'mds', 'table'];
 
     // Static set of filters for now
     var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
 
-    PanelManager.init(parentSelector,baseUrl);
-
-    var url = function(path) { return baseUrl + path; }
-
-    // Start the filter controller/view
+    // Start the filter controller/view, has to be laid out before panels
     new FilterController($(parentSelector),baseUrl);
 
-    ServiceLayer.loadUrl(url('temp/flu_country.json'));
+    PanelManager.init(parentSelector,baseUrl);
+
+    ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
 };
 
 // called by index.html to start up dash

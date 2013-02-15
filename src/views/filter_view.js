@@ -30,19 +30,8 @@ var FilterView = function (baseUrl) {
             }
         ];
 
-        var viewRenderer = $.Deferred();
-
-        var templateLoader = $.ajax({
-            url: baseUrl + 'src/templates/filter_template.hb'
-        });
-
-        templateLoader.done(function (template) {
-            var compiled = Handlebars.compile(template);
-            var html = compiled({filters: filters});
-            viewRenderer.resolve(html);
-        });
-
-        return viewRenderer.promise();
+        var template = Handlebars.templates['filter_template'];
+        return template({filters: filters});
     };
 
     this.onChange = function (callback) {

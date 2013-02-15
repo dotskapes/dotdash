@@ -22,8 +22,8 @@ var TimeStepController = function (baseUrl) {
 
         ServiceLayer.addDataCallback(
             function (layer) {
-                var promise = view.update(layer.properties().sort());
-                promise.done(addEventListener);
+                view.update(layer.properties().sort());
+                addEventListener();
             }
         );
     };
