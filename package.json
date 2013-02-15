@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "grunt": "~0.3",
-    "grunt-handlebars-js": "~0.1.2"
+    "grunt-shell": "~0.1.4"
   }
 }
