@@ -10,6 +10,7 @@ goog.require('SVGSelection');
 var TimePanel = function () {
 
     var configOptions = {selection: {name: 'Selection',
+                                     label: 'selection',
                                      enabled: false}};
 
     // Panel superclass of TimePanel
