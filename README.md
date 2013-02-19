@@ -1,5 +1,5 @@
 see wiki:
-https://github.com/dotskapes/dash/wiki/Dash
+https://github.com/dotskapes/dotdash/wiki/Dash
 
 
 Dash is short for dashboard.
