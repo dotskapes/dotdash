@@ -1,0 +1,27 @@
+dotDash
+Copyright 2010-2013 dotSkapes Virtual Lab
+
+This software is distributed under the
+Apache 2.0 License.
+
+See LICENSE file for details.
+
+-----------------------------------------------------------------------
+
+Historical Note:
+
+dotDash was developed for the dotSkapes Virtual Lab (dVL) with 
+support from the Gottesman Fund, UW-Madison Global Health Institute 
+and EcoHealth Alliance. The dVL was co-founded by Nico Preston 
+and Zack Krejci in 2010. 
+
+The dotDash idea is partially derived from the other components of the dVL 
+including SaVaGeLib, map viewing client, dotLab and WiggleMaps. The repo
+was originally called dash on Github.
+
+Previous versions of dotDash (<0.5) were licensed under MIT.
+
+Starting with version 0.5, dotDash is distributed under the 
+Apache 2.0 License.
+
+-----------------------------------------------------------------------
