@@ -8,6 +8,7 @@ goog.require('Panel');
 var MapPanel = function () {
 
     var configOptions = {selection: {name: 'Selection',
+                                     label: 'selection',
                                      enabled: false}};
 
     // this basically makes Panel the superclass of MapPanel
