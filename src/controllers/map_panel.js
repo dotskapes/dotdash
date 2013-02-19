@@ -56,6 +56,7 @@ var MapPanel = function () {
         // enable selection in map
         if (configOptions.selection.enabled) {
             map.enableSelect();
+            $('#map').addClass('selection');
         }
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
@@ -65,6 +66,7 @@ var MapPanel = function () {
 
         $('#map-selection-button').click(function (event) {
             $(event.target).toggleClass('enabled');
+            $(event.target).parents('.view').toggleClass('selection');
             if ($(event.target).hasClass('enabled')) {
                 map.enableSelect();
             } else {

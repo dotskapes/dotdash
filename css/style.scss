@@ -100,3 +100,11 @@ $panelWidth: 50%;
 #wigglemap, #timeseries {
     height: 100%;
 }
+
+#map, #time {
+    cursor: move;
+    
+    &.selection {
+        cursor: crosshair;
+    }
+}

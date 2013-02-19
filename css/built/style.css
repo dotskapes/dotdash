@@ -62,3 +62,8 @@ html, body, #dashboard {
 
 #wigglemap, #timeseries {
   height: 100%; }
+
+#map, #time {
+  cursor: move; }
+  #map.selection, #time.selection {
+    cursor: crosshair; }

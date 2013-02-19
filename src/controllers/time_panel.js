@@ -63,6 +63,7 @@ var TimePanel = function () {
         // enable selection in graph
         if (configOptions.selection.enabled) {
             graph.enableSelect();
+            $('#time').addClass('selection');
         }
         // listen for graph select and send selection to selectionManager
         graph.select(function  (box) {
@@ -72,6 +73,7 @@ var TimePanel = function () {
 
         $('#time-selection-button').click(function (event) {
             $(event.target).toggleClass('enabled');
+            $(event.target).parents('.view').toggleClass('selection');
             if ($(event.target).hasClass('enabled')) {
                 graph.enableSelect();
             } else {
