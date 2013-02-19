@@ -11,7 +11,7 @@ function Dashboard (parentSelector, baseUrl) {
     var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
 
     // Start the filter controller/view, has to be laid out before panels
-    new FilterController($(parentSelector),baseUrl);
+    new FilterController($(parentSelector));
 
     PanelManager.init(parentSelector,baseUrl);
 
