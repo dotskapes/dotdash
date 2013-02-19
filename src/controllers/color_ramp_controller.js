@@ -7,7 +7,7 @@ var ColorRampController = function () {
 
     var colorMap = function() { return ServiceLayer.colorMap; }
 
-    var chooser = $('.filter-button[name="'+ColorRampController.CSS_CLASS+'"]');
+    var chooser = $('.filter-button[name="'+ColorRampController.NAME+'"]');
 
     var init = function() {
         chooser.change(function(event) {
@@ -26,4 +26,4 @@ var ColorRampController = function () {
 
 }
 
-ColorRampController.CSS_CLASS = 'ramp';
+ColorRampController.NAME = 'ramp';

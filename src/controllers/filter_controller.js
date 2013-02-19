@@ -28,7 +28,7 @@ var FilterController = function(parent) {
               title: 'Time Step',
               options: []
             },
-            { name: ColorRampController.CSS_CLASS,
+            { name: ColorRampController.NAME,
               title: 'Color Ramp',
               options: [{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
             },
