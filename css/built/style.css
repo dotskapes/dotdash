@@ -36,20 +36,8 @@ html, body, #dashboard {
       top: 0px;
       right: 0px; }
     .panels .view .button {
-      background-color: white;
-      padding: 5px;
       margin: 3px;
-      cursor: pointer;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      -moz-box-shadow: inset 0px 0px 1px 1px #aaaaaa;
-      -webkit-box-shadow: inset 0px 0px 1px 1px #aaaaaa;
-      box-shadow: inset 0px 0px 1px 1px #aaaaaa; }
-      .panels .view .button:hover {
-        background-color: #dddddd; }
-      .panels .view .button.enabled, .panels .view .button:active {
-        background-color: #aaaaaa; }
+      cursor: pointer; }
 
 #left, #right {
   height: 22px;
@@ -67,3 +55,35 @@ html, body, #dashboard {
   cursor: move; }
   #map.selection, #time.selection {
     cursor: crosshair; }
+
+.icon {
+  background-color: white;
+  padding: 2px 13px; }
+  .icon:hover {
+    background-color: #dddddd; }
+  .icon.enabled, .icon:active {
+    background-color: #aaaaaa; }
+  .icon:first-of-type {
+    border-right: 3px solid #eeeeee;
+    -moz-border-top-left-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
+  .icon:last-of-type {
+    -moz-border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
+  .icon.move_arrow {
+    background-image: url("../../images/move_arrow.png");
+    background-repeat: no-repeat;
+    background-position: -2px -2px; }
+  .icon.selection_box {
+    padding: 2px 20px;
+    background-image: url("../../images/selection_box.png");
+    background-repeat: no-repeat;
+    background-position: -2px -2px; }

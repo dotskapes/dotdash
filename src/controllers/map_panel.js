@@ -7,9 +7,11 @@ goog.require('Panel');
 
 var MapPanel = function () {
 
-    var configOptions = {selection: {name: 'Selection',
-                                     label: 'selection',
-                                     enabled: false}};
+    var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
+                                     options: {hoverText: 
+                                                  {move: "Move Map", 
+                                                   select: "Select Features"},
+                                               enabled: false}}};
 
     // this basically makes Panel the superclass of MapPanel
     Panel.call(this,'Map','map', configOptions);
@@ -53,11 +55,6 @@ var MapPanel = function () {
     };
 
     var wireupMap = function() {
-        // enable selection in map
-        if (configOptions.selection.enabled) {
-            map.enableSelect();
-            $('#map').addClass('selection');
-        }
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
 	    selectionLayer = map.search (layer, box);
@@ -65,9 +62,9 @@ var MapPanel = function () {
         });
 
         $('#map-selection-button').click(function (event) {
-            $(event.target).toggleClass('enabled');
-            $(event.target).parents('.view').toggleClass('selection');
-            if ($(event.target).hasClass('enabled')) {
+            $(event.currentTarget).parents('.view').toggleClass('selection');
+            $(event.currentTarget).children('.icon').toggleClass('enabled');
+            if ($(event.currentTarget).children('.selection_box').hasClass('enabled')) {
                 map.enableSelect();
             } else {
                 map.disableSelect();

@@ -9,9 +9,11 @@ goog.require('SVGSelection');
 "use strict";
 var TimePanel = function () {
 
-    var configOptions = {selection: {name: 'Selection',
-                                     label: 'selection',
-                                     enabled: false}};
+    var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
+                                     options: {hoverText: 
+                                                  {move: "Move Panel", 
+                                                   select: "Select Time Steps"},
+                                               enabled: false}}};
 
     // Panel superclass of TimePanel
     Panel.call(this,'Time Series','time', configOptions);
@@ -60,11 +62,6 @@ var TimePanel = function () {
     };
 
     var wireupGraph = function() {
-        // enable selection in graph
-        if (configOptions.selection.enabled) {
-            graph.enableSelect();
-            $('#time').addClass('selection');
-        }
         // listen for graph select and send selection to selectionManager
         graph.select(function  (box) {
 	    selectionLayer = graph.search (layer, box);
@@ -72,9 +69,9 @@ var TimePanel = function () {
         });
 
         $('#time-selection-button').click(function (event) {
-            $(event.target).toggleClass('enabled');
-            $(event.target).parents('.view').toggleClass('selection');
-            if ($(event.target).hasClass('enabled')) {
+            $(event.currentTarget).parents('.view').toggleClass('selection');
+            $(event.currentTarget).children('.icon').toggleClass('enabled');
+            if ($(event.currentTarget).children('.selection_box').hasClass('enabled')) {
                 graph.enableSelect();
             } else {
                 graph.disableSelect();
