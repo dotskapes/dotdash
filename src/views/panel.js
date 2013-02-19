@@ -22,22 +22,8 @@ var Panel = function (name, label, configOptions) {
     };
 
     this.makeParentElement = function() {
-        // this should be moved to a template
-        this.parentElement = $('<div>').attr('id', this.label).addClass('view');
-        var buttons = $('<div>').addClass('buttons');
-        if (configOptions) {
-            $.each(configOptions, $.proxy(function (label, option) {
-                var button = $('<div>')
-                    .attr('id', this.label+'-'+label+'-button')
-                    .addClass('button')
-                    .html(option.name);
-                if (option.enabled) {
-                    button.addClass('enabled');
-                }
-                buttons.append(button);
-            }, this));
-        }
-        this.parentElement.append(buttons);
+        var template = Handlebars.templates['panel-template'];
+        this.parentElement = $(template({label: this.label, configOptions: configOptions}));
         return this.parentElement;
     };
 

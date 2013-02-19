@@ -1,0 +1,9 @@
+<div id="{{label}}" class="view">
+    <div class="buttons">
+        {{#each configOptions}}
+            <div id="{{../label}}-{{label}}-button" class="button{{#if enabled}} enabled{{/if}}">
+                {{name}}
+            </div>
+        {{/each}}
+    </div>
+</div>
