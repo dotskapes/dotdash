@@ -41,4 +41,14 @@ var Panel = function (name, label, configOptions) {
     this.select = function() {}
     this.deselect = function() {}
     
-}
+};
+
+Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
+
+
+Handlebars.registerHelper('renderButton', function (type, options) {
+    if (type === Panel.BUTTON_TYPES.SELECTION_TOGGLE) {
+        var template = Handlebars.templates['selection_toggle_button'];
+        return new Handlebars.SafeString(template(options));
+    }
+});
