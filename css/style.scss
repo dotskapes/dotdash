@@ -4,8 +4,9 @@
     #{$key}: $value;
 }
 
-@mixin rounded_corners ($radius) {
-    @include vendor_prefix(border-radius, $radius);
+@mixin rounded_corners ($radius, $leftOrRight) {
+    @include vendor_prefix(border-top-#{$leftOrRight}-radius, $radius);
+    @include vendor_prefix(border-bottom-#{$leftOrRight}-radius, $radius);
 } 
 
 html, body, #dashboard {
@@ -68,20 +69,8 @@ $panelWidth: 50%;
         }
 
         .button {
-            background-color: white;
-            padding: 5px;
             margin: 3px;
             cursor: pointer;
-            @include rounded_corners(5px);
-            @include vendor_prefix(box-shadow, inset 0px 0px 1px 1px #aaaaaa);
-
-            &:hover {
-                background-color: #dddddd;
-            }
-
-            &.enabled, &:active {
-                background-color: #aaaaaa;
-            }
         }
     }
 }
@@ -99,4 +88,45 @@ $panelWidth: 50%;
 
 #wigglemap, #timeseries {
     height: 100%;
+}
+
+#map, #time {
+    cursor: move;
+    
+    &.selection {
+        cursor: crosshair;
+    }
+}
+
+.icon {
+    background-color: white;
+    padding: 2px 13px;
+
+    &:hover {
+        background-color: #dddddd;
+    }
+
+    &.enabled, &:active {
+        background-color: #aaaaaa;
+    }
+
+    &:first-of-type {
+        border-right: 3px solid #eeeeee;
+        @include rounded_corners(5px, left);
+    }
+    &:last-of-type {
+        @include rounded_corners(5px, right);
+    }
+
+    &.move_arrow {
+        background-image: url('../../images/move_arrow.png');
+        background-repeat: no-repeat; 
+        background-position: -2px -2px;
+    }
+    &.selection_box {
+        padding: 2px 20px;
+        background-image: url('../../images/selection_box.png');
+        background-repeat: no-repeat;
+        background-position: -2px -2px;
+    }
 }
