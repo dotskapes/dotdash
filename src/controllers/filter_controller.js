@@ -30,7 +30,7 @@ var FilterController = function(parent) {
             },
             { name: ColorRampController.NAME,
               title: 'Color Ramp',
-              options: [{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
+              options: []//{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
             },
             { name: 'dist',
               title: 'Color Distribution',
