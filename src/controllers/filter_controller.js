@@ -6,9 +6,6 @@ goog.require('TimeStepController');
 'use strict';
 var FilterController = function(parent) {
 
-    var filterView;
-    var colorRampController = new ColorRampController();
-
     var init = function(parent) {
         var html = render();
         parent.prepend(html);
@@ -28,9 +25,9 @@ var FilterController = function(parent) {
               title: 'Time Step',
               options: []
             },
-            { name: ColorRampController.CSS_CLASS,
+            { name: ColorRampController.NAME,
               title: 'Color Ramp',
-              options: [{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
+              options: []//{label: 0}, {label: 1}, {label: 2}, {label: 3}, {label: 4}]
             },
             { name: 'dist',
               title: 'Color Distribution',
