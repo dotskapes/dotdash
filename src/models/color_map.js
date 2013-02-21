@@ -123,7 +123,6 @@ var ColorMap = function (dataLayer) {
     var currentColorRamp = ColorRamps.RAMPS[0]; //white_red;
 
     this.setColorRamp = function (index) {
-        //currentColorRamp = colorRamps[index];
         currentColorRamp = ColorRamps.RAMPS[index];
     }
 
