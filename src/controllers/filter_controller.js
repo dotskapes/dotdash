@@ -6,9 +6,6 @@ goog.require('TimeStepController');
 'use strict';
 var FilterController = function(parent) {
 
-    var filterView;
-    var colorRampController = new ColorRampController();
-
     var init = function(parent) {
         var html = render();
         parent.prepend(html);
