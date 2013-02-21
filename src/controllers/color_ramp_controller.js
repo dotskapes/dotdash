@@ -25,7 +25,7 @@ var ColorRampController = function () {
     };
 
     // wipe out old, and render new. if sel has changed will reflect
-    var newColorMap = function() {
+    var redraw = function() {
         d3.select('#'+rampSvgId).remove();
         render();
     }
@@ -61,7 +61,7 @@ var ColorRampController = function () {
                 attr('fill','white');
 
             // highlight current selected ramp
-            if (rampIndex == currentRampIndex) rect.attr('fill', 'yellow');
+            if (rampIndex === currentRampIndex) rect.attr('fill', 'yellow');
 
             // draw color boxes, listen for mouse click
             x = xMargin;
