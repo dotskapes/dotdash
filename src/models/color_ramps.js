@@ -4,8 +4,6 @@ goog.provide('ColorRamps');
 
 var ColorRamps = {
 
-    NUM_COLORS: 6,
-
     GREY_BLUE: [
         wiggle.util.icolor(255, 247, 251, 255),
         wiggle.util.icolor(208, 209, 230, 255),
@@ -52,6 +50,8 @@ var ColorRamps = {
     ],
 
 }
+
+ColorRamps.NUM_COLORS = ColorRamps.WHITE_RED.length;
 
 ColorRamps.RAMPS = [ColorRamps.WHITE_RED,ColorRamps.GREY_BLUE,ColorRamps.RED_BLUE,
                     ColorRamps.WHITE_GREEN,ColorRamps.BROWN_GREEN];
