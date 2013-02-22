@@ -12,7 +12,7 @@ function SelectionManager() {
     // this is a wigglemaps layer selector that selects for wigglemap features
     var currentSelectionLayer;
 
-    this.addView = function(view) { views.push(view); }
+    this.addView = function(view) { views.push(view); };
 
     this.select = function(newSelectionLayer) {
         $.each(views,function(i,view) {
@@ -20,12 +20,12 @@ function SelectionManager() {
             view.select(newSelectionLayer);
         } );
         currentSelectionLayer = newSelectionLayer;
-    }
+    };
 
     // reselect the current selection, needed if selection got lost(redraw)
     this.reselect = function() {
         if (currentSelectionLayer)
             this.select(currentSelectionLayer);
-    }
+    };
 
 }

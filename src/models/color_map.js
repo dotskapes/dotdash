@@ -115,14 +115,14 @@ var ColorMap = function (dataLayer) {
     
     this.extents = function (dateProp) {
         return ranges[dateProp];
-    }
+    };
 
     // 1st initial color - which should be same as index 0 for color ramp - refactor
     var currentColorRamp = ColorRamps.RAMPS[0]; //white_red;
 
     this.setColorRamp = function (index) {
         currentColorRamp = ColorRamps.RAMPS[index];
-    }
+    };
 
     this.dist = function (index) {
         dist = index;

@@ -32,14 +32,14 @@ var Panel = function (name, label, configOptions) {
         selectionManager.select(selectionLayer);
     };
 
-    this.allFeatures = function() { return ServiceLayer.currentData.features(); }
+    this.allFeatures = function() { return ServiceLayer.currentData.features(); };
 
-    this.width = function() { return this.parentElement.width(); }
-    this.height = function() { return this.parentElement.height(); }
+    this.width = function() { return this.parentElement.width(); };
+    this.height = function() { return this.parentElement.height(); };
 
     // override in subclass
-    this.select = function() {}
-    this.deselect = function() {}
+    this.select = function() {};
+    this.deselect = function() {};
     
 };
 

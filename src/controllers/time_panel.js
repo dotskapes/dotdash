@@ -87,11 +87,11 @@ var TimePanel = function () {
         selectionLayer.style(graph, 'stroke', function (f) {
             return ServiceLayer.colorMap.colorForFeat (f);
         });
-    }
+    };
 
     this.select = function(selectionLayer) {
         selectionLayer.style(graph, 'stroke', ColorMap.HIGHLIGHT);
-    }
+    };
 
     // draw graph - without highlight/selection
     this.draw = function() {
@@ -101,6 +101,6 @@ var TimePanel = function () {
         layer.features ().style(graph, 'stroke', function (f) {
             return ServiceLayer.colorMap.colorForFeat (f);
         });
-    }
+    };
 
 };
