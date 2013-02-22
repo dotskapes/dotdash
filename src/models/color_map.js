@@ -1,7 +1,9 @@
 goog.provide('ColorMap');
 
+goog.require('ColorRamps');
+
 'use strict';
-var NUM_COLORS = 6;
+var NUM_COLORS = ColorRamps.NUM_COLORS;
 
 var ColorMap = function (dataLayer) {
     var ranges = {};
@@ -82,53 +84,6 @@ var ColorMap = function (dataLayer) {
         currentDateProp = _currentDateProp;
     };
     
-    var grey_blue = [
-        wiggle.util.icolor(255, 247, 251, 255),
-        wiggle.util.icolor(208, 209, 230, 255),
-        wiggle.util.icolor(166, 189, 219, 255),
-        wiggle.util.icolor(116, 169, 207, 255),
-        wiggle.util.icolor(43, 140, 190, 255),
-        wiggle.util.icolor(4, 90, 141, 255)
-    ];
-
-    var white_red = [
-        wiggle.util.icolor(254, 229, 217, 255),
-        wiggle.util.icolor(252, 187, 161, 255),
-        wiggle.util.icolor(252, 146, 114, 255),
-        wiggle.util.icolor(251, 106, 74, 255),
-        wiggle.util.icolor(222, 45, 38, 255),
-        wiggle.util.icolor(165, 15, 21, 255)
-    ];
-    
-    var red_blue = [
-        wiggle.util.icolor(178, 24, 43, 255),
-        wiggle.util.icolor(239, 138, 98, 255),
-        wiggle.util.icolor(253, 219, 199, 255),
-        wiggle.util.icolor(209, 169, 207, 255),
-        wiggle.util.icolor(103, 169, 207, 255),
-        wiggle.util.icolor(33, 102, 172, 255)
-    ];
-
-    var brown_green = [
-        wiggle.util.icolor(140, 82, 10, 255),
-        wiggle.util.icolor(216, 179, 101, 255),
-        wiggle.util.icolor(246, 232, 195, 255),
-        wiggle.util.icolor(199, 234, 229, 255),
-        wiggle.util.icolor(90, 180, 172, 255),
-        wiggle.util.icolor(1, 102, 94, 255)       
-    ];
-
-    var white_green = [
-        wiggle.util.icolor(237, 248, 233, 255),
-        wiggle.util.icolor(199, 233, 192, 255),
-        wiggle.util.icolor(161, 217, 155, 255),
-        wiggle.util.icolor(116, 196, 118, 255),
-        wiggle.util.icolor(49, 163, 84, 255),
-        wiggle.util.icolor(0, 109, 44, 255)
-    ];
-
-    // 1st initial color - which should be same as index 0 for color ramp - refactor
-    var colors = white_red;
     var dist = 0;
     var range = 0;
 
@@ -154,9 +109,9 @@ var ColorMap = function (dataLayer) {
                 field = 'global';
             var max = ranges[field].max + 1;
             var min = ranges[field].min - 1;
-            index = Math.floor ((1 - (max - val) / (max - min)) * colors.length);
+            index = Math.floor ((1 - (max - val) / (max - min)) * currentColorRamp.length);
         }
-        return colors[index];
+        return currentColorRamp[index];
     };
 
     
@@ -164,10 +119,11 @@ var ColorMap = function (dataLayer) {
         return ranges[dateProp];
     }
 
-    var colorRamps = [white_red,grey_blue,red_blue,white_green,brown_green];
+    // 1st initial color - which should be same as index 0 for color ramp - refactor
+    var currentColorRamp = ColorRamps.RAMPS[0]; //white_red;
 
     this.setColorRamp = function (index) {
-        colors = colorRamps[index];
+        currentColorRamp = ColorRamps.RAMPS[index];
     }
 
     this.dist = function (index) {
@@ -179,6 +135,8 @@ var ColorMap = function (dataLayer) {
     };
 };
 
+
+// should this stuff go in a renamed ColorRamps?
 // if there is a hole in the data rather than barfing use grey
 ColorMap.NO_DATA =  wiggle.util.icolor(75,75,75,255);
 
