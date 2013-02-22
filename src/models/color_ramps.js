@@ -49,7 +49,7 @@ var ColorRamps = {
         wiggle.util.icolor(0, 109, 44, 255)
     ]
 
-}
+};
 
 ColorRamps.NUM_COLORS = ColorRamps.WHITE_RED.length;
 

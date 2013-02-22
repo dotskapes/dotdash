@@ -30,7 +30,7 @@ var SVGSelection = function (svg) {
             min.y = max.y;
             max.y = tmp;
         }
-    }
+    };
     
     var reset_rect = function () {
         min.x = start.x;
@@ -42,7 +42,7 @@ var SVGSelection = function (svg) {
         r.attr ('x', min.x)
         .attr ('y', min.y)
         .attr ('width', max.x - min.x)
-        .attr ('height', max.y - min.y)
+        .attr ('height', max.y - min.y);
     };
 
     svg.on ('mousedown', function () {

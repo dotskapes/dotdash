@@ -45,7 +45,6 @@ module.exports = function(grunt) {
               maxlen: 200,
 
               // suppress warnings
-              asi: true,
               expr: true,
               sub: true,
               white: false

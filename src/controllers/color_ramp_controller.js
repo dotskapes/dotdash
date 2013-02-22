@@ -28,7 +28,7 @@ var ColorRampController = function () {
     var redraw = function() {
         d3.select('#'+rampSvgId).remove();
         render();
-    }
+    };
 
     // should this go in crc view??? it has a tiny bit of controller in it
     var render = function() {
@@ -85,6 +85,6 @@ var ColorRampController = function () {
 
     init();
 
-}
+};
 
 ColorRampController.NAME = 'ramp';
