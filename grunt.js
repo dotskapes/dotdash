@@ -9,6 +9,53 @@ module.exports = function(grunt) {
           handlebars: {
               command: 'node_modules/handlebars/bin/handlebars src/templates/* -f src/templates/compiled.js'
           }
+      },
+
+      lint: {
+          all: ["grunt.js", "src/dash.js", "src/controllers/*.js", "src/models/*.js", "src/views/*.js"]
+      },
+      jshint: {
+          options: {
+              browser: true,
+              devel: true,
+              jquery: true,
+              bitwise: true,
+              camelcase: false,
+              curly: false,
+              eqeqeq: false,
+              forin: true,
+              immed: false,
+              indent: 4,
+              latedef: false,
+              newcap: false,
+              noarg: true,
+              noempty: true,
+              nonew: false,
+              plusplus: false,
+              quotmark: false,
+              regexp: true,
+              undef: false,
+              unused: false,
+              strict: false,
+              trailing: false,
+              maxparams: 10,
+              maxdepth: 10,
+              maxstatements: 50,
+              maxcomplexity: 10,
+              maxlen: 200,
+
+              // suppress warnings
+              asi: true,
+              expr: true,
+              smarttabs: true,
+              sub: true,
+              white: false
+          },
+          globals: {
+              Handlebars: true,
+              goog: true,
+              wiggle: true
+          }
       }
 
 /*    uglify: {

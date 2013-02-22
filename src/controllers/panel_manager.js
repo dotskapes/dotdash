@@ -1,4 +1,4 @@
-goog.provide('PanelManager');
+goog.provide('panelManager');
 
 goog.require('selectionManager');
 goog.require('MapPanel');
@@ -7,7 +7,7 @@ goog.require('MDSPanel');
 
 'use strict';
 // javascripts funny Singleton pattern
-var PanelManager = new function() {
+var PanelManager = function() {
 
     var labelToPanel = {};
     // for now hardwired
@@ -128,7 +128,7 @@ var PanelManager = new function() {
     var selectedOption = function(select) {
         var selOpt = select.children("option[selected='selected']");
         // funny! amidst select event sometimes the above works sometimes below
-        if (selOpt.length == 0) selOpt = select.children('option:selected');
+        if (selOpt.length === 0) selOpt = select.children('option:selected');
         return selOpt;
     }
     
@@ -179,4 +179,6 @@ var PanelManager = new function() {
         $('.left-select').val(panels[0].name).change();
     }
  
-} () ;
+};
+
+var panelManager = new PanelManager();

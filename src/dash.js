@@ -2,7 +2,7 @@ goog.provide('dash');
 
 goog.require('ServiceLayer');
 goog.require('FilterController');
-goog.require('PanelManager');
+goog.require('panelManager');
 
 'use strict';
 function Dashboard (parentSelector, baseUrl) {
@@ -13,10 +13,10 @@ function Dashboard (parentSelector, baseUrl) {
     // Start the filter controller/view, has to be laid out before panels
     new FilterController($(parentSelector));
 
-    PanelManager.init(parentSelector,baseUrl);
+    panelManager.init(parentSelector,baseUrl);
 
     ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
-};
+}
 
 // called by index.html to start up dash
 window.dash = {
