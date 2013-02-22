@@ -47,12 +47,12 @@ var MDSPanel = function () {
 
     };
 
-    this.draw = function() {} // ??
+    this.draw = function() {}; // ??
 
     this.newData = function(data) {
         // display new data
-    }
-    this.select = function() {}
-    this.deselect = function() {}
+    };
+    this.select = function() {};
+    this.deselect = function() {};
 
 };

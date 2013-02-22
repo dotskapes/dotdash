@@ -10,13 +10,13 @@ var FilterController = function(parent) {
         var html = render();
         parent.prepend(html);
         $('.collapse-toggler').click(function (event) {
-            var content = $(event.currentTarget).siblings('.collapsible')
+            var content = $(event.currentTarget).siblings('.collapsible');
             content.slideToggle();
             $(event.currentTarget).toggleClass('collapsed');
             event.stopPropagation();
         });
         initControllers();
-    }
+    };
 
     var render = function () {
         // hard-coded filters for now
@@ -55,7 +55,7 @@ var FilterController = function(parent) {
         });
         new ColorRampController();
         new TimeStepController();
-    }
+    };
   
     var onChange = function (callback) {
         $('.filter-button').change(function (event) {
@@ -67,4 +67,4 @@ var FilterController = function(parent) {
 
     init(parent);
 
-}
+};

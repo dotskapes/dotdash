@@ -21,7 +21,7 @@ var MapPanel = function () {
     var layer;
     var that = this;
 
-    this.getMap = function() { return map; }
+    this.getMap = function() { return map; };
     
     this.create = function () {
         this.container = $ ('<div>').attr ('id', 'wigglemap');
@@ -80,11 +80,11 @@ var MapPanel = function () {
         selectionLayer.style(map, 'fill', function (f) {
             return ServiceLayer.colorMap.colorForFeat (f);
         });
-    }
+    };
 
     this.select = function(selectionLayer) {
         selectionLayer.style(map, 'fill', ColorMap.HIGHLIGHT);
-    }
+    };
 
     // draw map - without highlight/selection
     this.draw = function() {
@@ -94,6 +94,6 @@ var MapPanel = function () {
         layer.features ().style(map, 'fill', function (f) {
             return ServiceLayer.colorMap.colorForFeat (f);
         });
-    }
+    };
 
 };

@@ -33,7 +33,7 @@ var PanelManager = function() {
         selectionDropdown();
         initSelectListeners();
         showFirstTwoPanels();
-    }
+    };
 
     // init panels list and labelToPanel hash
     // for now hardwires the panels, eventually get dynamically
@@ -46,7 +46,7 @@ var PanelManager = function() {
             });
             selectionManager.addView(pan);
         } );
-    }
+    };
 
     var setupDivs = function(parentSelector) {
         // Add the panel div/containers to the document
@@ -56,7 +56,7 @@ var PanelManager = function() {
             var panel_div = panel.makeParentElement();
             panel_container.append(panel_div);
         });
-    }
+    };
 
     var selectionDropdown = function() {
         var selTemp = Handlebars.templates['select-template'];
@@ -65,18 +65,18 @@ var PanelManager = function() {
         left.append(leftSel);
         right.append(selTemp({selClass:"right-select"}));
         addPanelNamesToSelect();
-    }
+    };
 
     var addPanelNamesToSelect = function() {
         $.each(panels,function(i,pan) {
             $('.view-select').append(optionTemp(pan.label,pan.name));
         });
-    }
+    };
 
     var optionTemp = function(label,name) {
         var tmp = Handlebars.templates['select-option-template'];
         return tmp({label: label,name: name});
-    }
+    };
 
     this.draw = function() {
         // this should probably only draw the panels currently showing
@@ -88,7 +88,7 @@ var PanelManager = function() {
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
-    } 
+    };
 
     // select is jquery element for dropdown select
     var selectListener = function(select) {
@@ -99,7 +99,7 @@ var PanelManager = function() {
             showPanels(leftPanelName,rightPanelName);
             bumpOtherDropdownIfSame(select);
         });
-    }
+    };
 
     var showPanels = function(leftPanelLabel, rightPanelLabel) {
         if (!leftPanelLabel) throw "cant show panels: Left panel name undefined";
@@ -114,27 +114,27 @@ var PanelManager = function() {
         $('.view').removeClass('left-panel').removeClass('right-panel');
         leftPanel.addClass('left-panel');
         rightPanel.addClass('right-panel');
-    }
+    };
 
     // get currently selected option's text in select jquery element
     var selectedValue = function(select) {
         return selectedOption(select).val();
-    }
+    };
 
     var selectedIndex = function(select) {
         return selectedOption(select).prop('index');
-    }
+    };
     
     var selectedOption = function(select) {
         var selOpt = select.children("option[selected='selected']");
         // funny! amidst select event sometimes the above works sometimes below
         if (selOpt.length === 0) selOpt = select.children('option:selected');
         return selOpt;
-    }
+    };
     
     var selectSize = function() {
         return $('.left-select option').length;
-    }
+    };
     
     // if user has selected same view that is already displayed in other panel
     // then change the other panel to a new view (dont/cant show same view in both)
@@ -150,15 +150,15 @@ var PanelManager = function() {
         selectedOption(other).removeAttr('selected');
         var newValue = other.children().eq(newIndex).val();
         other.val(newValue).change();
-    }
+    };
     
     var getOtherSelect = function(select) {
         return isLeftSelect(select) ? $('.right-select') : $('.left-select');
-    }
+    };
     
     var isLeftSelect = function(select) {
         return select.attr('class').indexOf('left') !== -1;
-    }
+    };
     
 
     // If the window is resized, we may want to resize the dashboard
@@ -171,13 +171,13 @@ var PanelManager = function() {
         // add selection listeners to left right select dropdowns
         selectListener($('.left-select'));
         selectListener($('.right-select'));
-    }
+    };
 
     var showFirstTwoPanels = function() {
         // initialize with 1st panel on left (& 2nd on right)
         // left panel select will cause right to bump to 2nd
         $('.left-select').val(panels[0].name).change();
-    }
+    };
  
 };
 
