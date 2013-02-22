@@ -47,7 +47,6 @@ module.exports = function(grunt) {
               // suppress warnings
               asi: true,
               expr: true,
-              smarttabs: true,
               sub: true,
               white: false
           },
