@@ -53,6 +53,13 @@ module.exports = function(grunt) {
               goog: true,
               wiggle: true
           }
+       },
+
+      watch: {
+          scripts: {
+              files: 'src/templates/*.handlebars',
+              tasks: ['shell:handlebars']
+          }
       }
 
 /*    uglify: {
