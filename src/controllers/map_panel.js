@@ -57,7 +57,7 @@ var MapPanel = function () {
     var wireupMap = function() {
         // listen for map select and send selection to selectionManager
         map.select(function  (box) {
-	    selectionLayer = map.search (layer, box);
+            selectionLayer = map.search (layer, box);
             that.fireSelect(selectionLayer);
         });
 
