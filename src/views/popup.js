@@ -2,7 +2,7 @@ goog.provide('Popup');
 
 function $div () {
     return $ ('<div></div>');
-};
+}
 
 var Popup = function () {
     var container = $div ().css ({

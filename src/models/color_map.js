@@ -92,18 +92,16 @@ var ColorMap = function (dataLayer) {
             console.log ('here');
         var val = f.attr(currentDateProp);
         if (!val) return ColorMap.NO_DATA;
-        var index;
-        if (dist == 0) {
-            var field;
-            if (range == 0)
+        var index, field;
+        if (dist === 0) {
+            if (range === 0)
                 field = currentDateProp;
             else if (range == 1)
                 field = 'global';
             index = find_quantile (field, val);
         }
-        else if (dist == 1) {
-            var field;
-            if (range == 0)
+        else if (dist === 1) {
+            if (range === 0)
                 field = currentDateProp;
             else if (range == 1)
                 field = 'global';

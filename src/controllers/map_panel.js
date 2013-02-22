@@ -45,7 +45,7 @@ var MapPanel = function () {
 
         layer.features ()
             .style (map, 'stroke', ColorMap.WHITE)
-            .style (map, 'fill-opacity', .9);
+            .style (map, 'fill-opacity', 0.9);
 
         map.center (layer.bounds.centroid ());
         map.extents (layer.bounds.width ());
