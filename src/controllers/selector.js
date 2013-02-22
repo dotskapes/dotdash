@@ -18,14 +18,15 @@ var SVGSelection = function (svg) {
 	.style ('fill', 'green')
         .style ('display', 'none');
 
+    var tmp;
     var swap_bounds = function () {
 	if (min.x > max.x) {
-	    var tmp = min.x;
+	    tmp = min.x;
 	    min.x = max.x;
 	    max.x = tmp;
 	}
 	if (min.y > max.y) {
-	    var tmp = min.y;
+	    tmp = min.y;
 	    min.y = max.y;
 	    max.y = tmp;
 	}
@@ -54,7 +55,7 @@ var SVGSelection = function (svg) {
 	end.x = d3.mouse (this)[0];
 	end.y = d3.mouse (this)[1];
 
-	r.style ('fill-opacity', .4);
+	r.style ('fill-opacity', 0.4);
 	reset_rect ();
 
 	dragging = true;
