@@ -2,7 +2,7 @@ goog.provide('dash');
 
 goog.require('ServiceLayer');
 goog.require('FilterController');
-goog.require('PanelManager');
+goog.require('panelManager');
 
 'use strict';
 function Dashboard (parentSelector, baseUrl) {

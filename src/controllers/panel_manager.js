@@ -1,4 +1,4 @@
-goog.provide('PanelManager');
+goog.provide('panelManager');
 
 goog.require('selectionManager');
 goog.require('MapPanel');

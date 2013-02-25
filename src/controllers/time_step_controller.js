@@ -1,7 +1,7 @@
 goog.provide('TimeStepController');
 
 goog.require('ServiceLayer');
-goog.require('PanelManager');
+goog.require('panelManager');
 goog.require('TimeStepFilterView');
 
 var TimeStepController = function () {

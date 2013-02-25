@@ -1,7 +1,7 @@
 goog.provide('ColorRampController');
 
 goog.require('ServiceLayer');
-goog.require('PanelManager');
+goog.require('panelManager');
 
 var ColorRampController = function () {
 
