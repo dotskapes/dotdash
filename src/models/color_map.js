@@ -50,7 +50,7 @@ var ColorMap = function (dataLayer) {
     var quantiles = {};
     quantiles[GLOBAL_PROPERTY] = [];
 
-    for (q = 1; q <= NUM_COLORS; q ++) {
+    for (var q = 1; q <= NUM_COLORS; q ++) {
         var top = Math.round (q * global_vals.length / NUM_COLORS);
         var bottom = Math.round ((q - 1) * global_vals.length / NUM_COLORS);
         quantiles[GLOBAL_PROPERTY].push ({
@@ -64,7 +64,7 @@ var ColorMap = function (dataLayer) {
         quantiles[field] = [];
         for (var i = 1; i <= NUM_COLORS; i ++) {
             //var q = br_precip.features ().quantile (field, i, NUM_COLORS);
-            var q = ServiceLayer.currentData.features().quantile(field, i, NUM_COLORS);
+            q = ServiceLayer.currentData.features().quantile(field, i, NUM_COLORS);
             var quantile = q.range(field);
             // if the data for dateProp is sparse may have no quantile, so dont push it
             if (quantile) {
