@@ -59,7 +59,7 @@ var PanelManager = function() {
     };
 
     var selectionDropdown = function() {
-        var selTemp = Handlebars.templates['select-template'];
+        var selTemp = Handlebars.templates.select_template;
         var leftCtxt = {selClass:"left-select"};
         var leftSel = selTemp(leftCtxt);
         left.append(leftSel);
@@ -74,7 +74,7 @@ var PanelManager = function() {
     };
 
     var optionTemp = function(label,name) {
-        var tmp = Handlebars.templates['select-option-template'];
+        var tmp = Handlebars.templates.select_option_template;
         return tmp({label: label,name: name});
     };
 
