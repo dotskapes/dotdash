@@ -37,8 +37,9 @@ var TimePanel = function () {
     };
 
     this.newData = function (data) {
-        if (layer)
+        if (layer) {
             graph.remove (layer);
+        }
         layer = data;
 
         var properties = layer.numeric ();

@@ -13,7 +13,9 @@ var Panel = function (name, label, configOptions) {
     this.container;
 
     this.show = function() {
-        if (this.container) this.container.css('display','block');
+        if (this.container) {
+            this.container.css('display','block');
+        }
         this.parentElement.show();
     };
 

@@ -63,16 +63,19 @@ var ColorMap = function (dataLayer) {
             var q = ServiceLayer.currentData.features().quantile(field, i, NUM_COLORS);
             var quantile = q.range(field);
             // if the data for dateProp is sparse may have no quantile, so dont push it
-            if (quantile) 
+            if (quantile) {
                 quantiles[field].push (q.range (field));
+            }
         }       
     }
     
     var find_quantile = function (dateProp, val) {
-        if (val <= quantiles[dateProp][0].max)
+        if (val <= quantiles[dateProp][0].max) {
             return 0;
-        if (val >= quantiles[dateProp][quantiles[dateProp].length - 1].min)
+        }
+        if (val >= quantiles[dateProp][quantiles[dateProp].length - 1].min) {
             return quantiles[dateProp].length - 1;
+        }
         for (var i = 0; i < quantiles[dateProp].length - 1; i ++) {
             if ((quantiles[dateProp][i].min <= val) && (quantiles[dateProp][i + 1].min > val)) {
                 return i;
@@ -88,23 +91,30 @@ var ColorMap = function (dataLayer) {
     var range = 0;
 
     this.colorForFeat = function (f) {
-        if (!f.attr)
+        if (!f.attr) {
             console.log ('here');
+        }
         var val = f.attr(currentDateProp);
-        if (!val) return ColorMap.NO_DATA;
+        if (!val) {
+            return ColorMap.NO_DATA;
+        }
         var index, field;
         if (dist === 0) {
-            if (range === 0)
+            if (range === 0) {
                 field = currentDateProp;
-            else if (range == 1)
+            }
+            else if (range == 1) {
                 field = GLOBAL_PROPERTY;
+            }
             index = find_quantile (field, val);
         }
         else if (dist === 1) {
-            if (range === 0)
+            if (range === 0) {
                 field = currentDateProp;
-            else if (range == 1)
+            }
+            else if (range == 1) {
                 field = GLOBAL_PROPERTY;
+            }
             var max = ranges[field].max + 1;
             var min = ranges[field].min - 1;
             index = Math.floor ((1 - (max - val) / (max - min)) * currentColorRamp.length);

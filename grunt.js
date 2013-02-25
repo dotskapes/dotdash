@@ -21,7 +21,7 @@ module.exports = function(grunt) {
               jquery: true,
               bitwise: true,
               camelcase: false,
-              curly: false,
+              curly: true,
               eqeqeq: false,
               forin: true,
               immed: false,
