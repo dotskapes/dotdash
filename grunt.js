@@ -24,7 +24,7 @@ module.exports = function(grunt) {
               curly: true,
               eqeqeq: true,
               forin: true,
-              immed: false,
+              immed: true,
               indent: 4,
               latedef: true,
               newcap: false,
@@ -38,11 +38,11 @@ module.exports = function(grunt) {
               unused: false,
               strict: false,
               trailing: false,
-              maxparams: 10,
-              maxdepth: 10,
+              maxparams: 5,
+              maxdepth: 5,
               maxstatements: 50,
               maxcomplexity: 10,
-              maxlen: 200,
+              maxlen: 120,
 
               // suppress warnings
               expr: true,
