@@ -9,7 +9,7 @@ var TimeStepFilterView = function() {
             labels.push({label: step});
         });
         return this.render(labels);
-    }; 
+    };
 
     this.render = function (labels) {
         var template = Handlebars.templates.radio_button_template;

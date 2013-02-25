@@ -70,7 +70,7 @@ var ColorMap = function (dataLayer) {
             if (quantile) {
                 quantiles[field].push (q.range (field));
             }
-        }       
+        }
     }
     
     var find_quantile = function (dateProp, val) {

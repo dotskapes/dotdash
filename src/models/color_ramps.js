@@ -37,7 +37,7 @@ var ColorRamps = {
         wiggle.util.icolor(246, 232, 195, 255),
         wiggle.util.icolor(199, 234, 229, 255),
         wiggle.util.icolor(90, 180, 172, 255),
-        wiggle.util.icolor(1, 102, 94, 255)       
+        wiggle.util.icolor(1, 102, 94, 255)
     ],
 
     WHITE_GREEN: [

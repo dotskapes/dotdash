@@ -29,7 +29,7 @@ function SelectionManager() {
 
 }
 
-// non enforced poor mans singleton - scandal? 
+// non enforced poor mans singleton - scandal?
 // actually we may eventually have more than 1 selection manager if loading up
 // 2 datasets woth separate selection models
 var selectionManager = new SelectionManager();
