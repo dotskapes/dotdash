@@ -46,7 +46,6 @@ module.exports = function(grunt) {
 
               // suppress warnings
               expr: true,
-              sub: true,
               white: false
           },
           globals: {

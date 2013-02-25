@@ -40,16 +40,16 @@ var ColorMap = function (dataLayer) {
         set_range (vals, currentDateProp);
     });
     // get global min & max under property "global"
-    set_range (global_vals, 'global');
+    var GLOBAL_PROPERTY = 'global';
+    set_range (global_vals, GLOBAL_PROPERTY);
 
-    var quantiles = {
-        'global': []
-    };
+    var quantiles = {};
+    quantiles[GLOBAL_PROPERTY] = [];
 
     for (q = 1; q <= NUM_COLORS; q ++) {
         var top = Math.round (q * global_vals.length / NUM_COLORS);
         var bottom = Math.round ((q - 1) * global_vals.length / NUM_COLORS);
-        quantiles['global'].push ({
+        quantiles[GLOBAL_PROPERTY].push ({
             min: global_vals[bottom],
             max: global_vals[top - 1]
         });
@@ -97,14 +97,14 @@ var ColorMap = function (dataLayer) {
             if (range === 0)
                 field = currentDateProp;
             else if (range == 1)
-                field = 'global';
+                field = GLOBAL_PROPERTY;
             index = find_quantile (field, val);
         }
         else if (dist === 1) {
             if (range === 0)
                 field = currentDateProp;
             else if (range == 1)
-                field = 'global';
+                field = GLOBAL_PROPERTY;
             var max = ranges[field].max + 1;
             var min = ranges[field].min - 1;
             index = Math.floor ((1 - (max - val) / (max - min)) * currentColorRamp.length);

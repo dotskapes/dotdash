@@ -43,7 +43,7 @@ var FilterController = function(parent) {
             }
         ];
 
-        var template = Handlebars.templates['filter_template'];
+        var template = Handlebars.templates.filter_template;
         return template({filters: filters});
     };
 

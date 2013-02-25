@@ -22,7 +22,7 @@ var Panel = function (name, label, configOptions) {
     };
 
     this.makeParentElement = function() {
-        var template = Handlebars.templates['panel-template'];
+        var template = Handlebars.templates.panel_template;
         this.parentElement = $(template({label: this.label, configOptions: configOptions}));
         return this.parentElement;
     };
@@ -48,7 +48,7 @@ Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
 
 Handlebars.registerHelper('renderButton', function (type, options) {
     if (type === Panel.BUTTON_TYPES.SELECTION_TOGGLE) {
-        var template = Handlebars.templates['selection_toggle_button'];
+        var template = Handlebars.templates.selection_toggle_button;
         return new Handlebars.SafeString(template(options));
     }
 });
