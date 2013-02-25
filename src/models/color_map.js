@@ -107,7 +107,7 @@ var ColorMap = function (dataLayer) {
             if (range === 0) {
                 field = currentDateProp;
             }
-            else if (range == 1) {
+            else if (range === 1) {
                 field = GLOBAL_PROPERTY;
             }
             index = find_quantile (field, val);
@@ -116,7 +116,7 @@ var ColorMap = function (dataLayer) {
             if (range === 0) {
                 field = currentDateProp;
             }
-            else if (range == 1) {
+            else if (range === 1) {
                 field = GLOBAL_PROPERTY;
             }
             var max = ranges[field].max + 1;
