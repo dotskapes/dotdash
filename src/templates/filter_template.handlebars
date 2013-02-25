@@ -8,13 +8,26 @@
                 {{title}}
             </div>
             <div id="{{name}}-filter" class="collapsible">
+              {{#if radioSubGroups}}
                 {{#each options}}
+                  {{#each subOptions}}
                     <label>
-                         <input class="filter-button {{../name}}" type="radio"
-                         name="{{../name}}" value="{{@index}}"
-                         {{#unless @index}}checked{{/unless}} />{{label}}
+                      <input class="filter-button {{../name}}" type="radio"
+                      name="{{../name}}" value="{{@index}}"
+                      {{#unless @index}}checked{{/unless}} />{{label}}
                     </label>
+                  {{/each}}
+                  <br>
                 {{/each}}
+              {{else}}
+                {{#each options}}
+                  <label>
+                    <input class="filter-button {{../name}}" type="radio"
+                    name="{{../name}}" value="{{@index}}"
+                    {{#unless @index}}checked{{/unless}} />{{label}}
+                  </label>
+                {{/each}}
+              {{/if}}
             </div>
         </div>
     {{/each}}

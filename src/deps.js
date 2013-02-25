@@ -2,7 +2,8 @@
 // Please do not edit.
 goog.addDependency('../src/base.js', ['goog'], []);
 goog.addDependency('../src/controllers/color_ramp_controller.js', ['ColorRampController'], ['ServiceLayer', 'panelManager']);
-goog.addDependency('../src/controllers/filter_controller.js', ['FilterController'], ['ColorRampController', 'TimeStepController']);
+goog.addDependency('../src/controllers/distrib_range_controller.js', ['DistribRangeController'], ['ServiceLayer']);
+goog.addDependency('../src/controllers/filter_controller.js', ['FilterController'], ['ColorRampController', 'DistribRangeController', 'TimeStepController']);
 goog.addDependency('../src/controllers/map_panel.js', ['MapPanel'], ['ColorMap', 'Panel', 'ServiceLayer', 'selectionManager']);
 goog.addDependency('../src/controllers/mds_panel.js', ['MDSPanel'], ['Panel']);
 goog.addDependency('../src/controllers/panel.js', ['Panel'], ['ServiceLayer', 'selectionManager']);
