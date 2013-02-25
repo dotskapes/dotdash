@@ -35,7 +35,7 @@ var FilterController = function(parent) {
               radioSubGroups: true,
               options: [ { name: DistribRangeController.DISTRIB,
                            subOptions: [{label: 'Quantile'}, {label: 'Uniform'}] },
-                         { name: 'range',
+                         { name: DistribRangeController.RANGE,
                            subOptions: [{label: 'Local'}, {label: 'Global'}] } ]
             },
             { name: 'agg',
