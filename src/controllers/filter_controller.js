@@ -2,6 +2,7 @@ goog.provide('FilterController');
 
 goog.require('ColorRampController');
 goog.require('TimeStepController');
+goog.require('DistribRangeController');
 
 'use strict';
 var FilterController = function(parent) {
@@ -32,7 +33,10 @@ var FilterController = function(parent) {
             { name: 'dist_range',
               title: 'Color Distribution & Range',
               radioSubGroups: true,
-              options: [ { name: 'dist', subOptions: [{label: 'Quantile'}, {label: 'Uniform'}] },{ name: 'range', subOptions: [{label: 'Local'}, {label: 'Global'}] } ]
+              options: [ { name: DistribRangeController.DISTRIB,
+                           subOptions: [{label: 'Quantile'}, {label: 'Uniform'}] },
+                         { name: 'range',
+                           subOptions: [{label: 'Local'}, {label: 'Global'}] } ]
             },
             { name: 'agg',
               title: 'Aggregate',
@@ -52,6 +56,7 @@ var FilterController = function(parent) {
         });
         new ColorRampController();
         new TimeStepController();
+        new DistribRangeController();
     };
   
     var onChange = function (callback) {
