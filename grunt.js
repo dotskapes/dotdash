@@ -42,7 +42,7 @@ module.exports = function(grunt) {
               maxdepth: 10,
               maxstatements: 50,
               maxcomplexity: 10,
-              maxlen: 200,
+              maxlen: 120,
 
               // suppress warnings
               expr: true,
