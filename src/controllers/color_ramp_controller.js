@@ -1,7 +1,7 @@
 goog.provide('ColorRampController');
 
 goog.require('ServiceLayer');
-goog.require('panelManager');
+goog.require('PanelManager');
 
 var ColorRampController = function () {
 
@@ -18,7 +18,7 @@ var ColorRampController = function () {
     var newRamp = function(rampIndex) {
         colorMap().setColorRamp(rampIndex);
         // redraw panels with new colors & redraws selection
-        panelManager.draw();
+        panelManager.redraw();
         currentRampIndex = rampIndex;
         // selection has probably changed, redraw
         redraw();

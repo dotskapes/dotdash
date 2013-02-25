@@ -1,4 +1,4 @@
-goog.provide('panelManager');
+goog.provide('PanelManager');
 
 goog.require('selectionManager');
 goog.require('MapPanel');
@@ -78,7 +78,7 @@ var PanelManager = function() {
         return tmp({label: label,name: name});
     };
 
-    this.draw = function() {
+    this.redraw = function() {
         // this should probably only draw the panels currently showing
         // and on showing a new panel would need to do a draw
         $.each(panels, function(i,panel) {

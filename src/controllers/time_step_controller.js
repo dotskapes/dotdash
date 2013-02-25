@@ -1,7 +1,7 @@
 goog.provide('TimeStepController');
 
 goog.require('ServiceLayer');
-goog.require('panelManager');
+goog.require('PanelManager');
 goog.require('TimeStepFilterView');
 
 var TimeStepController = function () {
@@ -15,7 +15,7 @@ var TimeStepController = function () {
             chooser.change(function (event) {
                 var value = $(event.target).val();
                 ServiceLayer.colorMap.currentDateProp(value);
-                panelManager.draw();
+                panelManager.redraw();
             });
         };
 
