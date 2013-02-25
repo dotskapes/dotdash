@@ -15,7 +15,7 @@ var TimeStepController = function () {
             chooser.change(function (event) {
                 var value = $(event.target).val();
                 ServiceLayer.colorMap.currentDateProp(value);
-                panelManager.draw();
+                panelManager.redraw();
             });
         };
 

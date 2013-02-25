@@ -33,11 +33,15 @@ var ColorMap = function (dataLayer) {
     $.each(dateProps, function (i, dateProp) {
         var vals = [];
         dataLayer.features().each(function (j, feature) {
-            vals.push (feature.attr(dateProp));
-            global_vals.push (feature.attr(dateProp));
+            var val = feature.attr(dateProp);
+            // i dont think we care about undefs do we, in fact they create problems
+            if (val !== undefined) {
+                vals.push (feature.attr(dateProp));
+                global_vals.push (feature.attr(dateProp));
+            }
         });
         // set min & max range for timestep/dateProp
-        set_range (vals, currentDateProp);
+        set_range (vals, dateProp);
     });
     // get global min & max under property "global"
     var GLOBAL_PROPERTY = 'global';

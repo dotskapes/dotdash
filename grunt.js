@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
        shell: {
           handlebars: {
-              command: 'node_modules/handlebars/bin/handlebars src/templates/* -f src/templates/compiled.js'
+              command: 'node_modules/handlebars/bin/handlebars src/templates/ -f src/templates/compiled.js'
           }
       },
 
@@ -52,6 +52,13 @@ module.exports = function(grunt) {
               Handlebars: true,
               goog: true,
               wiggle: true
+          }
+       },
+
+      watch: {
+          scripts: {
+              files: 'src/templates/*.handlebars',
+              tasks: ['shell:handlebars']
           }
       }
 
