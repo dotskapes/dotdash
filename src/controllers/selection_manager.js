@@ -16,7 +16,9 @@ function SelectionManager() {
 
     this.select = function(newSelectionLayer) {
         $.each(views,function(i,view) {
-            if (currentSelectionLayer) view.deselect(currentSelectionLayer);
+            if (currentSelectionLayer) {
+                view.deselect(currentSelectionLayer);
+            }
             view.select(newSelectionLayer);
         } );
         currentSelectionLayer = newSelectionLayer;
@@ -24,8 +26,9 @@ function SelectionManager() {
 
     // reselect the current selection, needed if selection got lost(redraw)
     this.reselect = function() {
-        if (currentSelectionLayer)
+        if (currentSelectionLayer) {
             this.select(currentSelectionLayer);
+        }
     };
 
 }

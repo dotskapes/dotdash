@@ -39,8 +39,9 @@ var MapPanel = function () {
     };
 
     this.newData = function (data) {
-        if (layer)
+        if (layer) {
             map.remove (layer);
+        }
         layer = data;
 
         layer.features ()
