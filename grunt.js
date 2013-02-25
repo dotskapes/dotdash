@@ -22,7 +22,7 @@ module.exports = function(grunt) {
               bitwise: true,
               camelcase: false,
               curly: true,
-              eqeqeq: false,
+              eqeqeq: true,
               forin: true,
               immed: false,
               indent: 4,
