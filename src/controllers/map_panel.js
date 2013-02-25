@@ -8,8 +8,8 @@ goog.require('Panel');
 var MapPanel = function () {
 
     var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
-                                     options: {hoverText: 
-                                                  {move: "Move Map", 
+                                     options: {hoverText:
+                                                  {move: "Move Map",
                                                    select: "Select Features"},
                                                enabled: false}}};
 

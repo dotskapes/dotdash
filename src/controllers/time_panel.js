@@ -10,8 +10,8 @@ goog.require('SVGSelection');
 var TimePanel = function () {
 
     var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
-                                     options: {hoverText: 
-                                                  {move: "Move Panel", 
+                                     options: {hoverText:
+                                                  {move: "Move Panel",
                                                    select: "Select Time Steps"},
                                                enabled: false}}};
 
@@ -49,7 +49,7 @@ var TimePanel = function () {
 
         graph = new wiggle.TimeSeries ('#timeseries', {
             // hard coding / 10 to make it look nice for now
-            'width': properties.length / 10, 
+            'width': properties.length / 10,
             'height': 6500,
             'min': new vect (0, 0)
         });
