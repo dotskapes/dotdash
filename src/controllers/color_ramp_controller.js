@@ -61,7 +61,9 @@ var ColorRampController = function () {
                 attr('fill','white');
 
             // highlight current selected ramp
-            if (rampIndex === currentRampIndex) rect.attr('fill', 'yellow');
+            if (rampIndex === currentRampIndex) {
+                rect.attr('fill', 'yellow');
+            }
 
             // draw color boxes, listen for mouse click
             x = xMargin;

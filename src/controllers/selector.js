@@ -46,8 +46,9 @@ var SVGSelection = function (svg) {
     };
 
     svg.on ('mousedown', function () {
-        if (!enabled)
+        if (!enabled) {
             return;
+        }
         r.style ('display', 'block');
         start.x = d3.mouse (this)[0];
         start.y = d3.mouse (this)[1];
@@ -62,16 +63,18 @@ var SVGSelection = function (svg) {
     });
     
     svg.on ('mousemove', function () {
-        if (!dragging)
+        if (!dragging) {
             return;
+        }
         end.x = d3.mouse (this)[0];
         end.y = d3.mouse (this)[1];
         reset_rect ();
     });
 
     svg.on ('mouseup', function () {
-        if (!enabled)
+        if (!enabled) {
             return;
+        }
         r.style ('display', 'none');
         if (dragging) {
             r.style ('fill-opacity', 0);

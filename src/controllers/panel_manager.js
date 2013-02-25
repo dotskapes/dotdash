@@ -102,14 +102,24 @@ var PanelManager = function() {
     };
 
     var showPanels = function(leftPanelLabel, rightPanelLabel) {
-        if (!leftPanelLabel) throw "cant show panels: Left panel name undefined";
-        if (!rightPanelLabel) throw "Right panel name undefined";
+        if (!leftPanelLabel) {
+            throw "cant show panels: Left panel name undefined";
+        }
+        if (!rightPanelLabel) {
+            throw "Right panel name undefined";
+        }
         var leftPanel = labelToPanel[leftPanelLabel];
         var rightPanel = labelToPanel[rightPanelLabel];
         $.each([leftPanel, rightPanel], function (i, panel) {
-            if (!panel) throw "Error: Panel "+leftPanelName+" "+rightPanelName+" not found";
-            if (!panel.created) panel.create();
-            else panel.show();
+            if (!panel) {
+                throw "Error: Panel "+leftPanelName+" "+rightPanelName+" not found";
+            }
+            if (!panel.created) {
+                panel.create();
+            }
+            else {
+                panel.show();
+            }
         });
         $('.view').removeClass('left-panel').removeClass('right-panel');
         leftPanel.addClass('left-panel');
@@ -128,7 +138,9 @@ var PanelManager = function() {
     var selectedOption = function(select) {
         var selOpt = select.children("option[selected='selected']");
         // funny! amidst select event sometimes the above works sometimes below
-        if (selOpt.length === 0) selOpt = select.children('option:selected');
+        if (selOpt.length === 0) {
+            selOpt = select.children('option:selected');
+        }
         return selOpt;
     };
     
@@ -143,7 +155,9 @@ var PanelManager = function() {
         leftIndex = selectedIndex($('.left-select'));
         rightIndex = selectedIndex($('.right-select'));
         // if 2 selections are not the same then return - nothing to do
-        if (leftIndex !== rightIndex) return;
+        if (leftIndex !== rightIndex) {
+            return;
+        }
         // else bump up other 1 past where select is
         var newIndex = selectedIndex(select) + 1 % selectSize();
         isLeftSelect(other) ? leftIndex = newIndex : rightIndex = newIndex;
