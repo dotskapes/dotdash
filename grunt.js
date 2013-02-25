@@ -1,66 +1,65 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
 
-  // Project configuration.
-  grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-       shell: {
-          handlebars: {
-              command: 'node_modules/handlebars/bin/handlebars src/templates/ -f src/templates/compiled.js'
-          }
-      },
+        shell: {
+            handlebars: {
+                command: 'node_modules/handlebars/bin/handlebars src/templates/ -f src/templates/compiled.js'
+            }
+        },
 
-      lint: {
-          all: ["grunt.js", "src/dash.js", "src/controllers/*.js", "src/models/*.js", "src/views/*.js"]
-      },
-      jshint: {
-          options: {
-              browser: true,
-              devel: true,
-              jquery: true,
-              bitwise: true,
-              camelcase: false,
-              curly: true,
-              eqeqeq: true,
-              forin: true,
-              immed: true,
-              indent: 4,
-              latedef: true,
-              newcap: false,
-              noarg: true,
-              noempty: true,
-              nonew: false,
-              plusplus: false,
-              quotmark: false,
-              regexp: true,
-              undef: false,
-              unused: false,
-              strict: false,
-              trailing: true,
-              maxparams: 5,
-              maxdepth: 5,
-              maxstatements: 50,
-              maxcomplexity: 10,
-              maxlen: 120,
+        lint: {
+            all: ["grunt.js", "src/dash.js", "src/controllers/*.js", "src/models/*.js", "src/views/*.js"]
+        },
+        jshint: {
+            options: {
+                browser: true,
+                devel: true,
+                jquery: true,
+                bitwise: true,
+                camelcase: false,
+                curly: true,
+                eqeqeq: true,
+                forin: true,
+                immed: true,
+                indent: 4,
+                latedef: true,
+                newcap: false,
+                noarg: true,
+                noempty: true,
+                nonew: false,
+                plusplus: false,
+                quotmark: false,
+                regexp: true,
+                undef: false,
+                unused: false,
+                strict: false,
+                trailing: true,
+                maxparams: 5,
+                maxdepth: 5,
+                maxstatements: 50,
+                maxcomplexity: 10,
+                maxlen: 120,
 
-              // suppress warnings
-              expr: true,
-              white: false
-          },
-          globals: {
-              Handlebars: true,
-              goog: true,
-              wiggle: true
-          }
-       },
+                // suppress warnings
+                expr: true
+            },
+            globals: {
+                Handlebars: true,
+                goog: true,
+                wiggle: true
+            }
+        },
 
-      watch: {
-          scripts: {
-              files: 'src/templates/*.handlebars',
-              tasks: ['shell:handlebars']
-          }
-      }
+        watch: {
+            scripts: {
+                files: 'src/templates/*.handlebars',
+                tasks: ['shell:handlebars']
+            }
+        }
 
 /*    uglify: {
       options: {
@@ -71,7 +70,7 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.js'
       }
     }*/
-  });
+    });
 
     grunt.loadNpmTasks('grunt-shell');
 
