@@ -11,8 +11,8 @@ var TimeStepController = function () {
     var init = function () {
 
         var addEventListener = function () {
-            var chooser = $('.filter-button[name="' + TimeStepController.NAME + '"]');
-            chooser.change(function (event) {
+            var select = $('.' + TimeStepFilterView.CLASS);
+            select.change(function (event) {
                 var value = $(event.target).val();
                 ServiceLayer.colorMap.currentDateProp(value);
                 panelManager.redraw();
@@ -31,4 +31,4 @@ var TimeStepController = function () {
     init();
 };
 
-TimeStepController.NAME = 'step';
+TimeStepController.NAME = TimeStepFilterView.NAME;
