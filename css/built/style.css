@@ -11,7 +11,7 @@ html, body, #dashboard {
   display: inline-block; }
 
 .collapsible {
-  display: none; }
+  display: block; }
 
 .panels {
   -moz-user-select: none;
