@@ -10,9 +10,6 @@ html, body, #dashboard {
 .collapse-toggler.collapsed .expand-arrow {
   display: inline-block; }
 
-.collapsible {
-  display: block; }
-
 .panels {
   -moz-user-select: none;
   -webkit-user-select: none;
