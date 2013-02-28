@@ -50,7 +50,7 @@ Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
 
 Handlebars.registerHelper('renderButton', function (type, options) {
     if (type === Panel.BUTTON_TYPES.SELECTION_TOGGLE) {
-        var template = Handlebars.templates.selection_toggle_button;
+        var template = Handlebars.templates.selection_toggle_button_template;
         return new Handlebars.SafeString(template(options));
     }
 });
