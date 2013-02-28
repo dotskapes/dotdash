@@ -19,6 +19,7 @@ var MapPanel = function () {
     // wiggle.Map object
     var map;
     var layer;
+    var selectionLayer;
     var that = this;
 
     this.getMap = function () { return map; };

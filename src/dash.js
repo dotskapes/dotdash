@@ -4,7 +4,6 @@ goog.require('ServiceLayer');
 goog.require('FilterController');
 goog.require('panelManager');
 
-'use strict';
 var Dashboard = function (parentSelector, baseUrl) {
 
     // Static set of filters for now
