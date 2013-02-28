@@ -18,7 +18,7 @@ var MDSPanel = function () {
         // get jquery elementy from d3 this.parentElement & append
         this.parentElement.show();
     };
-    
+
     this.create = function () {
 
         svg = d3.select(this.parentElement[0]).append('svg').attr({

@@ -26,7 +26,7 @@ window.dash = {
     create: function (selector, baseUrl) {
         selector = selector || 'body';
         baseUrl = baseUrl || '';
-        
+
         return new Dashboard(selector, baseUrl);
     }
 };

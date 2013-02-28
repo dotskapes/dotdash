@@ -42,7 +42,7 @@ var Panel = function (name, label, configOptions) {
     // override in subclass
     this.select = function () {};
     this.deselect = function () {};
-    
+
 };
 
 Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};

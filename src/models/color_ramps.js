@@ -21,7 +21,7 @@ var ColorRamps = {
         wiggle.util.icolor(222, 45, 38, 255),
         wiggle.util.icolor(165, 15, 21, 255)
     ],
-    
+
     RED_BLUE: [
         wiggle.util.icolor(178, 24, 43, 255),
         wiggle.util.icolor(239, 138, 98, 255),

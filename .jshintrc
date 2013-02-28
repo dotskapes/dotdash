@@ -1,0 +1,37 @@
+{
+    "browser": true,
+    "devel": true,
+    "jquery": true,
+    "bitwise": true,
+    "camelcase": false,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "newcap": false,
+    "noarg": true,
+    "noempty": true,
+    "nonew": false,
+    "plusplus": false,
+    "quotmark": false,
+    "regexp": true,
+    "undef": false,
+    "unused": false,
+    "strict": false,
+    "trailing": true,
+    "maxparams": 5,
+    "maxdepth": 5,
+    "maxstatements": 50,
+    "maxcomplexity": 10,
+    "maxlen": 120,
+    "white": true,
+    // suppress warnings                                                                                                                                                           
+    "expr": true,
+    "globals": [
+        "Handlebars",
+        "goog",
+        "wiggle"
+    ]    
+}

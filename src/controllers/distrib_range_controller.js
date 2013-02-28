@@ -20,7 +20,7 @@ var DistribRangeController = function () {
             panelManager.redraw();
         });
     };
-    
+
     init();
 
 };

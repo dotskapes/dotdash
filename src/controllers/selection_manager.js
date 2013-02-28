@@ -3,7 +3,7 @@ goog.provide('selectionManager');
 "use strict";
 
 var SelectionManager = function () {
-    
+
     var views = [];
     // this is a wigglemaps layer selector that selects for wigglemap features
     var currentSelectionLayer;

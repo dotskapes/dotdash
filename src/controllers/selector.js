@@ -31,7 +31,7 @@ var SVGSelection = function (svg) {
             max.y = tmp;
         }
     };
-    
+
     var reset_rect = function () {
         min.x = start.x;
         min.y = start.y;
@@ -61,7 +61,7 @@ var SVGSelection = function (svg) {
 
         dragging = true;
     });
-    
+
     svg.on('mousemove', function () {
         if (!dragging) {
             return;

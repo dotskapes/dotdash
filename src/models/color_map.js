@@ -72,7 +72,7 @@ var ColorMap = function (dataLayer) {
             }
         }
     }
-    
+
     var find_quantile = function (dateProp, val) {
         if (val <= quantiles[dateProp][0].max) {
             return 0;
@@ -86,11 +86,11 @@ var ColorMap = function (dataLayer) {
             }
         }
     };
-    
+
     this.currentDateProp = function (_currentDateProp) {
         currentDateProp = _currentDateProp;
     };
-    
+
     var dist = 0;
     var range = 0;
 
@@ -126,7 +126,7 @@ var ColorMap = function (dataLayer) {
         return currentColorRamp[index];
     };
 
-    
+
     this.extents = function (dateProp) {
         return ranges[dateProp];
     };

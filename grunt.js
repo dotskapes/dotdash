@@ -8,49 +8,11 @@ module.exports = function (grunt) {
         shell: {
             handlebars: {
                 command: 'node_modules/handlebars/bin/handlebars src/templates/ -f src/templates/compiled.js'
-            }
-        },
-
-        lint: {
-            all: ["grunt.js", "src/dash.js", "src/controllers/*.js", "src/models/*.js", "src/views/*.js"]
-        },
-        jshint: {
-            options: {
-                browser: true,
-                devel: true,
-                jquery: true,
-                bitwise: true,
-                camelcase: false,
-                curly: true,
-                eqeqeq: true,
-                forin: true,
-                immed: true,
-                indent: 4,
-                latedef: true,
-                newcap: false,
-                noarg: true,
-                noempty: true,
-                nonew: false,
-                plusplus: false,
-                quotmark: false,
-                regexp: true,
-                undef: false,
-                unused: false,
-                strict: false,
-                trailing: true,
-                maxparams: 5,
-                maxdepth: 5,
-                maxstatements: 50,
-                maxcomplexity: 10,
-                maxlen: 120,
-
-                // suppress warnings
-                expr: true
             },
-            globals: {
-                Handlebars: true,
-                goog: true,
-                wiggle: true
+            lint: {
+                command: 'node_modules/jshint/bin/jshint --reporter build/jshint_reporter.js src',
+                stdout: true,
+                failOnError: true
             }
         },
 

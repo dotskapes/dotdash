@@ -134,7 +134,7 @@ var PanelManager = function () {
     var selectedIndex = function (select) {
         return selectedOption(select).prop('index');
     };
-    
+
     var selectedOption = function (select) {
         var selOpt = select.children("option[selected='selected']");
         // funny! amidst select event sometimes the above works sometimes below
@@ -143,11 +143,11 @@ var PanelManager = function () {
         }
         return selOpt;
     };
-    
+
     var selectSize = function () {
         return $('.left-select option').length;
     };
-    
+
     // if user has selected same view that is already displayed in other panel
     // then change the other panel to a new view (dont/cant show same view in both)
     var bumpOtherDropdownIfSame = function (select) {
@@ -165,11 +165,11 @@ var PanelManager = function () {
         var newValue = other.children().eq(newIndex).val();
         other.val(newValue).change();
     };
-    
+
     var getOtherSelect = function (select) {
         return isLeftSelect(select) ? $('.right-select') : $('.left-select');
     };
-    
+
     var isLeftSelect = function (select) {
         return select.attr('class').indexOf('left') !== -1;
     };
@@ -192,7 +192,7 @@ var PanelManager = function () {
         // left panel select will cause right to bump to 2nd
         $('.left-select').val(panels[0].name).change();
     };
- 
+
 };
 
 var panelManager = new PanelManager();

@@ -58,7 +58,7 @@ var FilterController = function (parent) {
         new TimeStepController();
         new DistribRangeController();
     };
-  
+
     var onChange = function (callback) {
         $('.filter-button').change(function (event) {
             var name = $(event.target).attr('name');

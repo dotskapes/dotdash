@@ -22,7 +22,7 @@ var MapPanel = function () {
     var that = this;
 
     this.getMap = function () { return map; };
-    
+
     this.create = function () {
         this.container = $('<div>').attr('id', 'wigglemap');
 
