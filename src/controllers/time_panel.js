@@ -47,14 +47,8 @@ var TimePanel = function () {
         layer.attr('order', properties);
 
 
-        graph = new wiggle.TimeSeries('#timeseries', {
-            // hard coding / 10 to make it look nice for now
-            'width': properties.length / 10,
-            'height': 6500,
-            'min': new vect(0, 0)
-        });
+        graph = new wiggle.TimeSeries('#timeseries', layer, {'ticks': 500 });
 
-        graph.append(layer);
         wireupGraph();
 
         // initial (unselected) coloring
