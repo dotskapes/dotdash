@@ -12,7 +12,7 @@ var TimeStepFilterView = function () {
     };
 
     this.render = function (labels) {
-        var template = Handlebars.templates.select_and_options;
+        var template = Handlebars.templates.select_and_options_template;
         var params = { selClass: TimeStepFilterView.CLASS,
                        options: labels };
         var html = template(params);

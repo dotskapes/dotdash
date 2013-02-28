@@ -9,7 +9,7 @@ var MDSPanel = function () {
     Panel.call(this, 'MDS', 'mds');
 
     var svg;
-    var back_group, data_group;
+    var backGroup, dataGroup;
 
     var xmap, ymap;
 
@@ -26,10 +26,10 @@ var MDSPanel = function () {
             'preserveAspectRatio': 'none'
         });
 
-        back_group = svg.append('g');
-        data_group = svg.append('g');
+        backGroup = svg.append('g');
+        dataGroup = svg.append('g');
 
-        var matte = back_group.append('rect')
+        var matte = backGroup.append('rect')
             .attr('x', 0)
             .attr('y', 0)
             .attr('width', 1)

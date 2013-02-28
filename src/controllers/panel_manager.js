@@ -50,11 +50,11 @@ var PanelManager = function () {
 
     var setupDivs = function (parentSelector) {
         // Add the panel div/containers to the document
-        var panel_container = $('<div>').addClass('panels').append(left).append(right);
-        $(parentSelector).append(panel_container);
+        var panelContainer = $('<div>').addClass('panels').append(left).append(right);
+        $(parentSelector).append(panelContainer);
         $.each(panels, function (i, panel) {
-            var panel_div = panel.makeParentElement();
-            panel_container.append(panel_div);
+            var panelDiv = panel.makeParentElement();
+            panelContainer.append(panelDiv);
         });
     };
 
