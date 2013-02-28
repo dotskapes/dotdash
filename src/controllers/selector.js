@@ -19,7 +19,7 @@ var SVGSelection = function (svg) {
         .style('display', 'none');
 
     var tmp;
-    var swap_bounds = function () {
+    var swapBounds = function () {
         if (min.x > max.x) {
             tmp = min.x;
             min.x = max.x;
@@ -32,13 +32,13 @@ var SVGSelection = function (svg) {
         }
     };
 
-    var reset_rect = function () {
+    var resetRect = function () {
         min.x = start.x;
         min.y = start.y;
         max.x = end.x;
         max.y = end.y;
 
-        swap_bounds();
+        swapBounds();
         r.attr('x', min.x)
         .attr('y', min.y)
         .attr('width', max.x - min.x)
@@ -57,7 +57,7 @@ var SVGSelection = function (svg) {
         end.y = d3.mouse(this)[1];
 
         r.style('fill-opacity', 0.4);
-        reset_rect();
+        resetRect();
 
         dragging = true;
     });
@@ -68,7 +68,7 @@ var SVGSelection = function (svg) {
         }
         end.x = d3.mouse(this)[0];
         end.y = d3.mouse(this)[1];
-        reset_rect();
+        resetRect();
     });
 
     svg.on('mouseup', function () {
@@ -92,8 +92,8 @@ var SVGSelection = function (svg) {
         enabled = false;
     };
 
-    this.release = function (release_func) {
-        callback = release_func;
+    this.release = function (releaseFunc) {
+        callback = releaseFunc;
     };
 
     this.dragging = function () {

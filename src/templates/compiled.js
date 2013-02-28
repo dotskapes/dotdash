@@ -149,7 +149,7 @@ function program1(depth0,data,depth1) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </div>\n</div>";
   return buffer;});
-templates['select_and_options'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['select_and_options_template'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, stack2, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
@@ -204,7 +204,7 @@ templates['select_template'] = template(function (Handlebars,depth0,helpers,part
   else { stack1 = depth0.selClass; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1) + " view-select\"/>\n</div>";
   return buffer;});
-templates['selection_toggle_button'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['selection_toggle_button_template'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, stack2, self=this, functionType="function", escapeExpression=this.escapeExpression;
 

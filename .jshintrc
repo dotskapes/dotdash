@@ -3,7 +3,7 @@
     "devel": true,
     "jquery": true,
     "bitwise": true,
-    "camelcase": false,
+    "camelcase": true,
     "curly": true,
     "eqeqeq": true,
     "forin": true,

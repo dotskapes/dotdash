@@ -16,7 +16,7 @@ var ColorMap = function (dataLayer) {
 
     // figure out uniform distribution (for uniform filter)
     // sets min & max range, can be used by each time step or global
-    var set_range = function (vals, currentDateProp) {
+    var setRange = function (vals, currentDateProp) {
         vals.sort(function (a, b) {
             return a - b;
         });
@@ -29,7 +29,7 @@ var ColorMap = function (dataLayer) {
 
     // figure global color scale, that is scale according to all features,
     // not just self(local)
-    var global_vals = [];
+    var globalVals = [];
     $.each(dateProps, function (i, dateProp) {
         var vals = [];
         dataLayer.features().each(function (j, feature) {
@@ -37,25 +37,25 @@ var ColorMap = function (dataLayer) {
             // i dont think we care about undefs do we, in fact they create problems
             if (val !== undefined) {
                 vals.push(feature.attr(dateProp));
-                global_vals.push(feature.attr(dateProp));
+                globalVals.push(feature.attr(dateProp));
             }
         });
         // set min & max range for timestep/dateProp
-        set_range(vals, dateProp);
+        setRange(vals, dateProp);
     });
     // get global min & max under property "global"
     var GLOBAL_PROPERTY = 'global';
-    set_range(global_vals, GLOBAL_PROPERTY);
+    setRange(globalVals, GLOBAL_PROPERTY);
 
     var quantiles = {};
     quantiles[GLOBAL_PROPERTY] = [];
 
     for (var q = 1; q <= NUM_COLORS; q ++) {
-        var top = Math.round(q * global_vals.length / NUM_COLORS);
-        var bottom = Math.round((q - 1) * global_vals.length / NUM_COLORS);
+        var top = Math.round(q * globalVals.length / NUM_COLORS);
+        var bottom = Math.round((q - 1) * globalVals.length / NUM_COLORS);
         quantiles[GLOBAL_PROPERTY].push({
-            min: global_vals[bottom],
-            max: global_vals[top - 1]
+            min: globalVals[bottom],
+            max: globalVals[top - 1]
         });
     }
 
@@ -73,7 +73,7 @@ var ColorMap = function (dataLayer) {
         }
     }
 
-    var find_quantile = function (dateProp, val) {
+    var findQuantile = function (dateProp, val) {
         if (val <= quantiles[dateProp][0].max) {
             return 0;
         }
@@ -110,7 +110,7 @@ var ColorMap = function (dataLayer) {
             else if (range === 1) {
                 field = GLOBAL_PROPERTY;
             }
-            index = find_quantile(field, val);
+            index = findQuantile(field, val);
         }
         else if (dist === 1) {
             if (range === 0) {
