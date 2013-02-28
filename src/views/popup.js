@@ -1,27 +1,27 @@
 goog.provide('Popup');
 
-function $div () {
-    return $ ('<div></div>');
-}
+var $div = function () {
+    return $('<div></div>');
+};
 
 var Popup = function () {
-    var container = $div ().css ({
+    var container = $div().css({
         position: 'absolute',
         'display': 'none'
-    }).addClass ('popup');
+    }).addClass('popup');
 
-    $ ('body').append (container);
+    $('body').append(container);
 
     this.show = function (text, event) {
-        container.text (text);
-        container.css ({
+        container.text(text);
+        container.css({
             'display': 'block',
             'left': event.clientX + 5,
-            'top': event.clientY - container.innerHeight () - 5
+            'top': event.clientY - container.innerHeight() - 5
         });
     };
 
     this.hide = function () {
-        container.css ('display', 'none');
+        container.css('display', 'none');
     };
 };

@@ -12,37 +12,37 @@ var Panel = function (name, label, configOptions) {
     this.parentElement;
     this.container;
 
-    this.show = function() {
+    this.show = function () {
         if (this.container) {
-            this.container.css('display','block');
+            this.container.css('display', 'block');
         }
         this.parentElement.show();
     };
 
-    this.addClass = function(cssClass) {
+    this.addClass = function (cssClass) {
         this.parentElement.addClass(cssClass);
     };
 
-    this.makeParentElement = function() {
+    this.makeParentElement = function () {
         var template = Handlebars.templates.panel_template;
         this.parentElement = $(template({label: this.label, configOptions: configOptions}));
         return this.parentElement;
     };
 
-    this.fireSelect = function(selectionLayer) {
+    this.fireSelect = function (selectionLayer) {
         // hmmm, this is view knowing controller - refactor?
         selectionManager.select(selectionLayer);
     };
 
-    this.allFeatures = function() { return ServiceLayer.currentData.features(); };
+    this.allFeatures = function () { return ServiceLayer.currentData.features(); };
 
-    this.width = function() { return this.parentElement.width(); };
-    this.height = function() { return this.parentElement.height(); };
+    this.width = function () { return this.parentElement.width(); };
+    this.height = function () { return this.parentElement.height(); };
 
     // override in subclass
-    this.select = function() {};
-    this.deselect = function() {};
-    
+    this.select = function () {};
+    this.deselect = function () {};
+
 };
 
 Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
