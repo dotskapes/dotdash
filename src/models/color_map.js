@@ -2,7 +2,6 @@ goog.provide('ColorMap');
 
 goog.require('ColorRamps');
 
-'use strict';
 var NUM_COLORS = ColorRamps.NUM_COLORS;
 
 var ColorMap = function (dataLayer) {
