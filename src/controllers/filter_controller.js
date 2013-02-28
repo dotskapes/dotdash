@@ -5,9 +5,9 @@ goog.require('TimeStepController');
 goog.require('DistribRangeController');
 
 'use strict';
-var FilterController = function(parent) {
+var FilterController = function (parent) {
 
-    var init = function(parent) {
+    var init = function (parent) {
         var html = render();
         parent.prepend(html);
         $('.collapse-toggler').click(function (event) {
@@ -48,7 +48,7 @@ var FilterController = function(parent) {
         return template({filters: filters});
     };
 
-    var initControllers = function() {
+    var initControllers = function () {
         // take this out and just have events go direct to controller?
         onChange(function (name, value) {
             // controller should do something with this
@@ -58,7 +58,7 @@ var FilterController = function(parent) {
         new TimeStepController();
         new DistribRangeController();
     };
-  
+
     var onChange = function (callback) {
         $('.filter-button').change(function (event) {
             var name = $(event.target).attr('name');

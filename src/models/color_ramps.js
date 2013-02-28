@@ -21,7 +21,7 @@ var ColorRamps = {
         wiggle.util.icolor(222, 45, 38, 255),
         wiggle.util.icolor(165, 15, 21, 255)
     ],
-    
+
     RED_BLUE: [
         wiggle.util.icolor(178, 24, 43, 255),
         wiggle.util.icolor(239, 138, 98, 255),
@@ -53,5 +53,8 @@ var ColorRamps = {
 
 ColorRamps.NUM_COLORS = ColorRamps.WHITE_RED.length;
 
-ColorRamps.RAMPS = [ColorRamps.WHITE_RED,ColorRamps.GREY_BLUE,ColorRamps.RED_BLUE,
-                    ColorRamps.WHITE_GREEN,ColorRamps.BROWN_GREEN];
+ColorRamps.RAMPS = [ColorRamps.WHITE_RED,
+                    ColorRamps.GREY_BLUE,
+                    ColorRamps.RED_BLUE,
+                    ColorRamps.WHITE_GREEN,
+                    ColorRamps.BROWN_GREEN];

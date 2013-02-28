@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "grunt": "~0.3",
-    "grunt-shell": "~0.1.4"
+    "grunt-shell": "~0.1.4",
+    "jshint": "1.0.0"
   }
 }
