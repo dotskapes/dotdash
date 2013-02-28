@@ -1,10 +1,12 @@
 goog.provide('Popup');
 
 var $div = function () {
+    'use strict';
     return $('<div></div>');
 };
 
 var Popup = function () {
+    'use strict';
     var container = $div().css({
         position: 'absolute',
         'display': 'none'

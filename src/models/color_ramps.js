@@ -1,7 +1,5 @@
 goog.provide('ColorRamps');
 
-'use strict';
-
 var ColorRamps = {
 
     GREY_BLUE: [

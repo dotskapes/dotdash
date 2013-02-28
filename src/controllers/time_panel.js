@@ -5,8 +5,8 @@ goog.require('selectionManager');
 goog.require('Panel');
 goog.require('Popup');
 
-"use strict";
 var TimePanel = function () {
+    'use strict';
 
     var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
                                      options: {hoverText:
