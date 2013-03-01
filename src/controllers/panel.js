@@ -9,8 +9,6 @@ var Panel = function (name, label, configOptions) {
     this.name = name;
     // for internal/class
     this.label = label;
-    this.parentElement;
-    this.container;
 
     this.show = function () {
         if (this.container) {

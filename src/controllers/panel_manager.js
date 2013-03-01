@@ -159,7 +159,11 @@ var PanelManager = function () {
         }
         // else bump up other 1 past where select is
         var newIndex = selectedIndex(select) + 1 % selectSize();
-        isLeftSelect(other) ? leftIndex = newIndex : rightIndex = newIndex;
+        if (isLeftSelect(other)) {
+            leftIndex = newIndex;
+        } else {
+            rightIndex = newIndex;
+        }
         selectedOption(other).removeAttr('selected');
         var newValue = other.children().eq(newIndex).val();
         other.val(newValue).change();
