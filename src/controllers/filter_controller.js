@@ -1,12 +1,12 @@
-goog.provide('FilterController');
+goog.provide('filterController');
 
-goog.require('ColorRampController');
-goog.require('TimeStepController');
-goog.require('DistribRangeController');
+goog.require('colorRampController');
+goog.require('timeStepController');
+goog.require('distribRangeController');
 
-var FilterController = function (parent) {
+var FilterController = function () {
 
-    var init = function (parent) {
+    this.start = function (parent) {
         var html = render();
         parent.prepend(html);
         $('.collapse-toggler').click(function (event) {
@@ -53,9 +53,9 @@ var FilterController = function (parent) {
             // controller should do something with this
             console.log(name + ' changed to ' + value);
         });
-        new ColorRampController();
-        new TimeStepController();
-        new DistribRangeController();
+        colorRampController.start();
+        timeStepController.start();
+        distribRangeController.start();
     };
 
     var onChange = function (callback) {
@@ -65,7 +65,6 @@ var FilterController = function (parent) {
             callback(name, value);
         });
     };
-
-    init(parent);
-
 };
+
+var filterController = new FilterController();

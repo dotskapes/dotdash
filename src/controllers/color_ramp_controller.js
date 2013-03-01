@@ -1,4 +1,4 @@
-goog.provide('ColorRampController');
+goog.provide('colorRampController');
 
 goog.require('ServiceLayer');
 goog.require('panelManager');
@@ -10,7 +10,7 @@ var ColorRampController = function () {
     var filterSelector = '#' + ColorRampController.NAME + '-filter';
     var rampSvgId = 'ramp-svg';
 
-    var init = function () {
+    this.start = function () {
         render();
     };
 
@@ -83,10 +83,7 @@ var ColorRampController = function () {
             x = 0;
         });
     };
-
-
-    init();
-
 };
 
 ColorRampController.NAME = 'ramp';
+var colorRampController = new ColorRampController();
