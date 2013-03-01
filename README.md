@@ -15,9 +15,6 @@ To use npm, you'll need to install node (http://nodejs.org/). On a mac you'll al
 
 Once npm is installed, run npm install in dash to download the dependencies.
 
-To use a local version of wigglemaps:
-
-
 sass:
 gem install sass
 sass --watch css/style.scss:css/built/style.css
