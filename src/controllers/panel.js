@@ -5,7 +5,6 @@ goog.require('selectionManager');
 
 var Panel = function (name, label, configOptions) {
 
-    //var CONTROL = 20;
     var ALT = 18;
     var that = this;
 
