@@ -27,8 +27,6 @@
     "maxcomplexity": 10,
     "maxlen": 120,
     "white": true,
-    // suppress warnings                                                                                                                                                           
-    "expr": true,
     "globals": [
         "Handlebars",
         "goog",
