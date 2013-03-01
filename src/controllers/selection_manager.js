@@ -5,17 +5,35 @@ var SelectionManager = function () {
     var views = [];
     // this is a wigglemaps layer selector that selects for wigglemap features
     var currentSelectionLayer;
+    var multiSelect = false;
+
+    var addKeyListeners = function () {
+        $(document).on('keydown', function (e) {
+            if (e.which === 16) { multiSelect = true; }
+        });
+        $(document).on('keyup', function (e) {
+            if (e.which === 16) { multiSelect = false; }
+        });
+    };
 
     this.addView = function (view) { views.push(view); };
 
     this.select = function (newSelectionLayer) {
         $.each(views, function (i, view) {
-            if (currentSelectionLayer) {
+            // deselect if not multi & have something to desel
+            if (!multiSelect && currentSelectionLayer) {
                 view.deselect(currentSelectionLayer);
             }
+            // do selection
             view.select(newSelectionLayer);
         });
-        currentSelectionLayer = newSelectionLayer;
+        if (!currentSelectionLayer || !multiSelect) {
+            currentSelectionLayer = newSelectionLayer;
+        }
+        // if multi (&& have cur), join new selection to current (for desel later)
+        else {
+            currentSelectionLayer = currentSelectionLayer.join(newSelectionLayer);
+        }
     };
 
     // reselect the current selection, needed if selection got lost(redraw)
@@ -25,6 +43,7 @@ var SelectionManager = function () {
         }
     };
 
+    addKeyListeners();
 };
 
 // non enforced poor mans singleton - scandal?
