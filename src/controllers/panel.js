@@ -28,7 +28,6 @@ var Panel = function (name, label, configOptions) {
     };
 
     this.fireSelect = function (selectionLayer) {
-        // hmmm, this is view knowing controller - refactor?
         selectionManager.select(selectionLayer);
     };
 
