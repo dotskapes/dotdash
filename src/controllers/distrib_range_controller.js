@@ -1,10 +1,10 @@
-goog.provide('DistribRangeController');
+goog.provide('distribRangeController');
 
 goog.require('ServiceLayer');
 
 var DistribRangeController = function () {
 
-    var init = function () {
+    this.start = function () {
 
         var distrib = $('.filter-button[name="' + DistribRangeController.DISTRIB + '"]');
         distrib.change(function (event) {
@@ -20,10 +20,9 @@ var DistribRangeController = function () {
             panelManager.redraw();
         });
     };
-
-    init();
-
 };
 
 DistribRangeController.DISTRIB = 'dist';
 DistribRangeController.RANGE = 'range';
+
+var distribRangeController = new DistribRangeController();

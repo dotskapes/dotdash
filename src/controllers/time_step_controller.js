@@ -1,4 +1,4 @@
-goog.provide('TimeStepController');
+goog.provide('timeStepController');
 
 goog.require('ServiceLayer');
 goog.require('panelManager');
@@ -8,7 +8,7 @@ var TimeStepController = function () {
 
     var view = new TimeStepFilterView();
 
-    var init = function () {
+    this.start = function () {
 
         var addEventListener = function () {
             var select = $('.' + TimeStepFilterView.CLASS);
@@ -27,8 +27,8 @@ var TimeStepController = function () {
             }
         );
     };
-
-    init();
 };
 
 TimeStepController.NAME = TimeStepFilterView.NAME;
+
+var timeStepController = new TimeStepController();
