@@ -1,6 +1,7 @@
 goog.provide('ColorMap');
 
 goog.require('ColorRamps');
+goog.require('ColorScales');
 
 var NUM_COLORS = ColorRamps.NUM_COLORS;
 
@@ -90,8 +91,8 @@ var ColorMap = function (dataLayer) {
         currentDateProp = _currentDateProp;
     };
 
-    var dist = 0;
-    var range = 0;
+    var dist = ColorScales.DISTRIBUTION.QUANTILE;
+    var range = ColorScales.RANGE.LOCAL;
 
     this.colorForFeat = function (f) {
         if (!f.attr) {
@@ -102,22 +103,14 @@ var ColorMap = function (dataLayer) {
             return ColorMap.NO_DATA;
         }
         var index, field;
-        if (dist === 0) {
-            if (range === 0) {
-                field = currentDateProp;
-            }
-            else if (range === 1) {
-                field = GLOBAL_PROPERTY;
-            }
-            index = findQuantile(field, val);
+        if (range === ColorScales.RANGE.LOCAL) {
+            field = currentDateProp;
+        } else if (range === ColorScales.RANGE.GLOBAL) {
+            field = GLOBAL_PROPERTY;
         }
-        else if (dist === 1) {
-            if (range === 0) {
-                field = currentDateProp;
-            }
-            else if (range === 1) {
-                field = GLOBAL_PROPERTY;
-            }
+        if (dist === ColorScales.DISTRIBUTION.QUANTILE) {
+            index = findQuantile(field, val);
+        } else if (dist === ColorScales.DISTRIBUTION.UNIFORM) {
             var max = ranges[field].max + 1;
             var min = ranges[field].min - 1;
             index = Math.floor((1 - (max - val) / (max - min)) * currentColorRamp.length);
