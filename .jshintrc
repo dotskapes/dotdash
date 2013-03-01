@@ -27,9 +27,10 @@
     "maxcomplexity": 10,
     "maxlen": 120,
     "white": true,
-    "globals": [
-        "Handlebars",
-        "goog",
-        "wiggle"
-    ]    
+    "globals": {
+        "Handlebars": false,
+        "goog": false,
+        "wiggle": false,
+        "d3": false
+    }    
 }
