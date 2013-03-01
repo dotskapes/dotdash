@@ -11,12 +11,10 @@ goog.provide('ServiceLayer');
 
 // Singleton pattern
 var ServiceLayer = (function () {
-    //var data = null;
-    //var order = null;
 
     var settings = {
         'query': 'jan >= 0',
-        'step': '2002-12-29',//'1/2/2011',
+        'step': '2002-12-29',
         'ramp': [
             wiggle.util.icolor(254, 229, 217, 255),
             wiggle.util.icolor(252, 187, 161, 255),
@@ -49,21 +47,11 @@ var ServiceLayer = (function () {
                 url: url,
                 dataType: 'json',
                 success: function (data) {
-                    // Set the data
-                    //data = response;
-                    /* // Find an ordering, if possible
-                       order = [];
-                       for (var key in data.features[0].properties) {
-                       if (!isNaN (Number (data.features[0].properties[key])))
-                       order.push (key);
-                       }
-                       order.sort ();*/
                     layer = wiggle.io.GeoJSON(data);
                     layer
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
                         .style('stroke-opacity', 0.75)
                         .style('fill-opacity', 0.8);
-                    //callback (layer);
                     that.currentData = layer;
                     that.colorMap = new ColorMap(layer);
                     fireNewData(layer);

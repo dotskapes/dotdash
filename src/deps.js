@@ -14,6 +14,6 @@ goog.addDependency('../src/controllers/time_step_controller.js', ['timeStepContr
 goog.addDependency('../src/dash.js', ['dash'], ['ServiceLayer', 'filterController', 'panelManager']);
 goog.addDependency('../src/models/color_map.js', ['ColorMap'], ['ColorRamps']);
 goog.addDependency('../src/models/color_ramps.js', ['ColorRamps'], []);
-goog.addDependency('../src/models/service_layer.js', ['ServiceLayer'], []);
+goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], []);
 goog.addDependency('../src/views/popup.js', ['Popup'], []);
 goog.addDependency('../src/views/time_step_filter_view.js', ['TimeStepFilterView'], []);
