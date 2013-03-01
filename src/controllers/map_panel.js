@@ -70,7 +70,7 @@ var MapPanel = function () {
             $(event.currentTarget).children('.icon').toggleClass('enabled');
             selectModeOn =
                 $(event.currentTarget).children('.selection_box').hasClass('enabled');
-            this.tempSelectMode(selectModeOn);
+            that.tempSelectMode(selectModeOn);
         });
     };
 
