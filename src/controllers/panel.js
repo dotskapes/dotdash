@@ -4,6 +4,11 @@ goog.require('ServiceLayer');
 goog.require('selectionManager');
 
 var Panel = function (name, label, configOptions) {
+
+    //var CONTROL = 20;
+    var ALT = 18;
+    var that = this;
+
     this.created = false;
     // for display
     this.name = name;
@@ -40,6 +45,20 @@ var Panel = function (name, label, configOptions) {
     this.select = function () {};
     this.deselect = function () {};
 
+    // temporarily go into select mode (for modifier/ctrl hotkey)
+    this.tempSelectMode = function (tempSelectOn) {};
+
+    // control hotkey -> temporary select mode
+    var addKeyListeners = function () {
+        $(document).on('keydown', function (e) {
+            if (e.which === ALT) { that.tempSelectMode(true); }
+        });
+        $(document).on('keyup', function (e) {
+            if (e.which === ALT) { that.tempSelectMode(false); }
+        });
+    };
+
+    addKeyListeners();
 };
 
 Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
