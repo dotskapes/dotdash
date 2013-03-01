@@ -3,6 +3,7 @@ goog.provide('DistribRangeController');
 goog.require('ServiceLayer');
 
 var DistribRangeController = function () {
+    'use strict';
 
     var init = function () {
 

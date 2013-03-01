@@ -5,6 +5,7 @@ goog.require('ColorRamps');
 var NUM_COLORS = ColorRamps.NUM_COLORS;
 
 var ColorMap = function (dataLayer) {
+    'use strict';
     var ranges = {};
 
     // a list of properties of feature that correspond to timestamped data.

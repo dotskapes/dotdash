@@ -4,6 +4,8 @@ goog.require('ServiceLayer');
 goog.require('selectionManager');
 
 var Panel = function (name, label, configOptions) {
+    'use strict';
+
     this.created = false;
     // for display
     this.name = name;
@@ -49,6 +51,7 @@ Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
 
 
 Handlebars.registerHelper('renderButton', function (type, options) {
+    'use strict';
     if (type === Panel.BUTTON_TYPES.SELECTION_TOGGLE) {
         var template = Handlebars.templates.selection_toggle_button_template;
         return new Handlebars.SafeString(template(options));

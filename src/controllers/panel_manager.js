@@ -7,6 +7,7 @@ goog.require('MDSPanel');
 
 // javascripts funny Singleton pattern
 var PanelManager = function () {
+    'use strict';
 
     var labelToPanel = {};
     // for now hardwired

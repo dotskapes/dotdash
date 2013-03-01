@@ -19,7 +19,7 @@
     "regexp": true,
     "undef": false,
     "unused": false,
-    "strict": false,
+    "strict": true,
     "trailing": true,
     "maxparams": 5,
     "maxdepth": 5,

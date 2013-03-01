@@ -5,6 +5,7 @@ goog.require('TimeStepController');
 goog.require('DistribRangeController');
 
 var FilterController = function (parent) {
+    'use strict';
 
     var init = function (parent) {
         var html = render();

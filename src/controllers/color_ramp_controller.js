@@ -4,6 +4,7 @@ goog.require('ServiceLayer');
 goog.require('panelManager');
 
 var ColorRampController = function () {
+    'use strict';
 
     var currentRampIndex = 0;
     var colorMap = function () { return ServiceLayer.colorMap; };

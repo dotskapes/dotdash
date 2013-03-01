@@ -5,6 +5,7 @@ goog.require('panelManager');
 goog.require('TimeStepFilterView');
 
 var TimeStepController = function () {
+    'use strict';
 
     var view = new TimeStepFilterView();
 

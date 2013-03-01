@@ -11,8 +11,7 @@ goog.provide('ServiceLayer');
 
 // Singleton pattern
 var ServiceLayer = (function () {
-    //var data = null;
-    //var order = null;
+    'use strict';
 
     var settings = {
         'query': 'jan >= 0',
