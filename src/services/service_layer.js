@@ -1,5 +1,7 @@
 goog.provide('ServiceLayer');
 
+goog.require('AggregationService');
+
 // SingletonPattern being used for ServiceLayer
 //var Singleton = (function () {
 //    var c, d, e;
@@ -47,6 +49,7 @@ var ServiceLayer = (function () {
                 url: url,
                 dataType: 'json',
                 success: function (data) {
+                    AggregationService.computeAggregates(data);
                     layer = wiggle.io.GeoJSON(data);
                     layer
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
