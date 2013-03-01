@@ -1,16 +1,13 @@
 goog.provide('dash');
 
 goog.require('ServiceLayer');
-goog.require('FilterController');
+goog.require('filterController');
 goog.require('panelManager');
 
 var Dashboard = function (parentSelector, baseUrl) {
 
-    // Static set of filters for now
-    var filters = ['subset', 'step', 'ramp', 'distribution', 'scale', 'agg'];
-
     // Start the filter controller/view, has to be laid out before panels
-    new FilterController($(parentSelector));
+    filterController.start($(parentSelector));
 
     panelManager.init(parentSelector, baseUrl);
 
