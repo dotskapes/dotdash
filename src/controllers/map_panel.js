@@ -21,6 +21,7 @@ var MapPanel = function () {
     var layer;
     var selectionLayer;
     var that = this;
+    var selectModeOn = false;
 
     this.getMap = function () { return map; };
 
@@ -67,12 +68,16 @@ var MapPanel = function () {
         $('#map-selection-button').click(function (event) {
             $(event.currentTarget).parents('.view').toggleClass('selection');
             $(event.currentTarget).children('.icon').toggleClass('enabled');
-            if ($(event.currentTarget).children('.selection_box').hasClass('enabled')) {
-                map.enableSelect();
-            } else {
-                map.disableSelect();
-            }
+            selectModeOn =
+                $(event.currentTarget).children('.selection_box').hasClass('enabled');
+            this.tempSelectMode(selectModeOn);
         });
+    };
+
+    this.tempSelectMode = function (selectOn) {
+        if (selectOn) { map.enableSelect(); }
+        // only disable select if both temp selectOn & selectModeOn are false
+        else if (!selectModeOn) { map.disableSelect(); }
     };
 
     // Selection methods/interface - called by SelectionManager
