@@ -2,7 +2,6 @@ goog.provide('MDSPanel');
 
 goog.require('Panel');
 
-'use strict';
 var MDSPanel = function () {
 
     // TimePanel subclass of Panel

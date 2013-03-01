@@ -1,7 +1,5 @@
 goog.provide('selectionManager');
 
-"use strict";
-
 var SelectionManager = function () {
 
     var views = [];

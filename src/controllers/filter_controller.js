@@ -4,7 +4,6 @@ goog.require('ColorRampController');
 goog.require('TimeStepController');
 goog.require('DistribRangeController');
 
-'use strict';
 var FilterController = function (parent) {
 
     var init = function (parent) {
