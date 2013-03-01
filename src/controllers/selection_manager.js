@@ -6,13 +6,14 @@ var SelectionManager = function () {
     // this is a wigglemaps layer selector that selects for wigglemap features
     var currentSelectionLayer;
     var multiSelect = false;
+    var SHIFT = 16;
 
     var addKeyListeners = function () {
         $(document).on('keydown', function (e) {
-            if (e.which === 16) { multiSelect = true; }
+            if (e.which === SHIFT) { multiSelect = true; }
         });
         $(document).on('keyup', function (e) {
-            if (e.which === 16) { multiSelect = false; }
+            if (e.which === SHIFT) { multiSelect = false; }
         });
     };
 
