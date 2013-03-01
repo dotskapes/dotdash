@@ -60,6 +60,7 @@ var MapPanel = function () {
         // listen for map select and send selection to selectionManager
         map.select(function (box) {
             selectionLayer = map.search(layer, box);
+            // call to panel.js superclass
             that.fireSelect(selectionLayer);
         });
 
