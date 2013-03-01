@@ -52,14 +52,11 @@ var ServiceLayer = (function () {
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
                         .style('stroke-opacity', 0.75)
                         .style('fill-opacity', 0.8);
-                    that.currentData = layer;
                     that.colorMap = new ColorMap(layer);
                     fireNewData(layer);
                 }
             });
         },
-
-        currentData: {},
 
         // rename this
         change: function (key, value) {
