@@ -21,7 +21,8 @@
 
   <script type="text/javascript">
     dash.ready (function () {
-        dash.create ('#dashboard', '/dash/');
+        var dashboard = dash.create ('#dashboard', '/dotdash/');
+        dashboard.loadUrl('/dotdash/temp/flu_country.json');
     });
   </script>
   <body style="margin: 0px;">

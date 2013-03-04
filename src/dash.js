@@ -11,7 +11,11 @@ var Dashboard = function (parentSelector, baseUrl) {
 
     panelManager.init(parentSelector, baseUrl);
 
-    ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
+    this.loadUrl = function (url) {
+        ServiceLayer.loadUrl(url);
+    };
+    
+    //ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
 };
 
 // called by index.html to start up dash
