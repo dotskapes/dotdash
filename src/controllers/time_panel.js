@@ -45,7 +45,7 @@ var TimePanel = function () {
         layer.attr('order', properties);
 
         graph = new wiggle.TimeSeries('#timeseries', layer, {
-            'ticks': 500 
+            'ticks': 500
         });
 
         wireupGraph();

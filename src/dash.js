@@ -14,7 +14,7 @@ var Dashboard = function (parentSelector, baseUrl) {
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url);
     };
-    
+
     //ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
 };
 
