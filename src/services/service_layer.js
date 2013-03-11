@@ -108,6 +108,10 @@ var ServiceLayer = (function () {
                 allAttributes[property] = propertyAttributes;
             });
             return allAttributes;
+        },
+
+        getColorForFeature : function (feature) {
+            return this.colorMap.colorForFeat(feature);
         }
 
     };

@@ -86,7 +86,7 @@ var MapPanel = function () {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         selectionLayer.style(map, 'fill', function (f) {
-            return ServiceLayer.colorMap.colorForFeat(f);
+            return ServiceLayer.getColorForFeature(f);
         });
     };
 
@@ -100,7 +100,7 @@ var MapPanel = function () {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         layer.features().style(map, 'fill', function (f) {
-            return ServiceLayer.colorMap.colorForFeat(f);
+            return ServiceLayer.getColorForFeature(f);
         });
     };
 
