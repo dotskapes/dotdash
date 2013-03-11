@@ -86,10 +86,7 @@ var ColorMap = function (attributesByProperty) {
         }
     };
 
-    var dist = ColorScales.DISTRIBUTION.QUANTILE;
-    var range = ColorScales.RANGE.LOCAL;
-
-    this.colorForValue = function (val, prop, colorRamp) {
+    this.colorForValue = function (val, prop, colorRamp, dist, range) {
         if (!val) {
             return ColorMap.NO_DATA;
         }
@@ -112,14 +109,6 @@ var ColorMap = function (attributesByProperty) {
 
     this.extents = function (dateProp) {
         return ranges[dateProp];
-    };
-
-    this.dist = function (index) {
-        dist = index;
-    };
-
-    this.range = function (index) {
-        range = index;
     };
 };
 

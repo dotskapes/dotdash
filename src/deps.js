@@ -18,6 +18,6 @@ goog.addDependency('../src/models/color_map.js', ['ColorMap'], ['ColorRamps', 'C
 goog.addDependency('../src/models/color_ramps.js', ['ColorRamps'], []);
 goog.addDependency('../src/models/color_scales.js', ['ColorScales'], []);
 goog.addDependency('../src/services/aggregation_service.js', ['aggregationService'], ['AGGREGATION_FUNCTIONS', 'ServiceLayer']);
-goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['ColorRamps']);
+goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['ColorRamps', 'ColorScales']);
 goog.addDependency('../src/views/popup.js', ['Popup'], []);
 goog.addDependency('../src/views/time_step_filter_view.js', ['TimeStepFilterView'], []);
