@@ -12,21 +12,6 @@ goog.provide('ServiceLayer');
 // Singleton pattern
 var ServiceLayer = (function () {
 
-    var settings = {
-        'query': 'jan >= 0',
-        'step': '2002-12-29',
-        'ramp': [
-            wiggle.util.icolor(254, 229, 217, 255),
-            wiggle.util.icolor(252, 187, 161, 255),
-            wiggle.util.icolor(252, 146, 114, 255),
-            wiggle.util.icolor(251, 106, 74, 255),
-            wiggle.util.icolor(222, 45, 38, 255),
-            wiggle.util.icolor(165, 15, 21, 255)
-        ],
-        'dist': 'quantile',
-        'scale': 'local'
-    };
-
     var layer = null;
     var aggregates = null;
     var currentDateProp = null;
@@ -59,11 +44,6 @@ var ServiceLayer = (function () {
                     fireNewData(layer);
                 }
             });
-        },
-
-        // rename this
-        change: function (key, value) {
-            settings[key] = value;
         },
 
         // if we do multi datasets will need to associate colorMaps with datasets
