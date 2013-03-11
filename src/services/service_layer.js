@@ -52,7 +52,7 @@ var ServiceLayer = (function () {
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
                         .style('stroke-opacity', 0.75)
                         .style('fill-opacity', 0.8);
-                    that.colorMap = new ColorMap(layer);
+                    that.colorMap = new ColorMap(that.getAttributesBySortedDateProperty());
                     fireNewData(layer);
                 }
             });
@@ -91,6 +91,21 @@ var ServiceLayer = (function () {
                     featureAttributes[property] = feature.attr(property);
                 });
                 allAttributes[feature.id] = featureAttributes;
+            });
+            return allAttributes;
+        },
+
+        getAttributesBySortedDateProperty : function () {
+            var properties = layer.numeric().sort();
+            var features = layer.features();
+
+            var allAttributes = {};
+            $.each(properties, function (i, property) {
+                var propertyAttributes = {};
+                features.each(function (j, feature) {
+                    propertyAttributes[feature.id] = feature.attr(property);
+                });
+                allAttributes[property] = propertyAttributes;
             });
             return allAttributes;
         }

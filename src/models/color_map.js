@@ -5,14 +5,16 @@ goog.require('ColorScales');
 
 var NUM_COLORS = ColorRamps.NUM_COLORS;
 
-var ColorMap = function (dataLayer) {
+var ColorMap = function (attributesByProperty) {
     var ranges = {};
 
-    // a list of properties of feature that correspond to timestamped data.
-    // and sorted by dates - though thats not relevant for color map
-    var dateProps = ServiceLayer.getSortedDateProperties(dataLayer);
-
-    var currentDateProp = dateProps[0];
+    var currentDateProp;
+    for (var dateProp in attributesByProperty) {
+        if (attributesByProperty.hasOwnProperty(dateProp)) {
+            currentDateProp = dateProp;
+            break;
+        }
+    }
 
     // figure out uniform distribution (for uniform filter)
     // sets min & max range, can be used by each time step or global
@@ -30,14 +32,13 @@ var ColorMap = function (dataLayer) {
     // figure global color scale, that is scale according to all features,
     // not just self(local)
     var globalVals = [];
-    $.each(dateProps, function (i, dateProp) {
+    $.each(attributesByProperty, function (dateProp, featureAttributes) {
         var vals = [];
-        dataLayer.features().each(function (j, feature) {
-            var val = feature.attr(dateProp);
+        $.each(featureAttributes, function (featureId, val) {
             // i dont think we care about undefs do we, in fact they create problems
             if (val !== undefined) {
-                vals.push(feature.attr(dateProp));
-                globalVals.push(feature.attr(dateProp));
+                vals.push(val);
+                globalVals.push(val);
             }
         });
         // set min & max range for timestep/dateProp
@@ -59,19 +60,25 @@ var ColorMap = function (dataLayer) {
         });
     }
 
-    for (var k = 0; k < dateProps.length; k ++) {
-        var field = dateProps[k];
+    $.each(attributesByProperty, function (field, featureAttributes) {
         quantiles[field] = [];
-        for (var i = 1; i <= NUM_COLORS; i ++) {
-            //var q = br_precip.features ().quantile (field, i, NUM_COLORS);
-            q = dataLayer.features().quantile(field, i, NUM_COLORS);
-            var quantile = q.range(field);
-            // if the data for dateProp is sparse may have no quantile, so dont push it
-            if (quantile) {
-                quantiles[field].push(q.range(field));
+        var filteredValues = [];
+        $.each(featureAttributes, function (key, value) {
+            if (value !== undefined) {
+                filteredValues.push(value);
             }
+        });
+        filteredValues.sort();
+        for (var i = 1; i <= NUM_COLORS; i++) {
+            var top = Math.round(i * filteredValues.length / NUM_COLORS);
+            var bottom = Math.round((i - 1) * filteredValues.length / NUM_COLORS);
+
+            var max = filteredValues[top - 1];
+            var min = filteredValues[bottom];
+
+            quantiles[field].push({max: max, min: min});
         }
-    }
+    });
 
     var findQuantile = function (dateProp, val) {
         if (val <= quantiles[dateProp][0].max) {
