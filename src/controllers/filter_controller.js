@@ -3,6 +3,7 @@ goog.provide('filterController');
 goog.require('colorRampController');
 goog.require('timeStepController');
 goog.require('distribRangeController');
+goog.require('aggregationController');
 
 var FilterController = function () {
 
@@ -37,9 +38,11 @@ var FilterController = function () {
                          { name: DistribRangeController.RANGE,
                            subOptions: [{label: 'Local'}, {label: 'Global'}] } ]
             },
-            { name: 'agg',
+            { name: AggregationController.NAME,
               title: 'Aggregate',
-              options: [{label: 'Mean'}, {label: 'Max'}, {label: 'Min'}]
+              options: [{label: 'Mean', value: 'mean'},
+                        {label: 'Max', value: 'max'},
+                        {label: 'Min', value: 'min'}]
             }
         ];
 
@@ -56,6 +59,7 @@ var FilterController = function () {
         colorRampController.start();
         timeStepController.start();
         distribRangeController.start();
+        aggregationController.start();
     };
 
     var onChange = function (callback) {
