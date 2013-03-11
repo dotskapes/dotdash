@@ -1,29 +1,20 @@
-goog.provide('AggregationService');
+goog.provide('aggregationService');
 
-var AggregationService = {
+goog.require('AGGREGATION_FUNCTIONS');
+goog.require('ServiceLayer');
 
-    computeAggregates: function (data) {
+var aggregationService = {
 
-        $.each(data.features, function (i, feature) {
-            var min = Infinity;
-            var max = 0;
-            var sum = 0;
-            var count = 0;
+    computeAggregates: function (name) {
+        var aggregationFunction = AGGREGATION_FUNCTIONS[name];
+        if (!aggregationFunction) { return {}; }
 
-            $.each(feature.properties, function (dateProp, val) {
-                if (!isNaN(val)) {
-                    min = (val < min) ? val : min;
-                    max = (val > max) ? val : max;
-                    sum += val;
-                    count += 1;
-                }
-            });
+        var attributesByFeature = ServiceLayer.getAttributesByFeature();
 
-            var mean = sum / count;
-
-            feature.properties.min = min;
-            feature.properties.max = max;
-            feature.properties.mean = mean;
+        var aggregates = {};
+        $.each(attributesByFeature, function (featureId, attributes) {
+            aggregates[featureId] = aggregationFunction(attributes);
         });
+        return aggregates;
     }
 };

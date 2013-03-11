@@ -1,7 +1,5 @@
 goog.provide('ServiceLayer');
 
-goog.require('AggregationService');
-
 // SingletonPattern being used for ServiceLayer
 //var Singleton = (function () {
 //    var c, d, e;
@@ -49,7 +47,6 @@ var ServiceLayer = (function () {
                 url: url,
                 dataType: 'json',
                 success: function (data) {
-                    AggregationService.computeAggregates(data);
                     layer = wiggle.io.GeoJSON(data);
                     layer
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
@@ -81,6 +78,21 @@ var ServiceLayer = (function () {
             // this assumes the dates are lexically sortable, euro dates NOT USA
             sortedDateProps.sort();
             return sortedDateProps;
+        },
+
+        getAttributesByFeature : function () {
+            var features = layer.features();
+            var properties = layer.properties();
+
+            var allAttributes = {};
+            features.each(function (i, feature) {
+                var featureAttributes = {};
+                $.each(properties, function (j, property) {
+                    featureAttributes[property] = feature.attr(property);
+                });
+                allAttributes[feature.id] = featureAttributes;
+            });
+            return allAttributes;
         }
 
     };
