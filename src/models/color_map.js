@@ -89,7 +89,7 @@ var ColorMap = function (attributesByProperty) {
     var dist = ColorScales.DISTRIBUTION.QUANTILE;
     var range = ColorScales.RANGE.LOCAL;
 
-    this.colorForValue = function (val, prop) {
+    this.colorForValue = function (val, prop, colorRamp) {
         if (!val) {
             return ColorMap.NO_DATA;
         }
@@ -104,21 +104,14 @@ var ColorMap = function (attributesByProperty) {
         } else if (dist === ColorScales.DISTRIBUTION.UNIFORM) {
             var max = ranges[field].max + 1;
             var min = ranges[field].min - 1;
-            index = Math.floor((1 - (max - val) / (max - min)) * currentColorRamp.length);
+            index = Math.floor((1 - (max - val) / (max - min)) * colorRamp.length);
         }
-        return currentColorRamp[index];
+        return colorRamp[index];
     };
 
 
     this.extents = function (dateProp) {
         return ranges[dateProp];
-    };
-
-    // 1st initial color - which should be same as index 0 for color ramp - refactor
-    var currentColorRamp = ColorRamps.RAMPS[0]; //white_red;
-
-    this.setColorRamp = function (index) {
-        currentColorRamp = ColorRamps.RAMPS[index];
     };
 
     this.dist = function (index) {

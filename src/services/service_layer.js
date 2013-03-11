@@ -1,5 +1,7 @@
 goog.provide('ServiceLayer');
 
+goog.require('ColorRamps');
+
 // SingletonPattern being used for ServiceLayer
 //var Singleton = (function () {
 //    var c, d, e;
@@ -15,6 +17,7 @@ var ServiceLayer = (function () {
     var layer = null;
     var aggregates = null;
     var currentDateProp = null;
+    var colorRamp = ColorRamps.RAMPS[0];
 
     var dataCallbacks = [];
 
@@ -96,7 +99,7 @@ var ServiceLayer = (function () {
         getColorForFeature : function (feature) {
             var val = aggregates ? aggregates[feature.id] : feature.attr(currentDateProp);
             var property = aggregates ? 'agg' : currentDateProp;
-            return this.colorMap.colorForValue(val, property);
+            return this.colorMap.colorForValue(val, property, colorRamp);
         },
 
         setCurrentDateProp : function (dateProp) {
@@ -111,6 +114,10 @@ var ServiceLayer = (function () {
             } else {
                 this.colorMap = new ColorMap(this.getAttributesBySortedDateProperty());
             }
+        },
+
+        setColorRamp : function (index) {
+            colorRamp = ColorRamps.RAMPS[index];
         }
 
     };

@@ -6,7 +6,6 @@ goog.require('panelManager');
 var ColorRampController = function () {
 
     var currentRampIndex = 0;
-    var colorMap = function () { return ServiceLayer.colorMap; };
     var filterSelector = '#' + ColorRampController.NAME + '-filter';
     var rampSvgId = 'ramp-svg';
 
@@ -16,7 +15,7 @@ var ColorRampController = function () {
 
     // a new ramp is being asked for
     var newRamp = function (rampIndex) {
-        colorMap().setColorRamp(rampIndex);
+        ServiceLayer.setColorRamp(rampIndex);
         // redraw panels with new colors & redraws selection
         panelManager.redraw();
         currentRampIndex = rampIndex;
