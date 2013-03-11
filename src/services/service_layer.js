@@ -28,6 +28,8 @@ var ServiceLayer = (function () {
     };
 
     var layer = null;
+    var aggregates = null;
+    var currentDateProp = null;
 
     var dataCallbacks = [];
 
@@ -52,6 +54,7 @@ var ServiceLayer = (function () {
                         .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
                         .style('stroke-opacity', 0.75)
                         .style('fill-opacity', 0.8);
+                    currentDateProp = that.getSortedDateProperties(layer)[0];
                     that.colorMap = new ColorMap(that.getAttributesBySortedDateProperty());
                     fireNewData(layer);
                 }
@@ -111,7 +114,23 @@ var ServiceLayer = (function () {
         },
 
         getColorForFeature : function (feature) {
-            return this.colorMap.colorForFeat(feature);
+            var val = aggregates ? aggregates[feature.id] : feature.attr(currentDateProp);
+            var property = aggregates ? 'agg' : currentDateProp;
+            return this.colorMap.colorForValue(val, property);
+        },
+
+        setCurrentDateProp : function (dateProp) {
+            currentDateProp = dateProp;
+            this.setAggregates(null);
+        },
+
+        setAggregates : function (aggregateData) {
+            aggregates = aggregateData;
+            if (aggregates) {
+                this.colorMap = new ColorMap({agg: aggregates});
+            } else {
+                this.colorMap = new ColorMap(this.getAttributesBySortedDateProperty());
+            }
         }
 
     };

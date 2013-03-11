@@ -13,7 +13,8 @@ var AggregationController = function () {
         filter.change(function (event) {
             var name = AGGREGATE_NAMES[$(event.target).val()];
             var aggregates = aggregationService.computeAggregates(name);
-            console.log(aggregates);
+            ServiceLayer.setAggregates(aggregates);
+            panelManager.redraw();
         });
     };
 

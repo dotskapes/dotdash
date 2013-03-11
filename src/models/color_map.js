@@ -8,14 +8,6 @@ var NUM_COLORS = ColorRamps.NUM_COLORS;
 var ColorMap = function (attributesByProperty) {
     var ranges = {};
 
-    var currentDateProp;
-    for (var dateProp in attributesByProperty) {
-        if (attributesByProperty.hasOwnProperty(dateProp)) {
-            currentDateProp = dateProp;
-            break;
-        }
-    }
-
     // figure out uniform distribution (for uniform filter)
     // sets min & max range, can be used by each time step or global
     var setRange = function (vals, currentDateProp) {
@@ -94,24 +86,16 @@ var ColorMap = function (attributesByProperty) {
         }
     };
 
-    this.currentDateProp = function (_currentDateProp) {
-        currentDateProp = _currentDateProp;
-    };
-
     var dist = ColorScales.DISTRIBUTION.QUANTILE;
     var range = ColorScales.RANGE.LOCAL;
 
-    this.colorForFeat = function (f) {
-        if (!f.attr) {
-            console.log('here');
-        }
-        var val = f.attr(currentDateProp);
+    this.colorForValue = function (val, prop) {
         if (!val) {
             return ColorMap.NO_DATA;
         }
         var index, field;
         if (range === ColorScales.RANGE.LOCAL) {
-            field = currentDateProp;
+            field = prop;
         } else if (range === ColorScales.RANGE.GLOBAL) {
             field = GLOBAL_PROPERTY;
         }
