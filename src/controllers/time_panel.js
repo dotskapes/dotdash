@@ -79,7 +79,7 @@ var TimePanel = function () {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         selectionLayer.style(graph, 'stroke', function (f) {
-            return ServiceLayer.colorMap.colorForFeat(f);
+            return ServiceLayer.getColorForFeature(f);
         });
     };
 
@@ -93,7 +93,7 @@ var TimePanel = function () {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         layer.features().style(graph, 'stroke', function (f) {
-            return ServiceLayer.colorMap.colorForFeat(f);
+            return ServiceLayer.getColorForFeature(f);
         });
     };
 

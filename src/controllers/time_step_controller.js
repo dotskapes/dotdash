@@ -14,7 +14,7 @@ var TimeStepController = function () {
             var select = $('.' + TimeStepFilterView.CLASS);
             select.change(function (event) {
                 var value = $(event.target).val();
-                ServiceLayer.colorMap.currentDateProp(value);
+                ServiceLayer.setCurrentDateProp(value);
                 panelManager.redraw();
             });
         };
