@@ -1,9 +1,15 @@
 module.exports = function (grunt) {
-
+    var exec = require('child_process').exec;
+    var fs = require('fs');
 
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        jade: {
+            inputDir: 'src/templates/',
+            outputFile: "src/templates/compiled_jade.js"
+        },
 
         shell: {
             handlebars: {
@@ -36,6 +42,35 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-shell');
 
+    // jade compiler oddly gives anonymous fn, this gives handle to that fn
+    grunt.registerTask('jade', 'Build the templates', function (inputFile) {
+        var config = grunt.config.get ('jade');
+        var outputFile = config.outputFile;
+        jade = require ('jade');
+
+        var runtime = fs.readFileSync ('node_modules/jade/runtime.js');
+        fs.writeFileSync (outputFile, runtime);
+
+        var task = this;
+        var inputFiles = grunt.file.expand(config.inputDir+"/*.jade");
+
+        inputFiles.forEach (function (filename, i) {
+            var buffer = fs.readFileSync (filename);
+            var fn = jade.compile (buffer, {
+                client: true
+            });
+            var done = task.async ();
+
+            exec ('basename ' + filename + ' .jade', function (error, stdout, stderr) {
+                var jt = "jade.templates = {}; \
+                  jade.templates[\'' + stdout.trim () + '\'] = ' + fn.toString () + ';"
+                fs.appendFileSync (outputFile, jt);
+                done (error === null);
+            });
+        });
+    });
+
+
     // Default task(s).
-    grunt.registerTask('default', ['shell']);
+    grunt.registerTask('default', ['shell','jade']);
 };
