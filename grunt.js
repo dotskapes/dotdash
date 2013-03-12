@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
         jade: {
             inputDir: 'src/templates/',
-            outputFile: "src/templates/compiled_jade.js"
+            outputFile: "built/compiled_jade.js"
         },
 
         shell: {
