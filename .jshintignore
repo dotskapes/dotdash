@@ -1,3 +1,4 @@
 src/templates/compiled.js
+built/compiled_jade.js
 src/base.js
 src/deps.js
