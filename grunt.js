@@ -19,6 +19,10 @@ module.exports = function (grunt) {
                 command: 'node_modules/jshint/bin/jshint --reporter build/jshint_reporter.js src',
                 stdout: true,
                 failOnError: true
+            },
+            sass: {
+                command: 'sass css/style.scss css/built/style.css',
+                stdout: true,
             }
         },
 
@@ -26,6 +30,11 @@ module.exports = function (grunt) {
             scripts: {
                 files: 'src/templates/*.handlebars',
                 tasks: ['shell:handlebars']
+            },
+            sass: {
+                files: 'css/*.scss',
+                tasks: ['shell:sass'],
+                failOnError: false
             }
         }
 
