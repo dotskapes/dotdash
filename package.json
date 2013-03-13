@@ -13,7 +13,7 @@
     "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev"
   },
   "devDependencies": {
-    "grunt": "~0.3",
+    "grunt": "~0.4",
     "grunt-shell": "~0.1.4",
     "jshint": "1.0.0"
   }
