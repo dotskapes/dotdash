@@ -23,7 +23,6 @@ module.exports = function (grunt) {
             sass: {
                 command: 'sass css/style.scss css/built/style.css',
                 stdout: true,
-                failOnError: false
             }
         },
 
@@ -34,7 +33,8 @@ module.exports = function (grunt) {
             },
             sass: {
                 files: 'css/*.scss',
-                tasks: ['shell:sass']
+                tasks: ['shell:sass'],
+                failOnError: false
             }
         }
 
