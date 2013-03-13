@@ -90,8 +90,9 @@ function program8(depth0,data,depth1) {
   stack1 = depth1.name;
   stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1;
   buffer += escapeExpression(stack1) + "\" value=\"";
-  stack1 = data.index;
-  stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1;
+  foundHelper = helpers.value;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1) + "\"\n                    ";
   stack1 = data.index;
   stack2 = {};
