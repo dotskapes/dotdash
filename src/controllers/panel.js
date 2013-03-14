@@ -60,7 +60,7 @@ var Panel = function (name, label, configOptions) {
     addKeyListeners();
 };
 
-Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection',FILTER: 'filter'};
+Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection', FILTER: 'filter'};
 
 
 Handlebars.registerHelper('renderButton', function (type, options) {
