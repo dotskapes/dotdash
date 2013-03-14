@@ -1,5 +1,7 @@
 goog.provide('panelManager');
 
+goog.require('dashState');
+goog.require('ServiceLayer');
 goog.require('selectionManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
@@ -7,6 +9,7 @@ goog.require('MDSPanel');
 
 // javascripts funny Singleton pattern
 var PanelManager = function () {
+    var that = this;
 
     var labelToPanel = {};
     // for now hardwired
@@ -88,6 +91,10 @@ var PanelManager = function () {
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
     };
+
+    dashState.on('change', function () {
+        that.redraw();
+    });
 
     // select is jquery element for dropdown select
     var selectListener = function (select) {

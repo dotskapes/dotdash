@@ -54,7 +54,7 @@ var MapPanel = function () {
         map.extents(layer.bounds.width());
         map.append(layer);
         // initial (unselected) coloring
-        that.draw();
+        //that.draw();
     };
 
     var wireupMap = function () {
