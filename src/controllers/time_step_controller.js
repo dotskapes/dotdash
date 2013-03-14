@@ -1,5 +1,6 @@
 goog.provide('timeStepController');
 
+goog.require('dashState');
 goog.require('ServiceLayer');
 goog.require('panelManager');
 goog.require('TimeStepFilterView');
@@ -13,9 +14,8 @@ var TimeStepController = function () {
         var addEventListener = function () {
             var select = $('.' + TimeStepFilterView.CLASS);
             select.change(function (event) {
-                var value = $(event.target).val();
-                ServiceLayer.setCurrentDateProp(value);
-                panelManager.redraw();
+                var attr = $(event.target).val();
+                dashState.set('attr', attr);
             });
         };
 

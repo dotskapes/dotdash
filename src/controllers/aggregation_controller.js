@@ -1,7 +1,8 @@
 goog.provide('aggregationController');
 
+goog.require('aggModel');
+goog.require('dashState');
 goog.require('aggregationService');
-goog.require('ServiceLayer');
 goog.require('panelManager');
 
 var AggregationController = function () {
@@ -10,9 +11,15 @@ var AggregationController = function () {
         var filter = $('.filter-button[name="' + AggregationController.NAME + '"]');
         filter.change(function (event) {
             var name = $(event.target).val();
-            var aggregates = aggregationService.computeAggregates(name);
-            ServiceLayer.setAggregates(aggregates);
-            panelManager.redraw();
+            var aggregates;
+            if (name != 'none') {
+                aggregates = aggregationService.computeAggregates(name)
+            }
+            else {
+                aggregates = null;
+            }
+            aggModel.set('agg', aggregates);
+            dashState.set('agg', name);
         });
     };
 
