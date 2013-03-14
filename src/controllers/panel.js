@@ -27,7 +27,7 @@ var Panel = function (name, label, configOptions) {
 
     this.makeParentElement = function () {
         var template = jade.templates.panel;
-        this.parentElement = $(template({'label': this.label, 'configOptions': configOptions}));
+        this.parentElement = $(template({label: this.label, configOptions: configOptions}));
         return this.parentElement;
     };
 
