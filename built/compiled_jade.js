@@ -189,7 +189,9 @@ with (locals || {}) {
 var interp;
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
-buf.push('<' + (label) + ' class="view">');
+buf.push('<div');
+buf.push(attrs({ 'id':(label), "class": ('view') }, {"id":true,"class":true}));
+buf.push('>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 2, filename: __jade[0].filename });
 if (!( configOptions))
@@ -331,7 +333,7 @@ __jade.shift();
 buf.push('</div>');
 __jade.shift();
 __jade.shift();
-buf.push('</' + (label) + '>');
+buf.push('</div>');
 __jade.shift();
 __jade.shift();
 }
