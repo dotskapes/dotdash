@@ -9,7 +9,7 @@ var FilterController = function () {
 
     this.start = function (parent) {
         var html = render();
-        parent.prepend(html);
+        parent.append(html);
         $('.collapse-toggler').click(function (event) {
             var content = $(event.currentTarget).siblings('.collapsible');
             content.slideToggle();

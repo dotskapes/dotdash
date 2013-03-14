@@ -1,15 +1,20 @@
 goog.provide('dash');
 
+goog.require('timeSlider');
+goog.require('dashState');
 goog.require('ServiceLayer');
 goog.require('filterController');
 goog.require('panelManager');
 
 var Dashboard = function (parentSelector, baseUrl) {
 
+    $(parentSelector).append(timeSlider.$el);
     // Start the filter controller/view, has to be laid out before panels
     filterController.start($(parentSelector));
 
     panelManager.init(parentSelector, baseUrl);
+    
+    
 
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url);
