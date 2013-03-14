@@ -41,10 +41,6 @@ var ServiceLayer = (function () {
                 dataType: 'json',
                 success: function (data) {
                     layer = wiggle.io.GeoJSON(data);
-                    /*layer
-                        .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
-                        .style('stroke-opacity', 0.75)
-                        .style('fill-opacity', 0.8);*/
                     colorMap = new ColorMap(layer);
                     fireNewData(layer);
                     dashState.set('attr', that.getSortedDateProperties(layer)[0]);
