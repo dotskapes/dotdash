@@ -1,5 +1,6 @@
 goog.provide('ServiceLayer');
 
+goog.require('dashState');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
@@ -18,10 +19,6 @@ var ServiceLayer = (function () {
     var layer = null;
     var colorMap = {};
     var aggregates = null;
-    var currentDateProp = null;
-    var colorRamp = ColorRamps.RAMPS[0];
-    var colorDist = ColorScales.DISTRIBUTION.QUANTILE;
-    var colorRange = ColorScales.RANGE.LOCAL;
 
     var dataCallbacks = [];
 
@@ -33,7 +30,9 @@ var ServiceLayer = (function () {
     // Singleton public methods/properties
     return {
 
-        addDataCallback: function (cb) { dataCallbacks.push(cb); },
+        addDataCallback: function (cb) { 
+            dataCallbacks.push(cb); 
+        },
 
         loadUrl: function (url) {
             var that = this;
@@ -42,13 +41,9 @@ var ServiceLayer = (function () {
                 dataType: 'json',
                 success: function (data) {
                     layer = wiggle.io.GeoJSON(data);
-                    layer
-                        .style('stroke', wiggle.util.fcolor(0.3, 0.3, 0.3, 1.0))
-                        .style('stroke-opacity', 0.75)
-                        .style('fill-opacity', 0.8);
-                    currentDateProp = that.getSortedDateProperties(layer)[0];
-                    colorMap = new ColorMap(that.getAttributesBySortedDateProperty());
+                    colorMap = new ColorMap(layer);
                     fireNewData(layer);
+                    dashState.set('attr', that.getSortedDateProperties(layer)[0]);
                 }
             });
         },
@@ -98,37 +93,8 @@ var ServiceLayer = (function () {
         },
 
         getColorForFeature : function (feature) {
-            var val = aggregates ? aggregates[feature.id] : feature.attr(currentDateProp);
-            var property = aggregates ? 'agg' : currentDateProp;
-            return colorMap.colorForValue(val, property, colorRamp, colorDist, colorRange);
-        },
-
-        setCurrentDateProp : function (dateProp) {
-            currentDateProp = dateProp;
-            this.setAggregates(null);
-        },
-
-        setAggregates : function (aggregateData) {
-            aggregates = aggregateData;
-            if (aggregates) {
-                colorMap = new ColorMap({agg: aggregates});
-            } else {
-                colorMap = new ColorMap(this.getAttributesBySortedDateProperty());
-            }
-        },
-
-        setColorRamp : function (index) {
-            colorRamp = ColorRamps.RAMPS[index];
-        },
-
-        setColorDist : function (index) {
-            colorDist = index;
-        },
-
-        setColorRange : function (index) {
-            colorRange = index;
+            return colorMap.colorForValue(feature);
         }
-
     };
 } ());
  // this executes the function for Singleton purposes

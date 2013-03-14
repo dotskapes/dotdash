@@ -40,9 +40,11 @@ var FilterController = function () {
             },
             { name: AggregationController.NAME,
               title: 'Aggregate',
-              options: [{label: 'Mean', value: 'mean'},
-                        {label: 'Max', value: 'max'},
-                        {label: 'Min', value: 'min'}]
+              options: [
+                  {label: 'None', value: 'none'},
+                  {label: 'Mean', value: 'mean'},
+                  {label: 'Max', value: 'max'},
+                  {label: 'Min', value: 'min'}]
             }
         ];
 

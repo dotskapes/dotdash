@@ -1,7 +1,7 @@
 goog.provide('colorRampController');
 
-goog.require('ServiceLayer');
-goog.require('panelManager');
+goog.require('dashState');
+goog.require('ColorRamps');
 
 var ColorRampController = function () {
 
@@ -15,11 +15,9 @@ var ColorRampController = function () {
 
     // a new ramp is being asked for
     var newRamp = function (rampIndex) {
-        ServiceLayer.setColorRamp(rampIndex);
-        // redraw panels with new colors & redraws selection
-        panelManager.redraw();
-        currentRampIndex = rampIndex;
+        dashState.set('colorRamp', ColorRamps.RAMPS[rampIndex]);
         // selection has probably changed, redraw
+        currentRampIndex = rampIndex;
         redraw();
     };
 
