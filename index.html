@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="css/built/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/popup.css" />
     <script type="text/javascript" src="src/base.js"></script>
     <script type="text/javascript" src="src/deps.js"></script>
     <script type="text/javascript" src="node_modules/jquery/tmp/jquery.js"></script>
@@ -11,8 +10,9 @@
     <script type="text/javascript" src="node_modules/jade/jade.js"></script>
     <script type="text/javascript" src="node_modules/d3/d3.min.js"></script>
     <script type="text/javascript" src="node_modules/wigglemaps/lib/webgl-debug.js"></script>
-    <!-- cant put goog.provide on generated file -->
+    <!-- goog.provide not on generated file - grunt it! -->
     <script type="text/javascript" src="src/templates/compiled.js"></script>
+    <script type="text/javascript" src="built/compiled_jade.js"></script>
     <!--<script type="text/javascript" src="built/dash.js"></script>-->
     <script type="text/javascript">
         goog.require('dash');

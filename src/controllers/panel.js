@@ -26,7 +26,7 @@ var Panel = function (name, label, configOptions) {
     };
 
     this.makeParentElement = function () {
-        var template = Handlebars.templates.panel_template;
+        var template = jade.templates.panel;
         this.parentElement = $(template({label: this.label, configOptions: configOptions}));
         return this.parentElement;
     };
@@ -60,7 +60,7 @@ var Panel = function (name, label, configOptions) {
     addKeyListeners();
 };
 
-Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection'};
+Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection', FILTER: 'filter'};
 
 
 Handlebars.registerHelper('renderButton', function (type, options) {

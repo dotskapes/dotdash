@@ -27,9 +27,15 @@ module.exports = function (grunt) {
         },
 
         watch: {
-            scripts: {
+            handlebars: {
                 files: 'src/templates/*.handlebars',
-                tasks: ['shell:handlebars']
+                tasks: ['shell:handlebars'],
+                failOnError: false
+            },
+            jade: {
+                files: 'src/templates/*.jade',
+                tasks: ['jade'],
+                failOnError: false
             },
             sass: {
                 files: 'css/*.scss',
@@ -50,6 +56,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // jade compiler oddly gives anonymous fn, this gives handle to that fn
     grunt.registerTask('jade', 'Build the templates', function (inputFile) {
@@ -63,16 +70,23 @@ module.exports = function (grunt) {
         var task = this;
         var inputFiles = grunt.file.expand(config.inputDir+"/*.jade");
 
+        fs.appendFileSync(outputFile,'\njade.templates = {};\n;');
+
         inputFiles.forEach (function (filename, i) {
             var buffer = fs.readFileSync (filename);
+
             var fn = jade.compile (buffer, {
                 client: true
             });
+
             var done = task.async ();
 
+            // get basefilename sans .jade
             exec ('basename ' + filename + ' .jade', function (error, stdout, stderr) {
-                var jt = "jade.templates = {}; \
-                  jade.templates[\'' + stdout.trim () + '\'] = ' + fn.toString () + ';"
+                grunt.log.write("\n append file "+filename+inputFiles.length+stdout);
+                var jt = '\njade.templates[\'' + stdout.trim () + '\'] = ';
+                jt += fn.toString () + ';';
+
                 fs.appendFileSync (outputFile, jt);
                 done (error === null);
             });
