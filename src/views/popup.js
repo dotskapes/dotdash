@@ -4,6 +4,10 @@ var $div = function () {
     return $('<div></div>');
 };
 
+
+// this is a poorly named class that isnt used at all - it is in fact for hover
+// not for what one would normall call a popup. it is not being deleted as it
+// is going to be used at some point for hover box, whence it should be renamed
 var Popup = function () {
     var container = $div().css({
         position: 'absolute',

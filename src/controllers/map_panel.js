@@ -11,7 +11,12 @@ var MapPanel = function () {
                                      options: {hoverText:
                                                   {move: "Move Map",
                                                    select: "Select Features"},
-                                               enabled: false}}};
+                                               enabled: false}},
+                         filter: {type: Panel.BUTTON_TYPES.FILTER,
+                                  options: {hoverText:
+                                            { filter: "Filter" }
+                                           }
+                                 }};
 
     // this basically makes Panel the superclass of MapPanel
     Panel.call(this, 'Map', 'map', configOptions);
