@@ -1,5 +1,6 @@
 goog.provide('aggregationController');
 
+goog.require('aggModel');
 goog.require('dashState');
 goog.require('aggregationService');
 goog.require('panelManager');
@@ -10,14 +11,15 @@ var AggregationController = function () {
         var filter = $('.filter-button[name="' + AggregationController.NAME + '"]');
         filter.change(function (event) {
             var name = $(event.target).val();
-            var aggreates;
-            if (name) {
+            var aggregates;
+            if (name != 'none') {
                 aggregates = aggregationService.computeAggregates(name)
             }
             else {
                 aggregates = null;
             }
-            dashState.set('agg', aggregates);
+            aggModel.set('agg', aggregates);
+            dashState.set('agg', name);
         });
     };
 

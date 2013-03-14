@@ -47,7 +47,7 @@ var ServiceLayer = (function () {
                         .style('fill-opacity', 0.8);*/
                     colorMap = new ColorMap(layer);
                     fireNewData(layer);
-                    dashState.set('currentAttr', that.getSortedDateProperties(layer)[0]);
+                    dashState.set('attr', that.getSortedDateProperties(layer)[0]);
                 }
             });
         },

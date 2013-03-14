@@ -58,8 +58,6 @@ var MapPanel = function () {
         map.center(layer.bounds.centroid());
         map.extents(layer.bounds.width());
         map.append(layer);
-        // initial (unselected) coloring
-        //that.draw();
     };
 
     var wireupMap = function () {

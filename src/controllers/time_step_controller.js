@@ -15,7 +15,7 @@ var TimeStepController = function () {
             var select = $('.' + TimeStepFilterView.CLASS);
             select.change(function (event) {
                 var attr = $(event.target).val();
-                dashState.set('currentAttr', attr);
+                dashState.set('attr', attr);
             });
         };
 

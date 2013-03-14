@@ -1,6 +1,8 @@
 goog.provide('ColorMap');
 
+goog.require('aggModel');
 goog.require('dashState');
+goog.require('aggModel');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
@@ -8,30 +10,12 @@ var NUM_COLORS = ColorRamps.NUM_COLORS;
 
 var ColorMap = function (layer) {
     var ranges = {};
+    var quantiles = {};
 
-    /*$.each(attributesByProperty, function (dateProp, featureAttributes) {
-        var vals = [];
-        $.each(featureAttributes, function (featureId, val) {
-            // i dont think we care about undefs do we, in fact they create problems
-            if (val !== undefined) {
-                vals.push(val);
-                globalVals.push(val);
-            }
-        });
-        // set min & max range for timestep/dateProp
-        setRange(vals, dateProp);
-    });*/
-    // get global min & max under property "global"
-    //setRange(globalVals, GLOBAL_PROPERTY);
-
-    // figure global color scale, that is scale according to all features,
-    // not just self(local)
     var globalValues = [];
 
     var GLOBAL_PROPERTY = 'global';
     var AGG_PROPERTY = 'agg';
-
-    var quantiles = {};
 
     // figure out uniform distribution (for uniform filter)
     // sets min & max range, can be used by each time step or global
@@ -88,7 +72,7 @@ var ColorMap = function (layer) {
         return quantiles[dateProp].length - 1;
     };
 
-    dashState.on('change:agg', function () {
+    aggModel.on('change:agg', function () {
         var aggregates = dashState.get('agg');
         if (aggregates) {
             filteredValues = [];
@@ -104,16 +88,16 @@ var ColorMap = function (layer) {
     });
 
     this.colorForValue = function (feature) {
-        var prop = dashState.get('currentAttr');
+        var prop = dashState.get('attr');
         var colorRamp = dashState.get('colorRamp');
         var dist = dashState.get('colorDist');
         var range = dashState.get('colorRange');
         var val;
-        if (dashState.get('agg')) {
-            val = dashState.get('agg')[feature.id];
+        if (dashState.get('agg') == 'none') {
+            val = feature.attr(prop);
         }
         else {
-            val = feature.attr(prop);
+            val = aggModel.get('agg')[feature.id];
         }
         if (!val) {
             return ColorMap.NO_DATA;

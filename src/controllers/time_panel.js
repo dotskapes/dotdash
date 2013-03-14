@@ -51,9 +51,6 @@ var TimePanel = function () {
 
         wireupGraph();
 
-        // initial (unselected) coloring
-        this.deselect(layer);
-        //this.draw();
     };
 
     var wireupGraph = function () {
