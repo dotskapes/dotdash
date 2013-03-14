@@ -61,11 +61,3 @@ var Panel = function (name, label, configOptions) {
 };
 
 Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection', FILTER: 'filter'};
-
-
-Handlebars.registerHelper('renderButton', function (type, options) {
-    if (type === Panel.BUTTON_TYPES.SELECTION_TOGGLE) {
-        var template = Handlebars.templates.selection_toggle_button_template;
-        return new Handlebars.SafeString(template(options));
-    }
-});
