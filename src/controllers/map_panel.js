@@ -80,7 +80,7 @@ var MapPanel = function () {
         });
     };
 
-    var filterBtn = function() { return $('#'+MapPanel.FILTER_ID); }
+    var filterBtn = function () { return $('#' + MapPanel.FILTER_ID); };
 
     this.tempSelectMode = function (selectOn) {
         if (selectOn) { map.enableSelect(); }
