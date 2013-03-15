@@ -254,6 +254,21 @@ __jade.shift();
 __jade.shift();
 __jade.unshift({ lineno: 13, filename: __jade[0].filename });
 if ( cfgOpt.type === Panel.BUTTON_TYPES.FILTER)
+{
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+buf.push('<button');
+buf.push(attrs({ 'id':(label+'Filter') }, {"id":true}));
+buf.push('>');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+buf.push('Filter');
+__jade.shift();
+__jade.shift();
+buf.push('</button>');
+__jade.shift();
+__jade.shift();
+}
 __jade.shift();
 __jade.shift();
 buf.push('</div>');
@@ -306,6 +321,21 @@ __jade.shift();
 __jade.shift();
 __jade.unshift({ lineno: 13, filename: __jade[0].filename });
 if ( cfgOpt.type === Panel.BUTTON_TYPES.FILTER)
+{
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+buf.push('<button');
+buf.push(attrs({ 'id':(label+'Filter') }, {"id":true}));
+buf.push('>');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+buf.push('Filter');
+__jade.shift();
+__jade.shift();
+buf.push('</button>');
+__jade.shift();
+__jade.shift();
+}
 __jade.shift();
 __jade.shift();
 buf.push('</div>');
