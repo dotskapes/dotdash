@@ -77,6 +77,8 @@ module.exports = function (grunt) {
         var task = this;
         var inputFiles = grunt.file.expand(config.inputDir+"/*.jade");
 
+        // Check to see if jade templates are defined: Don't clobber templates that 
+        // have been brought in
         fs.writeFileSync(outputFile,'\nif (jade.templates === undefined) jade.templates = {};\n;');
 
         inputFiles.forEach (function (filename, i) {
