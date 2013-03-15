@@ -70,14 +70,14 @@ module.exports = function (grunt) {
         var config = grunt.config.get ('jade');
         var outputFile = config.outputFile;
         jade = require ('jade');
-
-        var runtime = fs.readFileSync ('node_modules/jade/runtime.js');
-        fs.writeFileSync (outputFile, runtime);
+        
+        //var runtime = fs.readFileSync ('node_modules/jade/runtime.js');
+        //fs.writeFileSync (outputFile, runtime);
 
         var task = this;
         var inputFiles = grunt.file.expand(config.inputDir+"/*.jade");
 
-        fs.appendFileSync(outputFile,'\njade.templates = {};\n;');
+        fs.writeFileSync(outputFile,'\nif (jade.templates === undefined) jade.templates = {};\n;');
 
         inputFiles.forEach (function (filename, i) {
             var buffer = fs.readFileSync (filename);

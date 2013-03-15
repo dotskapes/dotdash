@@ -26,6 +26,11 @@ var TimeStepController = function () {
                 addEventListener();
             }
         );
+
+        dashState.on('change:attr', function () {
+            var select = $('.' + TimeStepFilterView.CLASS);
+            select.val(dashState.get('attr'));
+        });
     };
 };
 

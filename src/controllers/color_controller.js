@@ -9,7 +9,7 @@ var ColorController = function () {
 
     this.start = function (parent) {
         var html = render();
-        parent.prepend(html);
+        parent.append(html);
         $('.collapse-toggler').click(function (event) {
             var content = $(event.currentTarget).siblings('.collapsible');
             content.slideToggle();
@@ -30,13 +30,12 @@ var ColorController = function () {
               title: 'Color Ramp',
               options: []
             },
-            { name: 'dist_range',
-              title: 'Color Distribution & Range',
-              radioSubGroups: true,
-              options: [ { name: DistribRangeController.DISTRIB,
-                           subOptions: [{label: 'Quantile'}, {label: 'Uniform'}] },
-                         { name: DistribRangeController.RANGE,
-                           subOptions: [{label: 'Local'}, {label: 'Global'}] } ]
+            { name: 'dist',
+              title: 'Color Distribution',
+              options: [
+                  {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM},
+                  {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE}
+              ]
             },
             { name: AggregationController.NAME,
               title: 'Aggregate',

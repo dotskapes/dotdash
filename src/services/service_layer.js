@@ -22,6 +22,8 @@ var ServiceLayer = (function () {
 
     var dataCallbacks = [];
 
+    var sortedDateProps = [];
+    var sortedIndexLookup = {};
 
     var fireNewData = function (dataLayer) {
         $.each(dataCallbacks, function (i, cb) { cb(dataLayer); });
@@ -41,9 +43,19 @@ var ServiceLayer = (function () {
                 dataType: 'json',
                 success: function (data) {
                     layer = wiggle.io.GeoJSON(data);
+
+                    sortedDateProps = layer.numeric();
+                    // this assumes the dates are lexically sortable, euro dates NOT USA
+                    sortedDateProps.sort();
+                    
+                    sortedIndexLookup = {};
+                    sortedDateProps.forEach(function (attr, i) {
+                        sortedIndexLookup[attr] = i;
+                    });
+
                     colorMap = new ColorMap(layer);
                     fireNewData(layer);
-                    dashState.set('attr', that.getSortedDateProperties(layer)[0]);
+                    dashState.set('attr', that.getSortedDateProperties()[0]);
                 }
             });
         },
@@ -52,14 +64,19 @@ var ServiceLayer = (function () {
         // this returns the keys in the feature corresponding to time data points
         // sorted by date, makes assumptions about the data - see below
         // this method(->object) may explode once we take in messier data??
-        getSortedDateProperties: function (layer) {
+        getSortedDateProperties: function () {
             // this gets the properties of the feature that have numerical values
             // this assumes that ONLY date props are numerical - this is not true for
             // all datasets
-            var sortedDateProps = layer.numeric();
-            // this assumes the dates are lexically sortable, euro dates NOT USA
-            sortedDateProps.sort();
+            if (!layer) {
+                return [];
+            }
             return sortedDateProps;
+        },
+
+        // Maps the name of a attribute on the layer to its ordering 
+        getIndexOfAttr: function (attr) {
+            return sortedIndexLookup[attr];
         },
 
         getAttributesByFeature : function () {
