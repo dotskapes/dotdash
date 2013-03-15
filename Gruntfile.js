@@ -17,19 +17,21 @@ module.exports = function (grunt) {
             },
             lint: {
                 command: 'node_modules/jshint/bin/jshint --reporter build/jshint_reporter.js src',
-                stdout: true,
-                failOnError: true
+                options: {stdout: true,
+                          failOnError: true}
             },
             sass: {
                 command: 'sass css/style.scss css/built/style.css',
-                stdout: true,
+                options: {stdout: true,
+                          failOnError: true}
             },
             closure_deps: {
                 command: 'build/deps.sh',
-                stdout: true
+                options: {stdout: true}
             },
             closure_compile: {
-                command: 'build/compile.sh'
+                command: 'build/compile.sh',
+                options: {stdout: true}        
             }
         },
 
@@ -37,17 +39,17 @@ module.exports = function (grunt) {
             handlebars: {
                 files: 'src/templates/*.handlebars',
                 tasks: ['shell:handlebars'],
-                failOnError: false
+                options: {failOnError: false}
             },
             jade: {
                 files: 'src/templates/*.jade',
                 tasks: ['jade'],
-                failOnError: false
+                options: {failOnError: false}
             },
             sass: {
                 files: 'css/*.scss',
                 tasks: ['shell:sass'],
-                failOnError: false
+                options: {failOnError: false}
             }
         }
 
