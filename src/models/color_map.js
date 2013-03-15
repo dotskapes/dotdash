@@ -33,16 +33,16 @@ var ColorMap = function (layer) {
             var qMin = filteredValues[bottom];
 
             quantiles[field].push({
-                max: qMax, 
+                max: qMax,
                 min: qMin
             });
         }
     };
-    
+
     layer.numeric().forEach(function (dateProp, i) {
         var localValues = [];
         layer.features().each(function (i, feature) {
-            var attr = feature.attr(dateProp)
+            var attr = feature.attr(dateProp);
             if (attr !== undefined) {
                 localValues.push(attr);
             }
@@ -86,7 +86,7 @@ var ColorMap = function (layer) {
         var colorRamp = dashState.get('colorRamp');
         var dist = dashState.get('colorDist');
         var val;
-        if (dashState.get('agg') == 'none') {
+        if (dashState.get('agg') === 'none') {
             val = feature.attr(field);
         }
         else {

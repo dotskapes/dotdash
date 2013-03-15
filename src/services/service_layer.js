@@ -32,8 +32,8 @@ var ServiceLayer = (function () {
     // Singleton public methods/properties
     return {
 
-        addDataCallback: function (cb) { 
-            dataCallbacks.push(cb); 
+        addDataCallback: function (cb) {
+            dataCallbacks.push(cb);
         },
 
         loadUrl: function (url) {
@@ -47,7 +47,7 @@ var ServiceLayer = (function () {
                     sortedDateProps = layer.numeric();
                     // this assumes the dates are lexically sortable, euro dates NOT USA
                     sortedDateProps.sort();
-                    
+
                     sortedIndexLookup = {};
                     sortedDateProps.forEach(function (attr, i) {
                         sortedIndexLookup[attr] = i;

@@ -13,8 +13,6 @@ var Dashboard = function (parentSelector, baseUrl) {
     colorController.start($(parentSelector));
 
     panelManager.init(parentSelector, baseUrl);
-    
-    
 
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url);

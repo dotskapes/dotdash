@@ -32,18 +32,16 @@ var ColorController = function () {
             },
             { name: 'dist',
               title: 'Color Distribution',
-              options: [
-                  {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM},
-                  {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE}
-              ]
+              options: [ {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM},
+                         {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE}
+                       ]
             },
             { name: AggregationController.NAME,
               title: 'Aggregate',
-              options: [
-                  {label: 'None', value: 'none'},
-                  {label: 'Mean', value: 'mean'},
-                  {label: 'Max', value: 'max'},
-                  {label: 'Min', value: 'min'}]
+              options: [ {label: 'None', value: 'none'},
+                         {label: 'Mean', value: 'mean'},
+                         {label: 'Max', value: 'max'},
+                         {label: 'Min', value: 'min'} ]
             }
         ];
 
