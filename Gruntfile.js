@@ -23,6 +23,13 @@ module.exports = function (grunt) {
             sass: {
                 command: 'sass css/style.scss css/built/style.css',
                 stdout: true,
+            },
+            closure_deps: {
+                command: 'build/deps.sh',
+                stdout: true
+            },
+            closure_compile: {
+                command: 'build/compile.sh'
             }
         },
 

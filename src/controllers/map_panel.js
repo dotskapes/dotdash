@@ -75,7 +75,12 @@ var MapPanel = function () {
                 $(event.currentTarget).children('.selection_box').hasClass('enabled');
             that.tempSelectMode(selectModeOn);
         });
+
+        filterBtn().click(function (event) {
+        });
     };
+
+    var filterBtn = function() { return $('#'+MapPanel.FILTER_ID); }
 
     this.tempSelectMode = function (selectOn) {
         if (selectOn) { map.enableSelect(); }
@@ -108,3 +113,5 @@ var MapPanel = function () {
     };
 
 };
+
+MapPanel.FILTER_ID = 'mapFilter';

@@ -1,15 +1,14 @@
-div(id = label, class='view')
+.view(id = label)
   unless configOptions
     - return // return if no configOptions defined
   .buttons
     each cfgOpt, key in configOptions
-      - var id = label + '-' + cfgOpt['type'] + '-button'
-      - var opts = cfgOpt['options']
-      div(id = id, class='button')
-        if cfgOpt['type'] === Panel.BUTTON_TYPES.SELECTION_TOGGLE
-          - var cls = "icon move_arrow" + (opts['enabled'] ? "" : " enabled");
-          - var move = opts['hoverText']['move']
-          a(class=cls, title=move)
-          - cls = "icon selection_box" + (opts['enabled'] ? " enabled" : "");
-          - var sel = opts['hoverText']['select']
-          a(class=cls, title=sel)
+      - var opts = cfgOpt.options
+      .button(id = label + '-' + cfgOpt.type + '-button')
+        if cfgOpt.type === Panel.BUTTON_TYPES.SELECTION_TOGGLE
+          - var cls = "icon move_arrow" + (opts.enabled ? "" : " enabled");
+          a(class=cls, title=opts.hoverText.move)
+          - cls = "icon selection_box" + (opts.enabled ? " enabled" : "");
+          a(class=cls, title=opts.hoverText.select)
+        if cfgOpt.type === Panel.BUTTON_TYPES.FILTER
+          button(id = label+'Filter') Filter
