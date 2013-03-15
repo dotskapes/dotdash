@@ -6,6 +6,7 @@ goog.require('selectionManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
+goog.require('filterController');
 
 // javascripts funny Singleton pattern
 var PanelManager = function () {
@@ -80,20 +81,20 @@ var PanelManager = function () {
         return tmp({label: label, name: name});
     };
 
-    this.redraw = function () {
-        // this should probably only draw the panels currently showing
+    this.draw = function () {
+        // todo: this should probably only draw the panels currently showing
         // and on showing a new panel would need to do a draw
         $.each(panels, function (i, panel) {
             // redraws all panels (without selection/highlight)
-            panel.draw();
-            // puts highlight selection back on if any
+            // only draw filtered features
+            panel.draw(filterController.getFilter());
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
     };
 
     dashState.on('change', function () {
-        that.redraw();
+        that.draw();
     });
 
     // select is jquery element for dropdown select
