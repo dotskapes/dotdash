@@ -12,9 +12,6 @@ var ColorMap = function (layer) {
     var ranges = {};
     var quantiles = {};
 
-    var globalValues = [];
-
-    var GLOBAL_PROPERTY = 'global';
     var AGG_PROPERTY = 'agg';
 
     // figure out uniform distribution (for uniform filter)
@@ -48,14 +45,11 @@ var ColorMap = function (layer) {
             var attr = feature.attr(dateProp)
             if (attr !== undefined) {
                 localValues.push(attr);
-                globalValues.push(attr);
             }
         });
 
         addQuantile(dateProp, localValues);
     });
-
-    addQuantile(GLOBAL_PROPERTY, globalValues);
 
     var findQuantile = function (dateProp, val) {
         if (val <= quantiles[dateProp][0].max) {
@@ -88,13 +82,12 @@ var ColorMap = function (layer) {
     });
 
     this.colorForValue = function (feature) {
-        var prop = dashState.get('attr');
+        var field = dashState.get('attr');
         var colorRamp = dashState.get('colorRamp');
         var dist = dashState.get('colorDist');
-        var range = dashState.get('colorRange');
         var val;
         if (dashState.get('agg') == 'none') {
-            val = feature.attr(prop);
+            val = feature.attr(field);
         }
         else {
             val = aggModel.get('agg')[feature.id];
@@ -102,12 +95,7 @@ var ColorMap = function (layer) {
         if (!val) {
             return ColorMap.NO_DATA;
         }
-        var index, field;
-        if (range === ColorScales.RANGE.LOCAL) {
-            field = prop;
-        } else if (range === ColorScales.RANGE.GLOBAL) {
-            field = GLOBAL_PROPERTY;
-        }
+        var index;
         if (dist === ColorScales.DISTRIBUTION.QUANTILE) {
             index = findQuantile(field, val);
         } else if (dist === ColorScales.DISTRIBUTION.UNIFORM) {

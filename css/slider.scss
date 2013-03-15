@@ -2,7 +2,6 @@
     font-size: 12px;
     font-family: Helvetica Neu, Helvetica, sans-serif;
     margin: 5px;
-    @include vendor_prefix (user-select, none);
 }
 
 .slider .exterior {

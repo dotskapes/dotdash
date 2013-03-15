@@ -11,12 +11,6 @@ var DistribRangeController = function () {
             var value = parseInt($(event.target).val(), 10);
             dashState.set('colorDist', value);
         });
-
-        var range = $('.filter-button[name="' + DistribRangeController.RANGE + '"]');
-        range.change(function (event) {
-            var value = parseInt($(event.target).val(), 10);
-            dashState.set('colorRange', value);
-        });
     };
 };
 

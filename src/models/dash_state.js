@@ -7,8 +7,7 @@ var DashboardState = Backbone.Model.extend({
     defaults: {
         attr: null,
         colorRamp: ColorRamps.RAMPS[0],
-        colorDist: ColorScales.DISTRIBUTION.QUANTILE,
-        colorRange: ColorScales.RANGE.LOCAL,
+        colorDist: ColorScales.DISTRIBUTION.UNIFORM,
         agg: 'none'
     }
 });

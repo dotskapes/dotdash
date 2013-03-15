@@ -11,6 +11,7 @@
 
 html, body, #dashboard {
     height: 100%;
+    @include vendor_prefix (user-select, none);
 }
 
 .collapse-toggler {

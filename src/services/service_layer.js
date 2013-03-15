@@ -23,6 +23,7 @@ var ServiceLayer = (function () {
     var dataCallbacks = [];
 
     var sortedDateProps = [];
+    var sortedIndexLookup = {};
 
     var fireNewData = function (dataLayer) {
         $.each(dataCallbacks, function (i, cb) { cb(dataLayer); });
@@ -46,6 +47,11 @@ var ServiceLayer = (function () {
                     sortedDateProps = layer.numeric();
                     // this assumes the dates are lexically sortable, euro dates NOT USA
                     sortedDateProps.sort();
+                    
+                    sortedIndexLookup = {};
+                    sortedDateProps.forEach(function (attr, i) {
+                        sortedIndexLookup[attr] = i;
+                    });
 
                     colorMap = new ColorMap(layer);
                     fireNewData(layer);
@@ -66,6 +72,11 @@ var ServiceLayer = (function () {
                 return [];
             }
             return sortedDateProps;
+        },
+
+        // Maps the name of a attribute on the layer to its ordering 
+        getIndexOfAttr: function (attr) {
+            return sortedIndexLookup[attr];
         },
 
         getAttributesByFeature : function () {

@@ -1,5 +1,8 @@
 html, body, #dashboard {
-  height: 100%; }
+  height: 100%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
 
 .collapse-toggler .collapse-arrow {
   display: inline-block; }
@@ -88,10 +91,7 @@ html, body, #dashboard {
 .slider {
   font-size: 12px;
   font-family: Helvetica Neu, Helvetica, sans-serif;
-  margin: 5px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none; }
+  margin: 5px; }
 
 .slider .exterior {
   background-color: #999;

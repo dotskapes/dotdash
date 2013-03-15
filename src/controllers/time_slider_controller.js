@@ -12,3 +12,8 @@ ServiceLayer.addDataCallback(function (layer) {
 timeSlider.change(function (index) {
     dashState.set('attr', ServiceLayer.getSortedDateProperties()[index]);
 });
+
+dashState.on('change:attr', function () {
+    var attr = dashState.get('attr');
+    timeSlider.model.set('index', ServiceLayer.getIndexOfAttr(attr));
+});
