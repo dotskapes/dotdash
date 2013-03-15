@@ -12,8 +12,8 @@ var AggregationController = function () {
         filter.change(function (event) {
             var name = $(event.target).val();
             var aggregates;
-            if (name != 'none') {
-                aggregates = aggregationService.computeAggregates(name)
+            if (name !== 'none') {
+                aggregates = aggregationService.computeAggregates(name);
             }
             else {
                 aggregates = null;

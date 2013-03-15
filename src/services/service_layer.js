@@ -30,8 +30,8 @@ var ServiceLayer = (function () {
     // Singleton public methods/properties
     return {
 
-        addDataCallback: function (cb) { 
-            dataCallbacks.push(cb); 
+        addDataCallback: function (cb) {
+            dataCallbacks.push(cb);
         },
 
         loadUrl: function (url) {
