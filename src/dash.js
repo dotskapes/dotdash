@@ -9,10 +9,11 @@ goog.require('panelManager');
 var Dashboard = function (parentSelector, baseUrl) {
 
     $(parentSelector).append(timeSlider.$el);
+    $(parentSelector).append('<div id="main">');
     // Start the filter controller/view, has to be laid out before panels
-    colorController.start($(parentSelector));
+    colorController.start($('#main'));
 
-    panelManager.init(parentSelector, baseUrl);
+    panelManager.init('#main', baseUrl);
     
     
 

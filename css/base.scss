@@ -4,6 +4,14 @@
     #{$key}: $value;
 }
 
+@mixin flex_container ($direction) {
+    display: -webkit-flex;
+    display: flex;
+    @include vendor_prefix(flex-flow, $direction nowrap);
+    @include vendor_prefix(justify-content, space-between);
+    @include vendor_prefix(align-items, stretch);
+}
+
 @mixin rounded_corners ($radius, $leftOrRight) {
     @include vendor_prefix(border-top-#{$leftOrRight}-radius, $radius);
     @include vendor_prefix(border-bottom-#{$leftOrRight}-radius, $radius);
@@ -12,6 +20,17 @@
 html, body, #dashboard {
     height: 100%;
     @include vendor_prefix (user-select, none);
+}
+
+#dashboard {
+    @include flex_container(column);
+}
+
+#main {
+    @include vendor_prefix(flex, 5 1 auto);
+    @include vendor_prefix(order, 1);
+
+    @include flex_container(row);
 }
 
 .collapse-toggler {
@@ -38,9 +57,9 @@ $dropdownHeight: 22px;
 $panelWidth: 50%;
 
 .panels {
+    @include vendor_prefix(flex, 4 1 auto);
+
     @include vendor_prefix(user-select, none);
-    height: 100%;
-    overflow: hidden;
     position: relative;
     
     .view {
@@ -79,8 +98,9 @@ $panelWidth: 50%;
 }
 
 #options {
-    float: right;
+    @include vendor_prefix(order, 3);
     width: 200px;
+    padding-left: 10px;
 }
 
 #wigglemap, #timeseries {
