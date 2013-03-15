@@ -60,6 +60,10 @@ var ServiceLayer = (function () {
             });
         },
 
+        getLayerSelector: function () {
+            return layer.features();
+        },
+
         // this perhaps belongs in a separate data util class?
         // this returns the keys in the feature corresponding to time data points
         // sorted by date, makes assumptions about the data - see below
