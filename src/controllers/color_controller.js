@@ -1,11 +1,11 @@
-goog.provide('filterController');
+goog.provide('colorController');
 
 goog.require('colorRampController');
 goog.require('timeStepController');
 goog.require('distribRangeController');
 goog.require('aggregationController');
 
-var FilterController = function () {
+var ColorController = function () {
 
     this.start = function (parent) {
         var html = render();
@@ -73,4 +73,4 @@ var FilterController = function () {
     };
 };
 
-var filterController = new FilterController();
+var colorController = new ColorController();
