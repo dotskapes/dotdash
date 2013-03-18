@@ -25,7 +25,7 @@ var SelectionManager = function () {
     this.select = function (newSelection) {
         // for optimization purposes (faster to select on whole layer)a selection
         // layer selector may actually contain items outside filter. strip em.
-        newSelection = filterController.filter(newSelection);
+        newSelection = filter.filter(newSelection);
 
         $.each(views, function (i, view) {
             // deselect if not multi & have something to desel
