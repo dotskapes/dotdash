@@ -1,6 +1,7 @@
 goog.provide('panelManager');
 
 goog.require('dashState');
+goog.require('panelState');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 goog.require('MapPanel');
@@ -8,215 +9,160 @@ goog.require('TimePanel');
 goog.require('MDSPanel');
 goog.require('filterController');
 
-// javascripts funny Singleton pattern
-var PanelManager = function () {
-    var that = this;
 
-    var labelToPanel = {};
-    // for now hardwired
-    var panels;
+var PanelManager = Backbone.View.extend({
+    init: function () {},
 
-    var selectHeight = 25;
+    // A mapping between names of panels and their actual html element
+    panelDivs: {},
 
-    // track view index of what is currently being displayed
-    // this is to stop endless loop that happens if you rely on the dom
-    // with events triggering in the middle of other events(for = index check)
-    var leftIndex = 0;
-    var rightIndex = 1;
+    start: function ($parent) {
+        var that = this;
 
-    // Format the two panels
-    var left = $('<div>').attr('id', 'left');
-    var right = $('<div>').attr('id', 'right');
+        $parent.append (this.$el);
+        this.render();
 
-    this.init = function (parentSelector, url) {
-        initPanels();
-        setupDivs(parentSelector);
-        selectionDropdown();
-        initSelectListeners();
-        showFirstTwoPanels();
-    };
+        // Set the height of the panels div
+        this.setSize();
 
-    // init panels list and labelToPanel hash
-    // for now hardwires the panels, eventually get dynamically
-    var initPanels = function () {
-        panels = [new MapPanel(), new TimePanel(), new MDSPanel()];
-        $.each(panels, function (i, pan) {
-            labelToPanel[pan.label] = pan;
+        // Whenever the window is resized, chnage the size of the panels
+        $(window).resize(function () {
+            that.setSize();
+        });
+
+        // Whenver the model changes the current panels, reflect this in the view
+        this.model.on('change', function () {
+            that.setPanels();
+        });
+
+        // Initialize data callbacks on the panels
+        this.initPanels();
+
+        // It is now okay to bring in the actual panels
+        this.setPanels();
+    },
+
+    // Shortcuts to the left and right panels, created by render
+    $left: null,
+    $right: null,
+
+    events: {
+        'change select': 'changePane'
+    },
+
+    // Name of the containing element
+    className: 'panels',
+
+    // Initializes the elements for managing the panels (left and right panelsl, etc)
+    // Don't call render until after start has been called
+    render: function () {
+        var that = this;
+        var panelContainer = $(jade.templates['panels']({
+            model: this.model
+        }));
+        this.$el.append(panelContainer);
+
+        // Initialize the html elements for each panel
+        $.each(this.model.get('panels'), function (i, panel) {
+            that.panelDivs[panel.name] = panel.makeParentElement();
+        });
+
+        this.$left = this.$el.find('.left');
+        this.$right = this.$el.find('.right');
+    },
+
+    setSize: function () {
+        //this.$el.css('height', $(window).height() - this.$el.offset().top);
+        this.$left.find('.view').css('height', $(window).height() - this.$left.find('.view').offset().top)
+        this.$right.find('.view').css('height', $(window).height() - this.$right.find('.view').offset().top)
+    },
+
+    // Either create of show a given panel
+    showPanel: function (panel) {
+        if (!panel.created) {
+            panel.create();
+        }
+        else {
+            panel.show();
+        }
+    },
+
+    setPanel: function (side) {
+        var panel = this.model.getPanel(this.model.get(side));
+        $pane = this['$' + side];
+
+        // Hide the exisiting elements
+        $pane.find('.view').children().hide();
+
+        // Append these panels to the correct side
+        $pane.find('.view').append(this.panelDivs[panel.name]);
+
+        // Show the two panels
+        this.showPanel(panel);
+
+        // Set the dropdown so the correct values are reflected
+        $pane.find('select').val(this.model.get(side));
+    },
+
+    // Set the panes that the panels belong to
+    setPanels: function () {
+        this.setPanel('left');
+        this.setPanel('right');
+    },
+
+    // Register a data callback on all the panels
+    initPanels: function () {
+        var that = this;
+
+        $.each(this.model.get('panels'), function (i, pan) {
             ServiceLayer.addDataCallback(function (data) {
                 return pan.newData(data);
             });
             selectionManager.addView(pan);
         });
-    };
 
-    var setupDivs = function (parentSelector) {
-        // Create the container for all the panels
-        var panelContainer = $(jade.templates['panels']({
-            panels: [
-                {
-                    name: 'map',
-                    label: 'Map'
-                },
-                {
-                    name: 'time',
-                    label: 'Time Series'
-                }
-            ]
-        }));
-        $(parentSelector).append(panelContainer);
-
-        // Add the panel div/containers to the document
-        //var panelContainer = $('<div>').addClass('panels').append(left).append(right);
-        //$(parentSelector).append(panelContainer);
-        $.each(panels, function (i, panel) {
-            var panelDiv = panel.makeParentElement();
-            panelContainer.append(panelDiv);
+        dashState.on('change', function () {
+            that.draw();
         });
-    };
+    },
 
-    var selectionDropdown = function () {
-        //var selTemp = Handlebars.templates.select_template;
-        //var leftCtxt = {selClass: "left-select"};
-        //var leftSel = selTemp(leftCtxt);
-        //left.append(leftSel);
-        //right.append(selTemp({selClass: "right-select"}));
-        //addPanelNamesToSelect();
-    };
-
-    var addPanelNamesToSelect = function () {
-        $.each(panels, function (i, pan) {
-            $('.view-select').append(optionTemp(pan.label, pan.name));
-        });
-    };
-
-    var optionTemp = function (label, name) {
-        var tmp = Handlebars.templates.select_option_template;
-        return tmp({label: label, name: name});
-    };
-
-    this.draw = function () {
+    draw: function () {
         // todo: this should probably only draw the panels currently showing
         // and on showing a new panel would need to do a draw
-        $.each(panels, function (i, panel) {
+        $.each(this.model.get('panels'), function (i, panel) {
             // redraws all panels (without selection/highlight)
             // only draw filtered features
             panel.draw(filterController.getFilter());
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
-    };
+    },
 
-    dashState.on('change', function () {
-        that.draw();
-    });
+    changePane: function (event) {
+        var leftSelect = this.$left.find('.select select');
+        var rightSelect = this.$right.find('.select select');
 
-    // select is jquery element for dropdown select
-    var selectListener = function (select) {
-        select.change(function () {
-            $('.view').hide();
-            var leftPanelName = selectedValue($('.left-select'));
-            var rightPanelName = selectedValue($('.right-select'));
-            showPanels(leftPanelName, rightPanelName);
-            bumpOtherDropdownIfSame(select);
-        });
-    };
+        var leftIndex = parseInt(leftSelect.val());
+        var rightIndex = parseInt(rightSelect.val())
 
-    var showPanels = function (leftPanelLabel, rightPanelLabel) {
-        if (!leftPanelLabel) {
-            throw "cant show panels: Left panel name undefined";
-        }
-        if (!rightPanelLabel) {
-            throw "Right panel name undefined";
-        }
-        var leftPanel = labelToPanel[leftPanelLabel];
-        var rightPanel = labelToPanel[rightPanelLabel];
-        $.each([leftPanel, rightPanel], function (i, panel) {
-            if (!panel) {
-                throw "Error: Panel " + leftPanelName + " " + rightPanelName + " not found";
-            }
-            if (!panel.created) {
-                panel.create();
+        // If the indices are the same, we must increment one of them
+        if (leftIndex === rightIndex) {
+            if (event.target === leftSelect.get(0)) {
+                rightIndex = (rightIndex + 1) % this.model.get('panels').length;
             }
             else {
-                panel.show();
+                leftIndex = (leftIndex + 1) % this.model.get('panels').length;
             }
+        }
+
+        this.model.set({
+            'left': leftIndex,
+            'right': rightIndex
         });
-        $('.view').removeClass('left-panel').removeClass('right-panel');
-        leftPanel.addClass('left-panel');
-        rightPanel.addClass('right-panel');
-    };
+    }
+});
 
-    // get currently selected option's text in select jquery element
-    var selectedValue = function (select) {
-        return selectedOption(select).val();
-    };
+var panelManager = new PanelManager({
+    model: panelState
+});
 
-    var selectedIndex = function (select) {
-        return selectedOption(select).prop('index');
-    };
-
-    var selectedOption = function (select) {
-        var selOpt = select.children("option[selected='selected']");
-        // funny! amidst select event sometimes the above works sometimes below
-        if (selOpt.length === 0) {
-            selOpt = select.children('option:selected');
-        }
-        return selOpt;
-    };
-
-    var selectSize = function () {
-        return $('.left-select option').length;
-    };
-
-    // if user has selected same view that is already displayed in other panel
-    // then change the other panel to a new view (dont/cant show same view in both)
-    var bumpOtherDropdownIfSame = function (select) {
-        var other = getOtherSelect(select);
-        leftIndex = selectedIndex($('.left-select'));
-        rightIndex = selectedIndex($('.right-select'));
-        // if 2 selections are not the same then return - nothing to do
-        if (leftIndex !== rightIndex) {
-            return;
-        }
-        // else bump up other 1 past where select is
-        var newIndex = selectedIndex(select) + 1 % selectSize();
-        if (isLeftSelect(other)) {
-            leftIndex = newIndex;
-        } else {
-            rightIndex = newIndex;
-        }
-        selectedOption(other).removeAttr('selected');
-        var newValue = other.children().eq(newIndex).val();
-        other.val(newValue).change();
-    };
-
-    var getOtherSelect = function (select) {
-        return isLeftSelect(select) ? $('.right-select') : $('.left-select');
-    };
-
-    var isLeftSelect = function (select) {
-        return select.attr('class').indexOf('left') !== -1;
-    };
-
-
-    // If the window is resized, we may want to resize the dashboard
-    $(window).resize(function () {
-        panels[leftIndex].resize();
-        panels[rightIndex].resize();
-    });
-
-    var initSelectListeners = function () {
-        // add selection listeners to left right select dropdowns
-        selectListener($('.left-select'));
-        selectListener($('.right-select'));
-    };
-
-    var showFirstTwoPanels = function () {
-        // initialize with 1st panel on left (& 2nd on right)
-        // left panel select will cause right to bump to 2nd
-        $('.left-select').val(panels[0].name).change();
-    };
-
-};
-
-var panelManager = new PanelManager();

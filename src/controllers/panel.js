@@ -3,7 +3,7 @@ goog.provide('Panel');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 
-var Panel = function (name, label, configOptions) {
+var Panel = function (label, name, configOptions) {
 
     var ALT = 18;
     var that = this;
@@ -27,7 +27,7 @@ var Panel = function (name, label, configOptions) {
 
     this.makeParentElement = function () {
         var template = jade.templates.panel;
-        this.parentElement = $(template({label: this.label, configOptions: configOptions}));
+        this.parentElement = $(template({label: this.name, configOptions: configOptions}));
         return this.parentElement;
     };
 
