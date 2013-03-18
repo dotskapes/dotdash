@@ -57,7 +57,7 @@ var PanelManager = Backbone.View.extend({
     // Don't call render until after start has been called
     render: function () {
         var that = this;
-        var panelContainer = $(jade.templates['panels']({
+        var panelContainer = $(jade.templates.panels({
             model: this.model
         }));
         this.$el.append(panelContainer);
@@ -73,8 +73,8 @@ var PanelManager = Backbone.View.extend({
 
     setSize: function () {
         //this.$el.css('height', $(window).height() - this.$el.offset().top);
-        this.$left.find('.view').css('height', $(window).height() - this.$left.find('.view').offset().top)
-        this.$right.find('.view').css('height', $(window).height() - this.$right.find('.view').offset().top)
+        this.$left.find('.view').css('height', $(window).height() - this.$left.find('.view').offset().top);
+        this.$right.find('.view').css('height', $(window).height() - this.$right.find('.view').offset().top);
     },
 
     // Either create of show a given panel
@@ -142,8 +142,8 @@ var PanelManager = Backbone.View.extend({
         var leftSelect = this.$left.find('.select select');
         var rightSelect = this.$right.find('.select select');
 
-        var leftIndex = parseInt(leftSelect.val());
-        var rightIndex = parseInt(rightSelect.val())
+        var leftIndex = parseInt(leftSelect.val(), 10);
+        var rightIndex = parseInt(rightSelect.val(), 10);
 
         // If the indices are the same, we must increment one of them
         if (leftIndex === rightIndex) {
