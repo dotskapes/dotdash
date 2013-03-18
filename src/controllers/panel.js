@@ -31,8 +31,8 @@ var Panel = function (name, label, configOptions) {
         return this.parentElement;
     };
 
-    this.fireSelect = function (selectionLayer) {
-        selectionManager.select(selectionLayer);
+    this.fireSelect = function (selectionLayerSelector) {
+        selectionManager.select(selectionLayerSelector);
     };
 
     this.allFeatures = function () { return ServiceLayer.currentData.features(); };
@@ -40,9 +40,10 @@ var Panel = function (name, label, configOptions) {
     this.width = function () { return this.parentElement.width(); };
     this.height = function () { return this.parentElement.height(); };
 
-    // override in subclass
+    // override in subclass, abstract methods
     this.select = function () {};
     this.deselect = function () {};
+    this.draw = function (layerSelector) {};
 
     // temporarily go into select mode (for modifier/ctrl hotkey)
     this.tempSelectMode = function (tempSelectOn) {};

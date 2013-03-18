@@ -4,6 +4,7 @@ goog.require('ColorMap');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 goog.require('Panel');
+goog.require('filterController');
 
 var MapPanel = function () {
 
@@ -18,13 +19,14 @@ var MapPanel = function () {
                                            }
                                  }};
 
+    var FILL_OPACITY = 0.9;
+
     // this basically makes Panel the superclass of MapPanel
     Panel.call(this, 'Map', 'map', configOptions);
 
     // wiggle.Map object
     var map;
     var layer;
-    var selectionLayer;
     var that = this;
     var selectModeOn = false;
 
@@ -53,7 +55,7 @@ var MapPanel = function () {
 
         layer.features()
             .style(map, 'stroke', ColorMap.WHITE)
-            .style(map, 'fill-opacity', 0.9);
+            .style(map, 'fill-opacity', FILL_OPACITY);
 
         map.center(layer.bounds.centroid());
         map.extents(layer.bounds.width());
@@ -63,9 +65,11 @@ var MapPanel = function () {
     var wireupMap = function () {
         // listen for map select and send selection to selectionManager
         map.select(function (box) {
-            selectionLayer = map.search(layer, box);
+            // faster to box whole layer than filtered layer according to zack
+            var selectionLayerSelector = map.search(layer, box);
+
             // call to panel.js superclass
-            that.fireSelect(selectionLayer);
+            that.fireSelect(selectionLayerSelector);
         });
 
         $('#map-selection-button').click(function (event) {
@@ -77,16 +81,22 @@ var MapPanel = function () {
         });
 
         filterBtn().click(function (event) {
+            filterController.filterToSelection();
+        });
+
+        filterOffBtn().click(function (event) {
+            filterController.clear();
         });
     };
-
-    var filterBtn = function () { return $('#' + MapPanel.FILTER_ID); };
 
     this.tempSelectMode = function (selectOn) {
         if (selectOn) { map.enableSelect(); }
         // only disable select if both temp selectOn & selectModeOn are false
         else if (!selectModeOn) { map.disableSelect(); }
     };
+
+    var filterBtn = function () { return $('#' + MapPanel.FILTER_ID); };
+    var filterOffBtn = function () { return $('#' + MapPanel.FILTER_OFF_ID); };
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function (selectionLayer) {
@@ -103,11 +113,24 @@ var MapPanel = function () {
     };
 
     // draw map - without highlight/selection
-    this.draw = function () {
+    this.draw = function (layerSelector) {
         // this should then further select on what is unfiltered out
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
-        layer.features().style(map, 'fill', function (f) {
+        if (filterController.isActive()) {
+            var filteredOut = filterController.getUnfiltered();
+            filteredOut.style(map, 'fill-opacity', 0)
+                .style(map, 'stroke-opacity', 0);
+        }
+        else {
+            ServiceLayer.getLayerSelector().style(map, 'fill-opacity', FILL_OPACITY)
+                .style(map, 'stroke-opacity', 1);
+        }
+
+        // map is layer selector funniness. it tells layer selector to ONLY apply
+        // this styling to the map 'engine', which it happens to know about.
+        // MVC violation? discuss. rationalization: selectors are controller not model
+        layerSelector.style(map, 'fill', function (f) {
             return ServiceLayer.getColorForFeature(f);
         });
     };
@@ -115,3 +138,4 @@ var MapPanel = function () {
 };
 
 MapPanel.FILTER_ID = 'mapFilter';
+MapPanel.FILTER_OFF_ID = 'mapFilterOff';
