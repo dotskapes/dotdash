@@ -181,3 +181,141 @@ return buf.join("");
   rethrow(err, __jade[0].filename, __jade[0].lineno);
 }
 };
+jade.templates['panels'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+var selectBox_mixin = function(className, panels){
+var block = this.block, attributes = this.attributes || {}, escaped = this.escaped || {};
+__jade.unshift({ lineno: 2, filename: __jade[0].filename });
+__jade.unshift({ lineno: 2, filename: __jade[0].filename });
+buf.push('<select');
+buf.push(attrs({ "class": (className) }, {"class":true}));
+buf.push('>');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 3, filename: __jade[0].filename });
+// iterate panels
+;(function(){
+  if ('number' == typeof panels.length) {
+
+    for (var $index = 0, $$l = panels.length; $index < $$l; $index++) {
+      var option = panels[$index];
+
+__jade.unshift({ lineno: 3, filename: __jade[0].filename });
+__jade.unshift({ lineno: 4, filename: __jade[0].filename });
+buf.push('<option');
+buf.push(attrs({ 'value':(option.name) }, {"value":true}));
+buf.push('>');
+var __val__ = option.label
+buf.push(escape(null == __val__ ? "" : __val__));
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</option>');
+__jade.shift();
+__jade.shift();
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in panels) {
+      $$l++;      var option = panels[$index];
+
+__jade.unshift({ lineno: 3, filename: __jade[0].filename });
+__jade.unshift({ lineno: 4, filename: __jade[0].filename });
+buf.push('<option');
+buf.push(attrs({ 'value':(option.name) }, {"value":true}));
+buf.push('>');
+var __val__ = option.label
+buf.push(escape(null == __val__ ? "" : __val__));
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</option>');
+__jade.shift();
+__jade.shift();
+    }
+
+  }
+}).call(this);
+
+__jade.shift();
+__jade.shift();
+buf.push('</select>');
+__jade.shift();
+__jade.shift();
+};
+__jade.shift();
+__jade.unshift({ lineno: 6, filename: __jade[0].filename });
+buf.push('<div class="panels">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 7, filename: __jade[0].filename });
+buf.push('<div class="left">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 8, filename: __jade[0].filename });
+buf.push('<div class="select">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+selectBox_mixin('right-select', panels);
+__jade.shift();
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.unshift({ lineno: 10, filename: __jade[0].filename });
+buf.push('<div class="view">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.unshift({ lineno: 11, filename: __jade[0].filename });
+buf.push('<div class="right">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 12, filename: __jade[0].filename });
+buf.push('<div class="select">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+selectBox_mixin('left-select', panels);
+__jade.shift();
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.unshift({ lineno: 14, filename: __jade[0].filename });
+buf.push('<div class="view">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};
+jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};

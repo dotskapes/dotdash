@@ -51,9 +51,24 @@ var PanelManager = function () {
     };
 
     var setupDivs = function (parentSelector) {
-        // Add the panel div/containers to the document
-        var panelContainer = $('<div>').addClass('panels').append(left).append(right);
+        // Create the container for all the panels
+        var panelContainer = $(jade.templates['panels']({
+            panels: [
+                {
+                    name: 'map',
+                    label: 'Map'
+                },
+                {
+                    name: 'time',
+                    label: 'Time Series'
+                }
+            ]
+        }));
         $(parentSelector).append(panelContainer);
+
+        // Add the panel div/containers to the document
+        //var panelContainer = $('<div>').addClass('panels').append(left).append(right);
+        //$(parentSelector).append(panelContainer);
         $.each(panels, function (i, panel) {
             var panelDiv = panel.makeParentElement();
             panelContainer.append(panelDiv);
@@ -61,12 +76,12 @@ var PanelManager = function () {
     };
 
     var selectionDropdown = function () {
-        var selTemp = Handlebars.templates.select_template;
-        var leftCtxt = {selClass: "left-select"};
-        var leftSel = selTemp(leftCtxt);
-        left.append(leftSel);
-        right.append(selTemp({selClass: "right-select"}));
-        addPanelNamesToSelect();
+        //var selTemp = Handlebars.templates.select_template;
+        //var leftCtxt = {selClass: "left-select"};
+        //var leftSel = selTemp(leftCtxt);
+        //left.append(leftSel);
+        //right.append(selTemp({selClass: "right-select"}));
+        //addPanelNamesToSelect();
     };
 
     var addPanelNamesToSelect = function () {

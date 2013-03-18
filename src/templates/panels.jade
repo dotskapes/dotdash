@@ -1,0 +1,15 @@
+mixin selectBox (className, panels)
+  select(class = className)
+    each option in panels
+      option(value = option.name)= option.label
+
+.panels
+  .left
+    .select
+      mixin selectBox('right-select', panels)
+    .view
+  .right
+    .select
+      mixin selectBox('left-select', panels)
+    .view
+

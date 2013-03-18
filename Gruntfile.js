@@ -83,6 +83,8 @@ module.exports = function (grunt) {
         // have been brought in
         fs.writeFileSync(outputFile,'\nif (jade.templates === undefined) jade.templates = {};\n;');
 
+        var finished = 0;
+
         inputFiles.forEach (function (filename, i) {
             var buffer = fs.readFileSync (filename);
 
@@ -99,7 +101,9 @@ module.exports = function (grunt) {
                 jt += fn.toString () + ';';
 
                 fs.appendFileSync (outputFile, jt);
-                done (error === null);
+                finished ++;
+                if (finished == inputFiles.length)
+                    done (true);
             });
         });
     });
