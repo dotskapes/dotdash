@@ -4,7 +4,7 @@ goog.require('ColorMap');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 goog.require('Panel');
-goog.require('filterController');
+goog.require('filter');
 
 var MapPanel = function () {
 
@@ -81,11 +81,11 @@ var MapPanel = function () {
         });
 
         filterBtn().click(function (event) {
-            filterController.filterToSelection();
+            filter.filterToSelection();
         });
 
         filterOffBtn().click(function (event) {
-            filterController.clear();
+            filter.clear();
         });
     };
 
@@ -114,11 +114,9 @@ var MapPanel = function () {
 
     // draw map - without highlight/selection
     this.draw = function (layerSelector) {
-        // this should then further select on what is unfiltered out
-        // but we are not yet filtering...
-        // var unfiltered = filterQueries.get(allFeats);
-        if (filterController.isActive()) {
-            var filteredOut = filterController.getUnfiltered();
+        // some of this logic belong in panel_man?
+        if (filter.isFiltered()) {
+            var filteredOut = filter.getUnfiltered();
             filteredOut.style(map, 'fill-opacity', 0)
                 .style(map, 'stroke-opacity', 0);
         }
