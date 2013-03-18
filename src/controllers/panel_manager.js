@@ -26,10 +26,8 @@ var PanelManager = function () {
     // Format the two panels
     var left = $('<div>').attr('id', 'left');
     var right = $('<div>').attr('id', 'right');
-    var baseUrl;
 
     this.init = function (parentSelector, url) {
-        baseUrl = url;
         initPanels();
         setupDivs(parentSelector);
         selectionDropdown();
