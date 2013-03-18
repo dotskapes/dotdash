@@ -7,8 +7,7 @@ goog.require('selectionManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
-goog.require('filterController');
-
+goog.require('filter');
 
 var PanelManager = Backbone.View.extend({
 
@@ -39,6 +38,9 @@ var PanelManager = Backbone.View.extend({
 
         // It is now okay to bring in the actual panels
         this.setPanels();
+
+        this.initFilterListener();
+
     },
 
     // Shortcuts to the left and right panels, created by render
@@ -129,7 +131,7 @@ var PanelManager = Backbone.View.extend({
         $.each(this.model.get('panels'), function (i, panel) {
             // redraws all panels (without selection/highlight)
             // only draw filtered features
-            panel.draw(filterController.getFilter());
+            panel.draw(filter.getFilter());
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
@@ -156,7 +158,12 @@ var PanelManager = Backbone.View.extend({
             'left': leftIndex,
             'right': rightIndex
         });
+    },
+    
+    initFilterListener: function () {
+        filter.on('change', this.draw);
     }
+
 });
 
 var panelManager = new PanelManager({

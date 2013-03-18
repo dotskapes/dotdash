@@ -5,11 +5,10 @@ goog.addDependency('../src/controllers/aggregation_controller.js', ['aggregation
 goog.addDependency('../src/controllers/color_controller.js', ['colorController'], ['aggregationController', 'colorRampController', 'distribRangeController', 'timeStepController']);
 goog.addDependency('../src/controllers/color_ramp_controller.js', ['colorRampController'], ['ColorRamps', 'dashState']);
 goog.addDependency('../src/controllers/distrib_range_controller.js', ['distribRangeController'], ['ServiceLayer']);
-goog.addDependency('../src/controllers/filter_controller.js', ['filterController'], ['ServiceLayer', 'selectionManager']);
-goog.addDependency('../src/controllers/map_panel.js', ['MapPanel'], ['ColorMap', 'Panel', 'ServiceLayer', 'filterController', 'selectionManager']);
+goog.addDependency('../src/controllers/map_panel.js', ['MapPanel'], ['ColorMap', 'Panel', 'ServiceLayer', 'filter', 'selectionManager']);
 goog.addDependency('../src/controllers/mds_panel.js', ['MDSPanel'], ['Panel']);
 goog.addDependency('../src/controllers/panel.js', ['Panel'], ['ServiceLayer', 'selectionManager']);
-goog.addDependency('../src/controllers/panel_manager.js', ['panelManager'], ['MDSPanel', 'MapPanel', 'ServiceLayer', 'TimePanel', 'dashState', 'filterController', 'panelState', 'selectionManager']);
+goog.addDependency('../src/controllers/panel_manager.js', ['panelManager'], ['MDSPanel', 'MapPanel', 'ServiceLayer', 'TimePanel', 'dashState', 'filter', 'panelState', 'selectionManager']);
 goog.addDependency('../src/controllers/selection_manager.js', ['selectionManager'], []);
 goog.addDependency('../src/controllers/time_panel.js', ['TimePanel'], ['Panel', 'Popup', 'ServiceLayer', 'selectionManager']);
 goog.addDependency('../src/controllers/time_slider_controller.js', ['timeSlider'], ['ServiceLayer', 'dashState']);
@@ -21,6 +20,7 @@ goog.addDependency('../src/models/color_map.js', ['ColorMap'], ['ColorRamps', 'C
 goog.addDependency('../src/models/color_ramps.js', ['ColorRamps'], []);
 goog.addDependency('../src/models/color_scales.js', ['ColorScales'], []);
 goog.addDependency('../src/models/dash_state.js', ['dashState'], ['ColorRamps', 'ColorScales']);
+goog.addDependency('../src/models/filter.js', ['filter'], ['ServiceLayer', 'selectionManager']);
 goog.addDependency('../src/models/panel_state.js', ['panelState'], []);
 goog.addDependency('../src/services/aggregation_service.js', ['aggregationService'], ['AGGREGATION_FUNCTIONS', 'ServiceLayer']);
 goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['ColorRamps', 'ColorScales', 'dashState']);
