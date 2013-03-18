@@ -4,7 +4,7 @@ var SelectionManager = function () {
 
     var views = [];
     // this is a wigglemaps layer selector that selects for wigglemap features
-    var currentSelectionLayer;
+    var selection;
     var multiSelect = false;
     var SHIFT = 16;
 
@@ -19,28 +19,35 @@ var SelectionManager = function () {
 
     this.addView = function (view) { views.push(view); };
 
-    this.select = function (newSelectionLayer) {
+    this.getSelection = function () { return selection; };
+
+    // new Selection is a layer selector
+    this.select = function (newSelection) {
+        // for optimization purposes (faster to select on whole layer)a selection
+        // layer selector may actually contain items outside filter. strip em.
+        newSelection = filterController.filter(newSelection);
+
         $.each(views, function (i, view) {
             // deselect if not multi & have something to desel
-            if (!multiSelect && currentSelectionLayer) {
-                view.deselect(currentSelectionLayer);
+            if (!multiSelect && selection) {
+                view.deselect(selection);
             }
             // do selection
-            view.select(newSelectionLayer);
+            view.select(newSelection);
         });
-        if (!currentSelectionLayer || !multiSelect) {
-            currentSelectionLayer = newSelectionLayer;
+        if (!selection || !multiSelect) {
+            selection = newSelection;
         }
         // if multi (&& have cur), join new selection to current (for desel later)
         else {
-            currentSelectionLayer = currentSelectionLayer.join(newSelectionLayer);
+            selection = selection.join(newSelection);
         }
     };
 
     // reselect the current selection, needed if selection got lost(redraw)
     this.reselect = function () {
-        if (currentSelectionLayer) {
-            this.select(currentSelectionLayer);
+        if (selection) {
+            this.select(selection);
         }
     };
 
