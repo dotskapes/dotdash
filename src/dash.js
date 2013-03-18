@@ -6,19 +6,17 @@ goog.require('ServiceLayer');
 goog.require('colorController');
 goog.require('panelManager');
 
-var Dashboard = function (parentSelector, baseUrl) {
+var Dashboard = function (parentSelector) {
 
     $(parentSelector).append(timeSlider.$el);
     // Start the filter controller/view, has to be laid out before panels
     colorController.start($(parentSelector));
 
-    panelManager.init(parentSelector, baseUrl);
+    panelManager.init(parentSelector);
 
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url);
     };
-
-    //ServiceLayer.loadUrl(baseUrl + 'temp/flu_country.json');
 };
 
 // called by index.html to start up dash
@@ -26,10 +24,9 @@ window.dash = {
     ready: function (func) {
         $(document).ready(func);
     },
-    create: function (selector, baseUrl) {
+    create: function (selector) {
         selector = selector || 'body';
-        baseUrl = baseUrl || '';
 
-        return new Dashboard(selector, baseUrl);
+        return new Dashboard(selector);
     }
 };
