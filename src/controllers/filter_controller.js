@@ -3,49 +3,49 @@ goog.provide('filterController');
 goog.require('selectionManager');
 goog.require('ServiceLayer');
 
-var FilterController = function() {
+var FilterController = function () {
 
     var filter;
     var filterActive = false;
 
-    this.isActive = function() { return filterActive; }
+    this.isActive = function () { return filterActive; };
 
     // filter down to the current selection
-    this.filterToSelection = function() {
+    this.filterToSelection = function () {
         filter = selectionManager.getSelection();
         filterActive = true;
         panelManager.draw();
-    }
+    };
 
-    this.clear = function() {
+    this.clear = function () {
         // set to whole unfiltered layer
         filter = ServiceLayer.getLayerSelector();
         filterActive = false;
         panelManager.draw();
-    }
+    };
 
     // returns a layer selector of whats currently filtered.
     // if nothing filtered returns whole layer selector
-    this.getFilter = function() {
+    this.getFilter = function () {
         if (filter === undefined) {
             filter = ServiceLayer.getLayerSelector();
         }
         return filter;
-    }
+    };
 
-    this.getUnfiltered = function() {
+    this.getUnfiltered = function () {
         if (!filterActive) { return null; }
         return ServiceLayer.getLayerSelector().not(filter);
-    }
+    };
 
-    this.filter = function(selector) {
+    this.filter = function (selector) {
         if (filterActive) {
             return selector.both(filter);
         }
         else {
             return selector;
         }
-    }
+    };
 
 };
 

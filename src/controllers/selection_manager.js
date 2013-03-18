@@ -19,7 +19,7 @@ var SelectionManager = function () {
 
     this.addView = function (view) { views.push(view); };
 
-    this.getSelection = function() { return selection; }
+    this.getSelection = function () { return selection; };
 
     // new Selection is a layer selector
     this.select = function (newSelection) {

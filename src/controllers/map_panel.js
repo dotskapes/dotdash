@@ -84,7 +84,7 @@ var MapPanel = function () {
             filterController.filterToSelection();
         });
 
-        filterOffBtn().click(function(event) {
+        filterOffBtn().click(function (event) {
             filterController.clear();
         });
     };
@@ -95,8 +95,8 @@ var MapPanel = function () {
         else if (!selectModeOn) { map.disableSelect(); }
     };
 
-    var filterBtn = function() { return $('#'+MapPanel.FILTER_ID); }
-    var filterOffBtn = function() { return $('#'+MapPanel.FILTER_OFF_ID); }
+    var filterBtn = function () { return $('#' + MapPanel.FILTER_ID); };
+    var filterOffBtn = function () { return $('#' + MapPanel.FILTER_OFF_ID); };
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function (selectionLayer) {
@@ -119,11 +119,11 @@ var MapPanel = function () {
         // var unfiltered = filterQueries.get(allFeats);
         if (filterController.isActive()) {
             var filteredOut = filterController.getUnfiltered();
-            filteredOut.style(map,'fill-opacity',0)
-                .style(map,'stroke-opacity',0);
+            filteredOut.style(map, 'fill-opacity', 0)
+                .style(map, 'stroke-opacity', 0);
         }
         else {
-            ServiceLayer.getLayerSelector().style(map,'fill-opacity',FILL_OPACITY)
+            ServiceLayer.getLayerSelector().style(map, 'fill-opacity', FILL_OPACITY)
                 .style(map, 'stroke-opacity', 1);
         }
 
