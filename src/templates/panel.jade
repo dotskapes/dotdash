@@ -1,4 +1,4 @@
-.view(id = label)
+.panel(id = name)
   unless configOptions
     - return // return if no configOptions defined
   .buttons
@@ -11,5 +11,5 @@
           - cls = "icon selection_box" + (opts.enabled ? " enabled" : "");
           a(class=cls, title=opts.hoverText.select)
         if cfgOpt.type === Panel.BUTTON_TYPES.FILTER
-          button(id = label+'Filter') Filter
-          button(id = label+'FilterOff') Filter Off
+          button(id = name+'Filter') Filter
+          button(id = name+'FilterOff') Filter Off

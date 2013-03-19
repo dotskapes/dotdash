@@ -1,8 +1,11 @@
 html, body, #dashboard {
-  height: 100%;
   -moz-user-select: none;
   -webkit-user-select: none;
-  user-select: none; }
+  user-select: none;
+  overflow: hidden;
+  height: 100%;
+  margin: 0px;
+  padding: 0px; }
 
 .collapse-toggler .collapse-arrow {
   display: inline-block; }
@@ -17,32 +20,23 @@ html, body, #dashboard {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  height: 100%;
-  overflow: hidden;
-  position: relative; }
-  .panels .view {
-    position: absolute;
-    top: 22px;
-    bottom: 0;
-    width: 50%;
-    float: left;
-    display: none; }
-    .panels .view.left-panel {
-      left: 0; }
-    .panels .view.right-panel {
-      right: 0; }
-    .panels .view .buttons {
+  margin: 0px;
+  padding: 0px;
+  margin-right: 200px; }
+  .panels .left {
+    float: left; }
+  .panels .pane {
+    display: inline-block;
+    width: 50%; }
+    .panels .pane .view .panel {
+      height: 100%; }
+    .panels .pane .view .buttons {
       position: absolute;
       top: 0px;
       right: 0px; }
-    .panels .view .button {
+    .panels .pane .view .button {
       margin: 3px;
       cursor: pointer; }
-
-#left, #right {
-  height: 22px;
-  width: 50%;
-  float: left; }
 
 #options {
   float: right;

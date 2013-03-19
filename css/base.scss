@@ -4,14 +4,19 @@
     #{$key}: $value;
 }
 
+$optionsWidth: 200px;
+
 @mixin rounded_corners ($radius, $leftOrRight) {
     @include vendor_prefix(border-top-#{$leftOrRight}-radius, $radius);
     @include vendor_prefix(border-bottom-#{$leftOrRight}-radius, $radius);
 } 
 
 html, body, #dashboard {
-    height: 100%;
     @include vendor_prefix (user-select, none);
+    overflow: hidden;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .collapse-toggler {
@@ -34,53 +39,44 @@ html, body, #dashboard {
     }
 }
 
-$dropdownHeight: 22px;
-$panelWidth: 50%;
-
 .panels {
     @include vendor_prefix(user-select, none);
-    height: 100%;
-    overflow: hidden;
-    position: relative;
+
+    margin: 0px;
+    padding: 0px;
+    margin-right: $optionsWidth;
     
-    .view {
-        position: absolute;
-        top: $dropdownHeight;
-        bottom: 0;
-        width: $panelWidth;
+    .left {
         float: left;
-        display: none;
+    }
+    
+    .pane {
+        display: inline-block;
+        width: 50%;
 
-        &.left-panel {
-            left: 0;
-        }
-
-        &.right-panel {
-            right: 0;
-        }
-
-        .buttons {
-            position: absolute;
-            top: 0px;
-            right: 0px;   
-        }
-
-        .button {
-            margin: 3px;
-            cursor: pointer;
+        .view {
+            
+            .panel {
+                height: 100%;
+            }
+            
+            .buttons {
+                position: absolute;
+                top: 0px;
+                right: 0px;   
+            }
+            
+            .button {
+                margin: 3px;
+                cursor: pointer;
+            }
         }
     }
 }
 
-#left, #right {
-    height: $dropdownHeight;
-    width: $panelWidth;
-    float: left;
-}
-
 #options {
     float: right;
-    width: 200px;
+    width: $optionsWidth;
 }
 
 #wigglemap, #timeseries {

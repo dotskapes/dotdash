@@ -12,7 +12,7 @@ var Dashboard = function (parentSelector) {
     // Start the filter controller/view, has to be laid out before panels
     colorController.start($(parentSelector));
 
-    panelManager.init(parentSelector);
+    panelManager.start($(parentSelector));
 
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url);
