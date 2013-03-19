@@ -161,7 +161,8 @@ var PanelManager = Backbone.View.extend({
     },
     
     initFilterListener: function () {
-        filter.on('change', this.draw);
+        var that = this;
+        filter.on('change', function() { that.draw(); });
     }
 
 });
