@@ -159,10 +159,10 @@ var PanelManager = Backbone.View.extend({
             'right': rightIndex
         });
     },
-    
+
     initFilterListener: function () {
         var that = this;
-        filter.on('change', function() { that.draw(); });
+        filter.on('change', function () { that.draw(); });
     }
 
 });
