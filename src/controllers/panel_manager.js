@@ -6,7 +6,7 @@ goog.require('selectionManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
-goog.require('filterController');
+goog.require('filter');
 
 // javascripts funny Singleton pattern
 var PanelManager = function () {
@@ -33,6 +33,7 @@ var PanelManager = function () {
         setupDivs(parentSelector);
         selectionDropdown();
         initSelectListeners();
+        initFilterListener();
         showFirstTwoPanels();
     };
 
@@ -85,7 +86,7 @@ var PanelManager = function () {
         $.each(panels, function (i, panel) {
             // redraws all panels (without selection/highlight)
             // only draw filtered features
-            panel.draw(filterController.getFilter());
+            panel.draw(filter.getFilter());
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
@@ -194,6 +195,10 @@ var PanelManager = function () {
         // add selection listeners to left right select dropdowns
         selectListener($('.left-select'));
         selectListener($('.right-select'));
+    };
+
+    var initFilterListener = function () {
+        filter.on('change', that.draw);
     };
 
     var showFirstTwoPanels = function () {
