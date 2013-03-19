@@ -4,7 +4,7 @@
   .buttons
     each cfgOpt, key in configOptions
       - var opts = cfgOpt.options
-      .button(id = label + '-' + cfgOpt.type + '-button')
+      .button(id = name + '-' + cfgOpt.type + '-button')
         if cfgOpt.type === Panel.BUTTON_TYPES.SELECTION_TOGGLE
           - var cls = "icon move_arrow" + (opts.enabled ? "" : " enabled");
           a(class=cls, title=opts.hoverText.move)
