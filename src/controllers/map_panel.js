@@ -81,7 +81,7 @@ var MapPanel = function () {
         });
 
         filterBtn().click(function (event) {
-            filter.filterToSelection();
+            filter.setFilterToSelection();
         });
 
         filterOffBtn().click(function (event) {
