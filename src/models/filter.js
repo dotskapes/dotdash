@@ -10,9 +10,7 @@ goog.require('ServiceLayer');
 var Filter = Backbone.Model.extend({
     defaults: {
         // filter selector layer (from wiggle maps)
-        filterSelector: undefined,
-        // true - filtering is currently applied
-        isFiltered: false
+        filterSelector: undefined
     },
 
     isFiltered: function () {
@@ -20,7 +18,7 @@ var Filter = Backbone.Model.extend({
     },
 
     // set the filter to currently selected
-    filterToSelection: function () {
+    setFilterToSelection: function () {
         this.set('filterSelector', selectionManager.getSelection());
     },
 
