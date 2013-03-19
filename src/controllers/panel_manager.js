@@ -71,8 +71,8 @@ var PanelManager = Backbone.View.extend({
         this.$right = this.$el.find('.right');
     },
 
+    // Configure the height of the panels so that they take up the remainder of the screen
     setSize: function () {
-        //this.$el.css('height', $(window).height() - this.$el.offset().top);
         this.$left.find('.view').css('height', $(window).height() - this.$left.find('.view').offset().top);
         this.$right.find('.view').css('height', $(window).height() - this.$right.find('.view').offset().top);
     },
@@ -82,9 +82,7 @@ var PanelManager = Backbone.View.extend({
         if (!panel.created) {
             panel.create();
         }
-        else {
-            panel.show();
-        }
+        panel.show();
     },
 
     setPanel: function (side) {

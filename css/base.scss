@@ -4,6 +4,8 @@
     #{$key}: $value;
 }
 
+$optionsWidth: 200px;
+
 @mixin rounded_corners ($radius, $leftOrRight) {
     @include vendor_prefix(border-top-#{$leftOrRight}-radius, $radius);
     @include vendor_prefix(border-bottom-#{$leftOrRight}-radius, $radius);
@@ -42,7 +44,7 @@ html, body, #dashboard {
 
     margin: 0px;
     padding: 0px;
-    margin-right: 210px;
+    margin-right: $optionsWidth;
     
     .left {
         float: left;
@@ -74,7 +76,7 @@ html, body, #dashboard {
 
 #options {
     float: right;
-    width: 200px;
+    width: $optionsWidth;
 }
 
 #wigglemap, #timeseries {

@@ -81,29 +81,30 @@ module.exports = function (grunt) {
 
         // Check to see if jade templates are defined: Don't clobber templates that 
         // have been brought in
-        fs.writeFileSync(outputFile,'\nif (jade.templates === undefined) jade.templates = {};\n;');
+        fs.writeFileSync(outputFile, '\nif (jade.templates === undefined) jade.templates = {};\n;');
 
         var finished = 0;
 
-        inputFiles.forEach (function (filename, i) {
-            var buffer = fs.readFileSync (filename);
+        inputFiles.forEach(function (filename, i) {
+            var buffer = fs.readFileSync(filename);
 
-            var fn = jade.compile (buffer, {
+            var fn = jade.compile(buffer, {
                 client: true
             });
 
-            var done = task.async ();
+            var done = task.async();
 
             // get basefilename sans .jade
-            exec ('basename ' + filename + ' .jade', function (error, stdout, stderr) {
-                grunt.log.write("\n append file "+filename+inputFiles.length+stdout);
+            exec('basename ' + filename + ' .jade', function (error, stdout, stderr) {
+                if (error !== null)
+                    done(false);
                 var jt = '\njade.templates[\'' + stdout.trim () + '\'] = ';
-                jt += fn.toString () + ';';
+                jt += fn.toString() + ';';
 
-                fs.appendFileSync (outputFile, jt);
+                fs.appendFileSync(outputFile, jt);
                 finished ++;
                 if (finished == inputFiles.length)
-                    done (true);
+                    done(true);
             });
         });
     });
