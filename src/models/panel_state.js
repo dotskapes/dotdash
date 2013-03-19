@@ -1,7 +1,5 @@
 goog.provide('panelState');
 
-goog.require('dashState');
-
 var PanelState = Backbone.Model.extend({
     defaults: {
         panels: [],

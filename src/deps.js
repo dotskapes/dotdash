@@ -21,7 +21,7 @@ goog.addDependency('../src/models/color_map.js', ['ColorMap'], ['ColorRamps', 'C
 goog.addDependency('../src/models/color_ramps.js', ['ColorRamps'], []);
 goog.addDependency('../src/models/color_scales.js', ['ColorScales'], []);
 goog.addDependency('../src/models/dash_state.js', ['dashState'], ['ColorRamps', 'ColorScales']);
-goog.addDependency('../src/models/panel_state.js', ['panelState'], ['dashState']);
+goog.addDependency('../src/models/panel_state.js', ['panelState'], []);
 goog.addDependency('../src/services/aggregation_service.js', ['aggregationService'], ['AGGREGATION_FUNCTIONS', 'ServiceLayer']);
 goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['ColorRamps', 'ColorScales', 'dashState']);
 goog.addDependency('../src/views/popup.js', ['Popup'], []);

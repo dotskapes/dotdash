@@ -11,7 +11,6 @@ goog.require('filterController');
 
 
 var PanelManager = Backbone.View.extend({
-    init: function () {},
 
     // A mapping between names of panels and their actual html element
     panelDivs: {},
