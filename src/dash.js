@@ -1,3 +1,5 @@
+another lint error
+
 goog.provide('dash');
 
 goog.require('timeSlider');
