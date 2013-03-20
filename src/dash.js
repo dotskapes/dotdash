@@ -1,3 +1,5 @@
+this should break the build
+
 goog.provide('dash');
 
 goog.require('timeSlider');
