@@ -81,7 +81,7 @@ var ColorMap = function (layer) {
         }
     });
 
-    this.colorForValue = function (feature) {
+    this.colorForFeature = function (feature) {
         var field = dashState.get('attr');
         var colorRamp = dashState.get('colorRamp');
         var dist = dashState.get('colorDist');
