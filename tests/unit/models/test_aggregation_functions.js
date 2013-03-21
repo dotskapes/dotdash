@@ -20,8 +20,8 @@ test("min test", function () {
 
     equal(min(makeObject([10, 55, 63, 4])), 4, "mean works");
 
-    equal(min({}), Infinity, "mean of empty object is Infinity");
-    equal(min(makeObject([2])), 2, "mean of one element is the element");
+    equal(min({}), Infinity, "min of empty object is Infinity");
+    equal(min(makeObject([2])), 2, "min of one element is the element");
 });
 
 test("max test", function () {
@@ -29,6 +29,6 @@ test("max test", function () {
 
     equal(max(makeObject([10, 55, 63, 4])), 63, "mean works");
 
-    equal(max({}), -Infinity, "mean of empty object is -Infinity");
-    equal(max(makeObject([2])), 2, "mean of one element is the element");
+    equal(max({}), -Infinity, "max of empty object is -Infinity");
+    equal(max(makeObject([2])), 2, "max of one element is the element");
 });
