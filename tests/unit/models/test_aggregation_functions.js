@@ -27,7 +27,7 @@ test("min test", function () {
 test("max test", function () {
     var max = AGGREGATION_FUNCTIONS.max;
 
-    equal(max(makeObject([10, 55, 63, 4])), 63, "mean works");
+    equal(max(makeObject([10, 55, 63, 4])), 63, "max works");
 
     equal(max({}), -Infinity, "max of empty object is -Infinity");
     equal(max(makeObject([2])), 2, "max of one element is the element");
