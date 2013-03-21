@@ -18,7 +18,7 @@ test("mean test", function () {
 test("min test", function () {
     var min = AGGREGATION_FUNCTIONS.min;
 
-    equal(min(makeObject([10, 55, 63, 4])), 4, "mean works");
+    equal(min(makeObject([10, 55, 63, 4])), 4, "min works");
 
     equal(min({}), Infinity, "min of empty object is Infinity");
     equal(min(makeObject([2])), 2, "min of one element is the element");
