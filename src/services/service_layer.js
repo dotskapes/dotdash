@@ -114,7 +114,7 @@ var ServiceLayer = (function () {
         },
 
         getColorForFeature : function (feature) {
-            return colorMap.colorForValue(feature);
+            return colorMap.colorForFeature(feature);
         }
     };
 } ());

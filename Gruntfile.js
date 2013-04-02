@@ -11,12 +11,16 @@ module.exports = function (grunt) {
             outputFile: "built/compiled_jade.js"
         },
 
+        qunit: {
+            all: ['tests/**/*.html']
+        },
+
         shell: {
             handlebars: {
                 command: 'node_modules/handlebars/bin/handlebars src/templates/ -f src/templates/compiled.js'
             },
             lint: {
-                command: 'node_modules/jshint/bin/jshint --reporter build/jshint_reporter.js src',
+                command: 'node_modules/jshint/bin/jshint --reporter build/jshint_reporter.js src tests',
                 options: {stdout: true,
                           failOnError: true}
             },
@@ -66,6 +70,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
 
     // jade compiler oddly gives anonymous fn, this gives handle to that fn
     grunt.registerTask('jade', 'Build the templates', function (inputFile) {
@@ -111,5 +116,5 @@ module.exports = function (grunt) {
 
 
     // Default task(s).
-    grunt.registerTask('default', ['shell','jade']);
+    grunt.registerTask('default', ['shell','jade','qunit']);
 };
