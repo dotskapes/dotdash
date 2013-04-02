@@ -21,7 +21,7 @@ var ColorController = function () {
 
     var render = function () {
         // hard-coded filters for now
-        var filters = [
+        var colorings = [
             { name: TimeStepController.NAME,
               title: 'Time Step',
               options: []
@@ -45,8 +45,8 @@ var ColorController = function () {
             }
         ];
 
-        var template = Handlebars.templates.filter_template;
-        return template({filters: filters});
+        var template = jade.templates.coloring;
+        return template({colorings: colorings});
     };
 
     var initControllers = function () {
