@@ -17,11 +17,11 @@ var FilterController = Backbone.View.extend({
 
     wireUp: function () {
         var that = this;
-        $('#Filter').click(function (evt) {
+        $('#filter-selected').click(function (evt) {
             that.model.setFilterToSelection();
         });
 
-        $('#FilterOff').click(function (evt) {
+        $('#filter-off').click(function (evt) {
             that.model.clear();
         });
     }
