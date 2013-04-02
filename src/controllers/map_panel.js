@@ -12,12 +12,8 @@ var MapPanel = function () {
                                      options: {hoverText:
                                                   {move: "Move Map",
                                                    select: "Select Features"},
-                                               enabled: false}},
-                         filter: {type: Panel.BUTTON_TYPES.FILTER,
-                                  options: {hoverText:
-                                            { filter: "Filter" }
-                                           }
-                                 }};
+                                               enabled: false}}
+                        };
 
     var FILL_OPACITY = 0.9;
 
@@ -80,13 +76,6 @@ var MapPanel = function () {
             that.tempSelectMode(selectModeOn);
         });
 
-        filterBtn().click(function (event) {
-            filter.setFilterToSelection();
-        });
-
-        filterOffBtn().click(function (event) {
-            filter.clear();
-        });
     };
 
     this.tempSelectMode = function (selectOn) {
@@ -95,8 +84,6 @@ var MapPanel = function () {
         else if (!selectModeOn) { map.disableSelect(); }
     };
 
-    var filterBtn = function () { return $('#' + MapPanel.FILTER_ID); };
-    var filterOffBtn = function () { return $('#' + MapPanel.FILTER_OFF_ID); };
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function (selectionLayer) {
@@ -135,5 +122,3 @@ var MapPanel = function () {
 
 };
 
-MapPanel.FILTER_ID = 'mapFilter';
-MapPanel.FILTER_OFF_ID = 'mapFilterOff';
