@@ -2,8 +2,9 @@ goog.provide('Panel');
 
 goog.require('ServiceLayer');
 goog.require('selectionManager');
+goog.require('moveSelModel');
 
-var Panel = function (label, name, configOptions) {
+var Panel = function (label, name) {
 
     var ALT = 18;
     var that = this;
@@ -13,6 +14,11 @@ var Panel = function (label, name, configOptions) {
     this.name = name;
     // for display
     this.label = label;
+
+    this.init = function () {
+        this.addKeyListeners();
+        this.addMoveSelListener();
+    };
 
     this.show = function () {
         if (this.container) {
@@ -27,7 +33,7 @@ var Panel = function (label, name, configOptions) {
 
     this.makeParentElement = function () {
         var template = jade.templates.panel;
-        this.parentElement = $(template({name: this.name, configOptions: configOptions}));
+        this.parentElement = $(template({name: this.name}));
         return this.parentElement;
     };
 
@@ -44,21 +50,35 @@ var Panel = function (label, name, configOptions) {
     this.select = function () {};
     this.deselect = function () {};
     this.draw = function (layerSelector) {};
+    this.getWiggleView = function () {};
 
     // temporarily go into select mode (for modifier/ctrl hotkey)
     this.tempSelectMode = function (tempSelectOn) {};
 
     // control hotkey -> temporary select mode
-    var addKeyListeners = function () {
+    this.addKeyListeners = function () {
         $(document).on('keydown', function (e) {
-            if (e.which === ALT) { that.tempSelectMode(true); }
+            if (e.which === ALT) { moveSelModel.set('selectOverride', true); }
         });
         $(document).on('keyup', function (e) {
-            if (e.which === ALT) { that.tempSelectMode(false); }
+            if (e.which === ALT) { moveSelModel.set('selectOverride', false); }
         });
     };
 
-    addKeyListeners();
+    this.addMoveSelListener = function () {
+        moveSelModel.on('change', function (m) {
+            //toggle cursor from pointer to 4HeadedArrow. not working! put in panel?
+            //$(event.currentTarget).parents('.view').toggleClass('selection');
+            var view = this.getWiggleView();
+            if (view) {
+                if (m.isMoveMode()) { view.disableSelect(); }
+                else { view.enableSelect(); }
+            }
+        }, this);
+    };
+
+    this.init();
+
 };
 
 Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection', FILTER: 'filter'};

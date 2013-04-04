@@ -7,14 +7,8 @@ goog.require('Popup');
 
 var TimePanel = function () {
 
-    var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
-                                     options: {hoverText:
-                                                  {move: "Move Panel",
-                                                   select: "Select Time Steps"},
-                                               enabled: false}}};
-
     // Panel superclass of TimePanel
-    Panel.call(this, 'Time Series', 'time', configOptions);
+    Panel.call(this, 'Time Series', 'time');
 
     // wiggle.Graph object
     var graph;
@@ -29,6 +23,8 @@ var TimePanel = function () {
 
         this.created = true;
     };
+
+    this.getWiggleView = function () { return graph; };
 
     this.resize = function () {
         graph.resize();
@@ -58,16 +54,6 @@ var TimePanel = function () {
         graph.select(function (box) {
             selectionLayer = graph.search(layer, box);
             that.fireSelect(selectionLayer);
-        });
-
-        $('#time-selection-button').click(function (event) {
-            $(event.currentTarget).parents('.view').toggleClass('selection');
-            $(event.currentTarget).children('.icon').toggleClass('enabled');
-            if ($(event.currentTarget).children('.selection_box').hasClass('enabled')) {
-                graph.enableSelect();
-            } else {
-                graph.disableSelect();
-            }
         });
     };
 
