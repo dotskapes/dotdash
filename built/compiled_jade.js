@@ -1,21 +1,6 @@
 
 if (jade.templates === undefined) jade.templates = {};
 ;
-jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
-attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
-var __jade = [{ lineno: 1, filename: undefined }];
-try {
-var buf = [];
-with (locals || {}) {
-var interp;
-__jade.unshift({ lineno: 1, filename: __jade[0].filename });
-__jade.shift();
-}
-return buf.join("");
-} catch (err) {
-  rethrow(err, __jade[0].filename, __jade[0].lineno);
-}
-};
 jade.templates['panels'] = function anonymous(locals, attrs, escape, rethrow, merge) {
 attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
 var __jade = [{ lineno: 1, filename: undefined }];
@@ -149,123 +134,50 @@ buf.push('<div');
 buf.push(attrs({ 'id':(name), "class": ('panel') }, {"id":true}));
 buf.push('>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</div>');
+__jade.shift();
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};
+jade.templates['moveSel'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
+buf.push('<div id="moveSel">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 2, filename: __jade[0].filename });
-if (!( configOptions))
-{
+buf.push('<h3>');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.unshift({ lineno: 2, filename: __jade[0].filename });
+buf.push('Move/Select');
+__jade.shift();
+__jade.shift();
+buf.push('</h3>');
+__jade.shift();
 __jade.unshift({ lineno: 3, filename: __jade[0].filename });
-__jade.unshift({ lineno: 3, filename: __jade[0].filename });
- return // return if no configOptions defined
-__jade.shift();
-__jade.shift();
-}
-__jade.shift();
+buf.push('<div id="move-sel-toggle" class="button">');
+__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 4, filename: __jade[0].filename });
-buf.push('<div class="buttons">');
+buf.push('<a title="Move Views in Panels" class="icon move_arrow enabled">');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
+__jade.shift();
+buf.push('</a>');
+__jade.shift();
 __jade.unshift({ lineno: 5, filename: __jade[0].filename });
-// iterate configOptions
-;(function(){
-  if ('number' == typeof configOptions.length) {
-
-    for (var key = 0, $$l = configOptions.length; key < $$l; key++) {
-      var cfgOpt = configOptions[key];
-
-__jade.unshift({ lineno: 5, filename: __jade[0].filename });
-__jade.unshift({ lineno: 6, filename: __jade[0].filename });
- var opts = cfgOpt.options
-__jade.shift();
-__jade.unshift({ lineno: 7, filename: __jade[0].filename });
-buf.push('<div');
-buf.push(attrs({ 'id':(name + '-' + cfgOpt.type + '-button'), "class": ('button') }, {"id":true}));
-buf.push('>');
-__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
-__jade.unshift({ lineno: 8, filename: __jade[0].filename });
-if ( cfgOpt.type === Panel.BUTTON_TYPES.SELECTION_TOGGLE)
-{
-__jade.unshift({ lineno: 9, filename: __jade[0].filename });
-__jade.unshift({ lineno: 9, filename: __jade[0].filename });
- var cls = "icon move_arrow" + (opts.enabled ? "" : " enabled");
-__jade.shift();
-__jade.unshift({ lineno: 10, filename: __jade[0].filename });
-buf.push('<a');
-buf.push(attrs({ 'title':(opts.hoverText.move), "class": (cls) }, {"class":true,"title":true}));
-buf.push('>');
+buf.push('<a title="Select Features in Panels" class="icon selection_box">');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.shift();
 buf.push('</a>');
-__jade.shift();
-__jade.unshift({ lineno: 11, filename: __jade[0].filename });
- cls = "icon selection_box" + (opts.enabled ? " enabled" : "");
-__jade.shift();
-__jade.unshift({ lineno: 12, filename: __jade[0].filename });
-buf.push('<a');
-buf.push(attrs({ 'title':(opts.hoverText.select), "class": (cls) }, {"class":true,"title":true}));
-buf.push('>');
-__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
-__jade.shift();
-buf.push('</a>');
-__jade.shift();
-__jade.shift();
-}
-__jade.shift();
-__jade.shift();
-buf.push('</div>');
-__jade.shift();
-__jade.shift();
-    }
-
-  } else {
-    var $$l = 0;
-    for (var key in configOptions) {
-      $$l++;      var cfgOpt = configOptions[key];
-
-__jade.unshift({ lineno: 5, filename: __jade[0].filename });
-__jade.unshift({ lineno: 6, filename: __jade[0].filename });
- var opts = cfgOpt.options
-__jade.shift();
-__jade.unshift({ lineno: 7, filename: __jade[0].filename });
-buf.push('<div');
-buf.push(attrs({ 'id':(name + '-' + cfgOpt.type + '-button'), "class": ('button') }, {"id":true}));
-buf.push('>');
-__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
-__jade.unshift({ lineno: 8, filename: __jade[0].filename });
-if ( cfgOpt.type === Panel.BUTTON_TYPES.SELECTION_TOGGLE)
-{
-__jade.unshift({ lineno: 9, filename: __jade[0].filename });
-__jade.unshift({ lineno: 9, filename: __jade[0].filename });
- var cls = "icon move_arrow" + (opts.enabled ? "" : " enabled");
-__jade.shift();
-__jade.unshift({ lineno: 10, filename: __jade[0].filename });
-buf.push('<a');
-buf.push(attrs({ 'title':(opts.hoverText.move), "class": (cls) }, {"class":true,"title":true}));
-buf.push('>');
-__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
-__jade.shift();
-buf.push('</a>');
-__jade.shift();
-__jade.unshift({ lineno: 11, filename: __jade[0].filename });
- cls = "icon selection_box" + (opts.enabled ? " enabled" : "");
-__jade.shift();
-__jade.unshift({ lineno: 12, filename: __jade[0].filename });
-buf.push('<a');
-buf.push(attrs({ 'title':(opts.hoverText.select), "class": (cls) }, {"class":true,"title":true}));
-buf.push('>');
-__jade.unshift({ lineno: undefined, filename: __jade[0].filename });
-__jade.shift();
-buf.push('</a>');
-__jade.shift();
-__jade.shift();
-}
-__jade.shift();
-__jade.shift();
-buf.push('</div>');
-__jade.shift();
-__jade.shift();
-    }
-
-  }
-}).call(this);
-
 __jade.shift();
 __jade.shift();
 buf.push('</div>');
@@ -591,6 +503,21 @@ __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.shift();
 buf.push('</div>');
 __jade.shift();
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};
+jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.shift();
 }
 return buf.join("");

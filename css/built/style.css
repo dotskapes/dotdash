@@ -30,13 +30,6 @@ html, body, #dashboard {
     width: 50%; }
     .panels .pane .view .panel {
       height: 100%; }
-    .panels .pane .view .buttons {
-      position: absolute;
-      top: 0px;
-      right: 0px; }
-    .panels .pane .view .button {
-      margin: 3px;
-      cursor: pointer; }
 
 #sidebar {
   float: right;
@@ -51,12 +44,12 @@ html, body, #dashboard {
     cursor: crosshair; }
 
 .icon {
-  background-color: white;
+  background-color: #aaa;
   padding: 2px 13px; }
   .icon:hover {
-    background-color: #dddddd; }
+    background-color: #ccc; }
   .icon.enabled, .icon:active {
-    background-color: #aaaaaa; }
+    background-color: lightgreen; }
   .icon:first-of-type {
     border-right: 3px solid #eeeeee;
     -moz-border-top-left-radius: 5px;

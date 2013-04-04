@@ -1,12 +1,1 @@
 .panel(id = name)
-  unless configOptions
-    - return // return if no configOptions defined
-  .buttons
-    each cfgOpt, key in configOptions
-      - var opts = cfgOpt.options
-      .button(id = name + '-' + cfgOpt.type + '-button')
-        if cfgOpt.type === Panel.BUTTON_TYPES.SELECTION_TOGGLE
-          - var cls = "icon move_arrow" + (opts.enabled ? "" : " enabled");
-          a(class=cls, title=opts.hoverText.move)
-          - cls = "icon selection_box" + (opts.enabled ? " enabled" : "");
-          a(class=cls, title=opts.hoverText.select)

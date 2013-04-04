@@ -7,7 +7,6 @@ var FilterController = Backbone.View.extend({
     start: function ($parent) {
         $parent.append (this.$el);
         this.render();
-        this.wireUp();
     },
 
     render: function () {
@@ -15,16 +14,19 @@ var FilterController = Backbone.View.extend({
         this.$el.append(container);
     },
 
-    wireUp: function () {
-        var that = this;
-        $('#filter-selected').click(function (evt) {
-            that.model.setFilterToSelection();
-        });
+    events: {
+        "click #filter-selected" : "filterSel",
+        "click #filter-off" : "unfilter"
+    },
 
-        $('#filter-off').click(function (evt) {
-            that.model.clear();
-        });
+    filterSel: function () {
+        this.model.setFilterToSelection();
+    },
+
+    unfilter: function () {
+        this.model.clear();
     }
+
 });
 
 var filterController = new FilterController({ model: filter });
