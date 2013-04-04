@@ -1,5 +1,6 @@
 goog.provide('sidebarController');
 
+goog.require('moveSelController');
 goog.require('filterController');
 goog.require('colorController');
 
@@ -12,8 +13,9 @@ var SidebarController = Backbone.View.extend({
     },
 
     render: function () {
-        var container = $(jade.templates.sidebar());
+        var container = $(jade.templates.sidebar()); // just a div
         this.$el.append(container);
+        moveSelController.start(container);
         filterController.start(container);
         colorController.start(container);
     }
