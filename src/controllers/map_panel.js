@@ -8,17 +8,10 @@ goog.require('filter');
 
 var MapPanel = function () {
 
-    var configOptions = {selection: {type: Panel.BUTTON_TYPES.SELECTION_TOGGLE,
-                                     options: {hoverText:
-                                                  {move: "Move Map",
-                                                   select: "Select Features"},
-                                               enabled: false}}
-                        };
-
     var FILL_OPACITY = 0.9;
 
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this, 'Map', 'map', configOptions);
+    Panel.call(this, 'Map', 'map');
 
     // wiggle.Map object
     var map;
@@ -27,6 +20,9 @@ var MapPanel = function () {
     var selectModeOn = false;
 
     this.getMap = function () { return map; };
+
+    // if panel has a wiggle view of some sort then return it, in this case map
+    this.getWiggleView = function () { return map; };
 
     this.create = function () {
         this.container = $('<div>').attr('id', 'wigglemap');
@@ -58,6 +54,7 @@ var MapPanel = function () {
         map.append(layer);
     };
 
+    // move/select is dealt with in super class panel
     var wireupMap = function () {
         // listen for map select and send selection to selectionManager
         map.select(function (box) {
@@ -67,23 +64,7 @@ var MapPanel = function () {
             // call to panel.js superclass
             that.fireSelect(selectionLayerSelector);
         });
-
-        $('#map-selection-button').click(function (event) {
-            $(event.currentTarget).parents('.view').toggleClass('selection');
-            $(event.currentTarget).children('.icon').toggleClass('enabled');
-            selectModeOn =
-                $(event.currentTarget).children('.selection_box').hasClass('enabled');
-            that.tempSelectMode(selectModeOn);
-        });
-
     };
-
-    this.tempSelectMode = function (selectOn) {
-        if (selectOn) { map.enableSelect(); }
-        // only disable select if both temp selectOn & selectModeOn are false
-        else if (!selectModeOn) { map.disableSelect(); }
-    };
-
 
     // Selection methods/interface - called by SelectionManager
     this.deselect = function (selectionLayer) {
