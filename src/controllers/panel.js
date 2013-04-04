@@ -15,9 +15,9 @@ var Panel = function (label, name) {
     // for display
     this.label = label;
 
-    this.init = function () {
-        this.addKeyListeners();
-        this.addMoveSelListener();
+    init = function () {
+        addKeyListeners();
+        addMoveSelListener();
     };
 
     this.show = function () {
@@ -56,7 +56,7 @@ var Panel = function (label, name) {
     this.tempSelectMode = function (tempSelectOn) {};
 
     // control hotkey -> temporary select mode
-    this.addKeyListeners = function () {
+    var addKeyListeners = function () {
         $(document).on('keydown', function (e) {
             if (e.which === ALT) { moveSelModel.set('selectOverride', true); }
         });
@@ -65,11 +65,11 @@ var Panel = function (label, name) {
         });
     };
 
-    this.addMoveSelListener = function () {
+    var addMoveSelListener = function () {
         moveSelModel.on('change', function (m) {
             //toggle cursor from pointer to 4HeadedArrow. not working! put in panel?
             //$(event.currentTarget).parents('.view').toggleClass('selection');
-            var view = this.getWiggleView();
+            var view = that.getWiggleView();
             if (view) {
                 if (m.isMoveMode()) { view.disableSelect(); }
                 else { view.enableSelect(); }
@@ -77,7 +77,7 @@ var Panel = function (label, name) {
         }, this);
     };
 
-    this.init();
+    init();
 
 };
 

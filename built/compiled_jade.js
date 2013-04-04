@@ -1,21 +1,6 @@
 
 if (jade.templates === undefined) jade.templates = {};
 ;
-jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
-attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
-var __jade = [{ lineno: 1, filename: undefined }];
-try {
-var buf = [];
-with (locals || {}) {
-var interp;
-__jade.unshift({ lineno: 1, filename: __jade[0].filename });
-__jade.shift();
-}
-return buf.join("");
-} catch (err) {
-  rethrow(err, __jade[0].filename, __jade[0].lineno);
-}
-};
 jade.templates['panels'] = function anonymous(locals, attrs, escape, rethrow, merge) {
 attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
 var __jade = [{ lineno: 1, filename: undefined }];
@@ -145,7 +130,9 @@ with (locals || {}) {
 var interp;
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
-buf.push('<div id="name" class="panel">');
+buf.push('<div');
+buf.push(attrs({ 'id':(name), "class": ('panel') }, {"id":true}));
+buf.push('>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.shift();
 buf.push('</div>');
@@ -516,6 +503,21 @@ __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.shift();
 buf.push('</div>');
 __jade.shift();
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};
+jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.shift();
 }
 return buf.join("");
