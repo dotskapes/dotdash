@@ -15,7 +15,7 @@ var Panel = function (label, name) {
     // for display
     this.label = label;
 
-    init = function () {
+    var init = function () {
         addKeyListeners();
         addMoveSelListener();
     };

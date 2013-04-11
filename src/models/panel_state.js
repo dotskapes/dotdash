@@ -1,5 +1,9 @@
 goog.provide('panelState');
 
+goog.require('MapPanel');
+goog.require('TimePanel');
+goog.require('MDSPanel');
+
 var PanelState = Backbone.Model.extend({
     defaults: {
         panels: [],

@@ -88,7 +88,7 @@ var PanelManager = Backbone.View.extend({
 
     setPanel: function (side) {
         var panel = this.model.getPanel(this.model.get(side));
-        $pane = this['$' + side];
+        var $pane = this['$' + side];
 
         // Hide the exisiting elements
         $pane.find('.view').children().hide();
