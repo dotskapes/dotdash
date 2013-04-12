@@ -67,6 +67,8 @@ html, body, #dashboard {
 #sidebar {
     float: right;
     width: $optionsWidth;
+    height: 0px;
+    overflow: visible;
 }
 
 #wigglemap, #timeseries {
