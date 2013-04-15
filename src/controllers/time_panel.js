@@ -52,7 +52,7 @@ var TimePanel = function () {
     var wireupGraph = function () {
         // listen for graph select and send selection to selectionManager
         graph.select(function (box) {
-            selectionLayer = graph.search(layer, box);
+            var selectionLayer = graph.search(layer, box);
             that.fireSelect(selectionLayer);
         });
     };
