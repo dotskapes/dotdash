@@ -33,7 +33,9 @@ html, body, #dashboard {
 
 #sidebar {
   float: right;
-  width: 200px; }
+  width: 200px;
+  height: 0px;
+  overflow: visible; }
 
 #wigglemap, #timeseries {
   height: 100%; }
