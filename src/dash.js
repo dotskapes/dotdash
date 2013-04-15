@@ -9,6 +9,7 @@ goog.require('panelManager');
 var Dashboard = function (parentSelector) {
 
     var parent = $(parentSelector);
+    parent.empty();
 
     parent.append(timeSlider.$el);
     // sidebar has to be laid out before panels

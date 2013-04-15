@@ -11,7 +11,7 @@ var MoveSelController = Backbone.View.extend({
 
     render: function () {
         var $container = jade.templates.moveSel();
-        this.$el.append($container);
+        this.$el.empty().append($container);
     },
 
     events: {
