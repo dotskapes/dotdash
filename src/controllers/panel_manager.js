@@ -61,7 +61,7 @@ var PanelManager = Backbone.View.extend({
         var panelContainer = $(jade.templates.panels({
             model: this.model
         }));
-        this.$el.append(panelContainer);
+        this.$el.empty().append(panelContainer);
 
         // Initialize the html elements for each panel
         $.each(this.model.get('panels'), function (i, panel) {
