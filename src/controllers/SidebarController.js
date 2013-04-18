@@ -1,8 +1,8 @@
 goog.provide('SidebarController');
 
-goog.require('moveSelController');
-goog.require('filterController');
-goog.require('colorController');
+goog.require('MoveSelController');
+goog.require('FilterController');
+goog.require('ColorController');
 
 // handles the sidebar - which currently is filter & colorings
 var SidebarController = Backbone.View.extend({
@@ -15,8 +15,11 @@ var SidebarController = Backbone.View.extend({
     render: function (dashState) {
         var container = $(jade.templates.sidebar()); // just a div
         this.$el.empty().append(container);
+        var moveSelController = new MoveSelController();
         moveSelController.start(container);
+        var filterController = new FilterController();
         filterController.start(container);
+        var colorController = new ColorController();
         colorController.start(container, dashState);
     }
 

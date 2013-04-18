@@ -1,8 +1,12 @@
-goog.provide('filterController');
+goog.provide('FilterController');
 
 goog.require('filter');
 
 var FilterController = Backbone.View.extend({
+
+    initialize : function () {
+        this.model = this.model || filter;
+    },
 
     start: function ($parent) {
         $parent.append (this.$el);
@@ -29,4 +33,3 @@ var FilterController = Backbone.View.extend({
 
 });
 
-var filterController = new FilterController({ model: filter });

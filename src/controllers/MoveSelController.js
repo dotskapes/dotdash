@@ -1,8 +1,12 @@
-goog.provide('moveSelController');
+goog.provide('MoveSelController');
 
 goog.require('moveSelModel');
 
 var MoveSelController = Backbone.View.extend({
+
+    initialize : function () {
+        this.model = this.model || moveSelModel;
+    },
 
     start: function ($parent) {
         $parent.append (this.$el);
@@ -24,5 +28,3 @@ var MoveSelController = Backbone.View.extend({
     }
 
 });
-
-var moveSelController = new MoveSelController({ model: moveSelModel });

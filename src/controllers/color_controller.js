@@ -1,4 +1,4 @@
-goog.provide('colorController');
+goog.provide('ColorController');
 
 goog.require('colorRampController');
 goog.require('timeStepController');
@@ -69,5 +69,3 @@ var ColorController = function () {
         });
     };
 };
-
-var colorController = new ColorController();
