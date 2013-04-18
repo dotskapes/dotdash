@@ -1,24 +1,25 @@
 goog.provide('dash');
 
 goog.require('timeSlider');
-goog.require('dashState');
+goog.require('DashboardState');
 goog.require('ServiceLayer');
 goog.require('sidebarController');
 goog.require('panelManager');
 
 var Dashboard = function (parentSelector) {
+    var dashState = new DashboardState();
 
     var parent = $(parentSelector);
     parent.empty();
 
-    parent.append(timeSlider.$el);
+    timeSlider.start(parent, dashState);
     // sidebar has to be laid out before panels
-    sidebarController.start(parent);
+    sidebarController.start(parent, dashState);
 
-    panelManager.start(parent);
+    panelManager.start(parent, dashState);
 
     this.loadUrl = function (url) {
-        ServiceLayer.loadUrl(url);
+        ServiceLayer.loadUrl(url, dashState);
     };
 };
 
