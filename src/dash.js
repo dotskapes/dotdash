@@ -5,7 +5,10 @@ goog.require('DashboardState');
 goog.require('ServiceLayer');
 goog.require('SidebarController');
 goog.require('PanelManager');
-goog.require('panelState');
+goog.require('PanelState');
+goog.require('MapPanel');
+goog.require('TimePanel');
+goog.require('MDSPanel');
 
 var Dashboard = function (parentSelector) {
     var dashState = new DashboardState();
@@ -19,6 +22,10 @@ var Dashboard = function (parentSelector) {
     // sidebar has to be laid out before panels
     var sidebarController = new SidebarController();
     sidebarController.start(parent, dashState);
+
+    var panelState = new PanelState({
+        panels: [new MapPanel(), new TimePanel(), new MDSPanel()]
+    });
 
     var panelManager = new PanelManager({model: panelState});
     panelManager.start(parent, dashState);
