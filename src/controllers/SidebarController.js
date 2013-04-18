@@ -9,19 +9,19 @@ var SidebarController = Backbone.View.extend({
 
     start: function ($parent, options) {
         $parent.append (this.$el);
-        this.render(options.dashState, options.aggregateModel, options.moveSelModel,
-                    options.filter, options.selectionManager);
+        this.render(options);
     },
 
-    render: function (dashState, aggregateModel, moveSelModel, filter, selectionManager) {
+    render: function (options) {
         var container = $(jade.templates.sidebar()); // just a div
         this.$el.empty().append(container);
-        var moveSelController = new MoveSelController({model: moveSelModel});
+        var moveSelController = new MoveSelController({model: options.moveSelModel});
         moveSelController.start(container);
-        var filterController = new FilterController({model: filter, selectionManager: selectionManager});
+        var filterController = new FilterController({model: options.filter,
+                                                     selectionManager: options.selectionManager});
         filterController.start(container);
         var colorController = new ColorController();
-        colorController.start(container, dashState, aggregateModel);
+        colorController.start(container, options.dashState, options.aggregateModel, options.serviceLayer);
     }
 
 });

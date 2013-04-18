@@ -1,13 +1,12 @@
 goog.provide('TimePanel');
 
-goog.require('ServiceLayer');
 goog.require('Panel');
 goog.require('Popup');
 
-var TimePanel = function (selectionManager, moveSelModel) {
+var TimePanel = function (selectionManager, moveSelModel, serviceLayer) {
 
     // Panel superclass of TimePanel
-    Panel.call(this, 'Time Series', 'time', selectionManager, moveSelModel);
+    Panel.call(this, 'Time Series', 'time', selectionManager, moveSelModel, serviceLayer);
 
     // wiggle.Graph object
     var graph;
@@ -62,7 +61,7 @@ var TimePanel = function (selectionManager, moveSelModel) {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         selectionLayer.style(graph, 'stroke', function (f) {
-            return ServiceLayer.getColorForFeature(f);
+            return serviceLayer.getColorForFeature(f);
         });
     };
 
@@ -76,7 +75,7 @@ var TimePanel = function (selectionManager, moveSelModel) {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         layer.features().style(graph, 'stroke', function (f) {
-            return ServiceLayer.getColorForFeature(f);
+            return serviceLayer.getColorForFeature(f);
         });
     };
 

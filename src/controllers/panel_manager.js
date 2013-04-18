@@ -1,6 +1,5 @@
 goog.provide('PanelManager');
 
-goog.require('ServiceLayer');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
@@ -10,7 +9,7 @@ var PanelManager = Backbone.View.extend({
     // A mapping between names of panels and their actual html element
     panelDivs: {},
 
-    start: function ($parent, dashState, filter, selectionManager) {
+    start: function ($parent, dashState, filter, selectionManager, serviceLayer) {
         var that = this;
 
         $parent.append (this.$el);
@@ -30,7 +29,7 @@ var PanelManager = Backbone.View.extend({
         });
 
         // Initialize data callbacks on the panels
-        this.initPanels(dashState, filter, selectionManager);
+        this.initPanels(dashState, filter, selectionManager, serviceLayer);
 
         // It is now okay to bring in the actual panels
         this.setPanels();
@@ -119,11 +118,11 @@ var PanelManager = Backbone.View.extend({
     },
 
     // Register a data callback on all the panels
-    initPanels: function (dashState, filter, selectionManager) {
+    initPanels: function (dashState, filter, selectionManager, serviceLayer) {
         var that = this;
 
         $.each(this.model.get('panels'), function (i, pan) {
-            ServiceLayer.addDataCallback(function (data) {
+            serviceLayer.addDataCallback(function (data) {
                 return pan.newData(data);
             });
             selectionManager.addView(pan);

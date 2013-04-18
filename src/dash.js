@@ -18,14 +18,16 @@ var Dashboard = function (parentSelector) {
     var dashState = new DashboardState();
     var aggregateModel = new AggregateModel();
 
+    var serviceLayer = new ServiceLayer();
+
     var parent = $(parentSelector);
     parent.empty();
 
     var timeSliderController = new TimeSliderController();
-    timeSliderController.start(parent, dashState);
+    timeSliderController.start(parent, dashState, serviceLayer);
 
     var moveSelModel = new MoveSelModel();
-    var filter = new Filter();
+    var filter = new Filter({serviceLayer: serviceLayer});
     var selectionManager = new SelectionManager(filter);
 
     // sidebar has to be laid out before panels
@@ -35,21 +37,22 @@ var Dashboard = function (parentSelector) {
         aggregateModel: aggregateModel,
         moveSelModel: moveSelModel,
         filter: filter,
-        selectionManager: selectionManager
+        selectionManager: selectionManager,
+        serviceLayer: serviceLayer
     };
     sidebarController.start(parent, options);
 
     var panelState = new PanelState({
-        panels: [new MapPanel(selectionManager, moveSelModel),
-                 new TimePanel(selectionManager, moveSelModel),
-                 new MDSPanel(selectionManager, moveSelModel)]
+        panels: [new MapPanel(selectionManager, moveSelModel, serviceLayer),
+                 new TimePanel(selectionManager, moveSelModel, serviceLayer),
+                 new MDSPanel(selectionManager, moveSelModel, serviceLayer)]
     });
 
     var panelManager = new PanelManager({model: panelState});
-    panelManager.start(parent, dashState, filter, selectionManager);
+    panelManager.start(parent, dashState, filter, selectionManager, serviceLayer);
 
     this.loadUrl = function (url) {
-        ServiceLayer.loadUrl(url, dashState, aggregateModel);
+        serviceLayer.loadUrl(url, dashState, aggregateModel);
     };
 };
 

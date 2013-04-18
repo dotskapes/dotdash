@@ -3,17 +3,7 @@ goog.provide('ServiceLayer');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
-// SingletonPattern being used for ServiceLayer
-//var Singleton = (function () {
-//    var c, d, e;
-//    return {
-//        a: 5,
-//        b: function () { return c; }
-//    };
-//}) ();
-
-// Singleton pattern
-var ServiceLayer = (function () {
+var ServiceLayer = function () {
 
     var layer = null;
     var colorMap = {};
@@ -28,7 +18,6 @@ var ServiceLayer = (function () {
         $.each(dataCallbacks, function (i, cb) { cb(dataLayer); });
     };
 
-    // Singleton public methods/properties
     return {
 
         addDataCallback: function (cb) {
@@ -116,5 +105,5 @@ var ServiceLayer = (function () {
             return colorMap.colorForFeature(feature);
         }
     };
-} ());
- // this executes the function for Singleton purposes
+};
+

@@ -7,7 +7,7 @@ goog.require('AggregationController');
 
 var ColorController = function () {
 
-    this.start = function (parent, dashState, aggregateModel) {
+    this.start = function (parent, dashState, aggregateModel, serviceLayer) {
         var html = render();
         parent.append(html);
         $('.collapse-toggler').click(function (event) {
@@ -16,7 +16,7 @@ var ColorController = function () {
             $(event.currentTarget).toggleClass('collapsed');
             event.stopPropagation();
         });
-        initControllers(dashState, aggregateModel);
+        initControllers(dashState, aggregateModel, serviceLayer);
     };
 
     var render = function () {
@@ -49,7 +49,7 @@ var ColorController = function () {
         return template({colorings: colorings});
     };
 
-    var initControllers = function (dashState, aggregateModel) {
+    var initControllers = function (dashState, aggregateModel, serviceLayer) {
         // take this out and just have events go direct to controller?
         onChange(function (name, value) {
             // controller should do something with this
@@ -58,11 +58,11 @@ var ColorController = function () {
         var colorRampController = new ColorRampController();
         colorRampController.start(dashState);
         var timeStepController = new TimeStepController();
-        timeStepController.start(dashState);
+        timeStepController.start(dashState, serviceLayer);
         var distribRangeController = new DistribRangeController();
         distribRangeController.start(dashState);
         var aggregationController = new AggregationController();
-        aggregationController.start(dashState, aggregateModel);
+        aggregationController.start(dashState, aggregateModel, serviceLayer);
     };
 
     var onChange = function (callback) {

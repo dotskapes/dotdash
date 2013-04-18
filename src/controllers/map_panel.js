@@ -1,15 +1,14 @@
 goog.provide('MapPanel');
 
 goog.require('ColorMap');
-goog.require('ServiceLayer');
 goog.require('Panel');
 
-var MapPanel = function (selectionManager, moveSelModel) {
+var MapPanel = function (selectionManager, moveSelModel, serviceLayer) {
 
     var FILL_OPACITY = 0.9;
 
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this, 'Map', 'map', selectionManager, moveSelModel);
+    Panel.call(this, 'Map', 'map', selectionManager, moveSelModel, serviceLayer);
 
     // wiggle.Map object
     var map;
@@ -70,7 +69,7 @@ var MapPanel = function (selectionManager, moveSelModel) {
         // but we are not yet filtering...
         // var unfiltered = filterQueries.get(allFeats);
         selectionLayer.style(map, 'fill', function (f) {
-            return ServiceLayer.getColorForFeature(f);
+            return serviceLayer.getColorForFeature(f);
         });
     };
 
@@ -87,7 +86,7 @@ var MapPanel = function (selectionManager, moveSelModel) {
                 .style(map, 'stroke-opacity', 0);
         }
         else {
-            ServiceLayer.getLayerSelector().style(map, 'fill-opacity', FILL_OPACITY)
+            serviceLayer.getLayerSelector().style(map, 'fill-opacity', FILL_OPACITY)
                 .style(map, 'stroke-opacity', 1);
         }
 
@@ -95,7 +94,7 @@ var MapPanel = function (selectionManager, moveSelModel) {
         // this styling to the map 'engine', which it happens to know about.
         // MVC violation? discuss. rationalization: selectors are controller not model
         layerSelector.style(map, 'fill', function (f) {
-            return ServiceLayer.getColorForFeature(f);
+            return serviceLayer.getColorForFeature(f);
         });
     };
 

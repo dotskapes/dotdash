@@ -1,15 +1,16 @@
 goog.provide('AggregationController');
 
-goog.require('aggregationService');
+goog.require('AggregationService');
 
 var AggregationController = function () {
 
-    this.start = function (dashState, aggModel) {
+    this.start = function (dashState, aggModel, serviceLayer) {
         var filter = $('.filter-button[name="' + AggregationController.NAME + '"]');
         filter.change(function (event) {
             var name = $(event.target).val();
             var aggregates;
             if (name !== 'none') {
+                var aggregationService = new AggregationService(serviceLayer);
                 aggregates = aggregationService.computeAggregates(name);
             }
             else {

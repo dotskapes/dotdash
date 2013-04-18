@@ -1,7 +1,5 @@
 goog.provide('DistribRangeController');
 
-goog.require('ServiceLayer');
-
 var DistribRangeController = function () {
 
     this.start = function (dashState) {
