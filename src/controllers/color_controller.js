@@ -5,21 +5,23 @@ goog.require('TimeStepController');
 goog.require('DistribRangeController');
 goog.require('AggregationController');
 
-var ColorController = function () {
+var ColorController = Backbone.View.extend({
 
-    this.start = function (parent, dashState, aggregateModel, serviceLayer) {
-        var html = render();
-        parent.append(html);
-        $('.collapse-toggler').click(function (event) {
+    className : 'options',
+
+    start : function (parent, dashState, aggregateModel, serviceLayer) {
+        parent.append(this.$el);
+        this.render();
+        this.$('.collapse-toggler').click(function (event) {
             var content = $(event.currentTarget).siblings('.collapsible');
             content.slideToggle();
             $(event.currentTarget).toggleClass('collapsed');
             event.stopPropagation();
         });
-        initControllers(dashState, aggregateModel, serviceLayer);
-    };
+        this.initControllers(dashState, aggregateModel, serviceLayer);
+    },
 
-    var render = function () {
+    render : function () {
         // hard-coded filters for now
         var colorings = [
             { name: TimeStepController.NAME,
@@ -46,10 +48,19 @@ var ColorController = function () {
         ];
 
         var template = jade.templates.coloring;
-        return template({colorings: colorings});
-    };
+        this.$el.empty().append(template({colorings: colorings}));
+    },
 
-    var initControllers = function (dashState, aggregateModel, serviceLayer) {
+    initControllers : function (dashState, aggregateModel, serviceLayer) {
+
+        var onChange = function (callback) {
+            this.$('.filter-button').change(function (event) {
+                var name = $(event.target).attr('name');
+                var value = $(event.target).attr('value');
+                callback(name, value);
+            });
+        };
+
         // take this out and just have events go direct to controller?
         onChange(function (name, value) {
             // controller should do something with this
@@ -63,13 +74,5 @@ var ColorController = function () {
         distribRangeController.start(dashState);
         var aggregationController = new AggregationController();
         aggregationController.start(dashState, aggregateModel, serviceLayer);
-    };
-
-    var onChange = function (callback) {
-        $('.filter-button').change(function (event) {
-            var name = $(event.target).attr('name');
-            var value = $(event.target).attr('value');
-            callback(name, value);
-        });
-    };
-};
+    }
+});
