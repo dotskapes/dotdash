@@ -1,4 +1,4 @@
-goog.provide('dashState');
+goog.provide('DashboardState');
 
 goog.require('ColorRamps');
 goog.require('ColorScales');
@@ -11,5 +11,3 @@ var DashboardState = Backbone.Model.extend({
         agg: 'none'
     }
 });
-
-var dashState = new DashboardState();

@@ -7,7 +7,7 @@ goog.require('aggregationController');
 
 var ColorController = function () {
 
-    this.start = function (parent) {
+    this.start = function (parent, dashState) {
         var html = render();
         parent.append(html);
         $('.collapse-toggler').click(function (event) {
@@ -16,7 +16,7 @@ var ColorController = function () {
             $(event.currentTarget).toggleClass('collapsed');
             event.stopPropagation();
         });
-        initControllers();
+        initControllers(dashState);
     };
 
     var render = function () {
@@ -49,16 +49,16 @@ var ColorController = function () {
         return template({colorings: colorings});
     };
 
-    var initControllers = function () {
+    var initControllers = function (dashState) {
         // take this out and just have events go direct to controller?
         onChange(function (name, value) {
             // controller should do something with this
             console.log(name + ' changed to ' + value);
         });
-        colorRampController.start();
-        timeStepController.start();
+        colorRampController.start(dashState);
+        timeStepController.start(dashState);
         distribRangeController.start();
-        aggregationController.start();
+        aggregationController.start(dashState);
     };
 
     var onChange = function (callback) {

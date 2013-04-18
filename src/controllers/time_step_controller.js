@@ -1,6 +1,5 @@
 goog.provide('timeStepController');
 
-goog.require('dashState');
 goog.require('ServiceLayer');
 goog.require('panelManager');
 goog.require('TimeStepFilterView');
@@ -9,7 +8,7 @@ var TimeStepController = function () {
 
     var view = new TimeStepFilterView();
 
-    this.start = function () {
+    this.start = function (dashState) {
 
         var addEventListener = function () {
             var select = $('.' + TimeStepFilterView.CLASS);

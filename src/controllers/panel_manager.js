@@ -1,6 +1,5 @@
 goog.provide('panelManager');
 
-goog.require('dashState');
 goog.require('panelState');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
@@ -14,7 +13,7 @@ var PanelManager = Backbone.View.extend({
     // A mapping between names of panels and their actual html element
     panelDivs: {},
 
-    start: function ($parent) {
+    start: function ($parent, dashState) {
         var that = this;
 
         $parent.append (this.$el);
@@ -34,7 +33,7 @@ var PanelManager = Backbone.View.extend({
         });
 
         // Initialize data callbacks on the panels
-        this.initPanels();
+        this.initPanels(dashState);
 
         // It is now okay to bring in the actual panels
         this.setPanels();
@@ -123,7 +122,7 @@ var PanelManager = Backbone.View.extend({
     },
 
     // Register a data callback on all the panels
-    initPanels: function () {
+    initPanels: function (dashState) {
         var that = this;
 
         $.each(this.model.get('panels'), function (i, pan) {

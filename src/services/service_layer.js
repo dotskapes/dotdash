@@ -1,6 +1,5 @@
 goog.provide('ServiceLayer');
 
-goog.require('dashState');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
@@ -36,7 +35,7 @@ var ServiceLayer = (function () {
             dataCallbacks.push(cb);
         },
 
-        loadUrl: function (url) {
+        loadUrl: function (url, dashState) {
             var that = this;
             $.ajax({
                 url: url,
@@ -53,7 +52,7 @@ var ServiceLayer = (function () {
                         sortedIndexLookup[attr] = i;
                     });
 
-                    colorMap = new ColorMap(layer);
+                    colorMap = new ColorMap(layer, dashState);
                     fireNewData(layer);
                     dashState.set('attr', that.getSortedDateProperties()[0]);
                 }
