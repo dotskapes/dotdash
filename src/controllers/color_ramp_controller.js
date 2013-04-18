@@ -1,6 +1,5 @@
 goog.provide('colorRampController');
 
-goog.require('dashState');
 goog.require('ColorRamps');
 
 var ColorRampController = function () {
@@ -9,26 +8,26 @@ var ColorRampController = function () {
     var filterSelector = '#' + ColorRampController.NAME + '-filter';
     var rampSvgId = 'ramp-svg';
 
-    this.start = function () {
-        render();
+    this.start = function (dashState) {
+        render(dashState);
     };
 
     // a new ramp is being asked for
-    var newRamp = function (rampIndex) {
+    var newRamp = function (rampIndex, dashState) {
         dashState.set('colorRamp', ColorRamps.RAMPS[rampIndex]);
         // selection has probably changed, redraw
         currentRampIndex = rampIndex;
-        redraw();
+        redraw(dashState);
     };
 
     // wipe out old, and render new. if sel has changed will reflect
-    var redraw = function () {
+    var redraw = function (dashState) {
         d3.select('#' + rampSvgId).remove();
-        render();
+        render(dashState);
     };
 
     // should this go in crc view??? it has a tiny bit of controller in it
-    var render = function () {
+    var render = function (dashState) {
         var xMargin = 3;
         var yMargin = 3;
         var colorWidth = 20;
@@ -72,7 +71,7 @@ var ColorRampController = function () {
                     .attr("width", colorWidth)
                     .attr('fill', d3.rgb(color.rgb()))
                     .data([ramp])
-                    .on('click', function (d, i) {newRamp(rampIndex); });
+                    .on('click', function (d, i) {newRamp(rampIndex, dashState); });
 
                 x += colorWidth;
             });
