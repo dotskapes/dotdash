@@ -1,11 +1,12 @@
 goog.provide('FilterController');
 
-goog.require('filter');
+goog.require('Filter');
 
 var FilterController = Backbone.View.extend({
 
-    initialize : function () {
-        this.model = this.model || filter;
+    initialize : function (options) {
+        this.model = this.model || new Filter();
+        this.selectionManager = options.selectionManager;
     },
 
     start: function ($parent) {
@@ -24,7 +25,7 @@ var FilterController = Backbone.View.extend({
     },
 
     filterSel: function () {
-        this.model.setFilterToSelection();
+        this.model.setFilterToSelection(this.selectionManager.getSelection());
     },
 
     unfilter: function () {

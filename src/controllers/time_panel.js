@@ -1,14 +1,13 @@
 goog.provide('TimePanel');
 
 goog.require('ServiceLayer');
-goog.require('selectionManager');
 goog.require('Panel');
 goog.require('Popup');
 
-var TimePanel = function () {
+var TimePanel = function (selectionManager, moveSelModel) {
 
     // Panel superclass of TimePanel
-    Panel.call(this, 'Time Series', 'time');
+    Panel.call(this, 'Time Series', 'time', selectionManager, moveSelModel);
 
     // wiggle.Graph object
     var graph;

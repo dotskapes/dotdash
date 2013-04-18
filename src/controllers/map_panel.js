@@ -2,16 +2,14 @@ goog.provide('MapPanel');
 
 goog.require('ColorMap');
 goog.require('ServiceLayer');
-goog.require('selectionManager');
 goog.require('Panel');
-goog.require('filter');
 
-var MapPanel = function () {
+var MapPanel = function (selectionManager, moveSelModel) {
 
     var FILL_OPACITY = 0.9;
 
     // this basically makes Panel the superclass of MapPanel
-    Panel.call(this, 'Map', 'map');
+    Panel.call(this, 'Map', 'map', selectionManager, moveSelModel);
 
     // wiggle.Map object
     var map;
@@ -81,7 +79,7 @@ var MapPanel = function () {
     };
 
     // draw map - without highlight/selection
-    this.draw = function (layerSelector) {
+    this.draw = function (layerSelector, filter) {
         // some of this logic belong in panel_man?
         if (filter.isFiltered()) {
             var filteredOut = filter.getUnfiltered();

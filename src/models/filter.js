@@ -1,6 +1,5 @@
-goog.provide('filter');
+goog.provide('Filter');
 
-goog.require('selectionManager');
 goog.require('ServiceLayer');
 
 // model for filtering. keeps the filter layer selector, which has all the 
@@ -18,8 +17,8 @@ var Filter = Backbone.Model.extend({
     },
 
     // set the filter to currently selected
-    setFilterToSelection: function () {
-        this.set('filterSelector', selectionManager.getSelection());
+    setFilterToSelection: function (selection) {
+        this.set('filterSelector', selection);
     },
 
     // filter the selector. that is return the intersection of filter & selector
@@ -52,4 +51,3 @@ var Filter = Backbone.Model.extend({
     }
 });
 
-var filter = new Filter();

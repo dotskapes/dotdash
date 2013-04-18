@@ -9,6 +9,9 @@ goog.require('PanelState');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
+goog.require('MoveSelModel');
+goog.require('Filter');
+goog.require('SelectionManager');
 
 var Dashboard = function (parentSelector) {
     var dashState = new DashboardState();
@@ -19,16 +22,22 @@ var Dashboard = function (parentSelector) {
     var timeSliderController = new TimeSliderController();
     timeSliderController.start(parent, dashState);
 
+    var moveSelModel = new MoveSelModel();
+    var filter = new Filter();
+    var selectionManager = new SelectionManager(filter);
+
     // sidebar has to be laid out before panels
     var sidebarController = new SidebarController();
-    sidebarController.start(parent, dashState);
+    sidebarController.start(parent, dashState, moveSelModel, filter, selectionManager);
 
     var panelState = new PanelState({
-        panels: [new MapPanel(), new TimePanel(), new MDSPanel()]
+        panels: [new MapPanel(selectionManager, moveSelModel),
+                 new TimePanel(selectionManager, moveSelModel),
+                 new MDSPanel(selectionManager, moveSelModel)]
     });
 
     var panelManager = new PanelManager({model: panelState});
-    panelManager.start(parent, dashState);
+    panelManager.start(parent, dashState, filter, selectionManager);
 
     this.loadUrl = function (url) {
         ServiceLayer.loadUrl(url, dashState);

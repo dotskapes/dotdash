@@ -1,10 +1,8 @@
 goog.provide('Panel');
 
 goog.require('ServiceLayer');
-goog.require('selectionManager');
-goog.require('moveSelModel');
 
-var Panel = function (label, name) {
+var Panel = function (label, name, selectionManager, moveSelModel) {
 
     var ALT = 18;
     var that = this;

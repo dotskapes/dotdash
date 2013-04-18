@@ -2,10 +2,10 @@ goog.provide('MDSPanel');
 
 goog.require('Panel');
 
-var MDSPanel = function () {
+var MDSPanel = function (selectionManager, moveSelModel) {
 
     // TimePanel subclass of Panel
-    Panel.call(this, 'MDS', 'mds');
+    Panel.call(this, 'MDS', 'mds', selectionManager, moveSelModel);
 
     var svg;
     var backGroup, dataGroup;

@@ -1,18 +1,16 @@
 goog.provide('PanelManager');
 
 goog.require('ServiceLayer');
-goog.require('selectionManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
-goog.require('filter');
 
 var PanelManager = Backbone.View.extend({
 
     // A mapping between names of panels and their actual html element
     panelDivs: {},
 
-    start: function ($parent, dashState) {
+    start: function ($parent, dashState, filter, selectionManager) {
         var that = this;
 
         $parent.append (this.$el);
@@ -32,12 +30,12 @@ var PanelManager = Backbone.View.extend({
         });
 
         // Initialize data callbacks on the panels
-        this.initPanels(dashState);
+        this.initPanels(dashState, filter, selectionManager);
 
         // It is now okay to bring in the actual panels
         this.setPanels();
 
-        this.initFilterListener();
+        this.initFilterListener(filter, selectionManager);
 
     },
 
@@ -121,7 +119,7 @@ var PanelManager = Backbone.View.extend({
     },
 
     // Register a data callback on all the panels
-    initPanels: function (dashState) {
+    initPanels: function (dashState, filter, selectionManager) {
         var that = this;
 
         $.each(this.model.get('panels'), function (i, pan) {
@@ -132,17 +130,17 @@ var PanelManager = Backbone.View.extend({
         });
 
         dashState.on('change', function () {
-            that.draw();
+            that.draw(filter, selectionManager);
         });
     },
 
-    draw: function () {
+    draw: function (filter, selectionManager) {
         // todo: this should probably only draw the panels currently showing
         // and on showing a new panel would need to do a draw
         $.each(this.model.get('panels'), function (i, panel) {
             // redraws all panels (without selection/highlight)
             // only draw filtered features
-            panel.draw(filter.getFilter());
+            panel.draw(filter.getFilter(), filter);
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();
@@ -171,9 +169,9 @@ var PanelManager = Backbone.View.extend({
         });
     },
 
-    initFilterListener: function () {
+    initFilterListener: function (filter, selectionManager) {
         var that = this;
-        filter.on('change', function () { that.draw(); });
+        filter.on('change', function () { that.draw(filter, selectionManager); });
     }
 
 });
