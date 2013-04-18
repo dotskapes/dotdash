@@ -1,9 +1,9 @@
 goog.provide('ColorController');
 
-goog.require('colorRampController');
-goog.require('timeStepController');
-goog.require('distribRangeController');
-goog.require('aggregationController');
+goog.require('ColorRampController');
+goog.require('TimeStepController');
+goog.require('DistribRangeController');
+goog.require('AggregationController');
 
 var ColorController = function () {
 
@@ -55,9 +55,13 @@ var ColorController = function () {
             // controller should do something with this
             console.log(name + ' changed to ' + value);
         });
+        var colorRampController = new ColorRampController();
         colorRampController.start(dashState);
+        var timeStepController = new TimeStepController();
         timeStepController.start(dashState);
+        var distribRangeController = new DistribRangeController();
         distribRangeController.start();
+        var aggregationController = new AggregationController();
         aggregationController.start(dashState);
     };
 

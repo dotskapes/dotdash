@@ -1,4 +1,4 @@
-goog.provide('distribRangeController');
+goog.provide('DistribRangeController');
 
 goog.require('ServiceLayer');
 
@@ -17,4 +17,3 @@ var DistribRangeController = function () {
 DistribRangeController.DISTRIB = 'dist';
 DistribRangeController.RANGE = 'range';
 
-var distribRangeController = new DistribRangeController();

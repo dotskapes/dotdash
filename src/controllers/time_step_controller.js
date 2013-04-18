@@ -1,4 +1,4 @@
-goog.provide('timeStepController');
+goog.provide('TimeStepController');
 
 goog.require('ServiceLayer');
 goog.require('TimeStepFilterView');
@@ -34,4 +34,3 @@ var TimeStepController = function () {
 
 TimeStepController.NAME = TimeStepFilterView.NAME;
 
-var timeStepController = new TimeStepController();

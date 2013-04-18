@@ -1,4 +1,4 @@
-goog.provide('aggregationController');
+goog.provide('AggregationController');
 
 goog.require('aggModel');
 goog.require('aggregationService');
@@ -25,4 +25,3 @@ var AggregationController = function () {
 
 AggregationController.NAME = 'agg';
 
-var aggregationController = new AggregationController();
