@@ -60,7 +60,7 @@ var ColorController = function () {
         var timeStepController = new TimeStepController();
         timeStepController.start(dashState);
         var distribRangeController = new DistribRangeController();
-        distribRangeController.start();
+        distribRangeController.start(dashState);
         var aggregationController = new AggregationController();
         aggregationController.start(dashState, aggregateModel);
     };

@@ -4,7 +4,7 @@ goog.require('ServiceLayer');
 
 var DistribRangeController = function () {
 
-    this.start = function () {
+    this.start = function (dashState) {
 
         var distrib = $('.filter-button[name="' + DistribRangeController.DISTRIB + '"]');
         distrib.change(function (event) {
