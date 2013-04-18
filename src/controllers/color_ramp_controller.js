@@ -1,4 +1,4 @@
-goog.provide('colorRampController');
+goog.provide('ColorRampController');
 
 goog.require('ColorRamps');
 
@@ -82,4 +82,3 @@ var ColorRampController = function () {
 };
 
 ColorRampController.NAME = 'ramp';
-var colorRampController = new ColorRampController();

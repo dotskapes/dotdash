@@ -1,7 +1,4 @@
-goog.provide('filter');
-
-goog.require('selectionManager');
-goog.require('ServiceLayer');
+goog.provide('Filter');
 
 // model for filtering. keeps the filter layer selector, which has all the 
 // features that are currently filtered in. and keeps state as to whether filtering
@@ -18,8 +15,8 @@ var Filter = Backbone.Model.extend({
     },
 
     // set the filter to currently selected
-    setFilterToSelection: function () {
-        this.set('filterSelector', selectionManager.getSelection());
+    setFilterToSelection: function (selection) {
+        this.set('filterSelector', selection);
     },
 
     // filter the selector. that is return the intersection of filter & selector
@@ -42,14 +39,13 @@ var Filter = Backbone.Model.extend({
     // if nothing filtered returns whole layer selector
     getFilter: function () {
         if (this.isFiltered()) { return this.get('filterSelector'); }
-        else { return ServiceLayer.getLayerSelector(); }
+        else { return this.get('serviceLayer').getLayerSelector(); }
     },
 
     // return layer selector of all features filtered out
     getUnfiltered: function () {
         if (!this.isFiltered()) { return null; }
-        return ServiceLayer.getLayerSelector().not(this.get('filterSelector'));
+        return this.get('serviceLayer').getLayerSelector().not(this.get('filterSelector'));
     }
 });
 
-var filter = new Filter();

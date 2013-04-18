@@ -1,20 +1,19 @@
-goog.provide('aggregationService');
+goog.provide('AggregationService');
 
 goog.require('AGGREGATION_FUNCTIONS');
-goog.require('ServiceLayer');
 
-var aggregationService = {
+var AggregationService = function (serviceLayer) {
 
-    computeAggregates: function (name) {
+    this.computeAggregates = function (name) {
         var aggregationFunction = AGGREGATION_FUNCTIONS[name];
         if (!aggregationFunction) { return {}; }
 
-        var attributesByFeature = ServiceLayer.getAttributesByFeature();
+        var attributesByFeature = serviceLayer.getAttributesByFeature();
 
         var aggregates = {};
         $.each(attributesByFeature, function (featureId, attributes) {
             aggregates[featureId] = aggregationFunction(attributes);
         });
         return aggregates;
-    }
+    };
 };

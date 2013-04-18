@@ -1,13 +1,13 @@
-goog.provide('colorController');
+goog.provide('ColorController');
 
-goog.require('colorRampController');
-goog.require('timeStepController');
-goog.require('distribRangeController');
-goog.require('aggregationController');
+goog.require('ColorRampController');
+goog.require('TimeStepController');
+goog.require('DistribRangeController');
+goog.require('AggregationController');
 
 var ColorController = function () {
 
-    this.start = function (parent, dashState) {
+    this.start = function (parent, dashState, aggregateModel, serviceLayer) {
         var html = render();
         parent.append(html);
         $('.collapse-toggler').click(function (event) {
@@ -16,7 +16,7 @@ var ColorController = function () {
             $(event.currentTarget).toggleClass('collapsed');
             event.stopPropagation();
         });
-        initControllers(dashState);
+        initControllers(dashState, aggregateModel, serviceLayer);
     };
 
     var render = function () {
@@ -49,16 +49,20 @@ var ColorController = function () {
         return template({colorings: colorings});
     };
 
-    var initControllers = function (dashState) {
+    var initControllers = function (dashState, aggregateModel, serviceLayer) {
         // take this out and just have events go direct to controller?
         onChange(function (name, value) {
             // controller should do something with this
             console.log(name + ' changed to ' + value);
         });
+        var colorRampController = new ColorRampController();
         colorRampController.start(dashState);
-        timeStepController.start(dashState);
-        distribRangeController.start();
-        aggregationController.start(dashState);
+        var timeStepController = new TimeStepController();
+        timeStepController.start(dashState, serviceLayer);
+        var distribRangeController = new DistribRangeController();
+        distribRangeController.start(dashState);
+        var aggregationController = new AggregationController();
+        aggregationController.start(dashState, aggregateModel, serviceLayer);
     };
 
     var onChange = function (callback) {
@@ -69,5 +73,3 @@ var ColorController = function () {
         });
     };
 };
-
-var colorController = new ColorController();

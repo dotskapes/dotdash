@@ -1,13 +1,11 @@
 goog.provide('ColorMap');
 
-goog.require('aggModel');
-goog.require('aggModel');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
 var NUM_COLORS = ColorRamps.NUM_COLORS;
 
-var ColorMap = function (layer, dashState) {
+var ColorMap = function (layer, dashState, aggModel) {
     var ranges = {};
     var quantiles = {};
 

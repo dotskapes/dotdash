@@ -1,8 +1,4 @@
-goog.provide('panelState');
-
-goog.require('MapPanel');
-goog.require('TimePanel');
-goog.require('MDSPanel');
+goog.provide('PanelState');
 
 var PanelState = Backbone.Model.extend({
     defaults: {
@@ -24,8 +20,4 @@ var PanelState = Backbone.Model.extend({
     getPanel: function (index) {
         return this.get('panels')[index];
     }
-});
-
-var panelState = new PanelState({
-    panels: [new MapPanel(), new TimePanel(), new MDSPanel()]
 });
