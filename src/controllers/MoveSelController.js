@@ -19,7 +19,7 @@ var MoveSelController = Backbone.View.extend({
     },
 
     events: {
-        "click #move-sel-toggle" : "toggle"
+        "click .move-sel-toggle" : "toggle"
     },
 
     toggle: function (e) {

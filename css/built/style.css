@@ -31,18 +31,18 @@ html, body, #dashboard {
     .panels .pane .view .panel {
       height: 100%; }
 
-#sidebar {
+.sidebar {
   float: right;
   width: 200px;
   height: 0px;
   overflow: visible; }
 
-#wigglemap, #timeseries {
+.wigglemap, .timeseries {
   height: 100%; }
 
-#map, #time {
+.map, .time {
   cursor: move; }
-  #map.selection, #time.selection {
+  .map.selection, .time.selection {
     cursor: crosshair; }
 
 .icon {
