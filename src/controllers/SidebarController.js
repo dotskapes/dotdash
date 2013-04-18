@@ -1,4 +1,4 @@
-goog.provide('sidebarController');
+goog.provide('SidebarController');
 
 goog.require('moveSelController');
 goog.require('filterController');
@@ -21,5 +21,3 @@ var SidebarController = Backbone.View.extend({
     }
 
 });
-
-var sidebarController = new SidebarController();

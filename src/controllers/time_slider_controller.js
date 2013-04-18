@@ -1,8 +1,8 @@
-goog.provide('timeSlider');
+goog.provide('TimeSliderController');
 
 goog.require('ServiceLayer');
 
-var TimeSlider = function () {
+var TimeSliderController = function () {
 
     this.start = function ($parent, dashState) {
         // The time slider is a bacckbone view
@@ -31,6 +31,5 @@ var TimeSlider = function () {
     };
 };
 
-var timeSlider = new TimeSlider();
 
 

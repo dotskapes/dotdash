@@ -1,6 +1,5 @@
-goog.provide('panelManager');
+goog.provide('PanelManager');
 
-goog.require('panelState');
 goog.require('ServiceLayer');
 goog.require('selectionManager');
 goog.require('MapPanel');
@@ -177,9 +176,5 @@ var PanelManager = Backbone.View.extend({
         filter.on('change', function () { that.draw(); });
     }
 
-});
-
-var panelManager = new PanelManager({
-    model: panelState
 });
 

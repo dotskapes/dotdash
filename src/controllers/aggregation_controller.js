@@ -2,7 +2,6 @@ goog.provide('aggregationController');
 
 goog.require('aggModel');
 goog.require('aggregationService');
-goog.require('panelManager');
 
 var AggregationController = function () {
 
