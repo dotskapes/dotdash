@@ -35,7 +35,7 @@ var ServiceLayer = (function () {
             dataCallbacks.push(cb);
         },
 
-        loadUrl: function (url, dashState) {
+        loadUrl: function (url, dashState, aggregateModel) {
             var that = this;
             $.ajax({
                 url: url,
@@ -52,7 +52,7 @@ var ServiceLayer = (function () {
                         sortedIndexLookup[attr] = i;
                     });
 
-                    colorMap = new ColorMap(layer, dashState);
+                    colorMap = new ColorMap(layer, dashState, aggregateModel);
                     fireNewData(layer);
                     dashState.set('attr', that.getSortedDateProperties()[0]);
                 }

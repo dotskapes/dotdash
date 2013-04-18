@@ -2,6 +2,7 @@ goog.provide('dash');
 
 goog.require('TimeSliderController');
 goog.require('DashboardState');
+goog.require('AggregateModel');
 goog.require('ServiceLayer');
 goog.require('SidebarController');
 goog.require('PanelManager');
@@ -15,6 +16,7 @@ goog.require('SelectionManager');
 
 var Dashboard = function (parentSelector) {
     var dashState = new DashboardState();
+    var aggregateModel = new AggregateModel();
 
     var parent = $(parentSelector);
     parent.empty();
@@ -28,7 +30,14 @@ var Dashboard = function (parentSelector) {
 
     // sidebar has to be laid out before panels
     var sidebarController = new SidebarController();
-    sidebarController.start(parent, dashState, moveSelModel, filter, selectionManager);
+    var options = {
+        dashState: dashState,
+        aggregateModel: aggregateModel,
+        moveSelModel: moveSelModel,
+        filter: filter,
+        selectionManager: selectionManager
+    };
+    sidebarController.start(parent, options);
 
     var panelState = new PanelState({
         panels: [new MapPanel(selectionManager, moveSelModel),
@@ -40,7 +49,7 @@ var Dashboard = function (parentSelector) {
     panelManager.start(parent, dashState, filter, selectionManager);
 
     this.loadUrl = function (url) {
-        ServiceLayer.loadUrl(url, dashState);
+        ServiceLayer.loadUrl(url, dashState, aggregateModel);
     };
 };
 

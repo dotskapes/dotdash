@@ -1,11 +1,10 @@
 goog.provide('AggregationController');
 
-goog.require('aggModel');
 goog.require('aggregationService');
 
 var AggregationController = function () {
 
-    this.start = function (dashState) {
+    this.start = function (dashState, aggModel) {
         var filter = $('.filter-button[name="' + AggregationController.NAME + '"]');
         filter.change(function (event) {
             var name = $(event.target).val();
