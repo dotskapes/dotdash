@@ -64,18 +64,18 @@ html, body, #dashboard {
     }
 }
 
-#sidebar {
+.sidebar {
     float: right;
     width: $optionsWidth;
     height: 0px;
     overflow: visible;
 }
 
-#wigglemap, #timeseries {
+.wigglemap, .timeseries {
     height: 100%;
 }
 
-#map, #time {
+.map, .time {
     cursor: move;
     
     &.selection {
