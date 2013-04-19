@@ -14,7 +14,7 @@ var TimePanel = function (selectionManager, moveSelModel, serviceLayer) {
     var that = this;
 
     this.create = function () {
-        this.container = $('<div>').attr('id', 'timeseries');
+        this.container = $('<div>').attr('class', 'timeseries');
 
         this.parentElement.append(this.container);
         this.show();
@@ -38,7 +38,7 @@ var TimePanel = function (selectionManager, moveSelModel, serviceLayer) {
         properties.sort();
         layer.attr('order', properties);
 
-        graph = new wiggle.TimeSeries('#timeseries', layer, {
+        graph = new wiggle.TimeSeries('.timeseries', layer, {
             'ticks': 500,
             'ylock': true
         });

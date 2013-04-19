@@ -3,7 +3,7 @@ goog.provide('TimeStepFilterView');
 var TimeStepFilterView = function () {
 
     this.update = function (timeSteps) {
-        $('#step-filter').empty();
+        $('.step-filter').empty();
         var labels = [];
         $.each(timeSteps, function (i, step) {
             labels.push({label: step, name: step});
@@ -16,7 +16,7 @@ var TimeStepFilterView = function () {
         var params = { selClass: TimeStepFilterView.CLASS,
                        options: labels };
         var html = template(params);
-        $('#' + TimeStepFilterView.NAME + '-filter').html(html);
+        $('.' + TimeStepFilterView.NAME + '-filter').html(html);
     };
 
 };

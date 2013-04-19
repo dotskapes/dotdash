@@ -22,12 +22,12 @@ var MapPanel = function (selectionManager, moveSelModel, serviceLayer) {
     this.getWiggleView = function () { return map; };
 
     this.create = function () {
-        this.container = $('<div>').attr('id', 'wigglemap');
+        this.container = $('<div>').attr('class', 'wigglemap');
 
         this.parentElement.append(this.container);
         this.show();
 
-        map = new wiggle.Map('#wigglemap');
+        map = new wiggle.Map('.wigglemap');
         wireupMap();
         this.created = true;
     };

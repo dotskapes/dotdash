@@ -5,8 +5,8 @@ goog.require('ColorRamps');
 var ColorRampController = function () {
 
     var currentRampIndex = 0;
-    var filterSelector = '#' + ColorRampController.NAME + '-filter';
-    var rampSvgId = 'ramp-svg';
+    var filterSelector = '.' + ColorRampController.NAME + '-filter';
+    var rampSvgClass = 'ramp-svg';
 
     this.start = function (dashState) {
         render(dashState);
@@ -22,7 +22,7 @@ var ColorRampController = function () {
 
     // wipe out old, and render new. if sel has changed will reflect
     var redraw = function (dashState) {
-        d3.select('#' + rampSvgId).remove();
+        d3.select('.' + rampSvgClass).remove();
         render(dashState);
     };
 
@@ -40,7 +40,7 @@ var ColorRampController = function () {
         // svg container
         var svg = d3.select(filterSelector)
             .append("svg:svg")
-            .attr('id', rampSvgId)
+            .attr('class', rampSvgClass)
             .attr("width", totalwidth)
             .attr("height", totalheight);
 

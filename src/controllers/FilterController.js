@@ -20,8 +20,8 @@ var FilterController = Backbone.View.extend({
     },
 
     events: {
-        "click #filter-selected" : "filterSel",
-        "click #filter-off" : "unfilter"
+        "click .filter-selected" : "filterSel",
+        "click .filter-off" : "unfilter"
     },
 
     filterSel: function () {
