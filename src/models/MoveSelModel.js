@@ -1,4 +1,4 @@
-goog.provide('moveSelModel');
+goog.provide('MoveSelModel');
 
 var MoveSelModel = Backbone.Model.extend({
     defaults: {
@@ -16,4 +16,3 @@ var MoveSelModel = Backbone.Model.extend({
     }
 });
 
-var moveSelModel = new MoveSelModel();

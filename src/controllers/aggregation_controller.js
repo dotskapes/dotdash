@@ -1,17 +1,16 @@
-goog.provide('aggregationController');
+goog.provide('AggregationController');
 
-goog.require('aggModel');
-goog.require('aggregationService');
-goog.require('panelManager');
+goog.require('AggregationService');
 
 var AggregationController = function () {
 
-    this.start = function (dashState) {
+    this.start = function (dashState, aggModel, serviceLayer) {
         var filter = $('.filter-button[name="' + AggregationController.NAME + '"]');
         filter.change(function (event) {
             var name = $(event.target).val();
             var aggregates;
             if (name !== 'none') {
+                var aggregationService = new AggregationService(serviceLayer);
                 aggregates = aggregationService.computeAggregates(name);
             }
             else {
@@ -26,4 +25,3 @@ var AggregationController = function () {
 
 AggregationController.NAME = 'agg';
 
-var aggregationController = new AggregationController();

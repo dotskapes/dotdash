@@ -1,17 +1,15 @@
-goog.provide('timeSlider');
+goog.provide('TimeSliderController');
 
-goog.require('ServiceLayer');
+var TimeSliderController = function () {
 
-var TimeSlider = function () {
-
-    this.start = function ($parent, dashState) {
+    this.start = function ($parent, dashState, serviceLayer) {
         // The time slider is a bacckbone view
         var timeSlider = new wiggle.widget.Slider();
 
 
         // Whenever the data changes, change the steps on the slider
-        ServiceLayer.addDataCallback(function (layer) {
-            timeSlider.model.set('attr', ServiceLayer.getSortedDateProperties());
+        serviceLayer.addDataCallback(function (layer) {
+            timeSlider.model.set('attr', serviceLayer.getSortedDateProperties());
         });
 
 
@@ -24,13 +22,12 @@ var TimeSlider = function () {
         // the selected attribute
         dashState.on('change:attr', function () {
             var attr = dashState.get('attr');
-            timeSlider.model.set('index', ServiceLayer.getIndexOfAttr(attr));
+            timeSlider.model.set('index', serviceLayer.getIndexOfAttr(attr));
         });
 
         $parent.append(timeSlider.$el);
     };
 };
 
-var timeSlider = new TimeSlider();
 
 

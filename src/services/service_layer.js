@@ -3,17 +3,7 @@ goog.provide('ServiceLayer');
 goog.require('ColorRamps');
 goog.require('ColorScales');
 
-// SingletonPattern being used for ServiceLayer
-//var Singleton = (function () {
-//    var c, d, e;
-//    return {
-//        a: 5,
-//        b: function () { return c; }
-//    };
-//}) ();
-
-// Singleton pattern
-var ServiceLayer = (function () {
+var ServiceLayer = function () {
 
     var layer = null;
     var colorMap = {};
@@ -28,14 +18,13 @@ var ServiceLayer = (function () {
         $.each(dataCallbacks, function (i, cb) { cb(dataLayer); });
     };
 
-    // Singleton public methods/properties
     return {
 
         addDataCallback: function (cb) {
             dataCallbacks.push(cb);
         },
 
-        loadUrl: function (url, dashState) {
+        loadUrl: function (url, dashState, aggregateModel) {
             var that = this;
             $.ajax({
                 url: url,
@@ -52,7 +41,7 @@ var ServiceLayer = (function () {
                         sortedIndexLookup[attr] = i;
                     });
 
-                    colorMap = new ColorMap(layer, dashState);
+                    colorMap = new ColorMap(layer, dashState, aggregateModel);
                     fireNewData(layer);
                     dashState.set('attr', that.getSortedDateProperties()[0]);
                 }
@@ -116,5 +105,5 @@ var ServiceLayer = (function () {
             return colorMap.colorForFeature(feature);
         }
     };
-} ());
- // this executes the function for Singleton purposes
+};
+

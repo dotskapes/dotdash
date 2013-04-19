@@ -1,14 +1,12 @@
-goog.provide('timeStepController');
+goog.provide('TimeStepController');
 
-goog.require('ServiceLayer');
-goog.require('panelManager');
 goog.require('TimeStepFilterView');
 
 var TimeStepController = function () {
 
     var view = new TimeStepFilterView();
 
-    this.start = function (dashState) {
+    this.start = function (dashState, serviceLayer) {
 
         var addEventListener = function () {
             var select = $('.' + TimeStepFilterView.CLASS);
@@ -19,7 +17,7 @@ var TimeStepController = function () {
         };
 
 
-        ServiceLayer.addDataCallback(
+        serviceLayer.addDataCallback(
             function (layer) {
                 view.update(layer.properties().sort());
                 addEventListener();
@@ -35,4 +33,3 @@ var TimeStepController = function () {
 
 TimeStepController.NAME = TimeStepFilterView.NAME;
 
-var timeStepController = new TimeStepController();

@@ -1,10 +1,6 @@
 goog.provide('Panel');
 
-goog.require('ServiceLayer');
-goog.require('selectionManager');
-goog.require('moveSelModel');
-
-var Panel = function (label, name) {
+var Panel = function (label, name, selectionManager, moveSelModel, serviceLayer) {
 
     var ALT = 18;
     var that = this;
@@ -41,7 +37,7 @@ var Panel = function (label, name) {
         selectionManager.select(selectionLayerSelector);
     };
 
-    this.allFeatures = function () { return ServiceLayer.currentData.features(); };
+    this.allFeatures = function () { return serviceLayer.currentData.features(); };
 
     this.width = function () { return this.parentElement.width(); };
     this.height = function () { return this.parentElement.height(); };

@@ -1,6 +1,6 @@
-goog.provide('selectionManager');
+goog.provide('SelectionManager');
 
-var SelectionManager = function () {
+var SelectionManager = function (filter) {
 
     var views = [];
     // this is a wigglemaps layer selector that selects for wigglemap features
@@ -53,8 +53,3 @@ var SelectionManager = function () {
 
     addKeyListeners();
 };
-
-// non enforced poor mans singleton - scandal?
-// actually we may eventually have more than 1 selection manager if loading up
-// 2 datasets woth separate selection models
-var selectionManager = new SelectionManager();
