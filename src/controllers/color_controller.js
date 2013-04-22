@@ -64,7 +64,9 @@ var ColorController = Backbone.View.extend({
             // controller should do something with this
             console.log(name + ' changed to ' + value);
         });
-        var colorRampController = new ColorRampController();
+        var colorRampController = new ColorRampController({
+            el: this.$('.' + ColorRampController.NAME + '-filter')
+        });
         colorRampController.start(dashState);
         var timeStepController = new TimeStepController();
         timeStepController.start(dashState, serviceLayer);

@@ -25,7 +25,7 @@ var ColorRampController = Backbone.View.extend({
 
     // wipe out old, and render new. if sel has changed will reflect
     redraw : function (dashState) {
-        d3.select('.' + this.rampSvgClass).remove();
+        d3.select(this.$('.' + this.rampSvgClass).get(0)).remove();
         this.render(dashState);
     },
 
@@ -41,7 +41,7 @@ var ColorRampController = Backbone.View.extend({
         var totalwidth =  rampWidth + 2 * xMargin;
 
         // svg container
-        var svg = d3.select(this.filterSelector)
+        var svg = d3.select(this.$el.get(0))
             .append("svg:svg")
             .attr('class', this.rampSvgClass)
             .attr("width", totalwidth)
