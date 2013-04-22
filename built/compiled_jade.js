@@ -507,7 +507,7 @@ with (locals || {}) {
 var interp;
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.unshift({ lineno: 1, filename: __jade[0].filename });
-buf.push('<div class="sidebar">');
+buf.push('<div class="control-panel">');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.shift();
 buf.push('</div>');
