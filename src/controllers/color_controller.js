@@ -7,8 +7,6 @@ goog.require('AggregationController');
 
 var ColorController = Backbone.View.extend({
 
-    className : 'options',
-
     start : function (parent, dashState, aggregateModel, serviceLayer) {
         parent.append(this.$el);
         this.render();
