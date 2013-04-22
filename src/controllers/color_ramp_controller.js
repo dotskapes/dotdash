@@ -6,7 +6,6 @@ var ColorRampController = Backbone.View.extend({
 
     initialize : function () {
         this.currentRampIndex = 0;
-        this.filterSelector = '.' + ColorRampController.NAME + '-filter';
         this.rampSvgClass = 'ramp-svg';
     },
 
