@@ -29,9 +29,6 @@ var TimePanel = function (selectionManager, moveSelModel, serviceLayer) {
     };
 
     this.newData = function (data) {
-        if (layer) {
-            graph.remove(layer);
-        }
         layer = data;
 
         var properties = layer.numeric();
