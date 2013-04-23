@@ -2,13 +2,11 @@ goog.provide('AggregationService');
 
 goog.require('AGGREGATION_FUNCTIONS');
 
-var AggregationService = function (serviceLayer) {
+var AggregationService = function () {
 
-    this.computeAggregates = function (name) {
+    this.computeAggregates = function (name, attributesByFeature) {
         var aggregationFunction = AGGREGATION_FUNCTIONS[name];
         if (!aggregationFunction) { return {}; }
-
-        var attributesByFeature = serviceLayer.getAttributesByFeature();
 
         var aggregates = {};
         $.each(attributesByFeature, function (featureId, attributes) {

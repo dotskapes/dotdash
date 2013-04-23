@@ -9,6 +9,6 @@ each coloring in colorings
       each option,i in coloring.options
         label
           input.filter-button(class=coloring.name,type='radio',
-            name=coloring.name,checked=i===0,value=option.value)
+            name=coloring.name,checked=option.selected,value=option.value)
           =option.label
       
