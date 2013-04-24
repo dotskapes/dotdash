@@ -52,7 +52,6 @@ var ServiceLayer = function () {
 
                     colorMap = new ColorMap(layer, dashState, aggregateModel);
                     fireNewData(layer);
-                    dashState.set('attr', that.getSortedDateProperties()[0]);
                 }
             });
         },
