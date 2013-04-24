@@ -21,6 +21,7 @@ var ColorController = Backbone.View.extend({
 
     render : function (dashState) {
         var selectedAgg = dashState.get('agg');
+        var selectedDist = dashState.get('colorDist');
         // hard-coded filters for now
         var colorings = [
             { name: TimeStepController.NAME,
@@ -33,8 +34,10 @@ var ColorController = Backbone.View.extend({
             },
             { name: 'dist',
               title: 'Color Distribution',
-              options: [ {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM, selected: true},
-                         {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE}
+              options: [ {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM,
+                          selected: (selectedDist === ColorScales.DISTRIBUTION.UNIFORM)},
+                         {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE,
+                          selected: (selectedDist === ColorScales.DISTRIBUTION.QUANTILE)}
                        ]
             },
             { name: AggregationController.NAME,

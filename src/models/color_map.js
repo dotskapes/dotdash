@@ -80,7 +80,7 @@ var ColorMap = function (layer, dashState, aggModel) {
 
     this.colorForFeature = function (feature) {
         var field = dashState.get('attr');
-        var colorRamp = dashState.get('colorRamp');
+        var colorRamp = ColorRamps.RAMPS[dashState.get('colorRampIndex')];
         var dist = dashState.get('colorDist');
         var val;
         if (dashState.get('agg') === 'none') {

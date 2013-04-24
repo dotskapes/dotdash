@@ -56,7 +56,7 @@ var Dashboard = function (parentSelector, savedDashState) {
     };
 
     this.getState = function () {
-        return dashState;
+        return dashState.toJSON();
     };
 };
 

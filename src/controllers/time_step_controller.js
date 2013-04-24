@@ -17,17 +17,20 @@ var TimeStepController = function () {
         };
 
 
+        var updateSelect = function () {
+            var select = $('.' + TimeStepFilterView.CLASS);
+            select.val(dashState.get('attr'));
+        };
+
         serviceLayer.addDataCallback(
             function (layer) {
                 view.update(layer.properties().sort());
                 addEventListener();
+                updateSelect();
             }
         );
 
-        dashState.on('change:attr', function () {
-            var select = $('.' + TimeStepFilterView.CLASS);
-            select.val(dashState.get('attr'));
-        });
+        dashState.on('change:attr', updateSelect);
     };
 };
 
