@@ -10,8 +10,9 @@ var AggregationController = function () {
             var name = $(event.target).val();
             var aggregates;
             if (name !== 'none') {
-                var aggregationService = new AggregationService(serviceLayer);
-                aggregates = aggregationService.computeAggregates(name);
+                var attributesByFeature = serviceLayer.getAttributesByFeature();
+                var aggregationService = new AggregationService();
+                aggregates = aggregationService.computeAggregates(name, attributesByFeature);
             }
             else {
                 aggregates = null;

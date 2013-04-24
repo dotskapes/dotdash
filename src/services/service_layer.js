@@ -2,6 +2,7 @@ goog.provide('ServiceLayer');
 
 goog.require('ColorRamps');
 goog.require('ColorScales');
+goog.require('AggregationService');
 
 var ServiceLayer = function () {
 
@@ -40,6 +41,14 @@ var ServiceLayer = function () {
                     sortedDateProps.forEach(function (attr, i) {
                         sortedIndexLookup[attr] = i;
                     });
+
+                    var aggregateName = dashState.get('agg');
+                    if (aggregateName) {
+                        var aggregationService = new AggregationService();
+                        var aggregates = aggregationService.computeAggregates(
+                            aggregateName, that.getAttributesByFeature());
+                        aggregateModel.set('agg', aggregates);
+                    }
 
                     colorMap = new ColorMap(layer, dashState, aggregateModel);
                     fireNewData(layer);

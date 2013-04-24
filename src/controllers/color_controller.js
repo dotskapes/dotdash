@@ -9,7 +9,7 @@ var ColorController = Backbone.View.extend({
 
     start : function (parent, dashState, aggregateModel, serviceLayer) {
         parent.append(this.$el);
-        this.render();
+        this.render(dashState);
         this.$('.collapse-toggler').click(function (event) {
             var content = $(event.currentTarget).siblings('.collapsible');
             content.slideToggle();
@@ -19,7 +19,8 @@ var ColorController = Backbone.View.extend({
         this.initControllers(dashState, aggregateModel, serviceLayer);
     },
 
-    render : function () {
+    render : function (dashState) {
+        var selectedAgg = dashState.get('agg');
         // hard-coded filters for now
         var colorings = [
             { name: TimeStepController.NAME,
@@ -32,16 +33,16 @@ var ColorController = Backbone.View.extend({
             },
             { name: 'dist',
               title: 'Color Distribution',
-              options: [ {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM},
+              options: [ {label: 'Uniform', value: ColorScales.DISTRIBUTION.UNIFORM, selected: true},
                          {label: 'Quantile', value: ColorScales.DISTRIBUTION.QUANTILE}
                        ]
             },
             { name: AggregationController.NAME,
               title: 'Aggregate',
-              options: [ {label: 'None', value: 'none'},
-                         {label: 'Mean', value: 'mean'},
-                         {label: 'Max', value: 'max'},
-                         {label: 'Min', value: 'min'} ]
+              options: [ {label: 'None', value: 'none', selected: (selectedAgg === 'none')},
+                         {label: 'Mean', value: 'mean', selected: (selectedAgg === 'mean')},
+                         {label: 'Max', value: 'max', selected: (selectedAgg === 'max')},
+                         {label: 'Min', value: 'min', selected: (selectedAgg === 'min')} ]
             }
         ];
 

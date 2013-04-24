@@ -14,8 +14,8 @@ goog.require('MoveSelModel');
 goog.require('Filter');
 goog.require('SelectionManager');
 
-var Dashboard = function (parentSelector) {
-    var dashState = new DashboardState();
+var Dashboard = function (parentSelector, savedDashState) {
+    var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
 
     var serviceLayer = new ServiceLayer();
@@ -54,6 +54,10 @@ var Dashboard = function (parentSelector) {
     this.loadUrl = function (url) {
         serviceLayer.loadUrl(url, dashState, aggregateModel);
     };
+
+    this.getState = function () {
+        return dashState;
+    };
 };
 
 // called by index.html to start up dash
@@ -61,9 +65,10 @@ window.dash = {
     ready: function (func) {
         $(document).ready(func);
     },
-    create: function (selector) {
+    create: function (selector, savedDashState) {
         selector = selector || 'body';
+        savedDashState = savedDashState || {};
 
-        return new Dashboard(selector);
+        return new Dashboard(selector, savedDashState);
     }
 };
