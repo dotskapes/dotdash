@@ -66,7 +66,7 @@ var ColorMap = function (layer, dashState, aggModel) {
     aggModel.on('change:agg', function () {
         var aggregates = dashState.get('agg');
         if (aggregates) {
-            filteredValues = [];
+            var filteredValues = [];
             layer.features().each(function (i, feature) {
                 filteredValues.push(aggregates[feature.id]);
             });
