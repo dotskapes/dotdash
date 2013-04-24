@@ -15,13 +15,13 @@ var TimeSliderController = function () {
         serviceLayer.addDataCallback(function (layer) {
             timeSlider.model.set('attr', serviceLayer.getSortedDateProperties());
             updateDate();
+
+            // Likewise, when the slider changes position, change the state
+            timeSlider.change(function (index) {
+                dashState.set('attr', timeSlider.model.get('attr')[index]);
+            });
         });
 
-
-        // Likewise, when the slider changes position, change the state
-        timeSlider.change(function (index) {
-            dashState.set('attr', timeSlider.model.get('attr')[index]);
-        });
 
         // Make sure to update the position of the slider if something else changes
         // the selected attribute
