@@ -1,21 +1,6 @@
 
 if (jade.templates === undefined) jade.templates = {};
 ;
-jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
-attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
-var __jade = [{ lineno: 1, filename: undefined }];
-try {
-var buf = [];
-with (locals || {}) {
-var interp;
-__jade.unshift({ lineno: 1, filename: __jade[0].filename });
-__jade.shift();
-}
-return buf.join("");
-} catch (err) {
-  rethrow(err, __jade[0].filename, __jade[0].lineno);
-}
-};
 jade.templates['panels'] = function anonymous(locals, attrs, escape, rethrow, merge) {
 attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
 var __jade = [{ lineno: 1, filename: undefined }];
@@ -331,7 +316,7 @@ buf.push('<label>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 11, filename: __jade[0].filename });
 buf.push('<input');
-buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(i===0), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
+buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(option.selected), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
 buf.push('/>');
 __jade.shift();
 __jade.unshift({ lineno: 12, filename: __jade[0].filename });
@@ -355,7 +340,7 @@ buf.push('<label>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 11, filename: __jade[0].filename });
 buf.push('<input');
-buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(i===0), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
+buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(option.selected), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
 buf.push('/>');
 __jade.shift();
 __jade.unshift({ lineno: 12, filename: __jade[0].filename });
@@ -437,7 +422,7 @@ buf.push('<label>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 11, filename: __jade[0].filename });
 buf.push('<input');
-buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(i===0), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
+buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(option.selected), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
 buf.push('/>');
 __jade.shift();
 __jade.unshift({ lineno: 12, filename: __jade[0].filename });
@@ -461,7 +446,7 @@ buf.push('<label>');
 __jade.unshift({ lineno: undefined, filename: __jade[0].filename });
 __jade.unshift({ lineno: 11, filename: __jade[0].filename });
 buf.push('<input');
-buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(i===0), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
+buf.push(attrs({ 'type':('radio'), 'name':(coloring.name), 'checked':(option.selected), 'value':(option.value), "class": ('filter-button') + ' ' + (coloring.name) }, {"class":true,"type":true,"name":true,"checked":true,"value":true}));
 buf.push('/>');
 __jade.shift();
 __jade.unshift({ lineno: 12, filename: __jade[0].filename });
@@ -491,6 +476,21 @@ __jade.shift();
 }).call(this);
 
 __jade.shift();
+__jade.shift();
+}
+return buf.join("");
+} catch (err) {
+  rethrow(err, __jade[0].filename, __jade[0].lineno);
+}
+};
+jade.templates['select_box'] = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var __jade = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+var interp;
+__jade.unshift({ lineno: 1, filename: __jade[0].filename });
 __jade.shift();
 }
 return buf.join("");

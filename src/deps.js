@@ -27,6 +27,6 @@ goog.addDependency('../src/models/dash_state.js', ['DashboardState'], ['ColorRam
 goog.addDependency('../src/models/filter.js', ['Filter'], []);
 goog.addDependency('../src/models/panel_state.js', ['PanelState'], []);
 goog.addDependency('../src/services/aggregation_service.js', ['AggregationService'], ['AGGREGATION_FUNCTIONS']);
-goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['ColorRamps', 'ColorScales']);
+goog.addDependency('../src/services/service_layer.js', ['ServiceLayer'], ['AggregationService', 'ColorRamps', 'ColorScales']);
 goog.addDependency('../src/views/popup.js', ['Popup'], []);
 goog.addDependency('../src/views/time_step_filter_view.js', ['TimeStepFilterView'], []);
