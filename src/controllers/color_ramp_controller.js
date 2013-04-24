@@ -5,7 +5,6 @@ goog.require('ColorRamps');
 var ColorRampController = Backbone.View.extend({
 
     initialize : function () {
-        this.currentRampIndex = 0;
         this.rampSvgClass = 'ramp-svg';
     },
 
@@ -15,10 +14,9 @@ var ColorRampController = Backbone.View.extend({
     },
 
     // a new ramp is being asked for
-    newRamp : function (rampIndex, dashState) {
-        this.dashState.set('colorRamp', ColorRamps.RAMPS[rampIndex]);
+    newRamp : function (rampIndex) {
+        this.dashState.set('colorRampIndex', rampIndex);
         // selection has probably changed, redraw
-        this.currentRampIndex = rampIndex;
         this.redraw(this.dashState);
     },
 
@@ -59,7 +57,7 @@ var ColorRampController = Backbone.View.extend({
                 .attr('fill', 'white');
 
             // highlight current selected ramp
-            if (rampIndex === this.currentRampIndex) {
+            if (rampIndex === dashState.get('colorRampIndex')) {
                 rect.attr('fill', 'yellow');
             }
 

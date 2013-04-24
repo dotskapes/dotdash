@@ -123,7 +123,8 @@ var PanelManager = Backbone.View.extend({
 
         $.each(this.model.get('panels'), function (i, pan) {
             serviceLayer.addDataCallback(function (data) {
-                return pan.newData(data);
+                pan.newData(data);
+                pan.draw(filter.getFilter(), filter);
             });
             selectionManager.addView(pan);
         });
