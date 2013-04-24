@@ -55,7 +55,7 @@ var Dashboard = function (parentSelector, savedDashState) {
         serviceLayer.loadUrl(url, dashState, aggregateModel);
     };
 
-    this.save = function () {
+    this.getState = function () {
         return dashState;
     };
 };
