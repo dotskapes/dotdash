@@ -8,7 +8,7 @@ var Panel;
 (function() {
 
     // A mapping from panel names to panel classes
-    var panelNames = {};
+    var panelClasses = {};
 
     Panel = function (label, name, selectionManager, moveSelModel, serviceLayer) {
 
@@ -95,13 +95,13 @@ var Panel;
 
     // Static method. Returns the class of panel associated with a name
     // ie - map returns the MapPanel constructor
-    Panel.get = function(name) {
-        return panelNames[name];
+    Panel.getClass = function(name) {
+        return panelClasses[name];
     };
 
     // Panel classes must register themselves to be avaialble through the Panel.get(name) interface
     Panel.register = function(name, func) {
-        panelNames[name] = func;
+        panelClasses[name] = func;
     };
 
     Panel.BUTTON_TYPES = {SELECTION_TOGGLE: 'selection', FILTER: 'filter'};

@@ -54,7 +54,7 @@ dash.Dashboard = function(settings) {
 
     var panels = [];
     $.each(panelNames, function(i, name) {
-        var PanelFunc = dash.controllers.Panel.get(name);
+        var PanelFunc = dash.controllers.Panel.getClass(name);
         panels.push(new PanelFunc(selectionManager, moveSelModel, serviceLayer));
     });
     var panelState = new PanelState({
