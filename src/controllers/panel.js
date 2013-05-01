@@ -6,6 +6,8 @@ goog.require('dash');
 var Panel;
 
 (function() {
+
+    // A mapping from panel names to panel classes
     var panelNames = {};
 
     Panel = function (label, name, selectionManager, moveSelModel, serviceLayer) {
@@ -91,10 +93,13 @@ var Panel;
 
     };
 
+    // Static method. Returns the class of panel associated with a name
+    // ie - map returns the MapPanel constructor
     Panel.get = function(name) {
         return panelNames[name];
     };
 
+    // Panel classes must register themselves to be avaialble through the Panel.get(name) interface
     Panel.register = function(name, func) {
         panelNames[name] = func;
     };
