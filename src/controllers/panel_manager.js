@@ -3,6 +3,7 @@ goog.provide('PanelManager');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
+goog.require('TablePanel');
 
 var PanelManager = Backbone.View.extend({
 
@@ -12,11 +13,8 @@ var PanelManager = Backbone.View.extend({
     start: function ($parent, dashState, filter, selectionManager, serviceLayer) {
         var that = this;
 
-        $parent.append (this.$el);
+        $parent.append(this.$el);
         this.render();
-
-        // Set the height of the panels div
-        this.setSize();
 
         // Whenever the window is resized, chnage the size of the panels
         $(window).resize(function () {
@@ -58,13 +56,19 @@ var PanelManager = Backbone.View.extend({
         }));
         this.$el.empty().append(panelContainer);
 
+        this.$left = this.$el.find('.left');
+        this.$right = this.$el.find('.right');
+
+        // Set the height of the panels div
+        this.setSize();
+
         // Initialize the html elements for each panel
         $.each(this.model.get('panels'), function (i, panel) {
             that.panelDivs[panel.name] = panel.makeParentElement();
+            that.$left.find('.view').append(that.panelDivs[panel.name]);
+            panel.create();
+            that.panelDivs[panel.name].hide();
         });
-
-        this.$left = this.$el.find('.left');
-        this.$right = this.$el.find('.right');
     },
 
     // Configure the height of the panels so that they take up the remainder of the screen

@@ -1,0 +1,8 @@
+table.dashtable
+  tr
+    each column in columns 
+      td= column
+  each feature, i in features
+    tr(fid=feature.id)
+      each column in columns 
+        td= feature.attr(column)
