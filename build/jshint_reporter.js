@@ -7,7 +7,7 @@ module.exports = {
             var file = result.file;
             var error = result.error;
 
-            if (error.reason === "Unexpected space before '('.") {
+            if (error.reason === "Missing space after 'function'.") {
                 len = len - 1;
                 return;
             }

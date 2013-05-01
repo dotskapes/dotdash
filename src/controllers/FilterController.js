@@ -10,7 +10,7 @@ var FilterController = Backbone.View.extend({
     },
 
     start: function ($parent) {
-        $parent.append (this.$el);
+        $parent.append(this.$el);
         this.render();
     },
 

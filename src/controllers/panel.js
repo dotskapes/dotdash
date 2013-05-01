@@ -51,6 +51,12 @@ var Panel = function (label, name, selectionManager, moveSelModel, serviceLayer)
     // temporarily go into select mode (for modifier/ctrl hotkey)
     this.tempSelectMode = function (tempSelectOn) {};
 
+    // Abstract create method
+    this.create = function() {};
+
+    // Abstract new data function
+    this.newData = function(data) {};
+
     // control hotkey -> temporary select mode
     var addKeyListeners = function () {
         $(document).on('keydown', function (e) {

@@ -11,12 +11,13 @@ goog.addDependency('../src/controllers/distrib_range_controller.js', ['DistribRa
 goog.addDependency('../src/controllers/map_panel.js', ['MapPanel'], ['ColorMap', 'Panel']);
 goog.addDependency('../src/controllers/mds_panel.js', ['MDSPanel'], ['Panel']);
 goog.addDependency('../src/controllers/panel.js', ['Panel'], []);
-goog.addDependency('../src/controllers/panel_manager.js', ['PanelManager'], ['MDSPanel', 'MapPanel', 'TimePanel']);
+goog.addDependency('../src/controllers/panel_manager.js', ['PanelManager'], ['MDSPanel', 'MapPanel', 'TablePanel', 'TimePanel']);
 goog.addDependency('../src/controllers/selection_manager.js', ['SelectionManager'], []);
+goog.addDependency('../src/controllers/table_panel.js', ['TablePanel'], ['Panel']);
 goog.addDependency('../src/controllers/time_panel.js', ['TimePanel'], ['Panel', 'Popup']);
 goog.addDependency('../src/controllers/time_slider_controller.js', ['TimeSliderController'], []);
 goog.addDependency('../src/controllers/time_step_controller.js', ['TimeStepController'], ['TimeStepFilterView']);
-goog.addDependency('../src/dash.js', ['dash'], ['AggregateModel', 'DashboardState', 'Filter', 'MDSPanel', 'MapPanel', 'MoveSelModel', 'PanelManager', 'PanelState', 'SelectionManager', 'ServiceLayer', 'SidebarController', 'TimePanel', 'TimeSliderController']);
+goog.addDependency('../src/dash.js', ['dash'], ['AggregateModel', 'DashboardState', 'Filter', 'MDSPanel', 'MapPanel', 'MoveSelModel', 'PanelManager', 'PanelState', 'SelectionManager', 'ServiceLayer', 'SidebarController', 'TablePanel', 'TimePanel', 'TimeSliderController']);
 goog.addDependency('../src/models/MoveSelModel.js', ['MoveSelModel'], []);
 goog.addDependency('../src/models/aggregate.js', ['AggregateModel'], []);
 goog.addDependency('../src/models/aggregation_functions.js', ['AGGREGATION_FUNCTIONS'], []);
