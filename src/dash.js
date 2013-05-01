@@ -7,14 +7,17 @@ goog.require('ServiceLayer');
 goog.require('SidebarController');
 goog.require('PanelManager');
 goog.require('PanelState');
+
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('MDSPanel');
+goog.require('TablePanel');
+
 goog.require('MoveSelModel');
 goog.require('Filter');
 goog.require('SelectionManager');
 
-var Dashboard = function (parentSelector, savedDashState) {
+var Dashboard = function(parentSelector, savedDashState) {
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
 
@@ -45,7 +48,9 @@ var Dashboard = function (parentSelector, savedDashState) {
     var panelState = new PanelState({
         panels: [new MapPanel(selectionManager, moveSelModel, serviceLayer),
                  new TimePanel(selectionManager, moveSelModel, serviceLayer),
-                 new MDSPanel(selectionManager, moveSelModel, serviceLayer)]
+                 new MDSPanel(selectionManager, moveSelModel, serviceLayer),
+                 new TablePanel(selectionManager, moveSelModel, serviceLayer)
+                ]
     });
 
     var panelManager = new PanelManager({model: panelState});

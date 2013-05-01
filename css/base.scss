@@ -115,3 +115,16 @@ html, body, #dashboard {
         background-position: -2px -2px;
     }
 }
+
+.dashtable {
+    border-spacing: 0px;
+    border: none;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.dashtable td {
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-bottom: solid 1px #eee;
+    text-align: center;
+}

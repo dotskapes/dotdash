@@ -8,7 +8,7 @@ goog.require('ColorController');
 var SidebarController = Backbone.View.extend({
 
     start: function ($parent, options) {
-        $parent.append (this.$el);
+        $parent.append(this.$el);
         this.render(options);
     },
 
