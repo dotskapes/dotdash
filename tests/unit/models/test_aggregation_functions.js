@@ -1,6 +1,5 @@
 module("aggregation functions test");
 
-
 // our aggregation functions act on objects, but only use the values
 var makeObject = function (list) {
     return _.object(_.range(list.length), list);

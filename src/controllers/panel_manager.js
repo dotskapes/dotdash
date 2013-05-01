@@ -2,7 +2,6 @@ goog.provide('PanelManager');
 
 goog.require('MapPanel');
 goog.require('TimePanel');
-goog.require('MDSPanel');
 goog.require('TablePanel');
 
 var PanelManager = Backbone.View.extend({
