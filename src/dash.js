@@ -1,4 +1,6 @@
-goog.provide('dash');
+goog.provide('Dashboard');
+
+goog.require('dash');
 
 goog.require('TimeSliderController');
 goog.require('DashboardState');
@@ -8,16 +10,21 @@ goog.require('SidebarController');
 goog.require('PanelManager');
 goog.require('PanelState');
 
+goog.require('Panel');
 goog.require('MapPanel');
 goog.require('TimePanel');
-goog.require('MDSPanel');
 goog.require('TablePanel');
 
 goog.require('MoveSelModel');
 goog.require('Filter');
 goog.require('SelectionManager');
 
-var Dashboard = function(parentSelector, savedDashState) {
+dash.Dashboard = function(settings) {
+
+    var parentSelector = settings.parent || 'body';
+    var savedDashState = settings.saved || {};
+    var panelNames = settings.panels || ['map', 'time', 'table'];
+
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
 
@@ -45,12 +52,13 @@ var Dashboard = function(parentSelector, savedDashState) {
     };
     sidebarController.start(parent, options);
 
+    var panels = [];
+    $.each(panelNames, function(i, name) {
+        var PanelFunc = dash.controllers.Panel.get(name);
+        panels.push(new PanelFunc(selectionManager, moveSelModel, serviceLayer));
+    });
     var panelState = new PanelState({
-        panels: [new MapPanel(selectionManager, moveSelModel, serviceLayer),
-                 new TimePanel(selectionManager, moveSelModel, serviceLayer),
-                 new MDSPanel(selectionManager, moveSelModel, serviceLayer),
-                 new TablePanel(selectionManager, moveSelModel, serviceLayer)
-                ]
+        panels: panels
     });
 
     var panelManager = new PanelManager({model: panelState});
@@ -63,17 +71,4 @@ var Dashboard = function(parentSelector, savedDashState) {
     this.getState = function () {
         return dashState.toJSON();
     };
-};
-
-// called by index.html to start up dash
-window.dash = {
-    ready: function (func) {
-        $(document).ready(func);
-    },
-    create: function (selector, savedDashState) {
-        selector = selector || 'body';
-        savedDashState = savedDashState || {};
-
-        return new Dashboard(selector, savedDashState);
-    }
 };
