@@ -1,6 +1,5 @@
 module("color map test");
 
-
 var makeGeoJson = function (propertyLists) {
     var features = _.map(propertyLists, function (properties) {
         return { type: "Feature",
