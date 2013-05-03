@@ -52,11 +52,18 @@ var Panel;
         this.width = function () { return this.parentElement.width(); };
         this.height = function () { return this.parentElement.height(); };
 
+        this.resize = function () {
+            if (this.hasWiggleView()) {
+                this.getWiggleView().resize();
+            }
+        };
+
         // override in subclass, abstract methods
         this.select = function () {};
         this.deselect = function () {};
         this.draw = function (layerSelector) {};
-        this.getWiggleView = function () {};
+        this.hasWiggleView = function () { return getWiggleView() !== null; };
+        this.getWiggleView = function () { return null; };
 
         // temporarily go into select mode (for modifier/ctrl hotkey)
         this.tempSelectMode = function (tempSelectOn) {};
