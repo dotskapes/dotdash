@@ -4,12 +4,12 @@ goog.addDependency('../src/Dashboard.js', ['Dashboard'], ['AggregateModel', 'Das
 goog.addDependency('../src/base.js', ['goog'], []);
 goog.addDependency('../src/controllers/FilterController.js', ['FilterController'], ['Filter']);
 goog.addDependency('../src/controllers/MoveSelController.js', ['MoveSelController'], ['MoveSelModel']);
-goog.addDependency('../src/controllers/Panel.js', ['Panel'], ['dash']);
 goog.addDependency('../src/controllers/SidebarController.js', ['SidebarController'], ['ColorController', 'FilterController', 'MoveSelController']);
 goog.addDependency('../src/controllers/aggregation_controller.js', ['AggregationController'], ['AggregationService']);
 goog.addDependency('../src/controllers/color_controller.js', ['ColorController'], ['AggregationController', 'ColorRampController', 'DistribRangeController', 'TimeStepController']);
 goog.addDependency('../src/controllers/color_ramp_controller.js', ['ColorRampController'], ['ColorRamps']);
 goog.addDependency('../src/controllers/distrib_range_controller.js', ['DistribRangeController'], []);
+goog.addDependency('../src/controllers/panel.js', ['Panel'], ['dash']);
 goog.addDependency('../src/controllers/panel_manager.js', ['PanelManager'], ['MapPanel', 'TablePanel', 'TimePanel']);
 goog.addDependency('../src/controllers/panels/MapPanel.js', ['MapPanel'], ['ColorMap', 'Panel']);
 goog.addDependency('../src/controllers/panels/TablePanel.js', ['TablePanel'], ['Panel']);

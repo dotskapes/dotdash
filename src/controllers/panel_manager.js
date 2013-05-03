@@ -87,6 +87,15 @@ var PanelManager = Backbone.View.extend({
         var height = this.$el.parent().height() - siblingsHeight - viewSiblingsHeight;
         this.$left.find('.view').css('height', height);
         this.$right.find('.view').css('height', height);
+
+        if (this.model.get('panels').length === 1) {
+            this.$left.find('.view').css('width', $('.panels').width());
+            this.$right.hide();
+        } else {
+            var width = $('.panels').width() / 2;
+            this.$left.find('.view').css('width', width);
+            this.$right.find('.view').css('width', width);
+        }
     },
 
     // Either create of show a given panel
@@ -104,14 +113,16 @@ var PanelManager = Backbone.View.extend({
         // Hide the exisiting elements
         $pane.find('.view').children().hide();
 
-        // Append these panels to the correct side
-        $pane.find('.view').append(this.panelDivs[panel.name]);
+        if (panel) {
+            // Append these panels to the correct side
+            $pane.find('.view').append(this.panelDivs[panel.name]);
 
-        // Show the two panels
-        this.showPanel(panel);
+            // Show the two panels
+            this.showPanel(panel);
 
-        // Set the dropdown so the correct values are reflected
-        $pane.find('select').val(this.model.get(side));
+            // Set the dropdown so the correct values are reflected
+            $pane.find('select').val(this.model.get(side));
+        }
     },
 
     // Set the panes that the panels belong to

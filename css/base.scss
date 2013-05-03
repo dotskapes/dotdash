@@ -55,6 +55,7 @@ html, body, #dashboard {
         width: 50%;
 
         .view {
+            overflow: scroll;
             
             .panel {
                 height: 100%;
@@ -72,7 +73,7 @@ html, body, #dashboard {
 }
 
 .wigglemap, .timeseries {
-    height: 100%;
+    height: 99%;
 }
 
 .map, .time {
