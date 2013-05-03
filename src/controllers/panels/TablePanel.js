@@ -18,13 +18,7 @@ goog.require('Panel');
             this.features = data.features();
             this.parentElement.empty();
 
-            // TEMP: These are useful to be able to play with inline while building this,
-            // so no one yell at me (Mark and Amy)
-            this.container = $('<div>').css({
-                width: '100%',
-                height: '100%',
-                overflow: 'scroll'
-            });
+            this.container = $('<div>');
 
             this.parentElement.append(this.container);
 
