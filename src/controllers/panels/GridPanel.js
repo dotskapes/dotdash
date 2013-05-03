@@ -16,8 +16,8 @@ goog.require('Panel');
         var layer;
         var that = this;
 
-        this.getGrid = function () { return grid; }
-        this.getWiggleView = function () { return grid; }
+        this.getGrid = function () { return grid; };
+        this.getWiggleView = function () { return grid; };
 
         this.create = function () {
             this.container = $('<div>').attr('class', 'grid');
@@ -29,18 +29,18 @@ goog.require('Panel');
 
             // wireupGrid();
             this.created = true;
-        }
-        
+        };
+
         this.newData = function (data) {
-            
+
             if (layer) {
                 grid.remove(layer);
             }
             layer = data;
 
             // layer.features.style...
-            
-        }
+
+        };
 
         this.draw = function (layerSelector, filter) {
             // dont think filtering makes any sense for grid??
@@ -52,14 +52,14 @@ goog.require('Panel');
             layerSelector.style(grid, 'fill', function (f) {
                 return serviceLayer.getColorForFeature(f);
             });
-        }
+        };
 
         var wireupGrid = function () {
             // is there anything interesting to select
             //grid.select(function (box) {});
-        }
+        };
 
-    }
+    };
 
     Panel.register('grid', GridPanel);
 
