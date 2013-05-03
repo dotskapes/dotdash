@@ -34,10 +34,6 @@ goog.require('Panel');
             this.created = true;
         };
 
-        this.resize = function () {
-            map.resize();
-        };
-
         this.newData = function (data) {
             if (layer) {
                 map.remove(layer);
