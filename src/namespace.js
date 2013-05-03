@@ -1,7 +1,9 @@
 goog.provide('dash');
 
-window.dash = {
+var dash = {
     controllers: {
         panels: {}
     }
 };
+
+window.dash = dash;
