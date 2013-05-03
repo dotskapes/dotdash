@@ -14,6 +14,7 @@ goog.require('Panel');
 goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('TablePanel');
+goog.require('GridPanel');
 
 goog.require('MoveSelModel');
 goog.require('Filter');
@@ -23,7 +24,7 @@ dash.Dashboard = function(settings) {
 
     var parentSelector = settings.parent || 'body';
     var savedDashState = settings.saved || {};
-    var panelNames = settings.panels || ['map', 'time', 'table'];
+    var panelNames = settings.panels || ['map', 'time', 'table', 'grid'];
 
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
