@@ -26,10 +26,27 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
+        var DO_GRID = true;
+        //DO_GRID = false; // comment out for GRIT
+        if (DO_GRID) {
+            // grid doesnt play well with map time & table
+            panels = ['grid'];
+        }
+        else {
+            panels = ['map', 'time', 'table'];
+        }
+
         var dashboard = new dash.Dashboard ({
-            parent: '#dashboard'
+            parent: '#dashboard',
+            panels: panels
         });
-        dashboard.loadUrl('temp/flu_country.json');
+
+        if (DO_GRID) {
+            dashboard.loadUrl('temp/noaa.asc');
+        }
+        else {
+            dashboard.loadUrl('temp/flu_country.json');
+        }
     });
   </script>
   <body style="margin: 0px;">

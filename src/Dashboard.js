@@ -24,7 +24,7 @@ dash.Dashboard = function(settings) {
 
     var parentSelector = settings.parent || 'body';
     var savedDashState = settings.saved || {};
-    var panelNames = settings.panels || ['map', 'time', 'table', 'grid'];
+    var panelNames = settings.panels || ['map', 'time', 'table'];
 
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
