@@ -12,6 +12,7 @@ goog.addDependency('../src/controllers/map_panel.js', ['MapPanel'], ['ColorMap',
 goog.addDependency('../src/controllers/mds_panel.js', ['MDSPanel'], ['Panel']);
 goog.addDependency('../src/controllers/panel.js', ['Panel'], []);
 goog.addDependency('../src/controllers/panel_manager.js', ['PanelManager'], ['MDSPanel', 'MapPanel', 'TablePanel', 'TimePanel']);
+goog.addDependency('../src/controllers/panels/MapPanel.js', ['MapPanel'], ['ColorMap', 'Panel']);
 goog.addDependency('../src/controllers/selection_manager.js', ['SelectionManager'], []);
 goog.addDependency('../src/controllers/table_panel.js', ['TablePanel'], ['Panel']);
 goog.addDependency('../src/controllers/time_panel.js', ['TimePanel'], ['Panel', 'Popup']);
