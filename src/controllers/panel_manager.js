@@ -139,7 +139,7 @@ var PanelManager = Backbone.View.extend({
         $.each(this.model.get('panels'), function (i, pan) {
             serviceLayer.addDataCallback(function (data) {
                 pan.newData(data);
-                pan.draw(filter.getFilter(), filter);
+                pan.draw(filter);
             });
             selectionManager.addView(pan);
         });
@@ -155,7 +155,7 @@ var PanelManager = Backbone.View.extend({
         $.each(this.model.get('panels'), function (i, panel) {
             // redraws all panels (without selection/highlight)
             // only draw filtered features
-            panel.draw(filter.getFilter(), filter);
+            panel.draw(filter);
         });
         // panels dont track selection, hafta redo selection with selMan
         selectionManager.reselect();

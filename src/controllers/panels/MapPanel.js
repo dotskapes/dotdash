@@ -63,9 +63,6 @@ goog.require('Panel');
 
         // Selection methods/interface - called by SelectionManager
         this.deselect = function (selectionLayer) {
-            // this should then further select on what is unfiltered out
-            // but we are not yet filtering...
-            // var unfiltered = filterQueries.get(allFeats);
             selectionLayer.style(map, 'fill', function (f) {
                 return serviceLayer.getColorForFeature(f);
             });
@@ -76,13 +73,15 @@ goog.require('Panel');
         };
 
         // draw map - without highlight/selection
-        this.draw = function (layerSelector, filter) {
+        this.draw = function (filter) {
             // some of this logic belong in panel_man?
+            // filtered - set filtered out to opacity 0 - not to be seen
             if (filter.isFiltered()) {
                 var filteredOut = filter.getUnfiltered();
                 filteredOut.style(map, 'fill-opacity', 0)
                     .style(map, 'stroke-opacity', 0);
             }
+            //no filter - all features should be seen - opacity 1
             else {
                 serviceLayer.getLayerSelector().style(map, 'fill-opacity', FILL_OPACITY)
                     .style(map, 'stroke-opacity', 1);
@@ -91,7 +90,8 @@ goog.require('Panel');
             // map is layer selector funniness. it tells layer selector to ONLY apply
             // this styling to the map 'engine', which it happens to know about.
             // MVC violation? discuss. rationalization: selectors are controller not model
-            layerSelector.style(map, 'fill', function (f) {
+            // draw all features, but ones with 0 above are not actually seen
+            filter.getLayerSelector().style(map, 'fill', function (f) {
                 return serviceLayer.getColorForFeature(f);
             });
         };
