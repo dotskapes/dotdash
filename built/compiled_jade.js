@@ -1,25 +1,6 @@
 
 if (jade.templates === undefined) jade.templates = {};
 ;
-jade.templates['sidebar'] = function anonymous(locals) {
-jade.debug = [{ lineno: 1, filename: undefined }];
-try {
-var buf = [];
-with (locals || {}) {
-jade.debug.unshift({ lineno: 1, filename: jade.debug[0].filename });
-jade.debug.unshift({ lineno: 1, filename: jade.debug[0].filename });
-buf.push("<div class=\"control-panel\">");
-jade.debug.unshift({ lineno: undefined, filename: jade.debug[0].filename });
-jade.debug.shift();
-buf.push("</div>");
-jade.debug.shift();
-jade.debug.shift();
-}
-return buf.join("");
-} catch (err) {
-  jade.rethrow(err, jade.debug[0].filename, jade.debug[0].lineno);
-}
-};
 jade.templates['select_box'] = function anonymous(locals) {
 jade.debug = [{ lineno: 1, filename: undefined }];
 try {
@@ -479,6 +460,25 @@ jade.debug.shift();
   }
 }).call(this);
 
+jade.debug.shift();
+jade.debug.shift();
+}
+return buf.join("");
+} catch (err) {
+  jade.rethrow(err, jade.debug[0].filename, jade.debug[0].lineno);
+}
+};
+jade.templates['sidebar'] = function anonymous(locals) {
+jade.debug = [{ lineno: 1, filename: undefined }];
+try {
+var buf = [];
+with (locals || {}) {
+jade.debug.unshift({ lineno: 1, filename: jade.debug[0].filename });
+jade.debug.unshift({ lineno: 1, filename: jade.debug[0].filename });
+buf.push("<div class=\"control-panel\">");
+jade.debug.unshift({ lineno: undefined, filename: jade.debug[0].filename });
+jade.debug.shift();
+buf.push("</div>");
 jade.debug.shift();
 jade.debug.shift();
 }

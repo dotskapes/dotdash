@@ -28,8 +28,10 @@ html, body, #dashboard {
   .panels .pane {
     display: inline-block;
     width: 50%; }
-    .panels .pane .view .panel {
-      height: 100%; }
+    .panels .pane .view {
+      overflow: scroll; }
+      .panels .pane .view .panel {
+        height: 100%; }
 
 .control-panel {
   float: right;
@@ -38,7 +40,7 @@ html, body, #dashboard {
   overflow: visible; }
 
 .wigglemap, .timeseries {
-  height: 100%; }
+  height: 99%; }
 
 .map, .time {
   cursor: move; }

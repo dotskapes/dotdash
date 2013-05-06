@@ -19,14 +19,16 @@
     <script type="text/javascript" src="built/compiled_jade.js"></script>
     <!--<script type="text/javascript" src="built/dash.js"></script>-->
     <script type="text/javascript">
-        goog.require('dash');
+        goog.require('Dashboard');
     </script>
     <title>Spatial-Temporal Dashboard</title>
   </head>
 
   <script type="text/javascript">
-    dash.ready (function () {
-        var dashboard = dash.create ('#dashboard');
+    $(document).ready(function() {
+        var dashboard = new dash.Dashboard ({
+            parent: '#dashboard'
+        });
         dashboard.loadUrl('temp/flu_country.json');
     });
   </script>
