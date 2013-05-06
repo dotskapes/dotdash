@@ -37,7 +37,7 @@ var Filter = Backbone.Model.extend({
 
     // returns a layer selector of whats currently filtered.
     // if nothing filtered returns whole layer selector
-    getFilter: function () {
+    getLayerSelector: function () {
         if (this.isFiltered()) { return this.get('filterSelector'); }
         else { return this.get('serviceLayer').getLayerSelector(); }
     },

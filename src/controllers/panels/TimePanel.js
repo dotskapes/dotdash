@@ -56,9 +56,7 @@ goog.require('Popup');
 
         // Selection methods/interface - called by SelectionManager
         this.deselect = function (selectionLayer) {
-            // this should then further select on what is unfiltered out
-            // but we are not yet filtering...
-            // var unfiltered = filterQueries.get(allFeats);
+
             selectionLayer.style(graph, 'stroke', function (f) {
                 return serviceLayer.getColorForFeature(f);
             });
@@ -69,7 +67,16 @@ goog.require('Popup');
         };
 
         // draw graph - without highlight/selection
-        this.draw = function () {
+        this.draw = function (filter) {
+            // filtered - set filtered out to opacity 0 - not to be seen
+            if (filter.isFiltered()) {
+                var filteredOut = filter.getUnfiltered();
+                filteredOut.style(graph, 'stroke-opacity', 0);
+            }
+            //no filter - all features should be seen - opacity 1
+            else {
+                serviceLayer.getLayerSelector().style(graph, 'stroke-opacity', 1);
+            }
             // this should then further select on what is unfiltered out
             // but we are not yet filtering...
             // var unfiltered = filterQueries.get(allFeats);

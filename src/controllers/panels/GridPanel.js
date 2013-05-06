@@ -42,14 +42,14 @@ goog.require('Panel');
 
         };
 
-        this.draw = function (layerSelector, filter) {
+        this.draw = function (filter) {
             // dont think filtering makes any sense for grid??
             //if (filter.isFiltered()) {}
             // ???
             serviceLayer.getLayerSelector().style(grid, 'fill-opacity', FILL_OPACITY)
                 .style(grid, 'stroke-opacity', 1);
             // copied from map ??? will serviceLayer have colors for features? it should
-            layerSelector.style(grid, 'fill', function (f) {
+            filter.getLayerSelector().style(grid, 'fill', function (f) {
                 return serviceLayer.getColorForFeature(f);
             });
         };
