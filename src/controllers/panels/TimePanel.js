@@ -15,8 +15,8 @@ goog.require('Popup');
         var layer;
         var that = this;
 
-        this.xlabel = $('<div>').text('X Label').addClass('label').addClass('xlabel');
-        this.ylabel = $('<div>').text('Y Label').addClass('label').addClass('ylabel');
+        this.xlabel = $('<div>').addClass('label').addClass('xlabel');
+        this.ylabel = $('<div>').addClass('label').addClass('ylabel');
 
         this.container = $('<div>').attr('class', 'timeseries');
 

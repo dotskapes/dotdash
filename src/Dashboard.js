@@ -69,7 +69,7 @@ dash.Dashboard = function(settings) {
         if (!settings) {
             settings = {};
         }
-        _.extend(settings, {
+        _.defaults(settings, {
             xlabel: '',
             ylabel: ''
         });
