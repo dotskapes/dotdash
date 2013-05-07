@@ -15,22 +15,52 @@ goog.require('Popup');
         var layer;
         var that = this;
 
-        this.create = function () {
-            this.container = $('<div>').attr('class', 'timeseries');
+        this.xlabel = $('<div>').text('X Label').addClass('label').addClass('xlabel');
+        this.ylabel = $('<div>').text('Y Label').addClass('label').addClass('ylabel');
 
-            this.parentElement.append(this.container);
-            this.show();
+        this.container = $('<div>').attr('class', 'timeseries');
 
-            this.created = true;
-        };
+        this.parentElement.append(this.container).append(this.xlabel).append(this.ylabel);
+        this.show();
+
+        this.created = true;
+
+        this.create = function () {};
 
         this.getWiggleView = function () { return graph; };
 
         this.resize = function () {
-            graph.resize();
+            // Use the positioning and height of the parent element to figure out where to put
+            // the labels
+            var pheight = this.container.parent().height();
+            var pwidth = this.container.parent().width();
+            var poffset = this.container.parent().offset();
+
+            // Set the size of the actual canvas div
+            // Wigglemaps will take up the entire space
+            this.container.css({
+                'height': pheight - this.xlabel.height(),
+                'width': pwidth - this.ylabel.height(),
+                'margin-left': this.ylabel.height()
+            });
+
+            this.xlabel.css({
+                left: poffset.left + pwidth / 2 + this.ylabel.height() - this.xlabel.width() / 2
+            });
+
+            this.ylabel.css({
+                left: poffset.left + this.ylabel.height() / 2 - this.ylabel.width() / 2,
+                top: poffset.top + pheight / 2 - this.ylabel.height() / 2 - this.xlabel.height() / 2,
+                transform: 'rotate(90deg)'
+            });
+
+            // The graph may not exist when resize is called if no data is in the system
+            if (graph) {
+                graph.resize();
+            }
         };
 
-        this.newData = function (data) {
+        this.newData = function (data, settings) {
             layer = data;
 
             var properties = layer.numeric();
@@ -42,16 +72,18 @@ goog.require('Popup');
                 'ylock': true
             });
 
-            wireupGraph();
+            this.xlabel.text(settings.xlabel);
+            this.ylabel.text(settings.ylabel);
 
-        };
+            // reconfigure the label positions
+            this.resize();
 
-        var wireupGraph = function () {
             // listen for graph select and send selection to selectionManager
             graph.select(function (box) {
                 var selectionLayer = graph.search(layer, box);
                 that.fireSelect(selectionLayer);
             });
+
         };
 
         // Selection methods/interface - called by SelectionManager

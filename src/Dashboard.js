@@ -24,7 +24,7 @@ dash.Dashboard = function(settings) {
 
     var parentSelector = settings.parent || 'body';
     var savedDashState = settings.saved || {};
-    var panelNames = settings.panels || ['map', 'time', 'table', 'grid'];
+    var panelNames = settings.panels || ['map', 'time', 'table'];
 
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
@@ -65,8 +65,8 @@ dash.Dashboard = function(settings) {
     var panelManager = new PanelManager({model: panelState});
     panelManager.start(parent, dashState, filter, selectionManager, serviceLayer);
 
-    this.loadUrl = function (url) {
-        serviceLayer.loadUrl(url, dashState, aggregateModel);
+    this.loadUrl = function (url, settings) {
+        serviceLayer.loadUrl(url, dashState, aggregateModel, settings);
     };
 
     this.getState = function () {

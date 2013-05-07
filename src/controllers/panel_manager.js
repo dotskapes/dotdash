@@ -97,6 +97,11 @@ var PanelManager = Backbone.View.extend({
             this.$left.find('.view').css('width', width);
             this.$right.find('.view').css('width', width);
         }
+
+        // Resize both the left and right panels to fit the screen
+        this.model.get('panels')[this.model.get('left')].resize();
+        this.model.get('panels')[this.model.get('right')].resize();
+
     },
 
     // Either create of show a given panel
@@ -105,6 +110,7 @@ var PanelManager = Backbone.View.extend({
             panel.create();
         }
         panel.show();
+        panel.resize();
     },
 
     setPanel: function (side) {
@@ -137,8 +143,8 @@ var PanelManager = Backbone.View.extend({
         var that = this;
 
         $.each(this.model.get('panels'), function (i, pan) {
-            serviceLayer.addDataCallback(function (data) {
-                pan.newData(data);
+            serviceLayer.addDataCallback(function (data, settings) {
+                pan.newData(data, settings);
                 pan.draw(filter);
             });
             selectionManager.addView(pan);

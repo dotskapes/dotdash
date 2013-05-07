@@ -29,7 +29,10 @@
         var dashboard = new dash.Dashboard ({
             parent: '#dashboard'
         });
-        dashboard.loadUrl('temp/flu_country.json');
+        dashboard.loadUrl('temp/flu_country.json', {
+            xlabel: 'Time (weeklxy)',
+            ylabel: 'Estimated cases of flu'
+        });
     });
   </script>
   <body style="margin: 0px;">
