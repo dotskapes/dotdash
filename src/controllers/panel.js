@@ -21,6 +21,10 @@ var Panel;
         // for display
         this.label = label;
 
+        // Make the parent element of the parent
+        var template = jade.templates.panel;
+        this.parentElement = $(template({name: this.name}));
+
         var init = function () {
             addKeyListeners();
             addMoveSelListener();
@@ -37,9 +41,8 @@ var Panel;
             this.parentElement.addClass(cssClass);
         };
 
+        // Rename: parent element is now created right away
         this.makeParentElement = function () {
-            var template = jade.templates.panel;
-            this.parentElement = $(template({name: this.name}));
             return this.parentElement;
         };
 
@@ -62,7 +65,9 @@ var Panel;
         this.select = function () {};
         this.deselect = function () {};
         this.draw = function (layerSelector) {};
-        this.hasWiggleView = function () { return getWiggleView() !== null; };
+        this.hasWiggleView = function () {
+            return (this.getWiggleView() !== null && this.getWiggleView() !== undefined);
+        };
         this.getWiggleView = function () { return null; };
 
         // temporarily go into select mode (for modifier/ctrl hotkey)
