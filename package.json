@@ -12,9 +12,7 @@
         "d3": "3.0.5",
         "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev",
         "backbone": ">=0.9",
-        "underscore": ">=1.4"
-    },
-    "devDependencies": {
+        "underscore": ">=1.4",
         "grunt": "~0.4",
         "grunt-shell": ">=0.2.1",
         "phantomjs": ">=1.9.0",
