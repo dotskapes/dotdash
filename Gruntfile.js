@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                           failOnError: true}
             },
             closure_deps: {
-                command: './build/depswriter.py --root_with_prefix="src ../src" > built/deps.js',
+                command: 'build/deps.sh',
                 options: {stdout: true}
             },
             closure_compile: {
