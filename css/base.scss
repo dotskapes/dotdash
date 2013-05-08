@@ -111,13 +111,13 @@ html, body, #dashboard {
     }
 
     &.move_arrow {
-        background-image: url('images/move_arrow.png');
+        background-image: url('../images/move_arrow.png');
         background-repeat: no-repeat; 
         background-position: -2px -2px;
     }
     &.selection_box {
         padding: 2px 20px;
-        background-image: url('images/selection_box.png');
+        background-image: url('../images/selection_box.png');
         background-repeat: no-repeat;
         background-position: -2px -2px;
     }

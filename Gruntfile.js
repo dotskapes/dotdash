@@ -25,7 +25,7 @@ module.exports = function (grunt) {
                           failOnError: true}
             },
             sass: {
-                command: 'sass css/style.scss css/built/style.css',
+                command: 'sass css/style.scss built/style.css',
                 options: {stdout: true,
                           failOnError: true}
             },

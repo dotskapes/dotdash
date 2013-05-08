@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="css/built/style.css" />
+    <link rel="stylesheet" type="text/css" href="built/style.css" />
     <script type="text/javascript" src="src/base.js"></script>
-    <script type="text/javascript" src="src/deps.js"></script>
+    <script type="text/javascript" src="built/deps.js"></script>
+
     <script type="text/javascript" src="node_modules/jquery/tmp/jquery.js"></script>
     <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
@@ -14,17 +15,20 @@
     <script type="text/javascript" src="node_modules/handlebars/dist/handlebars.js"></script>
     <script type="text/javascript" src="node_modules/d3/d3.min.js"></script>
     <script type="text/javascript" src="node_modules/wigglemaps/lib/webgl-debug.js"></script>
+
     <!-- goog.provide not on generated file - grunt it! -->
     <script type="text/javascript" src="src/templates/compiled.js"></script>
     <script type="text/javascript" src="built/compiled_jade.js"></script>
+
+    <!-- In production, use built version -->
     <!--<script type="text/javascript" src="built/dash.js"></script>-->
-    <script type="text/javascript">
-        goog.require('Dashboard');
-    </script>
+
     <title>Spatial-Temporal Dashboard</title>
   </head>
 
   <script type="text/javascript">
+    goog.require('Dashboard');
+
     $(document).ready(function() {
         var dashboard = new dash.Dashboard ({
             parent: '#dashboard'
@@ -36,7 +40,7 @@
     });
   </script>
   <body style="margin: 0px;">
-    <div  id="dashboard"></div>
+    <div id="dashboard"></div>
   </body>
 </html>
 

@@ -14,5 +14,5 @@
 }
 
 .time .ylabel {
-    transform: rotate(-90deg)
+    @include vendor_prefix(transform, rotate(-90deg));
 }
