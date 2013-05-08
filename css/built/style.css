@@ -132,10 +132,13 @@ html, body, #dashboard {
   padding: 2px; }
 
 .time {
-  background-color: black; }
+  background-color: white; }
 
 .time .label {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: absolute;
-  color: white;
+  color: black;
   font-size: 20px; }
+
+.time .ylabel {
+  transform: rotate(-90deg); }
