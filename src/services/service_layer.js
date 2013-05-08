@@ -29,36 +29,47 @@ var ServiceLayer = function () {
 
         loadUrl: function (url, dashState, aggregateModel, settings) {
             var that = this;
+            var deferred = $.Deferred();
             $.ajax({
                 url: url,
                 dataType: 'json',
                 success: function (data) {
-                    layer = wiggle.io.GeoJSON(data);
-
-                    sortedDateProps = layer.numeric();
-                    // this assumes the dates are lexically sortable, euro dates NOT USA
-                    sortedDateProps.sort();
-
-                    sortedIndexLookup = {};
-                    sortedDateProps.forEach(function (attr, i) {
-                        sortedIndexLookup[attr] = i;
-                    });
-
-                    var aggregateName = dashState.get('agg');
-                    if (aggregateName) {
-                        var aggregationService = new AggregationService();
-                        var aggregates = aggregationService.computeAggregates(
-                            aggregateName, that.getAttributesByFeature());
-                        aggregateModel.set('agg', aggregates);
-                    }
-
-                    colorMap = new ColorMap(layer, dashState, aggregateModel);
-                    fireNewData(layer, settings);
-                    if (!dashState.get('attr')) {
-                        dashState.set('attr', that.getSortedDateProperties()[0]);
-                    }
+                    that.load(data, dashState, aggregateModel, settings);
+                    deferred.resolve();
                 }
             });
+            return deferred.promise();
+        },
+
+        load: function (urlOrData, dashState, aggregateModel, settings) {
+            if (typeof urlOrData === 'string') {
+                return this.loadUrl(urlOrData, dashState, aggregateModel, settings);
+            }
+            layer = wiggle.io.GeoJSON(urlOrData);
+
+            sortedDateProps = layer.numeric();
+            // this assumes the dates are lexically sortable, euro dates NOT USA
+            sortedDateProps.sort();
+
+            sortedIndexLookup = {};
+            sortedDateProps.forEach(function (attr, i) {
+                sortedIndexLookup[attr] = i;
+            });
+
+            var aggregateName = dashState.get('agg');
+            if (aggregateName) {
+                var aggregationService = new AggregationService();
+                var aggregates = aggregationService.computeAggregates(
+                    aggregateName, this.getAttributesByFeature());
+                aggregateModel.set('agg', aggregates);
+            }
+
+            colorMap = new ColorMap(layer, dashState, aggregateModel);
+            fireNewData(layer, settings);
+            if (!dashState.get('attr')) {
+                dashState.set('attr', this.getSortedDateProperties()[0]);
+            }
+            return $.Deferred().resolve().promise();
         },
 
         getLayerSelector: function () {

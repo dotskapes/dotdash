@@ -65,7 +65,7 @@ dash.Dashboard = function(settings) {
     var panelManager = new PanelManager({model: panelState});
     panelManager.start(parent, dashState, filter, selectionManager, serviceLayer);
 
-    this.loadUrl = function (url, settings) {
+    this.load = function (urlOrData, settings) {
         if (!settings) {
             settings = {};
         }
@@ -73,7 +73,7 @@ dash.Dashboard = function(settings) {
             xlabel: '',
             ylabel: ''
         });
-        serviceLayer.loadUrl(url, dashState, aggregateModel, settings);
+        return serviceLayer.load(urlOrData, dashState, aggregateModel, settings);
     };
 
     this.getState = function () {
