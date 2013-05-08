@@ -79,6 +79,9 @@ var Panel;
         // Abstract new data function
         this.newData = function(data) {};
 
+        // Abstract new overlay function
+        this.newOverlay = function (data) {};
+
         // control hotkey -> temporary select mode
         var addKeyListeners = function () {
             $(document).on('keydown', function (e) {

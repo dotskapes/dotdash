@@ -15,6 +15,7 @@ goog.require('Panel');
         // wiggle.Map object
         var map;
         var layer;
+        var overlay;
         var that = this;
         var selectModeOn = false;
 
@@ -47,6 +48,20 @@ goog.require('Panel');
             map.center(layer.bounds.centroid());
             map.extents(layer.bounds.width());
             map.append(layer);
+        };
+
+        this.newOverlay = function (data) {
+            if (overlay) {
+                map.remove(overlay);
+            }
+            overlay = data;
+
+            overlay.features()
+                .style(map, 'stroke', ColorMap.HIGHLIGHT)
+                .style(map, 'fill-opacity', FILL_OPACITY)
+                .style(map, 'fill', function (f) { return ColorMap.HIGHLIGHT; });
+
+            map.append(overlay);
         };
 
         // move/select is dealt with in super class panel
