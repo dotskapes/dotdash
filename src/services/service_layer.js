@@ -15,8 +15,10 @@ var ServiceLayer = function () {
     var sortedDateProps = [];
     var sortedIndexLookup = {};
 
-    var fireNewData = function (dataLayer) {
-        $.each(dataCallbacks, function (i, cb) { cb(dataLayer); });
+    var fireNewData = function (dataLayer, settings) {
+        $.each(dataCallbacks, function (i, cb) {
+            cb(dataLayer, settings);
+        });
     };
 
     return {
@@ -25,7 +27,7 @@ var ServiceLayer = function () {
             dataCallbacks.push(cb);
         },
 
-        loadUrl: function (url, dashState, aggregateModel) {
+        loadUrl: function (url, dashState, aggregateModel, settings) {
             var that = this;
             $.ajax({
                 url: url,
@@ -51,7 +53,7 @@ var ServiceLayer = function () {
                     }
 
                     colorMap = new ColorMap(layer, dashState, aggregateModel);
-                    fireNewData(layer);
+                    fireNewData(layer, settings);
                     if (!dashState.get('attr')) {
                         dashState.set('attr', that.getSortedDateProperties()[0]);
                     }

@@ -4,6 +4,12 @@
     #{$key}: $value;
 }
 
+@mixin vendor_value_prefix ($key, $value) {
+    #{$key}: -moz-#{$value};
+    #{$key}: -webkit-#{$value};
+    #{$key}: $value;
+}
+
 $optionsWidth: 200px;
 
 @mixin rounded_corners ($radius, $leftOrRight) {
@@ -72,12 +78,12 @@ html, body, #dashboard {
     overflow: visible;
 }
 
-.wigglemap, .timeseries {
+.wigglemap {
     height: 99%;
 }
 
 .map, .time {
-    cursor: move;
+    @include vendor_value_prefix(cursor, grab);
     
     &.selection {
         cursor: crosshair;
