@@ -66,6 +66,13 @@ dash.Dashboard = function(settings) {
     panelManager.start(parent, dashState, filter, selectionManager, serviceLayer);
 
     this.loadUrl = function (url, settings) {
+        if (!settings) {
+            settings = {};
+        }
+        _.defaults(settings, {
+            xlabel: '',
+            ylabel: ''
+        });
         serviceLayer.loadUrl(url, dashState, aggregateModel, settings);
     };
 

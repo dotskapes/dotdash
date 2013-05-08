@@ -15,8 +15,8 @@ goog.require('Popup');
         var layer;
         var that = this;
 
-        this.xlabel = $('<div>').text('X Label').addClass('label').addClass('xlabel');
-        this.ylabel = $('<div>').text('Y Label').addClass('label').addClass('ylabel');
+        this.xlabel = $('<div>').addClass('label').addClass('xlabel');
+        this.ylabel = $('<div>').addClass('label').addClass('ylabel');
 
         this.container = $('<div>').attr('class', 'timeseries');
 
@@ -51,7 +51,6 @@ goog.require('Popup');
             this.ylabel.css({
                 left: poffset.left + this.ylabel.height() / 2 - this.ylabel.width() / 2,
                 top: poffset.top + pheight / 2 - this.ylabel.height() / 2 - this.xlabel.height() / 2,
-                transform: 'rotate(90deg)'
             });
 
             // The graph may not exist when resize is called if no data is in the system
