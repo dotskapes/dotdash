@@ -76,6 +76,10 @@ dash.Dashboard = function(settings) {
         return serviceLayer.load(urlOrData, dashState, aggregateModel, settings);
     };
 
+    this.loadOverlay = function (urlOrData) {
+        return serviceLayer.loadOverlay(urlOrData);
+    };
+
     this.getState = function () {
         return dashState.toJSON();
     };

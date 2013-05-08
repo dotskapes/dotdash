@@ -11,6 +11,7 @@ var ServiceLayer = function () {
     var aggregates = null;
 
     var dataCallbacks = [];
+    var overlayCallbacks = [];
 
     var sortedDateProps = [];
     var sortedIndexLookup = {};
@@ -21,10 +22,20 @@ var ServiceLayer = function () {
         });
     };
 
+    var fireNewOverlay = function (overlayLayer) {
+        $.each(overlayCallbacks, function (i, cb) {
+            cb(overlayLayer);
+        });
+    };
+
     return {
 
         addDataCallback: function (cb) {
             dataCallbacks.push(cb);
+        },
+
+        addOverlayCallback : function (cb) {
+            overlayCallbacks.push(cb);
         },
 
         loadUrl: function (url, dashState, aggregateModel, settings) {
@@ -69,6 +80,30 @@ var ServiceLayer = function () {
             if (!dashState.get('attr')) {
                 dashState.set('attr', this.getSortedDateProperties()[0]);
             }
+            return $.Deferred().resolve().promise();
+        },
+
+        loadOverlayUrl : function (url) {
+            var that = this;
+            var deferred = $.Deferred();
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (data) {
+                    that.loadOverlay(data);
+                    deferred.resolve();
+                }
+            });
+            return deferred.promise();
+        },
+
+        loadOverlay: function (urlOrData) {
+            if (typeof urlOrData === 'string') {
+                return this.loadOverlayUrl(urlOrData);
+            }
+
+            var overlayLayer = wiggle.io.GeoJSON(urlOrData);
+            fireNewOverlay(overlayLayer);
             return $.Deferred().resolve().promise();
         },
 

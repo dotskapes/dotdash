@@ -13,6 +13,7 @@ goog.require('Popup');
         // wiggle.Graph object
         var graph;
         var layer;
+        var overlay;
         var that = this;
 
         this.xlabel = $('<div>').addClass('label').addClass('xlabel');
@@ -83,6 +84,27 @@ goog.require('Popup');
                 that.fireSelect(selectionLayer);
             });
 
+        };
+
+        this.newOverlay = function (data) {
+            var dates = layer.properties().sort();
+            var counts = {};
+            _.each(dates, function (date) { counts[date] = 0; });
+            data.features().each(function (i, f) {
+                var date = f.attr('date').split(' ')[0];
+                var closestDate = dates[_.sortedIndex(dates, date) - 1];
+                counts[closestDate] = counts[closestDate] + 1;
+            });
+
+            var highlightedDates = _.filter(dates, function (date) {
+                return counts[date] > 0;
+            });
+
+            var indexList = _.map(highlightedDates, function (date) {
+                return _.indexOf(dates, date);
+            });
+
+            graph.highlightTicks(indexList, ColorMap.HIGHLIGHT);
         };
 
         // Selection methods/interface - called by SelectionManager
