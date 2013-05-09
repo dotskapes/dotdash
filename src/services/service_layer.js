@@ -11,6 +11,7 @@ var ServiceLayer = function () {
     var aggregates = null;
 
     var dataCallbacks = [];
+    var overlayCallbacks = [];
 
     var sortedDateProps = [];
     var sortedIndexLookup = {};
@@ -21,44 +22,89 @@ var ServiceLayer = function () {
         });
     };
 
+    var fireNewOverlay = function (overlayLayer) {
+        $.each(overlayCallbacks, function (i, cb) {
+            cb(overlayLayer);
+        });
+    };
+
     return {
 
         addDataCallback: function (cb) {
             dataCallbacks.push(cb);
         },
 
+        addOverlayCallback : function (cb) {
+            overlayCallbacks.push(cb);
+        },
+
         loadUrl: function (url, dashState, aggregateModel, settings) {
             var that = this;
+            var deferred = $.Deferred();
             $.ajax({
                 url: url,
                 dataType: 'json',
                 success: function (data) {
-                    layer = wiggle.io.GeoJSON(data);
-
-                    sortedDateProps = layer.numeric();
-                    // this assumes the dates are lexically sortable, euro dates NOT USA
-                    sortedDateProps.sort();
-
-                    sortedIndexLookup = {};
-                    sortedDateProps.forEach(function (attr, i) {
-                        sortedIndexLookup[attr] = i;
-                    });
-
-                    var aggregateName = dashState.get('agg');
-                    if (aggregateName) {
-                        var aggregationService = new AggregationService();
-                        var aggregates = aggregationService.computeAggregates(
-                            aggregateName, that.getAttributesByFeature());
-                        aggregateModel.set('agg', aggregates);
-                    }
-
-                    colorMap = new ColorMap(layer, dashState, aggregateModel);
-                    fireNewData(layer, settings);
-                    if (!dashState.get('attr')) {
-                        dashState.set('attr', that.getSortedDateProperties()[0]);
-                    }
+                    that.load(data, dashState, aggregateModel, settings);
+                    deferred.resolve();
                 }
             });
+            return deferred.promise();
+        },
+
+        load: function (urlOrData, dashState, aggregateModel, settings) {
+            if (typeof urlOrData === 'string') {
+                return this.loadUrl(urlOrData, dashState, aggregateModel, settings);
+            }
+            layer = wiggle.io.GeoJSON(urlOrData);
+
+            sortedDateProps = layer.numeric();
+            // this assumes the dates are lexically sortable, euro dates NOT USA
+            sortedDateProps.sort();
+
+            sortedIndexLookup = {};
+            sortedDateProps.forEach(function (attr, i) {
+                sortedIndexLookup[attr] = i;
+            });
+
+            var aggregateName = dashState.get('agg');
+            if (aggregateName) {
+                var aggregationService = new AggregationService();
+                var aggregates = aggregationService.computeAggregates(
+                    aggregateName, this.getAttributesByFeature());
+                aggregateModel.set('agg', aggregates);
+            }
+
+            colorMap = new ColorMap(layer, dashState, aggregateModel);
+            fireNewData(layer, settings);
+            if (!dashState.get('attr')) {
+                dashState.set('attr', this.getSortedDateProperties()[0]);
+            }
+            return $.Deferred().resolve().promise();
+        },
+
+        loadOverlayUrl : function (url) {
+            var that = this;
+            var deferred = $.Deferred();
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (data) {
+                    that.loadOverlay(data);
+                    deferred.resolve();
+                }
+            });
+            return deferred.promise();
+        },
+
+        loadOverlay: function (urlOrData) {
+            if (typeof urlOrData === 'string') {
+                return this.loadOverlayUrl(urlOrData);
+            }
+
+            var overlayLayer = wiggle.io.GeoJSON(urlOrData);
+            fireNewOverlay(overlayLayer);
+            return $.Deferred().resolve().promise();
         },
 
         getLayerSelector: function () {

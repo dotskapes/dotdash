@@ -147,6 +147,10 @@ var PanelManager = Backbone.View.extend({
                 pan.newData(data, settings);
                 pan.draw(filter);
             });
+            serviceLayer.addOverlayCallback(function (overlay) {
+                pan.newOverlay(overlay);
+                pan.draw(filter);
+            });
             selectionManager.addView(pan);
         });
 
