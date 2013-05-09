@@ -20,7 +20,8 @@ goog.require('Panel');
         var showData = function (data) {
             var wordCounts = {};
             data.features().each(function (i, feature) {
-                var words = feature.attr('descr').split(' ');
+                var descr = feature.attr('descr') || '';
+                var words = descr.split(' ');
                 _.each(words, function (word) {
                     if (!wordCounts[word]) {
                         wordCounts[word] = 0;
