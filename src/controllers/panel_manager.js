@@ -145,12 +145,12 @@ var PanelManager = Backbone.View.extend({
         var that = this;
 
         $.each(this.model.get('panels'), function (i, pan) {
-            serviceLayer.addDataCallback(function (data, settings) {
-                pan.newData(data, settings);
+            serviceLayer.addDataCallback(function (layer, settings, data) {
+                pan.newData(layer, settings, data);
                 pan.draw(filter);
             });
-            serviceLayer.addOverlayCallback(function (overlay) {
-                pan.newOverlay(overlay);
+            serviceLayer.addOverlayCallback(function (overlay, data) {
+                pan.newOverlay(overlay, data);
                 pan.draw(filter);
             });
             selectionManager.addView(pan);
