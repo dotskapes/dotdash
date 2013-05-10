@@ -7,7 +7,7 @@ goog.require('AggregationService');
 var ServiceLayer = function () {
 
     var layer = null;
-    var colorMap = {};
+    var colorMap = null;
     var aggregates = null;
 
     var dataCallbacks = [];
@@ -103,6 +103,11 @@ var ServiceLayer = function () {
             }
 
             var overlayLayer = wiggle.io.GeoJSON(urlOrData);
+
+            // hack to display overlay with no base data
+            layer = layer || overlayLayer;
+            colorMap = colorMap || new ColorMap(layer, new DashboardState(), new AggregateModel());
+
             fireNewOverlay(overlayLayer, urlOrData);
             return $.Deferred().resolve().promise();
         },
