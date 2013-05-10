@@ -10,6 +10,7 @@
         "handlebars": "1.0.8",
         "jade": ">=0.28.2",
         "d3": "3.0.5",
+        "rickshaw": "1.1.2",
         "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev",
         "backbone": ">=0.9",
         "underscore": ">=1.4",

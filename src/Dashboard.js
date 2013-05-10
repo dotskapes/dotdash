@@ -17,6 +17,7 @@ goog.require('TablePanel');
 goog.require('GridPanel');
 goog.require('ScatterPanel');
 goog.require('WordCloudPanel');
+goog.require('BasicTimePanel');
 
 goog.require('MoveSelModel');
 goog.require('Filter');
@@ -26,7 +27,7 @@ dash.Dashboard = function(settings) {
 
     var parentSelector = settings.parent || 'body';
     var savedDashState = settings.saved || {};
-    var panelNames = settings.panels || ['map', 'time', 'table'];
+    var panelNames = settings.panels || ['map', 'basictime', 'table'];
 
     var dashState = new DashboardState(savedDashState);
     var aggregateModel = new AggregateModel();
