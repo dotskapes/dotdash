@@ -32,7 +32,7 @@ goog.require('Panel');
                 var lineData = [];
                 _.each(dates, function (date) {
                     var val = feature.attr(date) || 0;
-                    lineData.push({x: new Date(date).getTime() / 10000, y: val});
+                    lineData.push({x: new Date(date).getTime() / 1000, y: val});
                 });
                 var wiggleColor = serviceLayer.getColorForFeature(feature);
                 var color = wiggleColor.rgb();
