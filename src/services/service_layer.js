@@ -22,9 +22,9 @@ var ServiceLayer = function () {
         });
     };
 
-    var fireNewOverlay = function (overlayLayer) {
+    var fireNewOverlay = function (overlayLayer, overlayData) {
         $.each(overlayCallbacks, function (i, cb) {
-            cb(overlayLayer);
+            cb(overlayLayer, overlayData);
         });
     };
 
@@ -103,7 +103,7 @@ var ServiceLayer = function () {
             }
 
             var overlayLayer = wiggle.io.GeoJSON(urlOrData);
-            fireNewOverlay(overlayLayer);
+            fireNewOverlay(overlayLayer, urlOrData);
             return $.Deferred().resolve().promise();
         },
 
