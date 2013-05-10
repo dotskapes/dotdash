@@ -94,6 +94,17 @@ html, body, #dashboard {
     background-color: black;
 }
 
+.rickshaw_graph .x_tick.plain .title, .rickshaw_graph .y_ticks.plain text {
+    opacity: 1;
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
+.rickshaw_graph .x_tick.plain .title {
+    bottom: -25px;
+}
+
 .icon {
     background-color: #aaa; // disabled color
     padding: 2px 13px;
