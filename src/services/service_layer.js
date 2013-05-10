@@ -7,7 +7,7 @@ goog.require('AggregationService');
 var ServiceLayer = function () {
 
     var layer = null;
-    var colorMap = {};
+    var colorMap = null;
     var aggregates = null;
 
     var dataCallbacks = [];
@@ -22,9 +22,9 @@ var ServiceLayer = function () {
         });
     };
 
-    var fireNewOverlay = function (overlayLayer) {
+    var fireNewOverlay = function (overlayLayer, overlayData) {
         $.each(overlayCallbacks, function (i, cb) {
-            cb(overlayLayer);
+            cb(overlayLayer, overlayData);
         });
     };
 
@@ -103,7 +103,12 @@ var ServiceLayer = function () {
             }
 
             var overlayLayer = wiggle.io.GeoJSON(urlOrData);
-            fireNewOverlay(overlayLayer);
+
+            // hack to display overlay with no base data
+            layer = layer || overlayLayer;
+            colorMap = colorMap || new ColorMap(layer, new DashboardState(), new AggregateModel());
+
+            fireNewOverlay(overlayLayer, urlOrData);
             return $.Deferred().resolve().promise();
         },
 

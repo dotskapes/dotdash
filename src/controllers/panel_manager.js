@@ -100,7 +100,9 @@ var PanelManager = Backbone.View.extend({
 
         // Resize both the left and right panels to fit the screen
         this.model.get('panels')[this.model.get('left')].resize();
-        this.model.get('panels')[this.model.get('right')].resize();
+        if (this.model.get('panels').length > 1) {
+            this.model.get('panels')[this.model.get('right')].resize();
+        }
 
     },
 

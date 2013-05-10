@@ -15,6 +15,8 @@ goog.require('MapPanel');
 goog.require('TimePanel');
 goog.require('TablePanel');
 goog.require('GridPanel');
+goog.require('ScatterPanel');
+goog.require('WordCloudPanel');
 
 goog.require('MoveSelModel');
 goog.require('Filter');
