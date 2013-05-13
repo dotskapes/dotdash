@@ -1,0 +1,24 @@
+{
+    "name": "dotdash",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dotskapes/dotdash.git"
+    },
+    "dependencies": {
+        "jquery": ">=1.8.3",
+        "handlebars": "1.0.8",
+        "jade": ">=0.28.2",
+        "d3": "3.0.5",
+        "rickshaw": "1.1.2",
+        "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev",
+        "backbone": ">=0.9",
+        "underscore": ">=1.4",
+        "grunt": "~0.4",
+        "grunt-shell": ">=0.2.1",
+        "phantomjs": ">=1.9.0",
+        "jshint": "1.0.0",
+        "grunt-contrib-watch": "~0.3.1",
+        "grunt-contrib-qunit": "~0.2.0"
+    }
+}

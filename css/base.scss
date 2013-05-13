@@ -1,0 +1,152 @@
+@mixin vendor_prefix ($key, $value) {
+    -moz-#{$key}: $value;
+    -webkit-#{$key}: $value;
+    #{$key}: $value;
+}
+
+@mixin vendor_value_prefix ($key, $value) {
+    #{$key}: -moz-#{$value};
+    #{$key}: -webkit-#{$value};
+    #{$key}: $value;
+}
+
+$optionsWidth: 200px;
+
+@mixin rounded_corners ($radius, $leftOrRight) {
+    @include vendor_prefix(border-top-#{$leftOrRight}-radius, $radius);
+    @include vendor_prefix(border-bottom-#{$leftOrRight}-radius, $radius);
+} 
+
+html, body, #dashboard {
+    @include vendor_prefix (user-select, none);
+    overflow: hidden;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.collapse-toggler {
+    .collapse-arrow {
+        display: inline-block;
+    }
+
+    .expand-arrow {
+        display: none;
+    }
+
+    &.collapsed {
+        .collapse-arrow {
+            display: none;
+        }
+    
+        .expand-arrow {
+            display: inline-block;
+        }
+    }
+}
+
+.panels {
+    @include vendor_prefix(user-select, none);
+
+    margin: 0px;
+    padding: 0px;
+    margin-right: $optionsWidth;
+    
+    .left {
+        float: left;
+    }
+    
+    .pane {
+        display: inline-block;
+        width: 50%;
+
+        .view {
+            overflow: scroll;
+            
+            .panel {
+                height: 100%;
+            }
+            
+        }
+    }
+}
+
+.control-panel {
+    float: right;
+    width: $optionsWidth;
+    height: 0px;
+    overflow: visible;
+}
+
+.wigglemap {
+    height: 99%;
+}
+
+.map, .time {
+    @include vendor_value_prefix(cursor, grab);
+    
+    &.selection {
+        cursor: crosshair;
+    }
+}
+
+.scatter {
+    background-color: black;
+}
+
+.rickshaw_graph .x_tick.plain .title, .rickshaw_graph .y_ticks.plain text {
+    opacity: 1;
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
+.rickshaw_graph .x_tick.plain .title {
+    bottom: -25px;
+}
+
+.icon {
+    background-color: #aaa; // disabled color
+    padding: 2px 13px;
+
+    &:hover {
+        background-color: #ccc;
+    }
+
+    &.enabled, &:active {
+        background-color: lightgreen;
+    }
+
+    &:first-of-type {
+        border-right: 3px solid #eeeeee;
+        @include rounded_corners(5px, left);
+    }
+    &:last-of-type {
+        @include rounded_corners(5px, right);
+    }
+
+    &.move_arrow {
+        background-image: url('../images/move_arrow.png');
+        background-repeat: no-repeat; 
+        background-position: -2px -2px;
+    }
+    &.selection_box {
+        padding: 2px 20px;
+        background-image: url('../images/selection_box.png');
+        background-repeat: no-repeat;
+        background-position: -2px -2px;
+    }
+}
+
+.dashtable {
+    border-spacing: 0px;
+    border: none;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.dashtable td {
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-bottom: solid 1px #eee;
+    text-align: center;
+}

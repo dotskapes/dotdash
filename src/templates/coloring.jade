@@ -1,0 +1,14 @@
+h3 Coloring
+each coloring in colorings
+  div
+    .collapse-toggler
+      span.expand-arrow &#9655
+      span.collapse-arrow &#9661
+      =coloring.title
+    .collapsible(class = coloring.name + '-filter')
+      each option,i in coloring.options
+        label
+          input.filter-button(class=coloring.name,type='radio',
+            name=coloring.name,checked=option.selected,value=option.value)
+          =option.label
+      

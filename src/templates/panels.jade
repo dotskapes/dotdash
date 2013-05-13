@@ -1,0 +1,15 @@
+mixin selectBox (name, model)
+  - panels = model.get('panels')
+  select(class = 'select-' + name)
+    each option, i in panels
+      option(value = i, selected = (i == model.get(name)))= option.label
+
+.left.pane
+  .select
+    mixin selectBox('left', model)
+  .view
+.right.pane
+  .select
+    mixin selectBox('right', model)
+  .view
+

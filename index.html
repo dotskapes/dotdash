@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="text/javascript" src="lib/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/wigglemaps/wigglemaps.min.js"></script>
-    <script type="text/javascript" src="lib/d3/d3.min.js"></script>
-    <script type="text/javascript" src="src/data.js"></script>
-    <script type="text/javascript" src="src/dash.js"></script>
-    <script type="text/javascript" src="src/map_panel.js"></script>
-    <script type="text/javascript" src="src/time_panel.js"></script>
-    <script type="text/javascript" src="src/mds_panel.js"></script>
+    <link rel="stylesheet" type="text/css" href="built/style.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/rickshaw/rickshaw.min.css" />
+    <script type="text/javascript" src="src/base.js"></script>
+    <script type="text/javascript" src="built/deps.js"></script>
+
+    <script type="text/javascript" src="node_modules/jquery/tmp/jquery.js"></script>
+    <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="node_modules/wigglemaps/wigglemaps.js"></script>
+    <script type="text/javascript" src="node_modules/jade/runtime.js"></script>
+    <script type="text/javascript" src="node_modules/wigglemaps/templates.js"></script>
+    <script type="text/javascript" src="node_modules/wigglemaps/wigglemaps.widget.js"></script>
+    <script type="text/javascript" src="node_modules/handlebars/dist/handlebars.js"></script>
+    <script type="text/javascript" src="node_modules/d3/d3.min.js"></script>
+    <script type="text/javascript" src="node_modules/wigglemaps/lib/webgl-debug.js"></script>
+    <script type="text/javascript" src="lib/d3.layout.cloud.js"></script>
+    <script type="text/javascript" src="node_modules/rickshaw/rickshaw.js"></script>
+
+    <!-- goog.provide not on generated file - grunt it! -->
+    <script type="text/javascript" src="src/templates/compiled.js"></script>
+    <script type="text/javascript" src="built/compiled_jade.js"></script>
+
+    <!-- In production, use built version -->
+    <!--<script type="text/javascript" src="built/dash.js"></script>-->
+
     <title>Spatial-Temporal Dashboard</title>
   </head>
+
   <script type="text/javascript">
-    dash.ready (function () {
-        // Set the size of the div containing the dashboard
-        var set_width = function () {
-            $ ('#dashboard').css ({
-                'width': $ (window).width (),
-                'height': $ (window).height ()
-            });
-        };
-        set_width ();
-        // Resize the dashboard when the window size changes
-        $ (window).resize (function () {
-            set_width ();
+    goog.require('Dashboard');
+
+    $(document).ready(function() {
+        var dashboard = new dash.Dashboard ({
+            parent: '#dashboard'
         });
-        dash.create ('#dashboard');
+        dashboard.load('temp/flu_country.json', {
+            xlabel: 'Time (weekly)',
+            ylabel: 'Estimated cases of flu'
+        });
     });
   </script>
   <body style="margin: 0px;">
-    <div style="width: 100%; height: 500px" id="dashboard"></div>
+    <div id="dashboard"></div>
   </body>
 </html>
 

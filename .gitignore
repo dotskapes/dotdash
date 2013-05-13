@@ -1,3 +1,9 @@
 *~
 \#*
 .\#*
+*.pyc
+node_modules
+.DS_Store
+.sass-cache
+backbone-src.js
+src/deps.js
