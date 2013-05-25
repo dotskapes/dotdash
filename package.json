@@ -1,6 +1,6 @@
 {
     "name": "dotdash",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "repository": {
         "type": "git",
         "url": "git://github.com/dotskapes/dotdash.git"
@@ -11,7 +11,7 @@
         "jade": ">=0.28.2",
         "d3": "3.0.5",
         "rickshaw": "1.1.2",
-        "wigglemaps": "git+ssh://git@github.com:dotskapes/wigglemaps.git#dev",
+        "wigglemaps": "git://github.com/dotskapes/wigglemaps.git#v0.1.0",
         "backbone": ">=0.9",
         "underscore": ">=1.4",
         "grunt": "~0.4",
